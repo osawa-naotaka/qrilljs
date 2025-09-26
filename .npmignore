@@ -10,6 +10,7 @@
 /test
 .pnp*
 biome.json
+CLAUDE.md
 bun.lock
 deno.json
 flake.lock

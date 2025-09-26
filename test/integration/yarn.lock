@@ -3850,7 +3850,7 @@ __metadata:
 
 "zephblaze@file:../../zephblaze-0.1.0-alpha.6.tgz::locator=integration-test%40workspace%3A.":
   version: 0.1.0-alpha.6
-  resolution: "zephblaze@file:../../zephblaze-0.1.0-alpha.6.tgz#../../zephblaze-0.1.0-alpha.6.tgz::hash=36c1a1&locator=integration-test%40workspace%3A."
+  resolution: "zephblaze@file:../../zephblaze-0.1.0-alpha.6.tgz#../../zephblaze-0.1.0-alpha.6.tgz::hash=cf1bd9&locator=integration-test%40workspace%3A."
   dependencies:
     "@fortawesome/fontawesome-free": "npm:^6.7.2"
     "@rollup/plugin-commonjs": "npm:^28.0.3"
@@ -3880,7 +3880,7 @@ __metadata:
     ws: "npm:^8.18.1"
   bin:
     zephblaze: build/bin.js
-  checksum: 10c0/95f8f7a6511dcc94204b9d479b0d94fd6dc93d611d7a1e8ed1aa912073d8e98caa23fa02074358d72bb16ccaa9052085aaf5fdb5b2d30a1bba145878ad7e2c4b
+  checksum: 10c0/80d2e916b4f51d0e1507fc9e708952c30d42e3b220b1445473a40e8d6cc7128f115c2e2f82a96af7c8bd4ea73d4a75119d66d4eba3914f9cb5c63d55e426d945
   languageName: node
   linkType: hard
 
