@@ -12,6 +12,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Security: in case of vulnerabilities.
 
 ## [Unreleased]
+## [0.1.0-alpha.6] - 2025-09-26
+### Fixed
+- fix zephblaze install scheme (with typescript tsc)
+
+### Removed
+- remove unused packages from package.json
 
 ## [0.1.0-alpha.5] - 2025-08-24
 ### Added
@@ -57,7 +63,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/zephblaze/compare/v0.1.0-alpha.5...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/zephblaze/compare/v0.1.0-alpha.6...HEAD
+[0.1.0-alpha.6]: https://github.com/osawa-naotaka/zephblaze/compare/v0.1.0-alpha.5...v0.1.0-alpha.6
 [0.1.0-alpha.5]: https://github.com/osawa-naotaka/zephblaze/compare/v0.1.0-alpha.4...v0.1.0-alpha.5
 [0.1.0-alpha.4]: https://github.com/osawa-naotaka/zephblaze/compare/v0.1.0-alpha.3...v0.1.0-alpha.4
 [0.1.0-alpha.3]: https://github.com/osawa-naotaka/zephblaze/compare/v0.1.0-alpha.2...v0.1.0-alpha.3
