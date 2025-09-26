@@ -19,8 +19,9 @@
 ### Node.js環境
 
 ```bash
-# Node.js 23推奨
+# Node.js 24以上のみ対応
 yarn add zephblaze
+yarn add typescript
 ```
 
 ### Nix環境（推奨開発環境）

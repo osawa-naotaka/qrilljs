@@ -188,11 +188,8 @@ function normalResponse(content_arg: string | Buffer<ArrayBufferLike>, ext: stri
 }
 
 function errorResponse(status: number, cause: string): Resp {
-    return {
-        status,
-        content: Buffer.from(stringifyToHtml(0, [])(ErrorPage({ name: status.toString(), cause }))).buffer,
-        type: "text/html",
-    };
+    const content = toArrayBuffer(stringifyToHtml(0, [])(ErrorPage({ name: status.toString(), cause })));
+    return { status, content, type: "text/html" };
 }
 
 function createReqProcessor(config: ZephblazeConfig): [ReqProcessFn, ReloadFn] {
