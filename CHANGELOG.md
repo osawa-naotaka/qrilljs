@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [0.1.0-alpha.6] - 2025-09-26
 ### Fixed
 - fix zephblaze install scheme (with typescript tsc)
+- fix bug that unintended reference to site.config.ts.
 
 ### Removed
 - remove unused packages from package.json

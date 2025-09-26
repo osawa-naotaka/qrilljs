@@ -3,7 +3,6 @@ import path from "node:path";
 import { cwd } from "node:process";
 import type { Markdown } from "@/lib/core/markdown";
 import { globExt } from "@/server";
-import { posts_dir } from "@site/site.config";
 import matter from "gray-matter";
 import rehypeStringify from "rehype-stringify";
 import remarkFrontmatter from "remark-frontmatter";
@@ -33,7 +32,7 @@ export async function getAllMarkdowns<T>(
 ): Promise<Markdown<T>[]> {
     return Promise.all(
         (await listFiles(dir, ".md")).map(async (slug) => {
-            const { data, content } = matter(await readFile(path.join(cwd(), posts_dir, slug), "utf-8"));
+            const { data, content } = matter(await readFile(path.join(dir, slug), "utf-8"));
             const data_parsed = v.parse(schema, data);
             return { slug: path.basename(slug, ".md"), data: data_parsed, content };
         }),
