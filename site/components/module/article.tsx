@@ -11,7 +11,7 @@ import {
     BORDER_UNDERLINE,
     B_LIGHTER,
     COLUMN,
-    C_BG,
+    C_BACKGROUND,
     C_TEXT,
     FONT_SIZE,
     F_XLARGE,
@@ -58,7 +58,7 @@ export function article(store: Store): HComponentFn<ArticleArgument> {
             PADDING_INLINE(S_MEDIUM(store)),
             PADDING_BLOCK("3px"),
             MARGIN_BLOCK(S_2XLARGE(store), S_MEDIUM(store)),
-            TEXT_COLOR(C_BG(store)),
+            TEXT_COLOR(C_BACKGROUND(store)),
             BG_COLOR(MIX_WHITE(C_TEXT(store))(B_LIGHTER(store))),
         ),
         style(ArticleText, P)(MARGIN_BLOCK("0", S_2XLARGE(store)), {

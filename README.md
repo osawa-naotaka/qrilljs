@@ -164,7 +164,7 @@ qrill.jsは以下の設計原則に基づいています：
 
 ## 対応ランタイム
 
-- **Node.js** - メイン対応（v23推奨）
+- **Node.js** - メイン対応（v24以上）
 - **Bun** - 高速実行対応
 - **Deno** - TypeScript native対応
 

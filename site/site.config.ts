@@ -33,7 +33,9 @@ export type PostFm = v.InferInput<typeof postFmSchema>;
 export default defaultSiteConfig({
     color: {
         category: {
-            text: [0x80, 0x6f, 0x61],
+            text: {
+                main: [0x80, 0x6f, 0x61],
+            },
         },
     },
 });

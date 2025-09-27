@@ -3,7 +3,7 @@ import type { HComponentFn, Store } from "qrill/core";
 import {
     ABSOLUTE_ANCHOR,
     BG_COLOR,
-    C_BG,
+    C_BACKGROUND,
     C_TEXT,
     DEFAULT_COLUMN,
     FIX_BOTTOM,
@@ -21,7 +21,7 @@ export function pageFooter(store: Store): HComponentFn<PageFooterArgument> {
     const Copyright = element("page-footer-copyright");
 
     const component_styles = [
-        style(PageFooter)(FIX_BOTTOM, TEXT_COLOR(C_BG(store)), BG_COLOR(C_TEXT(store))),
+        style(PageFooter)(FIX_BOTTOM, TEXT_COLOR(C_BACKGROUND(store)), BG_COLOR(C_TEXT(store))),
         style(Content)(DEFAULT_COLUMN(store), ABSOLUTE_ANCHOR),
         style(Copyright)(TEXT_ALIGN_CENTER),
     ];

@@ -4,7 +4,7 @@ import {
     BG_COLOR,
     BORDER_NONE,
     CURSOR,
-    C_BG,
+    C_BACKGROUND,
     DEFAULT_COLUMN,
     DEFAULT_RESPONSIVE_PAGE_WIDTH,
     DEFAULT_ROW,
@@ -36,7 +36,7 @@ export function popover(store: Store, button_id: string): HComponentFn<PopoverAr
         style(Container)(
             PADDING_BLOCK(S_MEDIUM(store)),
             FULL_WIDTH_HEIGHT,
-            BG_COLOR(C_BG(store)),
+            BG_COLOR(C_BACKGROUND(store)),
             BORDER_NONE,
             OPACITY("0"),
             DISPLAY("none"),
