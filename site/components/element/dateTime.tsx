@@ -1,5 +1,5 @@
-import { component, element } from "zephblaze/core";
-import type { HComponentFn } from "zephblaze/core";
+import { component, element } from "qrill/core";
+import type { HComponentFn } from "qrill/core";
 
 export type DateTimeArgument = {
     datetime: string | Date;

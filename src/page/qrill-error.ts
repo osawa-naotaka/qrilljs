@@ -1,4 +1,4 @@
-export const zephblaze_error_css = `
+export const qrill_error_css = `
 @charset "utf-8";
 
 * {

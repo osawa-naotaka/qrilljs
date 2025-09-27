@@ -1,8 +1,8 @@
 import { hSvgIconFont } from "@/lib/ui/svgIconFont";
 import { TAG_DESIGN } from "@site/styles/design";
-import { BG_COLOR, C_TEXT, DISPLAY, PADDING, ROW, S_SMALL, S_TINY, TEXT_COLOR } from "zephblaze/core";
-import { as, component, element, registerComponent, style } from "zephblaze/core";
-import type { HComponentFn, Store } from "zephblaze/core";
+import { S_SMALL, S_TINY, colorof } from "qrill/core";
+import { as, component, element, registerComponent, style } from "qrill/core";
+import type { HComponentFn, Store } from "qrill/core";
 
 export type ShareXArgument = {
     title: string;
@@ -16,9 +16,23 @@ export function shareX(store: Store): HComponentFn<ShareXArgument> {
 
     const styles = [
         TAG_DESIGN(store, "background", ShareX),
-        style(ShareX)(ROW("0"), PADDING("0"), BG_COLOR("transparent")),
-        style(XIcon)(DISPLAY("block"), BG_COLOR(C_TEXT(store)), PADDING(S_TINY(store), S_SMALL(store))),
-        style(Text)(PADDING(S_TINY(store), S_SMALL(store)), TEXT_COLOR(C_TEXT(store)), BG_COLOR("transparent"), {
+        style(ShareX)({
+            display: "flex",
+            flex_direction: "row",
+            align_items: "center",
+            gap: "0",
+            padding: "0",
+            background_color: "transparent",
+        }),
+        style(XIcon)({
+            display: "block",
+            background_color: colorof(store, "background_secondary"),
+            padding: [S_TINY(store), S_SMALL(store)],
+        }),
+        style(Text)({
+            padding: [S_TINY(store), S_SMALL(store)],
+            color: colorof(store, "text"),
+            background_color: "transparent",
             box_shadow: ["0", "0", "0", "2px", "inset"],
             border_radius: ["0", "4px", "4px", "0"],
         }),

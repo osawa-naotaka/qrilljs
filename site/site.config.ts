@@ -1,6 +1,5 @@
+import type { HSvgBrandsIconName } from "qrill/core";
 import * as v from "valibot";
-import type { HSvgBrandsIconName } from "zephblaze/core";
-import { defaultSiteConfig } from "zephblaze/core";
 
 export const site = {
     lang: "ja",
@@ -29,11 +28,3 @@ export const postFmSchema = v.object({
 });
 
 export type PostFm = v.InferInput<typeof postFmSchema>;
-
-export default defaultSiteConfig({
-    color: {
-        category: {
-            text: [0x80, 0x6f, 0x61],
-        },
-    },
-});

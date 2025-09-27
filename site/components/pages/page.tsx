@@ -1,9 +1,9 @@
 import { pageHead } from "@site/components/pages/pageHead";
 import { pageFooter } from "@site/components/sections/pageFooter";
 import { pageHeader } from "@site/components/sections/pageHeader";
-import { component, registerComponent } from "zephblaze/core";
-import type { HComponentFn, HSvgBrandsIconName, Store } from "zephblaze/core";
-import { DEFAULT_STYLES, INIT_CSS } from "zephblaze/core";
+import { component, registerComponent } from "qrill/core";
+import type { HComponentFn, HSvgBrandsIconName, Store } from "qrill/core";
+import { DEFAULT_STYLES, INIT_CSS } from "qrill/core";
 
 export type PageArgument = {
     title: string;

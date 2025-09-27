@@ -12,6 +12,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Security: in case of vulnerabilities.
 
 ## [Unreleased]
+## [0.1.0-alpha.8] - 2025-09-28
+### Changed
+- Renamed project from "zephblaze" to "qrill"
+- color part of design structure is totaly changed.
+
+### Remove
+- Remove and change design functions. Design system is now under reconstruction.
+
 ## [0.1.0-alpha.7] - 2025-09-27
 ### Added
 - import default export of site/site.config.ts to configure original design.
@@ -68,14 +76,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Development server with hot reload using WebSocket
 - FontAwesome SVG icon optimization and woff2 font generation
 - Multi-runtime support (Node.js/Bun/Deno)
-- CLI tools (`zephblaze build`, `zephblaze dev` commands)
+- CLI tools (`hanabi build`, `hanabi dev` commands)
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/zephblaze/compare/v0.1.0-alpha.7...HEAD
-[0.1.0-alpha.7]: https://github.com/osawa-naotaka/zephblaze/compare/v0.1.0-alpha.6...v0.1.0-alpha.7
-[0.1.0-alpha.6]: https://github.com/osawa-naotaka/zephblaze/compare/v0.1.0-alpha.5...v0.1.0-alpha.6
-[0.1.0-alpha.5]: https://github.com/osawa-naotaka/zephblaze/compare/v0.1.0-alpha.4...v0.1.0-alpha.5
-[0.1.0-alpha.4]: https://github.com/osawa-naotaka/zephblaze/compare/v0.1.0-alpha.3...v0.1.0-alpha.4
-[0.1.0-alpha.3]: https://github.com/osawa-naotaka/zephblaze/compare/v0.1.0-alpha.2...v0.1.0-alpha.3
-[0.1.0-alpha.2]: https://github.com/osawa-naotaka/zephblaze/compare/v0.1.0-alpha.1...v0.1.0-alpha.2
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.8...HEAD
+[0.1.0-alpha.8]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.7...v0.1.0-alpha.8
+[0.1.0-alpha.7]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.6...v0.1.0-alpha.7
+[0.1.0-alpha.6]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.5...v0.1.0-alpha.6
+[0.1.0-alpha.5]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.4...v0.1.0-alpha.5
+[0.1.0-alpha.4]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.3...v0.1.0-alpha.4
+[0.1.0-alpha.3]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.2...v0.1.0-alpha.3
+[0.1.0-alpha.2]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.1...v0.1.0-alpha.2

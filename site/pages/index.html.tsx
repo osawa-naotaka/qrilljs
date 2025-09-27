@@ -2,9 +2,9 @@ import { page } from "@site/components/pages/page";
 import { hero } from "@site/components/sections/hero";
 import { summaries } from "@site/components/sections/summaries";
 import { navitem, postFmSchema, posts_dir, site } from "@site/site.config";
-import { DEFAULT_RESPONSIVE_PAGE_WIDTH, element, registerRootPage, style } from "zephblaze/core";
-import type { HRootPageFn, Store } from "zephblaze/core";
-import { getAllMarkdowns } from "zephblaze/server";
+import { DEFAULT_RESPONSIVE_PAGE_WIDTH, element, registerRootPage, style } from "qrill/core";
+import type { HRootPageFn, Store } from "qrill/core";
+import { getAllMarkdowns } from "qrill/server";
 
 export default function Root(store: Store): HRootPageFn<void> {
     const Page = page(store);

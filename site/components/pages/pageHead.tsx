@@ -1,5 +1,5 @@
-import { component } from "zephblaze/core";
-import type { HComponentFn } from "zephblaze/core";
+import { component } from "qrill/core";
+import type { HComponentFn } from "qrill/core";
 
 export type PageHeadArgument = {
     title: string;

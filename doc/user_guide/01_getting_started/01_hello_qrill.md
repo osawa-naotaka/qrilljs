@@ -1,15 +1,15 @@
-# Hello Zephblaze: 最初のプロジェクト
+# Hello qrill: 最初のプロジェクト
 
-このガイドでは、Zephblazeを使って最初の"Hello World"プロジェクトを作成し、開発・ビルドする方法を説明します。
+このガイドでは、qrillを使って最初の"Hello World"プロジェクトを作成し、開発・ビルドする方法を説明します。
 
 ## プロジェクトの作成
 
 ### 1. プロジェクト構造
 
-Zephblazeプロジェクトは以下のような構造で作成します：
+qrillプロジェクトは以下のような構造で作成します：
 
 ```
-hello_zephblaze/
+hello_qrill/
 ├── package.json
 ├── tsconfig.json
 └── site/
@@ -21,7 +21,7 @@ hello_zephblaze/
 
 ```json
 {
-    "name": "hello_zephblaze",
+    "name": "hello_qrill",
     "devDependencies": {
         "@biomejs/biome": "^1.9.4",
         "@types/node": "^22.13.10",
@@ -30,12 +30,12 @@ hello_zephblaze/
     },
     "packageManager": "yarn@4.7.0",
     "scripts": {
-        "build": "tsc && zephblaze build",
-        "dev": "tsc --watch & zephblaze dev",
+        "build": "tsc && qrill build",
+        "dev": "tsc --watch & qrill dev",
         "check": "biome check --write ./site"
     },
     "dependencies": {
-        "zephblaze": "../../../zephblaze-0.1.0-alpha.3.tgz"
+        "qrill": "../../../qrill-0.1.0-alpha.3.tgz"
     }
 }
 ```
@@ -53,7 +53,7 @@ hello_zephblaze/
 
         // JSX
         "jsx": "react-jsx",
-        "jsxImportSource": "zephblaze",
+        "jsxImportSource": "qrill",
 
         /* Bundler mode */
         "moduleResolution": "bundler",
@@ -81,16 +81,16 @@ hello_zephblaze/
 ### 4. 最初のページ（site/pages/index.html.tsx）
 
 ```tsx
-import type { HRootPageFn, Store } from "zephblaze/core";
+import type { HRootPageFn, Store } from "qrill/core";
 
 export default function Root(_store: Store): HRootPageFn<void> {
     return async () => (
         <html lang="en">
             <head>
-                <title>Hello, Zephblaze!</title>
+                <title>Hello, qrill!</title>
             </head>
             <body>
-                <h1>Hello, Zephblaze!</h1>
+                <h1>Hello, qrill!</h1>
             </body>
         </html>
     );
@@ -107,7 +107,7 @@ npm run dev
 
 このコマンドは以下を実行します：
 - `tsc --watch`: TypeScriptファイルの変更を監視してコンパイル
-- `zephblaze dev`: 開発サーバーを起動
+- `qrill dev`: 開発サーバーを起動
 
 開発サーバーが起動すると、ファイルの変更を監視し、自動でブラウザに反映されます。
 
@@ -121,7 +121,7 @@ npm run build
 
 このコマンドは以下を実行します：
 1. `tsc`: TypeScriptファイルをコンパイル
-2. `zephblaze build`: 静的サイトを生成
+2. `qrill build`: 静的サイトを生成
 
 ビルドが完了すると、`dist/`ディレクトリに静的ファイルが生成されます。
 
@@ -137,7 +137,7 @@ npm run check
 
 ## 重要なポイント
 
-- **JSX設定**: `jsxImportSource`を`"zephblaze"`に設定することで、ZephblazeのJSX機能を使用できます
+- **JSX設定**: `jsxImportSource`を`"qrill"`に設定することで、qrillのJSX機能を使用できます
 - **ページファイル**: `site/pages/`ディレクトリ内の`.tsx`ファイルがルーティングに使用されます
 - **型安全性**: TypeScriptの厳格な設定により、型安全なコードが書けます
 - **開発体験**: ホットリロード機能により、変更がリアルタイムで反映されます

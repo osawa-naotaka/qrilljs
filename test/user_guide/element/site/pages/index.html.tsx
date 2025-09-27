@@ -1,15 +1,15 @@
-import type { HRootPageFn, Store } from "zephblaze/core";
-import { element } from "zephblaze/core";
+import type { HRootPageFn, Store } from "qrill/core";
+import { element } from "qrill/core";
 
 export default function Root(_store: Store): HRootPageFn<void> {
     const SiteTitle = element("site-title", { tag: "h1" });
     return async () => (
         <html lang="en">
             <head>
-                <title>Hello, Zephblaze!</title>
+                <title>Hello, qrill!</title>
             </head>
             <body>
-                <SiteTitle>Hello, Zephblaze!</SiteTitle>
+                <SiteTitle>Hello, qrill!</SiteTitle>
             </body>
         </html>
     );

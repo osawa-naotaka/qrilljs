@@ -2,16 +2,9 @@ import { drawer } from "@site/components/module/drawer";
 import { navigation } from "@site/components/module/navigation";
 import { popover } from "@site/components/module/popover";
 import { search } from "@site/components/module/search";
-import { component, element, hSvgIconFont, registerComponent, style } from "zephblaze/core";
-import type { HComponentFn, HSvgBrandsIconName, Store } from "zephblaze/core";
-import {
-    DEFAULT_RESPONSIVE_PAGE_WIDTH,
-    DEFAULT_TEXT_BG,
-    FIX_TOP_STICKY,
-    FONT_SIZE,
-    F_3XLARGE,
-    OPACITY,
-} from "zephblaze/core";
+import { colorof, component, element, hSvgIconFont, registerComponent, style } from "qrill/core";
+import type { HComponentFn, HSvgBrandsIconName, Store } from "qrill/core";
+import { DEFAULT_RESPONSIVE_PAGE_WIDTH, FIX_TOP_STICKY, F_3XLARGE } from "qrill/core";
 
 export type PageHeaderArgument = {
     title: string;
@@ -33,9 +26,13 @@ export function pageHeader(store: Store): HComponentFn<PageHeaderArgument> {
     const DrawerOpenButton = hSvgIconFont(store, { type: "solid", name: "bars" });
 
     const component_styles = [
-        style(PageHeader)(FIX_TOP_STICKY, DEFAULT_TEXT_BG(store), OPACITY("0.8")),
+        style(PageHeader)(FIX_TOP_STICKY, {
+            color: colorof(store, "text"),
+            background_color: colorof(store, "background"),
+            opacity: "0.8",
+        }),
         style(Drawer)(DEFAULT_RESPONSIVE_PAGE_WIDTH(store)),
-        style("h1")(FONT_SIZE(F_3XLARGE(store))),
+        style("h1")({ font_size: F_3XLARGE(store) }),
     ];
 
     registerComponent(store, PageHeader, component_styles);

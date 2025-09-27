@@ -1,8 +1,8 @@
-# Zephblazeのコンポーネント
+# qrillのコンポーネント
 
 前章では、`element()`関数を使って単一のHTML要素にクラス名を付与した独自要素の作成方法を学びました。しかし、実際のWebアプリケーションでは、複数の要素を組み合わせた再利用可能なUIパーツが必要です。
 
-このガイドでは、Zephblazeの`component()`関数を使って、複雑な構造を持つ再利用可能なコンポーネントを作成する方法を説明します。
+このガイドでは、qrillの`component()`関数を使って、複雑な構造を持つ再利用可能なコンポーネントを作成する方法を説明します。
 
 ## コンポーネントとは？
 
@@ -19,8 +19,8 @@
 以下は、サイトタイトルを表示し、ホームページへのリンク機能を持つ`SiteTitle`コンポーネントの例です：
 
 ```typescript
-import { component, element } from "zephblaze/core";
-import type { H1Attribute, HComponentFn } from "zephblaze/core";
+import { component, element } from "qrill/core";
+import type { H1Attribute, HComponentFn } from "qrill/core";
 
 export function siteTitle(): HComponentFn<Partial<H1Attribute>> {
     const SiteTitle = element("site-title", { tag: "h1" });
@@ -66,7 +66,7 @@ return component(SiteTitle, (_attr, ...child) => (
 作成したコンポーネントをページで使用する例です：
 
 ```typescript
-import type { HRootPageFn, Store } from "zephblaze/core";
+import type { HRootPageFn, Store } from "qrill/core";
 import { siteTitle } from "../components/siteTitle";
 
 export default function Root(_store: Store): HRootPageFn<void> {
@@ -75,10 +75,10 @@ export default function Root(_store: Store): HRootPageFn<void> {
     return async () => (
         <html lang="en">
             <head>
-                <title>Hello, Zephblaze!</title>
+                <title>Hello, qrill!</title>
             </head>
             <body>
-                <SiteTitle>Hello, Zephblaze!</SiteTitle>
+                <SiteTitle>Hello, qrill!</SiteTitle>
             </body>
         </html>
     );
@@ -99,11 +99,11 @@ export default function Root(_store: Store): HRootPageFn<void> {
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Hello, Zephblaze!</title>
+        <title>Hello, qrill!</title>
         <link href="/index.css" rel="stylesheet"></link>
     </head>
     <body>
-        <h1 class="site-title"><a href="/">Hello, Zephblaze!</a></h1>
+        <h1 class="site-title"><a href="/">Hello, qrill!</a></h1>
     </body>
 </html>
 ```
@@ -115,8 +115,8 @@ export default function Root(_store: Store): HRootPageFn<void> {
 以下は、日付を表示するコンポーネントの例です：
 
 ```typescript
-import { component, element } from "zephblaze/core";
-import type { HComponentFn } from "zephblaze/core";
+import { component, element } from "qrill/core";
+import type { HComponentFn } from "qrill/core";
 
 // コンポーネントの引数の型定義
 export type DateTimeArgument = {
@@ -149,8 +149,8 @@ export function dateTime(): HComponentFn<DateTimeArgument> {
 以下は、ブログ記事のカードコンポーネントの例です：
 
 ```typescript
-import { component, element } from "zephblaze/core";
-import type { HComponentFn } from "zephblaze/core";
+import { component, element } from "qrill/core";
+import type { HComponentFn } from "qrill/core";
 import { dateTime } from "./dateTime";
 
 export type ArticleCardArgument = {
@@ -337,7 +337,7 @@ const SecondaryButton = element("secondary-button");
 
 ## まとめ
 
-Zephblazeのコンポーネントシステムの特徴：
+qrillのコンポーネントシステムの特徴：
 
 ### 主な利点
 1. **型安全性**: TypeScriptによる完全な型サポート
@@ -350,4 +350,4 @@ Zephblazeのコンポーネントシステムの特徴：
 - CSSスタイリングの統合
 - 動的コンテンツ生成の活用
 
-これらの基本をマスターすることで、Zephblazeを使った効率的な静的サイト開発が可能になります。
+これらの基本をマスターすることで、qrillを使った効率的な静的サイト開発が可能になります。

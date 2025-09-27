@@ -1,16 +1,5 @@
-import {
-    CURSOR,
-    DEFAULT_ROW,
-    DISPLAY,
-    HEIGHT,
-    SPACE_BETWEEN,
-    TRANSITION,
-    component,
-    element,
-    registerComponent,
-    style,
-} from "zephblaze/core";
-import type { HComponentFn, HNode, Store } from "zephblaze/core";
+import { component, element, registerComponent, style } from "qrill/core";
+import type { HComponentFn, HNode, Store } from "qrill/core";
 
 export type DrawerArgument = {
     title: HNode;
@@ -29,12 +18,31 @@ export function drawer(store: Store, button_id: string): HComponentFn<DrawerArgu
 
     const styles = [
         style(Drawer)({ overflow: "hidden" }),
-        style(Title)(DEFAULT_ROW(store), SPACE_BETWEEN),
-        style(HeaderSpace)(DEFAULT_ROW(store)),
-        style(OpenState)(DISPLAY("none")),
-        style(OpenButton)(CURSOR("pointer")),
-        style(Content)(HEIGHT("0"), TRANSITION("height", "0.25s")),
-        style([`#${button_id}`, ":checked"], "~", Content)(HEIGHT("calc-size(fit-content, size)")),
+        style(Title)({
+            display: "flex",
+            flex_direction: "row",
+            align_items: "center",
+            justify_content: "space-between",
+        }),
+        style(HeaderSpace)({
+            display: "flex",
+            flex_direction: "row",
+            align_items: "center",
+            justify_content: "space-between",
+        }),
+        style(OpenState)({ display: "none" }),
+        style(OpenButton)({ cursor: "pointer" }),
+        style(Content)({
+            height: "0",
+            transition: "height 0.25s",
+        }),
+        style(
+            [`#${button_id}`, ":checked"],
+            "~",
+            Content,
+        )({
+            height: "calc-size(fit-content, size)",
+        }),
     ];
 
     registerComponent(store, Drawer, styles);

@@ -6,7 +6,7 @@ import type { Selector, StyleRule } from "@/lib/core/style";
 import type { RecursivePartial } from "@/lib/core/util";
 import { cloneAndMergeRecord } from "@/lib/core/util";
 
-// zephblaze element data structure for register element to repository, internal use only.
+// qrill element data structure for register element to repository, internal use only.
 export type HComponent = {
     component_name: string;
     style: StyleRule[];
@@ -72,7 +72,7 @@ export function registerRootPage(
     raw_style: (StyleRule | StyleRule[])[],
     attachment?: HComponentAttachment,
 ): void {
-    const component_name = "zephblaze-root-page";
+    const component_name = "qrill-root-page";
     const style = raw_style.flatMap((x) => (Array.isArray(x) ? x : [x]));
 
     store.components.set(component_name, { component_name, style, attachment });

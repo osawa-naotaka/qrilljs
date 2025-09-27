@@ -1,4 +1,4 @@
-# zephblaze
+# qrill
 
 軽量で型安全な静的サイトジェネレーター（SSG）です。小規模サイトに向けたツールとして、TypeScriptとTSX記法を活用した型安全なサイト構築を可能にします。
 
@@ -20,7 +20,7 @@
 
 ```bash
 # Node.js 24以上のみ対応
-yarn add zephblaze
+yarn add qrill
 yarn add typescript
 ```
 
@@ -31,8 +31,8 @@ yarn add typescript
 sh <(curl -L https://nixos.org/nix/install) --no-daemon
 mkdir -p ~/.config/nix && echo "experimental-features = nix-command flakes" > ~/.config/nix/nix.conf
 
-git clone https://github.com/osawa-naotaka/zephblaze.git
-cd zephblaze
+git clone https://github.com/osawa-naotaka/qrill.git
+cd qrill
 nix develop
 ```
 
@@ -73,12 +73,12 @@ site/
 
 ```tsx
 // site/pages/index.html.tsx
-import type { HRootPageFn } from "zephblaze/core";
+import type { HRootPageFn } from "qrill/core";
 
 const IndexPage: HRootPageFn<{}> = async () => {
   return (
     <div>
-      <h1>Welcome to zephblaze</h1>
+      <h1>Welcome to qrill</h1>
       <p>型安全な静的サイトジェネレーター</p>
     </div>
   );
@@ -91,7 +91,7 @@ export default IndexPage;
 
 ```tsx
 // site/pages/posts/[slug].html.tsx
-import type { HRootPageFn } from "zephblaze/core";
+import type { HRootPageFn } from "qrill/core";
 
 interface PostPageProps {
   slug: string;
@@ -116,19 +116,19 @@ export default PostPage;
 
 ```bash
 # ビルド
-zephblaze build
+qrill build
 
 # 開発サーバー
-zephblaze dev
+qrill dev
 
 # カスタム設定ファイル指定
-zephblaze build --config custom.config.ts
+qrill build --config custom.config.ts
 
 # ヘルプ表示
-zephblaze --help
+qrill --help
 
 # バージョン確認
-zephblaze --version
+qrill --version
 ```
 
 ## 設定
@@ -147,7 +147,7 @@ export const posts_dir = "site/contents/posts/";
 
 ## アーキテクチャ
 
-zephblaze.jsは以下の設計原則に基づいています：
+qrill.jsは以下の設計原則に基づいています：
 
 - **表現と構造の分離** - コンテンツ、レイアウト、スタイル、挙動の論理的分離
 - **型安全なスタイリング** - CSS-in-JSの進化版による型チェック
@@ -164,7 +164,7 @@ zephblaze.jsは以下の設計原則に基づいています：
 
 ## 対応ランタイム
 
-- **Node.js** - メイン対応（v23推奨）
+- **Node.js** - メイン対応（v24以上）
 - **Bun** - 高速実行対応
 - **Deno** - TypeScript native対応
 
@@ -187,5 +187,5 @@ yarn pack
 
 ## リポジトリ
 
-- GitHub: [osawa-naotaka/zephblaze](https://github.com/osawa-naotaka/zephblaze)
-- Issues: [GitHub Issues](https://github.com/osawa-naotaka/zephblaze/issues)
+- GitHub: [osawa-naotaka/qrill](https://github.com/osawa-naotaka/qrill)
+- Issues: [GitHub Issues](https://github.com/osawa-naotaka/qrill/issues)

@@ -1,24 +1,24 @@
-# Zephblazeにおけるtsxを使ったサイト構築
+# qrillにおけるtsxを使ったサイト構築
 
-このガイドでは、Zephblazeでtsxを使ってサイトを構築する基本的な方法について説明します。
+このガイドでは、qrillでtsxを使ってサイトを構築する基本的な方法について説明します。
 
 ## tsxファイルの基本構造
 
-Zephblazeのサイトはtsxファイルを使って構築します。各ページは`xxx.html.tsx`という命名規則に従い、HTMLノードを返す関数を定義します。
+qrillのサイトはtsxファイルを使って構築します。各ページは`xxx.html.tsx`という命名規則に従い、HTMLノードを返す関数を定義します。
 
 ### 基本的な例
 
 ```tsx
-import type { HRootPageFn, Store } from "zephblaze/core";
+import type { HRootPageFn, Store } from "qrill/core";
 
 export default function Root(_store: Store): HRootPageFn<void> {
     return async () => (
         <html lang="en">
             <head>
-                <title>Hello, Zephblaze!</title>
+                <title>Hello, qrill!</title>
             </head>
             <body>
-                <h1>Hello, Zephblaze!</h1>
+                <h1>Hello, qrill!</h1>
             </body>
         </html>
     );
@@ -29,7 +29,7 @@ export default function Root(_store: Store): HRootPageFn<void> {
 
 ### 1. Default Export
 
-Zephblazeのページファイルはdefaultエクスポートとして関数を定義する必要があります。
+qrillのページファイルはdefaultエクスポートとして関数を定義する必要があります。
 
 ```tsx
 export default function Root(_store: Store): HRootPageFn<void> {
@@ -48,7 +48,7 @@ export default function Root(_store: Store): HRootPageFn<void> {
 ```tsx
 // HRootPageFn<void>は以下のような構造です：
 // type HRootPageFn<T> = (parameter: T) => Promise<HNode>;
-// HNodeはzephblaze内部で利用するDOMの型です
+// HNodeはqrill内部で利用するDOMの型です
 
 export default function Root(_store: Store): HRootPageFn<void> {
     return async () => { // ← この async 関数が HRootPageFn
@@ -85,7 +85,7 @@ export default function Root(_store: Store): HRootPageFn<{ id: string }> {
 
 ## まとめ
 
-Zephblazeでのtsxサイト構築では：
+qrillでのtsxサイト構築では：
 
 1. **ファイル命名**: `xxx.html.tsx`の規則に従う
 2. **エクスポート**: default exportで関数を定義
@@ -94,4 +94,4 @@ Zephblazeでのtsxサイト構築では：
 5. **実装**: async関数でjsx要素を返す
 6. **型安全性**: TypeScriptの恩恵を受けながら開発できる
 
-この基本的な構造を理解することで、Zephblazeを使った柔軟で型安全なWebサイト開発が可能になります。
+この基本的な構造を理解することで、qrillを使った柔軟で型安全なWebサイト開発が可能になります。

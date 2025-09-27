@@ -12,11 +12,11 @@ export * from "@/lib/ui/icon";
 export * from "@/lib/ui/svgIconFont";
 export * from "@/lib/ui/svgIconStore";
 
-import type { ZephblazeConfig } from "@/cli/config";
+import type { QrillConfig } from "@/cli/config";
 import type { DesignRule } from "@/lib/core/design";
 import type { RecursivePartial } from "@/lib/core/util";
 
-export function defaultConfig(conf: RecursivePartial<ZephblazeConfig>): RecursivePartial<ZephblazeConfig> {
+export function defaultConfig(conf: RecursivePartial<QrillConfig>): RecursivePartial<QrillConfig> {
     return conf;
 }
 

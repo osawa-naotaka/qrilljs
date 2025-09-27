@@ -1,8 +1,8 @@
-import { attribute_names, tags, zephblaze_tags } from "@/lib/core/elements";
+import { attribute_names, qrill_tags, tags } from "@/lib/core/elements";
 import { property_names } from "@/lib/core/properties";
 
 // HTML Element
-const allowed_elements = /* @__PURE__*/ new Set<string>([...tags, ...zephblaze_tags]);
+const allowed_elements = /* @__PURE__*/ new Set<string>([...tags, ...qrill_tags]);
 
 export function validateElementName(name: string): boolean {
     return allowed_elements.has(name.toLowerCase());
