@@ -1,5 +1,5 @@
 {
-  "name": "qrill",
+  "name": "qrilljs",
   "version": "0.1.0-alpha.8",
   "description": "lightweight static site generator for typescript",
   "type": "module",
