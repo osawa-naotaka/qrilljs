@@ -2,16 +2,19 @@ export function replaceExt(filename: string, ext: string) {
     return filename.replace(/\.[^/.]+$/, ext);
 }
 
-export function cloneAndMergeRecord<
-    T1 extends Record<string | number | symbol, unknown>,
-    T2 extends Record<string | number | symbol, unknown>,
->(record1: T1, record2: T2): T1 & T2 {
-    const new_record1 = JSON.parse(JSON.stringify(record1));
-    const new_record2 = JSON.parse(JSON.stringify(record2));
-    for (const [key, value] of Object.entries(new_record2)) {
-        new_record1[key] = value;
+export function cloneAndMergeRecord<T extends Record<PropertyKey, unknown>>(
+    record1: T,
+    record2: RecursivePartial<T>,
+): T {
+    const new_record = JSON.parse(JSON.stringify(record1));
+    for (const [key, value] of Object.entries(record2)) {
+        if (value instanceof Object && value !== null && !Array.isArray(value)) {
+            new_record[key] = cloneAndMergeRecord(new_record[key], value);
+        } else {
+            new_record[key] = value;
+        }
     }
-    return new_record1;
+    return new_record;
 }
 
 export function joinAll<T extends {}, S extends {}>(base: T, items: S[]): T & S {
@@ -135,3 +138,11 @@ const contentTypes: [string, string][] = [
 export function contentType(ext: string): string {
     return contentTypes.find((c) => c[0] === ext)?.[1] || "text/plain";
 }
+
+export type RecursivePartial<T> = {
+    [P in keyof T]?: T[P] extends (infer U)[]
+        ? RecursivePartial<U>[]
+        : T[P] extends object
+          ? RecursivePartial<T[P]>
+          : T[P];
+};

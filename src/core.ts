@@ -11,3 +11,15 @@ export * from "@/lib/core/markdown";
 export * from "@/lib/ui/icon";
 export * from "@/lib/ui/svgIconFont";
 export * from "@/lib/ui/svgIconStore";
+
+import type { ZephblazeConfig } from "@/cli/config";
+import type { DesignRule } from "@/lib/core/design";
+import type { RecursivePartial } from "@/lib/core/util";
+
+export function defaultConfig(conf: RecursivePartial<ZephblazeConfig>): RecursivePartial<ZephblazeConfig> {
+    return conf;
+}
+
+export function defaultSiteConfig(conf: RecursivePartial<DesignRule>): RecursivePartial<DesignRule> {
+    return conf;
+}

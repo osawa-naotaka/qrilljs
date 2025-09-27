@@ -5,8 +5,9 @@ import { createRequire } from "node:module";
 import path from "node:path";
 import { cwd } from "node:process";
 import type { Duplex } from "node:stream";
-import { loadConfig } from "@/cli/config";
+import { loadConfig, requireConfig } from "@/cli/config";
 import type { ZephblazeConfig } from "@/cli/config";
+import { default_config } from "@/cli/config";
 import { bundleCss } from "@/cli/css";
 import { bundleWoff2 } from "@/cli/font";
 import { bundleHtml } from "@/cli/html";
@@ -14,18 +15,19 @@ import { stringifyToHtml } from "@/cli/html";
 import { createAssetRouter, createPageRouter, createStaticRouter, withoutExt } from "@/cli/route";
 import type { Router } from "@/cli/route";
 import { bundleScriptEsbuild } from "@/cli/script";
+import { default_design_rule } from "@/core";
 import { Link, Script } from "@/lib/core/elements";
-import { clearStore, generateStore } from "@/lib/core/store";
+import { generateStore } from "@/lib/core/store";
 import type { Store } from "@/lib/core/store";
 import { contentType } from "@/lib/core/util";
-import { ErrorPage } from "@/page/error";
+import { ErrorPage, InternalServerErrorPage } from "@/page/error";
 import { zephblaze_error_css } from "@/page/zephblaze-error";
 import chokidar from "chokidar";
 import type { FSWatcher } from "chokidar";
 import { WebSocketServer } from "ws";
 
 export async function serve(conf_file: string | undefined): Promise<void> {
-    const config = await loadConfig(conf_file);
+    const config = loadConfig(conf_file ?? "zephblaze.config.ts", default_config);
     const watch_dir = path.join(cwd(), config.server.watch_dir);
     const watcher = chokidar.watch(watch_dir, { persistent: true });
 
@@ -187,23 +189,29 @@ function normalResponse(content_arg: string | Buffer<ArrayBufferLike>, ext: stri
     return { status: 200, content, type: contentType(ext) };
 }
 
-function errorResponse(status: number, cause: string): Resp {
-    const content = toArrayBuffer(stringifyToHtml(0, [])(ErrorPage({ name: status.toString(), cause })));
+function errorResponse(status: number, cause: string | Error): Resp {
+    if (typeof cause === "string") {
+        const content = toArrayBuffer(stringifyToHtml(0, [])(ErrorPage({ name: status.toString(), cause })));
+        return { status, content, type: "text/html" };
+    }
+
+    const content = toArrayBuffer(stringifyToHtml(0, [])(InternalServerErrorPage(cause)));
     return { status, content, type: "text/html" };
 }
 
 function createReqProcessor(config: ZephblazeConfig): [ReqProcessFn, ReloadFn] {
+    const require = createRequire(import.meta.url);
+
     const root = cwd();
     const page_dir = path.join(root, config.input.page_dir);
     const public_dir = path.join(root, config.input.public_dir);
 
-    const store = generateStore(config.asset, config.designrule);
+    let site_config = requireConfig(require, config.input.site_conf, default_design_rule);
+    let store = generateStore(config.asset, site_config);
 
     let page_router = createPageRouter(page_dir);
     let public_router = createStaticRouter(public_dir);
     let asset_router = new Map<string, Router>();
-
-    const require = createRequire(import.meta.url);
 
     const reload_fn: ReloadFn = () => {
         for (const key of Object.keys(require.cache)) {
@@ -212,6 +220,8 @@ function createReqProcessor(config: ZephblazeConfig): [ReqProcessFn, ReloadFn] {
         page_router = createPageRouter(page_dir);
         public_router = createStaticRouter(public_dir);
         asset_router = new Map<string, Router>();
+        site_config = requireConfig(require, config.input.site_conf, default_design_rule);
+        store = generateStore(config.asset, site_config);
     };
 
     const proc_fn: ReqProcessFn = async (req: Request) => {
@@ -221,7 +231,7 @@ function createReqProcessor(config: ZephblazeConfig): [ReqProcessFn, ReloadFn] {
             if (!(match_page instanceof Error)) {
                 const page_fn = require(path.join(page_dir, match_page.target_file));
                 if (typeof page_fn.default === "function") {
-                    clearStore(store);
+                    store = generateStore(config.asset, site_config);
                     const root_page_fn = await page_fn.default(store);
 
                     // auto generation of .css , .js and .woff2 from .html.ts
@@ -231,7 +241,7 @@ function createReqProcessor(config: ZephblazeConfig): [ReqProcessFn, ReloadFn] {
                                 const css_name = withoutExt(withoutExt(match_page.target_file));
                                 const css = await bundleCss(store, css_name, require);
                                 if (css instanceof Error) {
-                                    return errorResponse(500, css.message);
+                                    return errorResponse(500, css);
                                 }
                                 return normalResponse(css || "", match_page.req_ext);
                             }
@@ -305,7 +315,7 @@ function createReqProcessor(config: ZephblazeConfig): [ReqProcessFn, ReloadFn] {
             return errorResponse(404, `route for url "${req.url}" not found.`);
         } catch (e) {
             if (e instanceof Error) {
-                return errorResponse(500, e.toString());
+                return errorResponse(500, e);
             }
             throw e;
         }

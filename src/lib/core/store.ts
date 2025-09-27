@@ -3,6 +3,8 @@ import type { HComponentFn, HNode } from "@/lib/core/component";
 import { default_design_rule } from "@/lib/core/design";
 import type { DesignRule } from "@/lib/core/design";
 import type { Selector, StyleRule } from "@/lib/core/style";
+import type { RecursivePartial } from "@/lib/core/util";
+import { cloneAndMergeRecord } from "@/lib/core/util";
 
 // zephblaze element data structure for register element to repository, internal use only.
 export type HComponent = {
@@ -45,10 +47,10 @@ export type Store = {
     asset: AssetConfig;
 };
 
-export function generateStore(asset: AssetConfig, rule: Partial<DesignRule> = {}): Store {
+export function generateStore(asset: AssetConfig, rule: RecursivePartial<DesignRule> = {}): Store {
     return {
         components: new Map<string, HComponent>(),
-        designrule: { ...default_design_rule, ...rule },
+        designrule: cloneAndMergeRecord(default_design_rule, rule),
         asset,
     };
 }

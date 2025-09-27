@@ -5,6 +5,8 @@ export type BrightnessValue = string; // persentage (color mix to black or white
 export type ColorSet = {
     primary: ColorValue;
     secondary: ColorValue;
+    thirdary: ColorValue;
+    forthary: ColorValue;
     accent: ColorValue;
     background: ColorValue;
     text: ColorValue;
@@ -66,6 +68,8 @@ export const default_design_rule: DesignRule = {
         category: {
             primary: [63, 81, 181], // #3f51b5
             secondary: [33, 186, 69], // #21ba45
+            thirdary: [255, 193, 7], // #ffc107
+            forthary: [0, 188, 212], // #00bcd4
             accent: [255, 64, 129], // #ff4081
             text: [48, 48, 48], // #303030
             background: [240, 240, 240], // #f0f0f0
