@@ -126,6 +126,8 @@ export const LIGHTEST = (store: Store, kind: ColorKind) => MIX_WHITE(COLOROF(sto
 export type ColorKind =
     | "primary"
     | "secondary"
+    | "thirdary"
+    | "forthary"
     | "accent"
     | "background"
     | "text"
@@ -140,6 +142,10 @@ export function COLOROF(store: Store, kind: ColorKind): string {
             return C_PRIMARY(store);
         case "secondary":
             return C_SECONDARY(store);
+        case "thirdary":
+            return C_THIRDARY(store);
+        case "forthary":
+            return C_FORTHARY(store);
         case "accent":
             return C_ACCENT(store);
         case "background":
@@ -165,6 +171,10 @@ export function SCOLOROF(store: Store, kind: ColorKind): string {
             return CS_PRIMARY(store);
         case "secondary":
             return CS_SECONDARY(store);
+        case "thirdary":
+            return CS_THIRDARY(store);
+        case "forthary":
+            return CS_FORTHARY(store);
         case "accent":
             return CS_ACCENT(store);
         case "background":
@@ -412,6 +422,8 @@ export function INVERT(n: string): Properties {
 // shorthand from store
 export const C_PRIMARY = (store: Store) => rgb(store.designrule.color.category.primary);
 export const C_SECONDARY = (store: Store) => rgb(store.designrule.color.category.secondary);
+export const C_THIRDARY = (store: Store) => rgb(store.designrule.color.category.thirdary);
+export const C_FORTHARY = (store: Store) => rgb(store.designrule.color.category.forthary);
 export const C_ACCENT = (store: Store) => rgb(store.designrule.color.category.accent);
 export const C_TEXT = (store: Store) => rgb(store.designrule.color.category.text);
 export const C_BG = (store: Store) => rgb(store.designrule.color.category.background);
@@ -422,6 +434,8 @@ export const C_WARNING = (store: Store) => rgb(store.designrule.color.category.w
 
 export const CS_PRIMARY = (store: Store) => rgb_sep(store.designrule.color.category.primary);
 export const CS_SECONDARY = (store: Store) => rgb_sep(store.designrule.color.category.secondary);
+export const CS_THIRDARY = (store: Store) => rgb_sep(store.designrule.color.category.thirdary);
+export const CS_FORTHARY = (store: Store) => rgb_sep(store.designrule.color.category.forthary);
 export const CS_ACCENT = (store: Store) => rgb_sep(store.designrule.color.category.accent);
 export const CS_TEXT = (store: Store) => rgb_sep(store.designrule.color.category.text);
 export const CS_BG = (store: Store) => rgb_sep(store.designrule.color.category.background);
