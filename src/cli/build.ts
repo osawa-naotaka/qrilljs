@@ -3,11 +3,13 @@ import { createRequire } from "node:module";
 import path from "node:path";
 import { cwd } from "node:process";
 import { loadConfig } from "@/cli/config";
+import { default_config } from "@/cli/config";
 import { bundleCss } from "@/cli/css";
 import { bundleWoff2 } from "@/cli/font";
 import { bundleHtml } from "@/cli/html";
 import { withoutExt } from "@/cli/route";
 import { bundleScriptEsbuild } from "@/cli/script";
+import { default_design_rule } from "@/core";
 import type { Attribute, HRootPageFn } from "@/lib/core/component";
 import { Link, Script } from "@/lib/core/elements";
 import { clearStore, generateStore } from "@/lib/core/store";
@@ -19,14 +21,15 @@ import { globSync } from "glob";
 export async function build(conf_file: string | undefined) {
     const start = performance.now();
 
-    const config = await loadConfig(conf_file);
+    const config = loadConfig(conf_file ?? "zephblaze.config.ts", default_config);
+    const site_config = loadConfig(config.input.site_conf, default_design_rule);
 
     const root = cwd();
     const dist_dir = path.join(root, config.output.dist_dir);
     const page_dir = path.join(root, config.input.page_dir);
     const public_dir = path.join(root, config.input.public_dir);
 
-    const store = generateStore(config.asset, config.designrule);
+    const store = generateStore(config.asset, site_config);
     const asset_store = new Map<string, HComponentAsset[]>();
 
     if (config.output.clean_befor_build && existsSync(dist_dir)) {
