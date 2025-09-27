@@ -1,5 +1,4 @@
 import type { HSvgBrandsIconName } from "qrill/core";
-import { defaultSiteConfig } from "qrill/core";
 import * as v from "valibot";
 
 export const site = {
@@ -29,13 +28,3 @@ export const postFmSchema = v.object({
 });
 
 export type PostFm = v.InferInput<typeof postFmSchema>;
-
-export default defaultSiteConfig({
-    color: {
-        category: {
-            text: {
-                main: [0x80, 0x6f, 0x61],
-            },
-        },
-    },
-});

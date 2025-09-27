@@ -1,12 +1,7 @@
 import {
-    BOLD,
-    C_ACCENT,
+    colorof,
     DEFAULT_RESPONSIVE_PAGE_WIDTH,
-    FONT_SIZE,
-    LINE_HEIGHT,
-    MARGIN_BLOCK,
     S_2XLARGE,
-    TEXT_COLOR,
 } from "@/core";
 import { component, element, registerComponent, style } from "qrill/core";
 import type { HArgument, HComponentFn, Store } from "qrill/core";
@@ -16,9 +11,23 @@ export function hero(store: Store): HComponentFn<HArgument> {
     const HeroText = element("hero-text");
 
     const component_styles = [
-        style(Hero)(BOLD, MARGIN_BLOCK("0", S_2XLARGE(store)), FONT_SIZE("min(17vw, 7rem)"), LINE_HEIGHT("1.2")),
+        style(Hero)(
+            {
+                font_weight: "bold",
+                font_style: "normal",
+                margin_block: ["0", S_2XLARGE(store)],
+                font_size: "min(17vw, 7rem)",
+                line_height: "1.2",
+            }
+        ),
         style(HeroText)(DEFAULT_RESPONSIVE_PAGE_WIDTH(store)),
-        style(HeroText, "em")(BOLD, TEXT_COLOR(C_ACCENT(store))),
+        style(HeroText, "em")(
+            {
+                font_weight: "bold",
+                font_style: "normal",
+                color: colorof(store, "accent"),
+            },
+        ),
     ];
 
     registerComponent(store, Hero, component_styles);

@@ -1,14 +1,7 @@
 import { component, element, registerComponent, style } from "qrill/core";
 import type { HComponentFn, HNode, Store } from "qrill/core";
 import {
-    BORDER_UNDERLINE,
-    FLEX_END,
-    FLEX_WRAP,
-    FONT_SIZE,
     F_SMALL,
-    LINE_HEIGHT,
-    MARGIN_BLOCK,
-    ROW,
     S_SMALL,
     S_TINY,
 } from "qrill/core";
@@ -23,14 +16,18 @@ export function articleHeader(store: Store): HComponentFn<ArticleHeaderArgument>
     const Meta = element("article-header-meta");
 
     const component_styles = [
-        style(Title)(BORDER_UNDERLINE),
+        style(Title)({ border_bottom: "2px solid"}),
         style(Meta)(
-            ROW(S_SMALL(store)),
-            FLEX_END,
-            FLEX_WRAP,
-            FONT_SIZE(F_SMALL(store)),
-            LINE_HEIGHT("1"),
-            MARGIN_BLOCK(S_TINY(store), "0"),
+            {
+                display: "flex",
+                flex_direction: "row",
+                align_items: "center",
+                justify_content: "flex-end",
+                gap: S_SMALL(store),
+                font_size: F_SMALL(store),
+                line_height: "1",
+                margin_block: [S_TINY(store), "0"]
+            },
         ),
     ];
 

@@ -2,19 +2,11 @@ import { dateTime } from "@site/components/element/dateTime";
 import { tag } from "@site/components/element/tag";
 import { postFmSchema } from "@site/site.config";
 import { TAG_DESIGN } from "@site/styles/design";
-import { as, component, createDom, element, hSvgIconFont, registerComponent, style } from "qrill/core";
+import { as, colorof, component, createDom, element, hSvgIconFont, registerComponent, style } from "qrill/core";
 import {
-    BORDER_UNDERLINE,
     DEFAULT_RESPONSIVE_PAGE_WIDTH,
-    DEFAULT_TEXT_BG,
-    FONT_SIZE,
     F_SMALL,
     F_TINY,
-    HEIGHT,
-    MARGIN_BLOCK,
-    OPACITY,
-    ROW,
-    ROW_WRAP,
     S_2XLARGE,
     S_LARGE,
 } from "qrill/core";
@@ -34,10 +26,24 @@ export function search(store: Store): HComponentFn<HArgument> {
 
     const component_sytles = [
         style(Search)(DEFAULT_RESPONSIVE_PAGE_WIDTH(store)),
-        style(SearchBar)(ROW("0.5rem"), BORDER_UNDERLINE),
-        style(Input)(DEFAULT_TEXT_BG(store), HEIGHT(S_2XLARGE(store))),
-        style([Input, "::placeholder"])(OPACITY("0.5")),
-        style(Result)(MARGIN_BLOCK(S_LARGE(store))),
+        style(SearchBar)(
+            {
+                display: "flex",
+                flex_direction: "row",
+                align_items: "center",
+                gap: "0.5rem",
+                border_bottom: "2px solid"
+            }
+        ),
+        style(Input)(
+            {
+                color: colorof(store, "text"),
+                background_color: colorof(store, "background"),
+                height: S_2XLARGE(store),
+            }
+        ),
+        style([Input, "::placeholder"])({ opacity: "0.5" }),
+        style(Result)({ margin_block: S_LARGE(store) }),
     ];
 
     registerComponent(store, Search, component_sytles, { script: import.meta.url });
@@ -110,9 +116,19 @@ export function searchResultItem(store: Store): HComponentFn<SearchResultItemAtt
     const Tag = as("serch-result-item-tag", tag());
 
     const component_styles = [
-        style(ResultItem)(MARGIN_BLOCK(S_2XLARGE(store), "0")),
-        style(Meta)(ROW("2px 0.5rem"), ROW_WRAP, FONT_SIZE(F_SMALL(store)), BORDER_UNDERLINE),
-        style(Description)(FONT_SIZE(F_TINY(store))),
+        style(ResultItem)({ margin_block: [S_2XLARGE(store), "0"] }),
+        style(Meta)(
+            {
+                display: "flex",
+                flex_direction: "row",
+                align_items: "center",
+                gap: ["2px", "0.5rem"],
+                flex_wrap: "wrap",
+                font_size: F_SMALL(store),
+                border_bottom: "1px solid",
+            },
+        ),
+        style(Description)({ font_size: F_TINY(store) }),
         TAG_DESIGN(store, "text", Tag),
     ];
 

@@ -5,30 +5,14 @@ import { articleHeader } from "@site/components/module/articleHeader";
 import type { PostFm } from "@site/site.config";
 import { TAG_DESIGN } from "@site/styles/design";
 import {
-    ALIGN_NOMAL,
-    BG_COLOR,
-    BORDER_LEFT_THIC,
-    BORDER_UNDERLINE,
-    B_LIGHTER,
-    COLUMN,
-    C_BACKGROUND,
-    C_TEXT,
-    FONT_SIZE,
+    F_LARGE,
     F_XLARGE,
-    LIST_DECIMAL,
-    LIST_DISC,
     Link,
-    MARGIN_BLOCK,
-    MARGIN_INLINE,
-    MIX_WHITE,
-    PADDING_BLOCK,
-    PADDING_INLINE,
-    ROUND,
     S_2XLARGE,
     S_MEDIUM,
-    TEXT_COLOR,
     TEXT_JUSTIFY,
     TEXT_UNDERLINE,
+    colorof,
 } from "qrill/core";
 import { A, H2, H3, H4, H5, Li, Ol, P, Script, Ul } from "qrill/core";
 import { as, component, element, registerComponent, style } from "qrill/core";
@@ -46,30 +30,56 @@ export function article(store: Store): HComponentFn<ArticleArgument> {
     const ShareX = shareX(store);
 
     const component_styles = [
-        style(Article)(MARGIN_BLOCK(S_2XLARGE(store))),
+        style(Article)({ margin_block: S_2XLARGE(store) }),
 
-        style(ArticleHeader, H2)(FONT_SIZE(F_XLARGE(store))),
+        style(ArticleHeader, H2)({ font_size: F_XLARGE(store) }),
         TAG_DESIGN(store, "text", ArticleTag),
 
-        style(ArticleText)(COLUMN("0"), TEXT_JUSTIFY, ALIGN_NOMAL),
-        style(ArticleText, H3)(
-            FONT_SIZE(F_XLARGE(store)),
-            ROUND("4px"),
-            PADDING_INLINE(S_MEDIUM(store)),
-            PADDING_BLOCK("3px"),
-            MARGIN_BLOCK(S_2XLARGE(store), S_MEDIUM(store)),
-            TEXT_COLOR(C_BACKGROUND(store)),
-            BG_COLOR(MIX_WHITE(C_TEXT(store))(B_LIGHTER(store))),
+        style(ArticleText)(
+            TEXT_JUSTIFY,
+            {
+                display: "flex",
+                flex_direction: "column",
+                align_items: "normal",
+                gap: "0"
+            },
         ),
-        style(ArticleText, P)(MARGIN_BLOCK("0", S_2XLARGE(store)), {
-            text_indent: S_MEDIUM(store),
-        }),
-        style(ArticleText, H4)(BORDER_UNDERLINE, MARGIN_BLOCK(S_MEDIUM(store))),
-        style(ArticleText, H5)(BORDER_LEFT_THIC),
-        style(ArticleText, Ul)(LIST_DISC),
-        style(ArticleText, Ol)(LIST_DECIMAL),
+        style(ArticleText, H3)(
+            {
+                font_size: F_LARGE(store),
+                border_radius: "4px",
+                padding_inline: S_MEDIUM(store),
+                padding_block: "3px",
+                margin_block: [S_2XLARGE(store), S_MEDIUM(store)],
+                color: colorof(store, "text_secondary"),
+                background_color: colorof(store, "background_secondary", "light"),
+            },
+        ),
+        style(ArticleText, P)( 
+            {
+                margin_block: ["0", S_2XLARGE(store)],
+                text_indent: S_MEDIUM(store),
+            }
+        ),
+        style(ArticleText, H4)(
+            {
+                border_bottom: "1px solid",
+                margin_block: S_MEDIUM(store),
+            }
+        ),
+        style(ArticleText, H5)(
+            {
+                border_left: "4px solid"
+            }
+        ),
+        style(ArticleText, Ul)(
+            {
+                list_style_type: "disc"
+            }
+        ),
+        style(ArticleText, Ol)({ list_style_type: "decimal" }),
         style(ArticleText, A)(TEXT_UNDERLINE),
-        style(ArticleText, Li)(MARGIN_INLINE(S_2XLARGE(store))),
+        style(ArticleText, Li)({ margin_inline: S_2XLARGE(store) }),
     ];
 
     const prism_cdn = "https://cdn.jsdelivr.net/npm/prismjs@1.30.0";

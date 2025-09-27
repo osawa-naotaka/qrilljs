@@ -4,7 +4,7 @@ import { page } from "@site/components/pages/page";
 import { navitem, postFmSchema, posts_dir, site } from "@site/site.config";
 import { RawHTML, element, registerRootPage, style } from "qrill/core";
 import type { HRootPageFn, Store } from "qrill/core";
-import { DEFAULT_RESPONSIVE_PAGE_WIDTH, MARGIN_BLOCK, S_2XLARGE } from "qrill/core";
+import { DEFAULT_RESPONSIVE_PAGE_WIDTH, S_2XLARGE } from "qrill/core";
 import { getMarkdown, listFiles, markdownToHtml } from "qrill/server";
 
 type RootParameter = {
@@ -20,7 +20,7 @@ export default function Root(store: Store): HRootPageFn<RootParameter> {
     const PageMainArea = element("page-main-area", { tag: "main" });
     const Article = article(store);
 
-    const styles = [style(PageMainArea)(MARGIN_BLOCK("0", S_2XLARGE(store)), DEFAULT_RESPONSIVE_PAGE_WIDTH(store))];
+    const styles = [style(PageMainArea)({ margin_block: ["0", S_2XLARGE(store)] }, DEFAULT_RESPONSIVE_PAGE_WIDTH(store))];
 
     registerRootPage(store, styles);
 

@@ -1,8 +1,7 @@
-import { FLEX_WRAP, element, hIcon, hSvgIconFont, registerRootPage, style, unionRecords } from "qrill/core";
-import type { ColorKind, HArgument, HRootPageFn, Properties, Store } from "qrill/core";
+import { element, hIcon, hSvgIconFont, registerRootPage, style, unionRecords } from "qrill/core";
+import type { ColorCategory, HArgument, HRootPageFn, Properties, Store } from "qrill/core";
 import {
     BOLD,
-    BORDER_RADIUS,
     BOX_ELEVATED,
     BOX_ELEVATED_EM_LIGHT,
     BOX_ELEVATED_EM_STRONG,
@@ -18,19 +17,12 @@ import {
     BOX_TONAL,
     BOX_TONAL_EM_LIGHT,
     BOX_TONAL_EM_STRONG,
-    CURSOR,
     DEFAULT_RESPONSIVE_PAGE_WIDTH,
     DEFAULT_STYLES,
-    DISPLAY,
-    GAP,
     INIT_CSS,
     INLINE_FLEX,
-    LINE_HEIGHT,
-    OVERFLOW,
-    PADDING,
     S_MEDIUM,
     S_SMALL,
-    TRANSITION,
 } from "qrill/core";
 
 export default function Root(store: Store): HRootPageFn<HArgument> {
@@ -44,24 +36,32 @@ export default function Root(store: Store): HRootPageFn<HArgument> {
     const XIcon = hSvgIconFont(store, { type: "brands", name: "x-twitter" });
     const YoutubeIcon = hSvgIconFont(store, { type: "brands", name: "youtube" });
 
-    const kind: ColorKind = "primary";
+    const kind: ColorCategory = "primary";
 
     const default_styles: Properties = unionRecords(
         INLINE_FLEX,
-        PADDING(S_SMALL(store), S_MEDIUM(store)),
         BOLD,
-        LINE_HEIGHT("1"),
-        OVERFLOW("hidden"),
-        BORDER_RADIUS("4px"),
-        CURSOR("pointer"),
-        TRANSITION("all", "0.25s", "ease-in-out"),
+        {
+            padding: [S_SMALL(store), S_MEDIUM(store)],
+            line_height: "1",
+            overflow: "hidden",
+            border_radius: "4px",
+            cursor: "pointer",
+            transition: "all 0.25s ease-in-out",
+        },
     );
 
     const page_styles = [
         INIT_CSS,
         DEFAULT_STYLES(store),
-        style("main")(DEFAULT_RESPONSIVE_PAGE_WIDTH(store), DISPLAY("flex"), FLEX_WRAP),
-
+        style("main")(
+            DEFAULT_RESPONSIVE_PAGE_WIDTH(store),
+            {
+                display: "flex",
+                flex_wrap: "wrap",
+                gap: S_MEDIUM(store),
+            }
+        ),
         style(BText)(BOX_TEXT(store, kind), default_styles),
         style([BText, ":hover"])(BOX_TEXT_EM_LIGHT(store, kind)),
         style([BText, ":active"])(BOX_TEXT_EM_STRONG(store, kind)),
@@ -82,8 +82,8 @@ export default function Root(store: Store): HRootPageFn<HArgument> {
         style([BElevated, ":hover"])(BOX_ELEVATED_EM_LIGHT(store, kind)),
         style([BElevated, ":active"])(BOX_ELEVATED_EM_STRONG(store, kind)),
 
-        style(BFilled, ">", "*")(DISPLAY("block")),
-        style(BFilled)(GAP(S_SMALL(store))),
+        style(BFilled, ">", "*")({ display: "block" }),
+        style(BFilled)({ gap: S_SMALL(store) }),
     ];
 
     registerRootPage(store, page_styles);

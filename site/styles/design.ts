@@ -1,38 +1,35 @@
 import {
     BOLD,
-    BORDER_RADIUS,
-    BORDER_UNDERLINE,
     BOX_FILLED,
     BOX_FILLED_EM_LIGHT,
-    CURSOR,
     INLINE_FLEX,
-    LINE_HEIGHT,
-    OVERFLOW,
-    PADDING,
     S_SMALL,
     S_TINY,
-    TRANSITION,
     style,
 } from "qrill/core";
-import type { ColorKind, HComponentFn, Selector, Store, StyleRule } from "qrill/core";
+import type { ColorCategory, HComponentFn, Selector, Store, StyleRule } from "qrill/core";
 
-export function TAG_DESIGN<T>(store: Store, kind: ColorKind, top: HComponentFn<T>): StyleRule[] {
+export function TAG_DESIGN<T>(store: Store, cat: ColorCategory, top: HComponentFn<T>): StyleRule[] {
     return [
-        style(top)(BOX_FILLED(store, kind)),
+        style(top)(BOX_FILLED(store, cat)),
         style(top)(
             INLINE_FLEX,
             BOLD,
-            LINE_HEIGHT("1"),
-            OVERFLOW("hidden"),
-            BORDER_RADIUS("4px"),
-            CURSOR("pointer"),
-            TRANSITION("all", "0.25s", "ease-in-out"),
-            PADDING(S_TINY(store), S_SMALL(store)),
+            {
+                line_height: "1",
+                overflow: "hidden",
+                border_radius: "4px",
+                cursor: "pointer",
+                transition: "all 0.25s ease-in-out",
+                padding: [S_TINY(store), S_SMALL(store)],
+            },
         ),
-        style([top, ":hover"])(BOX_FILLED_EM_LIGHT(store, kind)),
+        style([top, ":hover"])(BOX_FILLED_EM_LIGHT(store, cat)),
     ];
 }
 
 export function LINK_DESIGN(...sel: Selector[]): StyleRule[] {
-    return [style(...sel)(BORDER_UNDERLINE)];
+    return [style(...sel)({
+        border: ["1px", "solid"],
+    })];
 }

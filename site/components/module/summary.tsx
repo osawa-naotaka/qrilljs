@@ -6,7 +6,7 @@ import type { PostFm } from "@site/site.config";
 import { TAG_DESIGN } from "@site/styles/design";
 import { H2, as, component, element, registerComponent, style } from "qrill/core";
 import type { HComponentFn, Markdown, Store, StyleRule } from "qrill/core";
-import { FONT_SIZE, F_XLARGE, MARGIN_BLOCK, S_XLARGE } from "qrill/core";
+import { F_XLARGE, S_XLARGE } from "qrill/core";
 
 export type SummaryArgument = Markdown<PostFm>;
 
@@ -19,8 +19,8 @@ export function summary(store: Store): HComponentFn<SummaryArgument> {
     const HLink = hlink(store);
 
     const component_styles: (StyleRule | StyleRule[])[] = [
-        style(Summary)(MARGIN_BLOCK(S_XLARGE(store))),
-        style(Summary, ArticleHeader, H2)(FONT_SIZE(F_XLARGE(store))),
+        style(Summary)({ margin_block: S_XLARGE(store) }),
+        style(Summary, ArticleHeader, H2)({ font_size: F_XLARGE(store) }),
         TAG_DESIGN(store, "text", SummaryTag),
     ];
 

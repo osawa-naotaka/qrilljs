@@ -2,6 +2,7 @@ import type { Properties } from "@/lib/core/properties";
 import type { Store } from "@/lib/core/store";
 import type { PropertyOf, StyleRule } from "@/lib/core/style";
 import { atStyle } from "@/lib/core/style";
+import { ColorVariant } from "./design";
 
 export const INIT_CSS: StyleRule[] = /* @__PURE__*/ [
     atStyle(["@layer", "base"])("*")({
@@ -42,156 +43,122 @@ export function DEFAULT_STYLES(store: Store) {
             line_height: store.designrule.font.line_height,
             font_family: store.designrule.font.family.join(", "),
         }),
-        atStyle(["@layer", "base"])("body")(DEFAULT_TEXT_BG(store)),
+        atStyle(["@layer", "base"])("body")({
+            background_color: rgb(store.designrule.color.category.background.main),
+            color: rgb(store.designrule.color.category.text.main),
+        }),
     ];
 }
 
-export const BOX_TEXT = (store: Store, kind: ColorKind): Properties => ({
-    color: COLOROF(store, kind),
+export const BOX_TEXT = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => ({
+    color: colorof(store, cat, val),
     background_color: "transparent",
     border: "none",
     box_shadow: "none",
 });
 
-export const BOX_TEXT_EM_LIGHT = (store: Store, kind: ColorKind): Properties => BOX_EM_LIGHT(store, kind);
+export const BOX_TEXT_EM_LIGHT = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => BOX_EM_LIGHT(store, cat, val);
 
-export const BOX_TEXT_EM_STRONG = (store: Store, kind: ColorKind): Properties => BOX_EM_STRONG(store, kind);
+export const BOX_TEXT_EM_STRONG = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => BOX_EM_STRONG(store, cat, val);
 
-export const BOX_OUTLINED = (store: Store, kind: ColorKind): Properties => ({
-    color: COLOROF(store, kind),
+export const BOX_OUTLINED = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => ({
+    color: colorof(store, cat, val),
     background_color: "transparent",
     border: "none",
-    box_shadow: ["0", "0", "0", "1px", "inset", COLOROF(store, kind)],
+    box_shadow: ["0", "0", "0", "1px", "inset", colorof(store, cat, val)],
 });
 
-export const BOX_OUTLINED_EM_LIGHT = (store: Store, kind: ColorKind): Properties => BOX_EM_LIGHT(store, kind);
+export const BOX_OUTLINED_EM_LIGHT = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => BOX_EM_LIGHT(store, cat, val);
 
-export const BOX_OUTLINED_EM_STRONG = (store: Store, kind: ColorKind): Properties => BOX_EM_STRONG(store, kind);
+export const BOX_OUTLINED_EM_STRONG = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => BOX_EM_STRONG(store, cat, val);
 
-export const BOX_TONAL = (store: Store, kind: ColorKind): Properties => ({
-    color: MIX_BLACK(COLOROF(store, kind))("90%"),
-    background_color: COLOR_MIX(COLOROF(store, kind), C_BACKGROUND(store))("35%"),
+export const BOX_TONAL = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => ({
+    color: MIX_BLACK(colorof(store, cat, val))("90%"),
+    background_color: color_mix(colorof(store, cat, val), B_MAIN(C_BACKGROUND(store)))("35%"),
     border: "none",
     box_shadow: "none",
 });
 
-export const BOX_TONAL_EM_LIGHT = (store: Store, kind: ColorKind): Properties => ({
-    background_color: COLOR_MIX(COLOROF(store, kind), C_BACKGROUND(store))("45%"),
+export const BOX_TONAL_EM_LIGHT = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => ({
+    background_color: color_mix(colorof(store, cat, val), B_MAIN(C_BACKGROUND(store)))("45%"),
 });
 
-export const BOX_TONAL_EM_STRONG = (store: Store, kind: ColorKind): Properties => ({
-    background_color: COLOR_MIX(COLOROF(store, kind), C_BACKGROUND(store))("55%"),
+export const BOX_TONAL_EM_STRONG = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => ({
+    background_color: color_mix(colorof(store, cat, val), B_MAIN(C_BACKGROUND(store)))("55%"),
 });
 
-export const BOX_FILLED = (store: Store, kind: ColorKind): Properties => ({
-    color: C_BACKGROUND(store),
-    background_color: COLOROF(store, kind),
+export const BOX_FILLED = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => ({
+    color: B_MAIN(C_BACKGROUND(store)),
+    background_color: colorof(store, cat, val),
     border: "none",
     box_shadow: "none",
 });
 
-export const BOX_FILLED_EM_LIGHT = (store: Store, kind: ColorKind): Properties => ({
-    background_color: DARKER(store, kind),
+export const BOX_FILLED_EM_LIGHT = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => ({
+    background_color: DARKER(store, cat, val),
 });
 
-export const BOX_FILLED_EM_STRONG = (store: Store, kind: ColorKind): Properties => ({
-    background_color: DARKEST(store, kind),
+export const BOX_FILLED_EM_STRONG = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => ({
+    background_color: DARKEST(store, cat, val),
 });
 
-export const BOX_ELEVATED = (store: Store, kind: ColorKind): Properties => ({
-    color: COLOROF(store, kind),
-    background_color: COLOR_MIX(C_BACKGROUND(store), COLOROF(store, kind))(B_DARKER(store)),
+export const BOX_ELEVATED = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => ({
+    color: colorof(store, cat, val),
+    background_color: color_mix(B_MAIN(C_BACKGROUND(store)), colorof(store, cat, val))(B_DARKER(store)),
     border: "none",
-    box_shadow: ["0", "1px", "3px", `rgba(${SCOLOROF(store, kind)} / 0.2)`],
+    box_shadow: ["0", "1px", "3px", `rgba(${scolorof(store, cat, val)} / 0.2)`],
 });
 
-export const BOX_ELEVATED_EM_LIGHT = (store: Store, kind: ColorKind): Properties => ({
-    box_shadow: ["0", "2px", "4px", `rgba(${SCOLOROF(store, kind)} / 0.3)`],
+export const BOX_ELEVATED_EM_LIGHT = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => ({
+    box_shadow: ["0", "2px", "4px", `rgba(${scolorof(store, cat, val)} / 0.3)`],
 });
 
-export const BOX_ELEVATED_EM_STRONG = (store: Store, kind: ColorKind): Properties => ({
-    box_shadow: ["0", "4px", "8px", `rgba(${SCOLOROF(store, kind)} / 0.4)`],
+export const BOX_ELEVATED_EM_STRONG = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => ({
+    box_shadow: ["0", "4px", "8px", `rgba(${scolorof(store, cat, val)} / 0.4)`],
 });
 
-export const BOX_EM_LIGHT = (store: Store, kind: ColorKind): Properties =>
-    BG_COLOR(MIX_WHITE(COLOROF(store, kind))("15%"));
-export const BOX_EM_STRONG = (store: Store, kind: ColorKind): Properties =>
-    BG_COLOR(MIX_WHITE(COLOROF(store, kind))("25%"));
+export const BOX_EM_LIGHT = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => ({
+    background_color: MIX_WHITE(colorof(store, cat, val))("15%")
+});
 
-export const DARKER = (store: Store, kind: ColorKind) => MIX_BLACK(COLOROF(store, kind))(B_DARKER(store));
-export const DARKEST = (store: Store, kind: ColorKind) => MIX_BLACK(COLOROF(store, kind))(B_DARKEST(store));
-export const LIGHTER = (store: Store, kind: ColorKind) => MIX_WHITE(COLOROF(store, kind))(B_LIGHTER(store));
-export const LIGHTEST = (store: Store, kind: ColorKind) => MIX_WHITE(COLOROF(store, kind))(B_LIGHTEST(store));
+export const BOX_EM_STRONG = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => ({
+    background_color: MIX_WHITE(colorof(store, cat, val))("25%")
+});
 
-export type ColorKind =
+export const DARKER = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main") => MIX_BLACK(colorof(store, cat, val))(B_DARKER(store));
+export const DARKEST = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main") => MIX_BLACK(colorof(store, cat, val))(B_DARKEST(store));
+export const LIGHTER = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main") => MIX_WHITE(colorof(store, cat, val))(B_LIGHTER(store));
+export const LIGHTEST = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main") => MIX_WHITE(colorof(store, cat, val))(B_LIGHTEST(store));
+
+export type ColorCategory =
     | "primary"
     | "secondary"
     | "thirdary"
     | "forthary"
     | "accent"
-    | "background"
     | "text"
+    | "text_secondary"
+    | "background"
+    | "background_secondary"
     | "success"
     | "error"
     | "warning"
     | "info";
 
-export function COLOROF(store: Store, kind: ColorKind): string {
-    switch (kind) {
-        case "primary":
-            return C_PRIMARY(store);
-        case "secondary":
-            return C_SECONDARY(store);
-        case "thirdary":
-            return C_THIRDARY(store);
-        case "forthary":
-            return C_FORTHARY(store);
-        case "accent":
-            return C_ACCENT(store);
-        case "background":
-            return C_BACKGROUND(store);
-        case "text":
-            return C_TEXT(store);
-        case "success":
-            return C_SUCCESS(store);
-        case "error":
-            return C_ERROR(store);
-        case "warning":
-            return C_WARNING(store);
-        case "info":
-            return C_INFO(store);
-        default:
-            throw Error("invalid color kind");
-    }
+export type BrightnessVariant = "light" | "main" | "dark";
+
+export function colorof(store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): string {
+    const category = store.designrule.color.category[cat];
+    const variant = category[val];
+
+    return rgb(variant);
 }
 
-export function SCOLOROF(store: Store, kind: ColorKind): string {
-    switch (kind) {
-        case "primary":
-            return CS_PRIMARY(store);
-        case "secondary":
-            return CS_SECONDARY(store);
-        case "thirdary":
-            return CS_THIRDARY(store);
-        case "forthary":
-            return CS_FORTHARY(store);
-        case "accent":
-            return CS_ACCENT(store);
-        case "background":
-            return CS_BACKGROUND(store);
-        case "text":
-            return CS_TEXT(store);
-        case "success":
-            return CS_SUCCESS(store);
-        case "error":
-            return CS_ERROR(store);
-        case "warning":
-            return CS_WARNING(store);
-        case "info":
-            return CS_INFO(store);
-        default:
-            throw Error("invalid color kind");
-    }
+export function scolorof(store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): string {
+    const category = store.designrule.color.category[cat];
+    const variant = category[val];
+
+    return rgb_sep(variant);
 }
 
 export function RESPONSIVE_PAGE_WIDTH(
@@ -223,12 +190,6 @@ export const INLINE_FLEX: Properties = {
     display: "inline-flex",
 };
 
-export function GAP(gap: PropertyOf<"gap">): Properties {
-    return {
-        gap,
-    };
-}
-
 export function COLUMN(gap: PropertyOf<"gap">): Properties {
     return {
         display: "flex",
@@ -236,10 +197,6 @@ export function COLUMN(gap: PropertyOf<"gap">): Properties {
         align_items: "center",
         gap,
     };
-}
-
-export function DEFAULT_COLUMN(store: Store): Properties {
-    return COLUMN(S_MEDIUM(store));
 }
 
 export function ROW(gap: PropertyOf<"gap">): Properties {
@@ -250,37 +207,6 @@ export function ROW(gap: PropertyOf<"gap">): Properties {
         gap,
     };
 }
-
-export function DEFAULT_ROW(store: Store): Properties {
-    return ROW(store.designrule.size.spacing.medium);
-}
-
-export const ALIGN_NOMAL: Properties = {
-    align_items: "normal",
-};
-
-export const ALIGN_CENTER: Properties = {
-    align_items: "center",
-};
-
-export const JUSTIFY_CENTER: Properties = {
-    justify_content: "center",
-};
-
-export const ROW_WRAP: Properties = {
-    flex_wrap: "wrap",
-};
-
-export const BORDER_UNDERLINE: Properties = {
-    border_block_end: ["2px", "solid"],
-    padding_block_end: "2px",
-};
-
-export const BORDER_LEFT_THIC: Properties = {
-    border_inline_start: ["8px", "solid"],
-    padding_block_end: "2px",
-    padding_inline_start: "1rem",
-};
 
 export const TEXT_UNDERLINE: Properties = {
     text_decoration: ["underline", "2px"],
@@ -320,35 +246,11 @@ export const TEXT_JUSTIFY: Properties = {
     text_align: "justify",
 };
 
-export const OPACITY = (opacity: PropertyOf<"opacity">): Properties => ({ opacity });
-
-export const ROUND = (border_radius: PropertyOf<"border_radius">): Properties => ({ border_radius });
-
-export const OVERFLOW = (overflow: PropertyOf<"overflow">): Properties => ({ overflow });
-
-export const BORDER_RADIUS = (border_radius: PropertyOf<"border_radius">): Properties => ({ border_radius });
-
-export const TEXT_ALIGN_CENTER: Properties = {
-    text_align: "center",
-};
-
 export const ABSOLUTE_ANCHOR: Properties = {
     position: "relative",
 };
 
-export const LIST_DISC: Properties = {
-    list_style_type: "disc",
-};
-
-export const LIST_DECIMAL: Properties = {
-    list_style_type: "decimal",
-};
-
 // font
-export const FONT_SIZE = (font_size: PropertyOf<"font_size">): Properties => ({ font_size });
-
-export const LINE_HEIGHT = (line_height: PropertyOf<"line_height">): Properties => ({ line_height });
-
 export const BOLD: Properties = {
     font_weight: "bold",
     font_style: "normal",
@@ -359,125 +261,33 @@ export const ITALIC: Properties = {
     font_weight: "normal",
 };
 
-// spacing
-export const MARGIN_INLINE = (...n: string[]): Properties => ({ margin_inline: n });
-
-export const MARGIN_BLOCK = (...n: string[]): Properties => ({ margin_block: n });
-
-export const MARGIN = (...n: string[]): Properties => ({ margin: n });
-
-export const MARGINA = (n: string | string[]): Properties => ({ margin: n });
-
-export const MARGIN_LEFT = (margin_left: PropertyOf<"margin_left">): Properties => ({ margin_left });
-
-export const MARGIN_RIGHT = (margin_right: PropertyOf<"margin_right">): Properties => ({ margin_right });
-
-export const PADDING_INLINE = (...n: string[]): Properties => ({ padding_inline: n });
-
-export const PADDING_BLOCK = (...n: string[]): Properties => ({ padding_block: n });
-
-export const PADDING = (...n: string[]): Properties => ({ padding: n });
-
-export const PADDINGA = (n: string | string[]): Properties => ({ padding: n });
-
-export const WIDTH = (width: PropertyOf<"width">): Properties => ({ width });
-
-export const HEIGHT = (height: PropertyOf<"height">): Properties => ({ height });
-
 // color
-export const TEXT_COLOR = (color: string): Properties => ({ color });
-
-export const BG_COLOR = (background_color: string): Properties => ({ background_color });
-
-export const MIX_WHITE = (color: string) => COLOR_MIX(color, "white");
-export const MIX_BLACK = (color: string) => COLOR_MIX(color, "black");
+export const MIX_WHITE = (color: string) => color_mix(color, "white");
+export const MIX_BLACK = (color: string) => color_mix(color, "black");
 
 // basic property settings
-export const DISPLAY = (display: PropertyOf<"display">): Properties => ({ display });
-
-export const CURSOR = (cursor: PropertyOf<"cursor">): Properties => ({ cursor });
-
-export function TRANSITION(...n: string[]): Properties {
-    return {
-        transition: n,
-    };
-}
-
-export const FLEX_END: Properties = {
-    justify_content: "flex-end",
-};
-
-export const FLEX_WRAP: Properties = {
-    flex_wrap: "wrap",
-};
-
-export const SPACE_BETWEEN: Properties = {
-    justify_content: "space-between",
-};
-
 export function INVERT(n: string): Properties {
     return { filter: `invert(${n})` };
 }
 
 // shorthand from store
-export const C_PRIMARY = (store: Store) => rgb(store.designrule.color.category.primary.main);
-export const C_SECONDARY = (store: Store) => rgb(store.designrule.color.category.secondary.main);
-export const C_THIRDARY = (store: Store) => rgb(store.designrule.color.category.thirdary.main);
-export const C_FORTHARY = (store: Store) => rgb(store.designrule.color.category.forthary.main);
-export const C_ACCENT = (store: Store) => rgb(store.designrule.color.category.accent.main);
-export const C_TEXT = (store: Store) => rgb(store.designrule.color.category.text.main);
-export const C_TEXT_SECONDARY = (store: Store) => rgb(store.designrule.color.category.text_secondary.main);
-export const C_BACKGROUND = (store: Store) => rgb(store.designrule.color.category.background.main);
-export const C_BACKGROUND_SECONDARY = (store: Store) => rgb(store.designrule.color.category.background_secondary.main);
-export const C_ERROR = (store: Store) => rgb(store.designrule.color.category.error.main);
-export const C_INFO = (store: Store) => rgb(store.designrule.color.category.info.main);
-export const C_SUCCESS = (store: Store) => rgb(store.designrule.color.category.success.main);
-export const C_WARNING = (store: Store) => rgb(store.designrule.color.category.warning.main);
+export const C_PRIMARY = (store: Store) => store.designrule.color.category.primary;
+export const C_SECONDARY = (store: Store) => store.designrule.color.category.secondary;
+export const C_THIRDARY = (store: Store) => store.designrule.color.category.thirdary;
+export const C_FORTHARY = (store: Store) => store.designrule.color.category.forthary;
+export const C_ACCENT = (store: Store) => store.designrule.color.category.accent;
+export const C_TEXT = (store: Store) => store.designrule.color.category.text;
+export const C_TEXT_SECONDARY = (store: Store) => store.designrule.color.category.text_secondary;
+export const C_BACKGROUND = (store: Store) => store.designrule.color.category.background;
+export const C_BACKGROUND_SECONDARY = (store: Store) => store.designrule.color.category.background_secondary;
+export const C_ERROR = (store: Store) => store.designrule.color.category.error;
+export const C_INFO = (store: Store) => store.designrule.color.category.info;
+export const C_SUCCESS = (store: Store) => store.designrule.color.category.success;
+export const C_WARNING = (store: Store) => store.designrule.color.category.warning;
 
-export const C_PRIMARY_LIGHT = (store: Store) => rgb(store.designrule.color.category.primary.light);
-export const C_SECONDARY_LIGHT = (store: Store) => rgb(store.designrule.color.category.secondary.light);
-export const C_THIRDARY_LIGHT = (store: Store) => rgb(store.designrule.color.category.thirdary.light);
-export const C_FORTHARY_LIGHT = (store: Store) => rgb(store.designrule.color.category.forthary.light);
-export const C_ACCENT_LIGHT = (store: Store) => rgb(store.designrule.color.category.accent.light);
-export const C_TEXT_LIGHT = (store: Store) => rgb(store.designrule.color.category.text.main);
-export const C_TEXT_SECONDARY_LIGHT = (store: Store) => rgb(store.designrule.color.category.text_secondary.light);
-export const C_BACKGROUND_LIGHT = (store: Store) => rgb(store.designrule.color.category.background.light);
-export const C_BACKGROUND_SECONDARY_LIGHT = (store: Store) =>
-    rgb(store.designrule.color.category.background_secondary.light);
-export const C_ERROR_LIGHT = (store: Store) => rgb(store.designrule.color.category.error.light);
-export const C_INFO_LIGHT = (store: Store) => rgb(store.designrule.color.category.info.light);
-export const C_SUCCESS_LIGHT = (store: Store) => rgb(store.designrule.color.category.success.light);
-export const C_WARNING_LIGHT = (store: Store) => rgb(store.designrule.color.category.warning.light);
-
-export const C_PRIMARY_DARK = (store: Store) => rgb(store.designrule.color.category.primary.dark);
-export const C_SECONDARY_DARK = (store: Store) => rgb(store.designrule.color.category.secondary.dark);
-export const C_THIRDARY_DARK = (store: Store) => rgb(store.designrule.color.category.thirdary.dark);
-export const C_FORTHARY_DARK = (store: Store) => rgb(store.designrule.color.category.forthary.dark);
-export const C_ACCENT_DARK = (store: Store) => rgb(store.designrule.color.category.accent.dark);
-export const C_TEXT_DARK = (store: Store) => rgb(store.designrule.color.category.text.dark);
-export const C_TEXT_SECONDARY_DARK = (store: Store) => rgb(store.designrule.color.category.text_secondary.dark);
-export const C_BACKGROUND_DARK = (store: Store) => rgb(store.designrule.color.category.background.dark);
-export const C_BACKGROUND_SECONDARY_DARK = (store: Store) =>
-    rgb(store.designrule.color.category.background_secondary.dark);
-export const C_ERROR_DARK = (store: Store) => rgb(store.designrule.color.category.error.dark);
-export const C_INFO_DARK = (store: Store) => rgb(store.designrule.color.category.info.dark);
-export const C_SUCCESS_DARK = (store: Store) => rgb(store.designrule.color.category.success.dark);
-export const C_WARNING_DARK = (store: Store) => rgb(store.designrule.color.category.warning.dark);
-
-export const CS_PRIMARY = (store: Store) => rgb_sep(store.designrule.color.category.primary.main);
-export const CS_SECONDARY = (store: Store) => rgb_sep(store.designrule.color.category.secondary.main);
-export const CS_THIRDARY = (store: Store) => rgb_sep(store.designrule.color.category.thirdary.main);
-export const CS_FORTHARY = (store: Store) => rgb_sep(store.designrule.color.category.forthary.main);
-export const CS_ACCENT = (store: Store) => rgb_sep(store.designrule.color.category.accent.main);
-export const CS_TEXT = (store: Store) => rgb_sep(store.designrule.color.category.text.main);
-export const CS_TEXT_SECONDARY = (store: Store) => rgb_sep(store.designrule.color.category.text_secondary.main);
-export const CS_BACKGROUND = (store: Store) => rgb_sep(store.designrule.color.category.background.main);
-export const CS_BACKGROUND_SECONDARY = (store: Store) =>
-    rgb_sep(store.designrule.color.category.background_secondary.main);
-export const CS_ERROR = (store: Store) => rgb_sep(store.designrule.color.category.error.main);
-export const CS_INFO = (store: Store) => rgb_sep(store.designrule.color.category.info.main);
-export const CS_SUCCESS = (store: Store) => rgb_sep(store.designrule.color.category.success.main);
-export const CS_WARNING = (store: Store) => rgb_sep(store.designrule.color.category.warning.main);
+export const B_MAIN = (variant: ColorVariant) => rgb(variant.main);
+export const B_LIGHT = (variant: ColorVariant) => rgb(variant.light);
+export const B_DARK = (variant: ColorVariant) => rgb(variant.dark);
 
 export const F_TINY = (store: Store) => store.designrule.size.font.tiny;
 export const F_SMALL = (store: Store) => store.designrule.size.font.small;
@@ -508,14 +318,7 @@ export const B_LIGHTER = (store: Store) => store.designrule.color.brightness.lig
 export const B_DARKER = (store: Store) => store.designrule.color.brightness.dark;
 export const B_DARKEST = (store: Store) => store.designrule.color.brightness.darkest;
 
-export function DEFAULT_TEXT_BG(store: Store): Properties {
-    return {
-        color: C_TEXT(store),
-        background_color: C_BACKGROUND(store),
-    };
-}
-
-export function COLOR_MIX(color_a: string, color_b: string): (persent: string) => string {
+export function color_mix(color_a: string, color_b: string): (persent: string) => string {
     return (persent) => `color-mix(in srgb, ${color_a} ${persent}, ${color_b})`;
 }
 
