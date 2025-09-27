@@ -17,6 +17,7 @@
         bun
         deno
         gh
+        firefox
       ];
     };
   };

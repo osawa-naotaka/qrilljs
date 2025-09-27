@@ -11,8 +11,5 @@
         "build": "tsc && qrill build",
         "dev": "tsc --watch & qrill dev",
         "check": "biome check --write ./site"
-    },
-    "dependencies": {
-        "qrill": "file:../../../qrill-0.1.0-alpha.8.tgz"
     }
 }
