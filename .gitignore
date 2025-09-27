@@ -9,5 +9,5 @@ build
 !.yarn/sdks
 !.yarn/versions
 
-qrill-*.tgz
+qrilljs-*.tgz
 package.tgz
