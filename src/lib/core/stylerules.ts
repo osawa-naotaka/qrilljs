@@ -2,7 +2,7 @@ import type { Properties } from "@/lib/core/properties";
 import type { Store } from "@/lib/core/store";
 import type { PropertyOf, StyleRule } from "@/lib/core/style";
 import { atStyle } from "@/lib/core/style";
-import { ColorVariant } from "./design";
+import type { ColorVariant } from "./design";
 
 export const INIT_CSS: StyleRule[] = /* @__PURE__*/ [
     atStyle(["@layer", "base"])("*")({
@@ -57,9 +57,11 @@ export const BOX_TEXT = (store: Store, cat: ColorCategory, val: BrightnessVarian
     box_shadow: "none",
 });
 
-export const BOX_TEXT_EM_LIGHT = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => BOX_EM_LIGHT(store, cat, val);
+export const BOX_TEXT_EM_LIGHT = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties =>
+    BOX_EM_LIGHT(store, cat, val);
 
-export const BOX_TEXT_EM_STRONG = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => BOX_EM_STRONG(store, cat, val);
+export const BOX_TEXT_EM_STRONG = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties =>
+    BOX_EM_STRONG(store, cat, val);
 
 export const BOX_OUTLINED = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => ({
     color: colorof(store, cat, val),
@@ -68,9 +70,11 @@ export const BOX_OUTLINED = (store: Store, cat: ColorCategory, val: BrightnessVa
     box_shadow: ["0", "0", "0", "1px", "inset", colorof(store, cat, val)],
 });
 
-export const BOX_OUTLINED_EM_LIGHT = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => BOX_EM_LIGHT(store, cat, val);
+export const BOX_OUTLINED_EM_LIGHT = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties =>
+    BOX_EM_LIGHT(store, cat, val);
 
-export const BOX_OUTLINED_EM_STRONG = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => BOX_EM_STRONG(store, cat, val);
+export const BOX_OUTLINED_EM_STRONG = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties =>
+    BOX_EM_STRONG(store, cat, val);
 
 export const BOX_TONAL = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => ({
     color: MIX_BLACK(colorof(store, cat, val))("90%"),
@@ -98,7 +102,11 @@ export const BOX_FILLED_EM_LIGHT = (store: Store, cat: ColorCategory, val: Brigh
     background_color: DARKER(store, cat, val),
 });
 
-export const BOX_FILLED_EM_STRONG = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => ({
+export const BOX_FILLED_EM_STRONG = (
+    store: Store,
+    cat: ColorCategory,
+    val: BrightnessVariant = "main",
+): Properties => ({
     background_color: DARKEST(store, cat, val),
 });
 
@@ -109,26 +117,38 @@ export const BOX_ELEVATED = (store: Store, cat: ColorCategory, val: BrightnessVa
     box_shadow: ["0", "1px", "3px", `rgba(${scolorof(store, cat, val)} / 0.2)`],
 });
 
-export const BOX_ELEVATED_EM_LIGHT = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => ({
+export const BOX_ELEVATED_EM_LIGHT = (
+    store: Store,
+    cat: ColorCategory,
+    val: BrightnessVariant = "main",
+): Properties => ({
     box_shadow: ["0", "2px", "4px", `rgba(${scolorof(store, cat, val)} / 0.3)`],
 });
 
-export const BOX_ELEVATED_EM_STRONG = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => ({
+export const BOX_ELEVATED_EM_STRONG = (
+    store: Store,
+    cat: ColorCategory,
+    val: BrightnessVariant = "main",
+): Properties => ({
     box_shadow: ["0", "4px", "8px", `rgba(${scolorof(store, cat, val)} / 0.4)`],
 });
 
 export const BOX_EM_LIGHT = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => ({
-    background_color: MIX_WHITE(colorof(store, cat, val))("15%")
+    background_color: MIX_WHITE(colorof(store, cat, val))("15%"),
 });
 
 export const BOX_EM_STRONG = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main"): Properties => ({
-    background_color: MIX_WHITE(colorof(store, cat, val))("25%")
+    background_color: MIX_WHITE(colorof(store, cat, val))("25%"),
 });
 
-export const DARKER = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main") => MIX_BLACK(colorof(store, cat, val))(B_DARKER(store));
-export const DARKEST = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main") => MIX_BLACK(colorof(store, cat, val))(B_DARKEST(store));
-export const LIGHTER = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main") => MIX_WHITE(colorof(store, cat, val))(B_LIGHTER(store));
-export const LIGHTEST = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main") => MIX_WHITE(colorof(store, cat, val))(B_LIGHTEST(store));
+export const DARKER = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main") =>
+    MIX_BLACK(colorof(store, cat, val))(B_DARKER(store));
+export const DARKEST = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main") =>
+    MIX_BLACK(colorof(store, cat, val))(B_DARKEST(store));
+export const LIGHTER = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main") =>
+    MIX_WHITE(colorof(store, cat, val))(B_LIGHTER(store));
+export const LIGHTEST = (store: Store, cat: ColorCategory, val: BrightnessVariant = "main") =>
+    MIX_WHITE(colorof(store, cat, val))(B_LIGHTEST(store));
 
 export type ColorCategory =
     | "primary"

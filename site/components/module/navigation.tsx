@@ -20,18 +20,16 @@ export function navigation(store: Store): HComponentFn<NavigationArgument> {
     );
 
     const component_styles = [
-        style(Navigation)(
-            {
-                font_size: F_XLARGE(store),
-                font_weight: "bold",
-                font_style: "normal",
-                display: "flex",
-                flex_direction: "row",
-                align_items: "center",
-                justify_content: "center",
-                gap: S_XLARGE(store),
-            },
-        ),
+        style(Navigation)({
+            font_size: F_XLARGE(store),
+            font_weight: "bold",
+            font_style: "normal",
+            display: "flex",
+            flex_direction: "row",
+            align_items: "center",
+            justify_content: "center",
+            gap: S_XLARGE(store),
+        }),
     ];
 
     registerComponent(store, Navigation, component_styles);

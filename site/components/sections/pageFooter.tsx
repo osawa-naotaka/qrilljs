@@ -1,9 +1,6 @@
-import { colorof, component, element, registerComponent, S_MEDIUM, style } from "qrill/core";
+import { S_MEDIUM, colorof, component, element, registerComponent, style } from "qrill/core";
 import type { HComponentFn, Store } from "qrill/core";
-import {
-    ABSOLUTE_ANCHOR,
-    FIX_BOTTOM,
-} from "qrill/core";
+import { ABSOLUTE_ANCHOR, FIX_BOTTOM } from "qrill/core";
 
 export type PageFooterArgument = {
     site_name: string;
@@ -15,13 +12,10 @@ export function pageFooter(store: Store): HComponentFn<PageFooterArgument> {
     const Copyright = element("page-footer-copyright");
 
     const component_styles = [
-        style(PageFooter)(
-            FIX_BOTTOM,
-            {
-                color: colorof(store, "text_secondary"),
-                background_color: colorof(store, "background_secondary"),
-            }
-        ),
+        style(PageFooter)(FIX_BOTTOM, {
+            color: colorof(store, "text_secondary"),
+            background_color: colorof(store, "background_secondary"),
+        }),
         style(Content)(
             {
                 display: "flex",
@@ -29,7 +23,7 @@ export function pageFooter(store: Store): HComponentFn<PageFooterArgument> {
                 align_items: "center",
                 gap: S_MEDIUM(store),
             },
-            ABSOLUTE_ANCHOR
+            ABSOLUTE_ANCHOR,
         ),
         style(Copyright)({ text_align: "center" }),
     ];

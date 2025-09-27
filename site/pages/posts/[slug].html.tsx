@@ -20,7 +20,9 @@ export default function Root(store: Store): HRootPageFn<RootParameter> {
     const PageMainArea = element("page-main-area", { tag: "main" });
     const Article = article(store);
 
-    const styles = [style(PageMainArea)({ margin_block: ["0", S_2XLARGE(store)] }, DEFAULT_RESPONSIVE_PAGE_WIDTH(store))];
+    const styles = [
+        style(PageMainArea)({ margin_block: ["0", S_2XLARGE(store)] }, DEFAULT_RESPONSIVE_PAGE_WIDTH(store)),
+    ];
 
     registerRootPage(store, styles);
 

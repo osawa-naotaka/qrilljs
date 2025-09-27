@@ -10,7 +10,7 @@
     },
     "dependencies": {
         "@biomejs/biome": "^1.9.4",
-        "typescript": "^5.9.2",
-        "qrill": "../../qrill-0.1.0-alpha.6.tgz"
+        "qrill": "../../qrill-0.1.0-alpha.8.tgz",
+        "typescript": "^5.9.2"
     }
 }

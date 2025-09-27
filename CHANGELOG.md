@@ -12,12 +12,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Security: in case of vulnerabilities.
 
 ## [Unreleased]
-## [0.1.0-alpha.8] - 2025-09-27
+## [0.1.0-alpha.8] - 2025-09-28
 ### Changed
 - Renamed project from "zephblaze" to "qrill"
+- color part of design structure is totaly changed.
 
-### Added
-- thirdary, forthary color is added in design structure.
+### Remove
+- Remove and change design functions. Design system is now under reconstruction.
 
 ## [0.1.0-alpha.7] - 2025-09-27
 ### Added

@@ -3,13 +3,7 @@ import { tag } from "@site/components/element/tag";
 import { postFmSchema } from "@site/site.config";
 import { TAG_DESIGN } from "@site/styles/design";
 import { as, colorof, component, createDom, element, hSvgIconFont, registerComponent, style } from "qrill/core";
-import {
-    DEFAULT_RESPONSIVE_PAGE_WIDTH,
-    F_SMALL,
-    F_TINY,
-    S_2XLARGE,
-    S_LARGE,
-} from "qrill/core";
+import { DEFAULT_RESPONSIVE_PAGE_WIDTH, F_SMALL, F_TINY, S_2XLARGE, S_LARGE } from "qrill/core";
 import type { HArgument, HClientFn, HComponentFn, HNode, Store } from "qrill/core";
 import type { SearchResult } from "staticseek";
 import * as v from "valibot";
@@ -26,22 +20,18 @@ export function search(store: Store): HComponentFn<HArgument> {
 
     const component_sytles = [
         style(Search)(DEFAULT_RESPONSIVE_PAGE_WIDTH(store)),
-        style(SearchBar)(
-            {
-                display: "flex",
-                flex_direction: "row",
-                align_items: "center",
-                gap: "0.5rem",
-                border_bottom: "2px solid"
-            }
-        ),
-        style(Input)(
-            {
-                color: colorof(store, "text"),
-                background_color: colorof(store, "background"),
-                height: S_2XLARGE(store),
-            }
-        ),
+        style(SearchBar)({
+            display: "flex",
+            flex_direction: "row",
+            align_items: "center",
+            gap: "0.5rem",
+            border_bottom: "2px solid",
+        }),
+        style(Input)({
+            color: colorof(store, "text"),
+            background_color: colorof(store, "background"),
+            height: S_2XLARGE(store),
+        }),
         style([Input, "::placeholder"])({ opacity: "0.5" }),
         style(Result)({ margin_block: S_LARGE(store) }),
     ];
@@ -117,17 +107,15 @@ export function searchResultItem(store: Store): HComponentFn<SearchResultItemAtt
 
     const component_styles = [
         style(ResultItem)({ margin_block: [S_2XLARGE(store), "0"] }),
-        style(Meta)(
-            {
-                display: "flex",
-                flex_direction: "row",
-                align_items: "center",
-                gap: ["2px", "0.5rem"],
-                flex_wrap: "wrap",
-                font_size: F_SMALL(store),
-                border_bottom: "1px solid",
-            },
-        ),
+        style(Meta)({
+            display: "flex",
+            flex_direction: "row",
+            align_items: "center",
+            gap: ["2px", "0.5rem"],
+            flex_wrap: "wrap",
+            font_size: F_SMALL(store),
+            border_bottom: "1px solid",
+        }),
         style(Description)({ font_size: F_TINY(store) }),
         TAG_DESIGN(store, "text", Tag),
     ];

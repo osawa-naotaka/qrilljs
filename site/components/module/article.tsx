@@ -4,16 +4,7 @@ import { tag } from "@site/components/element/tag";
 import { articleHeader } from "@site/components/module/articleHeader";
 import type { PostFm } from "@site/site.config";
 import { TAG_DESIGN } from "@site/styles/design";
-import {
-    F_LARGE,
-    F_XLARGE,
-    Link,
-    S_2XLARGE,
-    S_MEDIUM,
-    TEXT_JUSTIFY,
-    TEXT_UNDERLINE,
-    colorof,
-} from "qrill/core";
+import { F_LARGE, F_XLARGE, Link, S_2XLARGE, S_MEDIUM, TEXT_JUSTIFY, TEXT_UNDERLINE, colorof } from "qrill/core";
 import { A, H2, H3, H4, H5, Li, Ol, P, Script, Ul } from "qrill/core";
 import { as, component, element, registerComponent, style } from "qrill/core";
 import type { HComponentFn, Markdown, Store } from "qrill/core";
@@ -35,48 +26,50 @@ export function article(store: Store): HComponentFn<ArticleArgument> {
         style(ArticleHeader, H2)({ font_size: F_XLARGE(store) }),
         TAG_DESIGN(store, "text", ArticleTag),
 
-        style(ArticleText)(
-            TEXT_JUSTIFY,
-            {
-                display: "flex",
-                flex_direction: "column",
-                align_items: "normal",
-                gap: "0"
-            },
-        ),
-        style(ArticleText, H3)(
-            {
-                font_size: F_LARGE(store),
-                border_radius: "4px",
-                padding_inline: S_MEDIUM(store),
-                padding_block: "3px",
-                margin_block: [S_2XLARGE(store), S_MEDIUM(store)],
-                color: colorof(store, "text_secondary"),
-                background_color: colorof(store, "background_secondary", "light"),
-            },
-        ),
-        style(ArticleText, P)( 
-            {
-                margin_block: ["0", S_2XLARGE(store)],
-                text_indent: S_MEDIUM(store),
-            }
-        ),
-        style(ArticleText, H4)(
-            {
-                border_bottom: "1px solid",
-                margin_block: S_MEDIUM(store),
-            }
-        ),
-        style(ArticleText, H5)(
-            {
-                border_left: "4px solid"
-            }
-        ),
-        style(ArticleText, Ul)(
-            {
-                list_style_type: "disc"
-            }
-        ),
+        style(ArticleText)(TEXT_JUSTIFY, {
+            display: "flex",
+            flex_direction: "column",
+            align_items: "normal",
+            gap: "0",
+        }),
+        style(
+            ArticleText,
+            H3,
+        )({
+            font_size: F_LARGE(store),
+            border_radius: "4px",
+            padding_inline: S_MEDIUM(store),
+            padding_block: "3px",
+            margin_block: [S_2XLARGE(store), S_MEDIUM(store)],
+            color: colorof(store, "text_secondary"),
+            background_color: colorof(store, "background_secondary", "light"),
+        }),
+        style(
+            ArticleText,
+            P,
+        )({
+            margin_block: ["0", S_2XLARGE(store)],
+            text_indent: S_MEDIUM(store),
+        }),
+        style(
+            ArticleText,
+            H4,
+        )({
+            border_bottom: "1px solid",
+            margin_block: S_MEDIUM(store),
+        }),
+        style(
+            ArticleText,
+            H5,
+        )({
+            border_left: "4px solid",
+        }),
+        style(
+            ArticleText,
+            Ul,
+        )({
+            list_style_type: "disc",
+        }),
         style(ArticleText, Ol)({ list_style_type: "decimal" }),
         style(ArticleText, A)(TEXT_UNDERLINE),
         style(ArticleText, Li)({ margin_inline: S_2XLARGE(store) }),

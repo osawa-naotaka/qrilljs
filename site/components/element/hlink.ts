@@ -6,11 +6,9 @@ export function hlink(store: Store): HComponentFn<Partial<AttributeOf<"a">>> {
 
     const styles = [
         style(Link)({ transition: ["all", "0.25s", "ease-in-out"] }),
-        style([Link, ":hover"])(
-            {
-                color: colorof(store, "text", "light")
-            }
-        ),
+        style([Link, ":hover"])({
+            color: colorof(store, "text", "light"),
+        }),
     ];
 
     registerComponent(store, Link, styles);

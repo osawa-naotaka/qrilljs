@@ -38,30 +38,23 @@ export default function Root(store: Store): HRootPageFn<HArgument> {
 
     const kind: ColorCategory = "primary";
 
-    const default_styles: Properties = unionRecords(
-        INLINE_FLEX,
-        BOLD,
-        {
-            padding: [S_SMALL(store), S_MEDIUM(store)],
-            line_height: "1",
-            overflow: "hidden",
-            border_radius: "4px",
-            cursor: "pointer",
-            transition: "all 0.25s ease-in-out",
-        },
-    );
+    const default_styles: Properties = unionRecords(INLINE_FLEX, BOLD, {
+        padding: [S_SMALL(store), S_MEDIUM(store)],
+        line_height: "1",
+        overflow: "hidden",
+        border_radius: "4px",
+        cursor: "pointer",
+        transition: "all 0.25s ease-in-out",
+    });
 
     const page_styles = [
         INIT_CSS,
         DEFAULT_STYLES(store),
-        style("main")(
-            DEFAULT_RESPONSIVE_PAGE_WIDTH(store),
-            {
-                display: "flex",
-                flex_wrap: "wrap",
-                gap: S_MEDIUM(store),
-            }
-        ),
+        style("main")(DEFAULT_RESPONSIVE_PAGE_WIDTH(store), {
+            display: "flex",
+            flex_wrap: "wrap",
+            gap: S_MEDIUM(store),
+        }),
         style(BText)(BOX_TEXT(store, kind), default_styles),
         style([BText, ":hover"])(BOX_TEXT_EM_LIGHT(store, kind)),
         style([BText, ":active"])(BOX_TEXT_EM_STRONG(store, kind)),
