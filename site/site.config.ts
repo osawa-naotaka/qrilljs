@@ -1,6 +1,6 @@
+import type { HSvgBrandsIconName } from "qrill/core";
+import { defaultSiteConfig } from "qrill/core";
 import * as v from "valibot";
-import type { HSvgBrandsIconName } from "zephblaze/core";
-import { defaultSiteConfig } from "zephblaze/core";
 
 export const site = {
     lang: "ja",

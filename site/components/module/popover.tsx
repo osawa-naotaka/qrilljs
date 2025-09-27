@@ -1,5 +1,5 @@
-import { atStyle, component, element, registerComponent, style } from "zephblaze/core";
-import type { HComponentFn, HNode, Store } from "zephblaze/core";
+import { atStyle, component, element, registerComponent, style } from "qrill/core";
+import type { HComponentFn, HNode, Store } from "qrill/core";
 import {
     BG_COLOR,
     BORDER_NONE,
@@ -17,7 +17,7 @@ import {
     PADDING_BLOCK,
     S_MEDIUM,
     TRANSITION,
-} from "zephblaze/core";
+} from "qrill/core";
 
 export type PopoverArgument = {
     open_button: HNode;

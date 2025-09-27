@@ -1,5 +1,5 @@
-import { A, Body, H1, Html, Link, Meta, Title, element, registerComponent, style } from "zephblaze/core";
-import type { HComponentFn, Store } from "zephblaze/core";
+import { A, Body, H1, Html, Link, Meta, Title, element, registerComponent, style } from "qrill/core";
+import type { HComponentFn, Store } from "qrill/core";
 
 export type PageAttribute = {
     title: string;

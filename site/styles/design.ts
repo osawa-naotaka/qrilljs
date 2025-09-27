@@ -13,8 +13,8 @@ import {
     S_TINY,
     TRANSITION,
     style,
-} from "zephblaze/core";
-import type { ColorKind, HComponentFn, Selector, Store, StyleRule } from "zephblaze/core";
+} from "qrill/core";
+import type { ColorKind, HComponentFn, Selector, Store, StyleRule } from "qrill/core";
 
 export function TAG_DESIGN<T>(store: Store, kind: ColorKind, top: HComponentFn<T>): StyleRule[] {
     return [

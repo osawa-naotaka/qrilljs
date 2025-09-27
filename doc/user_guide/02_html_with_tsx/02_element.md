@@ -1,28 +1,28 @@
-# Zephblazeのエレメント
+# qrillのエレメント
 
 前章では、TSXを使った基本的なサイト構築について説明しました。このガイドでは、独自のHTML要素を定義する`element()`関数の使い方と活用方法について詳しく解説します。
 
 ## 独自要素とは？
 
-Zephblazeでは、標準的なHTML要素（`<div>`、`<h1>`、`<p>`など）に加えて、意味的により具体的な独自要素を作成できます。独自要素は、既存のHTML要素に自動的にCSSクラス名を付与し、コードの可読性とスタイルの管理を向上させます。
+qrillでは、標準的なHTML要素（`<div>`、`<h1>`、`<p>`など）に加えて、意味的により具体的な独自要素を作成できます。独自要素は、既存のHTML要素に自動的にCSSクラス名を付与し、コードの可読性とスタイルの管理を向上させます。
 
 ## 基本的な使用例
 
 以下は、サイトのタイトルを表す独自要素`SiteTitle`の例です：
 
 ```typescript
-import type { HRootPageFn, Store } from "zephblaze/core";
-import { element } from "zephblaze/core";
+import type { HRootPageFn, Store } from "qrill/core";
+import { element } from "qrill/core";
 
 export default function Root(_store: Store): HRootPageFn<void> {
     const SiteTitle = element("site-title", { tag: "h1" });
     return async () => (
         <html lang="en">
             <head>
-                <title>Hello, Zephblaze!</title>
+                <title>Hello, qrill!</title>
             </head>
             <body>
-                <SiteTitle>Hello, Zephblaze!</SiteTitle>
+                <SiteTitle>Hello, qrill!</SiteTitle>
             </body>
         </html>
     );
@@ -51,11 +51,11 @@ export default function Root(_store: Store): HRootPageFn<void> {
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Hello, Zephblaze!</title>
+        <title>Hello, qrill!</title>
         <link href="/index.css" rel="stylesheet"></link>
     </head>
     <body>
-        <h1 class="site-title">Hello, Zephblaze!</h1>
+        <h1 class="site-title">Hello, qrill!</h1>
     </body>
 </html>
 ```
@@ -98,7 +98,7 @@ h1 {
 ### 基本的な構文
 
 ```typescript
-element<K extends Tag | ZephblazeTag = "div">(
+element<K extends Tag | qrillTag = "div">(
     element_name: string,
     options?: ElementOptions<K>
 ): HElementFn<K>
@@ -183,8 +183,8 @@ const PostContent = element("post-content", { tag: "section" });
 以下は、複数の独自要素を組み合わせた実際のページ例です：
 
 ```typescript
-import type { HRootPageFn, Store } from "zephblaze/core";
-import { element } from "zephblaze/core";
+import type { HRootPageFn, Store } from "qrill/core";
+import { element } from "qrill/core";
 
 export default function Root(_store: Store): HRootPageFn<void> {
     // 独自要素の定義
@@ -200,19 +200,19 @@ export default function Root(_store: Store): HRootPageFn<void> {
     return async () => (
         <html lang="ja">
             <head>
-                <title>Zephblaze デモサイト</title>
+                <title>qrill デモサイト</title>
             </head>
             <body>
                 <PageHeader>
                     <SiteTitle>
-                        <a href="/">Zephblaze Demo</a>
+                        <a href="/">qrill Demo</a>
                     </SiteTitle>
                 </PageHeader>
                 
                 <MainContent>
                     <WelcomeMessage>
                         <h2>ようこそ！</h2>
-                        <p>Zephblazeで作られたデモサイトです。</p>
+                        <p>qrillで作られたデモサイトです。</p>
                         <CallToAction>始める</CallToAction>
                     </WelcomeMessage>
                 </MainContent>

@@ -8,7 +8,7 @@ export type AssetConfig = {
     target_prefix: string;
 };
 
-export type ZephblazeConfig = {
+export type QrillConfig = {
     server: {
         hostname: string;
         port: number;
@@ -26,7 +26,7 @@ export type ZephblazeConfig = {
     asset: AssetConfig;
 };
 
-export const default_config: ZephblazeConfig = {
+export const default_config: QrillConfig = {
     server: {
         hostname: "localhost",
         port: 4132,
@@ -62,7 +62,7 @@ export function requireConfig<T extends Record<string, string | number | symbol 
     const abs_path = path.join(cwd(), relative_path);
     if (!existsSync(abs_path)) {
         if (relative_path !== undefined) {
-            console.warn(`zephblaze: config file "${abs_path}" is not found. use default value.`);
+            console.warn(`qrill: config file "${abs_path}" is not found. use default value.`);
         }
         return default_conf;
     }
@@ -70,12 +70,12 @@ export function requireConfig<T extends Record<string, string | number | symbol 
     try {
         const config = require(abs_path);
         if (typeof config.default !== "object") {
-            console.warn(`zephblaze: config file "${abs_path}" has no default export. use default configuration.`);
+            console.warn(`qrill: config file "${abs_path}" has no default export. use default configuration.`);
             return default_conf;
         }
         return cloneAndMergeRecord(default_conf, config.default);
     } catch (_e) {
-        console.warn(`zephblaze: fail to read config file "${abs_path}". use default.`);
+        console.warn(`qrill: fail to read config file "${abs_path}". use default.`);
         return default_conf;
     }
 }

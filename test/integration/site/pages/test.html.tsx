@@ -1,4 +1,4 @@
-import type { HRootPageFn, Store } from "zephblaze/core";
+import type { HRootPageFn, Store } from "qrill/core";
 
 export default function Root(_store: Store): HRootPageFn<void> {
     return async () => (

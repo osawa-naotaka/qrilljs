@@ -1,5 +1,5 @@
-import { component, element } from "zephblaze/core";
-import type { H1Attribute, HComponentFn } from "zephblaze/core";
+import { component, element } from "qrill/core";
+import type { H1Attribute, HComponentFn } from "qrill/core";
 
 export function siteTitle(): HComponentFn<Partial<H1Attribute>> {
     const SiteTitle = element("site-title", { tag: "h1" });

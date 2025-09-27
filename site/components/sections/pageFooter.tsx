@@ -1,5 +1,5 @@
-import { component, element, registerComponent, style } from "zephblaze/core";
-import type { HComponentFn, Store } from "zephblaze/core";
+import { component, element, registerComponent, style } from "qrill/core";
+import type { HComponentFn, Store } from "qrill/core";
 import {
     ABSOLUTE_ANCHOR,
     BG_COLOR,
@@ -9,7 +9,7 @@ import {
     FIX_BOTTOM,
     TEXT_ALIGN_CENTER,
     TEXT_COLOR,
-} from "zephblaze/core";
+} from "qrill/core";
 
 export type PageFooterArgument = {
     site_name: string;

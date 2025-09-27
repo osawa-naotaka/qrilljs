@@ -1,5 +1,5 @@
 {
-  "name": "zephblaze",
+  "name": "qrill",
   "version": "0.1.0-alpha.8",
   "description": "lightweight static site generator for typescript",
   "type": "module",
@@ -26,11 +26,9 @@
       "require": "./build/jsx-dev-runtime/main.js"
     }
   },
-  "bin": {
-    "zephblaze": "build/bin.js"
-  },
+  "bin": "build/bin.js",
   "scripts": {
-    "clean": "rm -rf build dist package.tgz zephblaze-*.tgz",
+    "clean": "rm -rf build dist package.tgz qrill-*.tgz",
     "build": "biome check --write ./src ./site ./test && tsc && tsup --config tsup.config.ts",
     "dev": "concurrently \"tsc --watch\" \"tsup --watch --config tsup.config.ts\" \"tsx watch --exclude './site/**/*' --clear-screen=false src/bin.ts dev\"",
     "node-dev": "concurrently \"tsc --watch\" \"tsup --watch --config tsup.config.ts\" \"tsx watch --exclude './site/**/*' --clear-screen=false src/bin.ts dev\"",
@@ -44,13 +42,13 @@
   },
   "author": "osawa naotaka",
   "license": "MIT",
-  "homepage": "https://github.com/osawa-naotaka/zephblaze",
+  "homepage": "https://github.com/osawa-naotaka/qrill",
   "bugs": {
-    "url": "https://github.com/osawa-naotaka/zephblaze/issues"
+    "url": "https://github.com/osawa-naotaka/qrill/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/osawa-naotaka/zephblaze.git"
+    "url": "git+https://github.com/osawa-naotaka/qrill.git"
   },
   "devDependencies": {
     "@anthropic-ai/claude-code": "^1.0.80",

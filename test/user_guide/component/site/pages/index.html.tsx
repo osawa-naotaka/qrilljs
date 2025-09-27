@@ -1,4 +1,4 @@
-import type { HRootPageFn, Store } from "zephblaze/core";
+import type { HRootPageFn, Store } from "qrill/core";
 import { siteTitle } from "../components/siteTitle";
 
 export default function Root(_store: Store): HRootPageFn<void> {
@@ -6,10 +6,10 @@ export default function Root(_store: Store): HRootPageFn<void> {
     return async () => (
         <html lang="en">
             <head>
-                <title>Hello, Zephblaze!</title>
+                <title>Hello, qrill!</title>
             </head>
             <body>
-                <SiteTitle>Hello, Zephblaze!</SiteTitle>
+                <SiteTitle>Hello, qrill!</SiteTitle>
             </body>
         </html>
     );

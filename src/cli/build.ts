@@ -21,7 +21,7 @@ import { globSync } from "glob";
 export async function build(conf_file: string | undefined) {
     const start = performance.now();
 
-    const config = loadConfig(conf_file ?? "zephblaze.config.ts", default_config);
+    const config = loadConfig(conf_file ?? "qrill.config.ts", default_config);
     const site_config = loadConfig(config.input.site_conf, default_design_rule);
 
     const root = cwd();
@@ -37,7 +37,7 @@ export async function build(conf_file: string | undefined) {
     }
 
     if (!existsSync(page_dir)) {
-        throw new Error(`zephblaze: no page directory found at ${page_dir}.`);
+        throw new Error(`qrill: no page directory found at ${page_dir}.`);
     }
     for (const filename_in_dir of globExt(page_dir, ".{ts,tsx}")) {
         const import_start = performance.now();

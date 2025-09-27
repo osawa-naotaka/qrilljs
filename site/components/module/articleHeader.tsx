@@ -1,5 +1,5 @@
-import { component, element, registerComponent, style } from "zephblaze/core";
-import type { HComponentFn, HNode, Store } from "zephblaze/core";
+import { component, element, registerComponent, style } from "qrill/core";
+import type { HComponentFn, HNode, Store } from "qrill/core";
 import {
     BORDER_UNDERLINE,
     FLEX_END,
@@ -11,7 +11,7 @@ import {
     ROW,
     S_SMALL,
     S_TINY,
-} from "zephblaze/core";
+} from "qrill/core";
 
 export type ArticleHeaderArgument = {
     title: HNode;

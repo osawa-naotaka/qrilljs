@@ -1,6 +1,6 @@
-# Zephblazeのファイルベースルーター
+# qrillのファイルベースルーター
 
-Zephblazeは**ファイルベースルーティング**を採用しており、`site/pages/`ディレクトリ以下のファイル構造に基づいて自動的にルートとHTMLファイルを生成します。
+qrillは**ファイルベースルーティング**を採用しており、`site/pages/`ディレクトリ以下のファイル構造に基づいて自動的にルートとHTMLファイルを生成します。
 
 ## 基本的なルーティング
 
@@ -14,7 +14,7 @@ site/pages/
     └── hello.html.tsx    → /posts/hello.html
 ```
 
-Zephblazeは`.html.tsx`ファイルから以下のファイルを自動生成します：
+qrillは`.html.tsx`ファイルから以下のファイルを自動生成します：
 
 - HTMLファイル（主要なコンテンツ）
 - CSSファイル（スタイル）
@@ -69,7 +69,7 @@ export function rootPageFnParameters(): RootParameter[] {
 **ブログ記事ページ（posts/[slug].html.tsx）:**
 
 ```typescript
-import type { HRootPageFn, Store } from "zephblaze/core";
+import type { HRootPageFn, Store } from "qrill/core";
 import { listFiles, getMarkdown } from "../../../lib/post";
 import path from "path";
 
@@ -115,7 +115,7 @@ export default function Root(_store: Store): HRootPageFn<RootParameter> {
 **タグページ（tags/[tag].html.tsx）:**
 
 ```typescript
-import type { HRootPageFn, Store } from "zephblaze/core";
+import type { HRootPageFn, Store } from "qrill/core";
 
 // パラメータの型定義
 type RootParameter = {
@@ -225,7 +225,7 @@ export default function Root(_store: Store): HRootPageFn<RootParameter> {
 // HRootPageFn の型定義
 type HRootPageFn<T> = (parameter: T) => Promise<HNode>;
 
-// HNode はzephblaze内部で利用するDOM要素の型
+// HNode はqrill内部で利用するDOM要素の型
 // 通常のjsx要素（React.ReactElement相当）として扱える
 ```
 
@@ -265,7 +265,7 @@ export default function Root(store: Store): HRootPageFn<RootParameter> {
 
 ## まとめ
 
-Zephblazeのファイルベースルーターの特徴：
+qrillのファイルベースルーターの特徴：
 
 1. **直感的なファイル構造**: ディレクトリ構造がそのままURL構造に対応
 2. **動的パラメータ**: `[param]`記法による柔軟なパラメータ化

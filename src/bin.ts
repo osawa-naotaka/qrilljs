@@ -19,7 +19,7 @@ function getVersion() {
 }
 
 const VERSION = getVersion();
-const PROGRAM_NAME = "zephblaze";
+const PROGRAM_NAME = "qrill";
 
 function showHelp() {
     console.log(`
@@ -100,7 +100,7 @@ async function main() {
 
             default:
                 console.error(`Error: Unknown command '${command}'`);
-                console.log("\nRun 'zephblaze --help' for usage information");
+                console.log("\nRun 'qrill --help' for usage information");
                 exit(1);
         }
     } catch (e) {

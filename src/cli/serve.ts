@@ -6,7 +6,7 @@ import path from "node:path";
 import { cwd } from "node:process";
 import type { Duplex } from "node:stream";
 import { loadConfig, requireConfig } from "@/cli/config";
-import type { ZephblazeConfig } from "@/cli/config";
+import type { QrillConfig } from "@/cli/config";
 import { default_config } from "@/cli/config";
 import { bundleCss } from "@/cli/css";
 import { bundleWoff2 } from "@/cli/font";
@@ -21,13 +21,13 @@ import { generateStore } from "@/lib/core/store";
 import type { Store } from "@/lib/core/store";
 import { contentType } from "@/lib/core/util";
 import { ErrorPage, InternalServerErrorPage } from "@/page/error";
-import { zephblaze_error_css } from "@/page/zephblaze-error";
+import { qrill_error_css } from "@/page/qrill-error";
 import chokidar from "chokidar";
 import type { FSWatcher } from "chokidar";
 import { WebSocketServer } from "ws";
 
 export async function serve(conf_file: string | undefined): Promise<void> {
-    const config = loadConfig(conf_file ?? "zephblaze.config.ts", default_config);
+    const config = loadConfig(conf_file ?? "qrill.config.ts", default_config);
     const watch_dir = path.join(cwd(), config.server.watch_dir);
     const watcher = chokidar.watch(watch_dir, { persistent: true });
 
@@ -55,12 +55,7 @@ type Resp = {
 type ReqProcessFn = (req: Request) => Promise<Resp>;
 type ReloadFn = () => void;
 
-function createAndStartDenoServer(
-    config: ZephblazeConfig,
-    proc: ReqProcessFn,
-    reload: ReloadFn,
-    watcher: FSWatcher,
-): void {
+function createAndStartDenoServer(config: QrillConfig, proc: ReqProcessFn, reload: ReloadFn, watcher: FSWatcher): void {
     Deno.serve({ port: config.server.port, hostname: config.server.hostname }, async (req: Request) => {
         if (req.headers.get("upgrade") === "websocket") {
             const { socket, response } = Deno.upgradeWebSocket(req);
@@ -82,12 +77,7 @@ function createAndStartDenoServer(
     });
 }
 
-function createAndStartBunServer(
-    config: ZephblazeConfig,
-    proc: ReqProcessFn,
-    reload: ReloadFn,
-    watcher: FSWatcher,
-): void {
+function createAndStartBunServer(config: QrillConfig, proc: ReqProcessFn, reload: ReloadFn, watcher: FSWatcher): void {
     const server = Bun.serve({
         websocket: {
             open(ws) {
@@ -120,12 +110,7 @@ function createAndStartBunServer(
     });
 }
 
-function createAndStartNodeServer(
-    config: ZephblazeConfig,
-    proc: ReqProcessFn,
-    reload: ReloadFn,
-    watcher: FSWatcher,
-): void {
+function createAndStartNodeServer(config: QrillConfig, proc: ReqProcessFn, reload: ReloadFn, watcher: FSWatcher): void {
     const http_server = http.createServer(async (msg: IncomingMessage, resp: ServerResponse) => {
         const req: Request = new Request(new URL(`http://${msg.headers.host}${msg.url}`));
         const rv = await proc(req);
@@ -199,7 +184,7 @@ function errorResponse(status: number, cause: string | Error): Resp {
     return { status, content, type: "text/html" };
 }
 
-function createReqProcessor(config: ZephblazeConfig): [ReqProcessFn, ReloadFn] {
+function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
     const require = createRequire(import.meta.url);
 
     const root = cwd();
@@ -308,8 +293,8 @@ function createReqProcessor(config: ZephblazeConfig): [ReqProcessFn, ReloadFn] {
             }
 
             // css for error page
-            if (new URL(req.url).pathname.localeCompare("/zephblaze-error.css") === 0) {
-                return normalResponse(zephblaze_error_css, ".css");
+            if (new URL(req.url).pathname.localeCompare("/qrill-error.css") === 0) {
+                return normalResponse(qrill_error_css, ".css");
             }
 
             return errorResponse(404, `route for url "${req.url}" not found.`);

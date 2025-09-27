@@ -1,5 +1,5 @@
-import { FLEX_WRAP, element, hIcon, hSvgIconFont, registerRootPage, style, unionRecords } from "zephblaze/core";
-import type { ColorKind, HArgument, HRootPageFn, Properties, Store } from "zephblaze/core";
+import { FLEX_WRAP, element, hIcon, hSvgIconFont, registerRootPage, style, unionRecords } from "qrill/core";
+import type { ColorKind, HArgument, HRootPageFn, Properties, Store } from "qrill/core";
 import {
     BOLD,
     BORDER_RADIUS,
@@ -31,7 +31,7 @@ import {
     S_MEDIUM,
     S_SMALL,
     TRANSITION,
-} from "zephblaze/core";
+} from "qrill/core";
 
 export default function Root(store: Store): HRootPageFn<HArgument> {
     const BText = element("b-text");

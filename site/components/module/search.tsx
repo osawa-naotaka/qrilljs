@@ -2,9 +2,7 @@ import { dateTime } from "@site/components/element/dateTime";
 import { tag } from "@site/components/element/tag";
 import { postFmSchema } from "@site/site.config";
 import { TAG_DESIGN } from "@site/styles/design";
-import type { SearchResult } from "staticseek";
-import * as v from "valibot";
-import { as, component, createDom, element, hSvgIconFont, registerComponent, style } from "zephblaze/core";
+import { as, component, createDom, element, hSvgIconFont, registerComponent, style } from "qrill/core";
 import {
     BORDER_UNDERLINE,
     DEFAULT_RESPONSIVE_PAGE_WIDTH,
@@ -19,8 +17,10 @@ import {
     ROW_WRAP,
     S_2XLARGE,
     S_LARGE,
-} from "zephblaze/core";
-import type { HArgument, HClientFn, HComponentFn, HNode, Store } from "zephblaze/core";
+} from "qrill/core";
+import type { HArgument, HClientFn, HComponentFn, HNode, Store } from "qrill/core";
+import type { SearchResult } from "staticseek";
+import * as v from "valibot";
 
 import { StaticSeekError, createSearchFn } from "staticseek";
 

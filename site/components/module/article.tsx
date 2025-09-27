@@ -29,10 +29,10 @@ import {
     TEXT_COLOR,
     TEXT_JUSTIFY,
     TEXT_UNDERLINE,
-} from "zephblaze/core";
-import { A, H2, H3, H4, H5, Li, Ol, P, Script, Ul } from "zephblaze/core";
-import { as, component, element, registerComponent, style } from "zephblaze/core";
-import type { HComponentFn, Markdown, Store } from "zephblaze/core";
+} from "qrill/core";
+import { A, H2, H3, H4, H5, Li, Ol, P, Script, Ul } from "qrill/core";
+import { as, component, element, registerComponent, style } from "qrill/core";
+import type { HComponentFn, Markdown, Store } from "qrill/core";
 
 export type ArticleArgument = Markdown<PostFm>;
 

@@ -1,7 +1,7 @@
 import { hlink } from "@site/components/element/hlink";
-import { component, element, hSvgIconStore, registerComponent, style } from "zephblaze/core";
-import type { HComponentFn, HSvgBrandsIconName, Store } from "zephblaze/core";
-import { BOLD, FONT_SIZE, F_XLARGE, JUSTIFY_CENTER, ROW, S_XLARGE } from "zephblaze/core";
+import { component, element, hSvgIconStore, registerComponent, style } from "qrill/core";
+import type { HComponentFn, HSvgBrandsIconName, Store } from "qrill/core";
+import { BOLD, FONT_SIZE, F_XLARGE, JUSTIFY_CENTER, ROW, S_XLARGE } from "qrill/core";
 
 export type NavigationArgument = {
     navitem: {

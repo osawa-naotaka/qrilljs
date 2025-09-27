@@ -9,8 +9,8 @@ import {
     element,
     registerComponent,
     style,
-} from "zephblaze/core";
-import type { HComponentFn, HNode, Store } from "zephblaze/core";
+} from "qrill/core";
+import type { HComponentFn, HNode, Store } from "qrill/core";
 
 export type DrawerArgument = {
     title: HNode;
