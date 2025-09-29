@@ -31,7 +31,7 @@ export async function getAllMarkdowns<T>(
     schema: v.BaseSchema<unknown, T, v.BaseIssue<unknown>>,
 ): Promise<Markdown<T>[]> {
     return Promise.all(
-        (await listFiles(dir, ".md")).map(async (slug) => {
+        listFiles(dir, ".md").map(async (slug) => {
             const { data, content } = matter(await readFile(path.join(dir, slug), "utf-8"));
             const data_parsed = v.parse(schema, data);
             return { slug: path.basename(slug, ".md"), data: data_parsed, content };
@@ -50,6 +50,6 @@ export async function getMarkdown<T>(
     return { slug, data: parsed_data, content };
 }
 
-export async function listFiles(dir: string, ext: string): Promise<string[]> {
+export function listFiles(dir: string, ext: string): string[] {
     return globExt(path.join(cwd(), dir), ext);
 }
