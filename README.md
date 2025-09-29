@@ -20,7 +20,7 @@
 
 ```bash
 # Node.js 24以上のみ対応
-yarn add qrill
+yarn add qrilljs
 yarn add typescript
 ```
 

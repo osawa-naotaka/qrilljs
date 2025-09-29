@@ -12,6 +12,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Security: in case of vulnerabilities.
 
 ## [Unreleased]
+## [0.1.0-alpha.9] - 2025-09-30
+### Added
+- add a simple design system documentation.
+
+### Fixed
+- fix bug that dev server outputs collapse html/css because of async problem between http requests.
+  - shareing Store between pages results in collapse page.
+
 ## [0.1.0-alpha.8] - 2025-09-28
 ### Changed
 - Renamed project from "zephblaze" to "qrill"
@@ -80,7 +88,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.8...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.9...HEAD
+[0.1.0-alpha.9]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.8...v0.1.0-alpha.9
 [0.1.0-alpha.8]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.7...v0.1.0-alpha.8
 [0.1.0-alpha.7]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.6...v0.1.0-alpha.7
 [0.1.0-alpha.6]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.5...v0.1.0-alpha.6

@@ -192,7 +192,6 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
     const public_dir = path.join(root, config.input.public_dir);
 
     let site_config = requireConfig(require, config.input.site_conf, default_design_rule);
-    let store = generateStore(config.asset, site_config);
 
     let page_router = createPageRouter(page_dir);
     let public_router = createStaticRouter(public_dir);
@@ -206,7 +205,6 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
         public_router = createStaticRouter(public_dir);
         asset_router = new Map<string, Router>();
         site_config = requireConfig(require, config.input.site_conf, default_design_rule);
-        store = generateStore(config.asset, site_config);
     };
 
     const proc_fn: ReqProcessFn = async (req: Request) => {
@@ -216,7 +214,7 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
             if (!(match_page instanceof Error)) {
                 const page_fn = require(path.join(page_dir, match_page.target_file));
                 if (typeof page_fn.default === "function") {
-                    store = generateStore(config.asset, site_config);
+                    const store = generateStore(config.asset, site_config);
                     const root_page_fn = await page_fn.default(store);
 
                     // auto generation of .css , .js and .woff2 from .html.ts

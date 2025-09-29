@@ -1,6 +1,6 @@
 {
   "name": "qrilljs",
-  "version": "0.1.0-alpha.8",
+  "version": "0.1.0-alpha.9",
   "description": "lightweight static site generator for typescript",
   "type": "module",
   "main": "build/client/main.js",
@@ -30,7 +30,7 @@
     "qrill": "build/bin.js"
   },
   "scripts": {
-    "clean": "rm -rf build dist package.tgz qrill-*.tgz",
+    "clean": "rm -rf build dist package.tgz qrilljs-*.tgz",
     "build": "biome check --write ./src ./site ./test && tsc && tsup --config tsup.config.ts",
     "dev": "concurrently \"tsc --watch\" \"tsup --watch --config tsup.config.ts\" \"tsx watch --exclude './site/**/*' --clear-screen=false src/bin.ts dev\"",
     "node-dev": "concurrently \"tsc --watch\" \"tsup --watch --config tsup.config.ts\" \"tsx watch --exclude './site/**/*' --clear-screen=false src/bin.ts dev\"",

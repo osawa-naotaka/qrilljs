@@ -12,7 +12,7 @@ import { bundleScriptEsbuild } from "@/cli/script";
 import { default_design_rule } from "@/core";
 import type { Attribute, HRootPageFn } from "@/lib/core/component";
 import { Link, Script } from "@/lib/core/elements";
-import { clearStore, generateStore } from "@/lib/core/store";
+import { generateStore } from "@/lib/core/store";
 import type { HComponentAsset, Store } from "@/lib/core/store";
 import { replaceExt } from "@/lib/core/util";
 import { globExt } from "@/server";
@@ -29,7 +29,6 @@ export async function build(conf_file: string | undefined) {
     const page_dir = path.join(root, config.input.page_dir);
     const public_dir = path.join(root, config.input.public_dir);
 
-    const store = generateStore(config.asset, site_config);
     const asset_store = new Map<string, HComponentAsset[]>();
 
     if (config.output.clean_befor_build && existsSync(dist_dir)) {
@@ -46,6 +45,7 @@ export async function build(conf_file: string | undefined) {
 
         const relative_path = replaceExt(path.join("/", filename_in_dir), "");
         if (typeof page_fn.default === "function") {
+            const store = generateStore(config.asset, site_config);
             if (path.extname(relative_path) === ".html") {
                 await processHtmlDotTs(store, relative_path, dist_dir, page_fn);
 
@@ -106,7 +106,6 @@ type HtmlPageFn = {
 };
 
 async function processHtmlDotTs(store: Store, relative_path: string, dist_dir: string, page_fn: HtmlPageFn) {
-    clearStore(store);
     const root_page_fn = await page_fn.default(store);
     const css_js = await bundleAndWriteCssJs(relative_path, dist_dir, store);
     await bundleAndWriteWoff2(relative_path, dist_dir, store);
