@@ -1,6 +1,6 @@
 {
   "name": "qrilljs",
-  "version": "0.1.0-alpha.9",
+  "version": "0.1.0-alpha.10",
   "description": "lightweight static site generator for typescript",
   "type": "module",
   "main": "build/client/main.js",
@@ -30,7 +30,7 @@
     "qrill": "build/bin.js"
   },
   "scripts": {
-    "clean": "rm -rf build dist package.tgz qrilljs-*.tgz",
+    "clean": "rm -rf build dist package.tgz",
     "build": "biome check --write ./src ./site ./test && tsc && tsup --config tsup.config.ts",
     "dev": "concurrently \"tsc --watch\" \"tsup --watch --config tsup.config.ts\" \"tsx watch --exclude './site/**/*' --clear-screen=false src/bin.ts dev\"",
     "node-dev": "concurrently \"tsc --watch\" \"tsup --watch --config tsup.config.ts\" \"tsx watch --exclude './site/**/*' --clear-screen=false src/bin.ts dev\"",
@@ -77,6 +77,7 @@
     "glob": "^11.0.1",
     "gray-matter": "^4.0.3",
     "jsdom": "^26.0.0",
+    "rehype-prism-plus": "^2.0.1",
     "rehype-stringify": "^10.0.1",
     "remark-frontmatter": "^5.0.0",
     "remark-gfm": "^4.0.1",
