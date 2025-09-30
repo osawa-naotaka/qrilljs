@@ -4,8 +4,8 @@ import { tag } from "@site/components/element/tag";
 import { articleHeader } from "@site/components/module/articleHeader";
 import type { PostFm } from "@site/site.config";
 import { TAG_DESIGN } from "@site/styles/design";
-import { F_LARGE, F_XLARGE, Link, S_2XLARGE, S_MEDIUM, TEXT_JUSTIFY, TEXT_UNDERLINE, colorof } from "qrill/core";
-import { A, H2, H3, H4, H5, Li, Ol, P, Script, Ul } from "qrill/core";
+import { F_LARGE, F_XLARGE, S_2XLARGE, S_MEDIUM, TEXT_JUSTIFY, TEXT_UNDERLINE, colorof } from "qrill/core";
+import { A, H2, H3, H4, H5, Li, Ol, P, Ul } from "qrill/core";
 import { as, component, element, registerComponent, style } from "qrill/core";
 import type { HComponentFn, Markdown, Store } from "qrill/core";
 
@@ -82,11 +82,7 @@ export function article(store: Store): HComponentFn<ArticleArgument> {
         inserts: [
             {
                 selector: ["head"],
-                nodes: [
-                    Link({ href: `${prism_cdn}/themes/${css_filename}`, rel: "stylesheet" }),
-                    Script({ src: `${prism_cdn}/components/prism-core.min.js` }),
-                    Script({ src: `${prism_cdn}/plugins/autoloader/prism-autoloader.min.js` }),
-                ],
+                nodes: [<link key={css_filename} href={`${prism_cdn}/themes/${css_filename}`} rel="stylesheet" />],
             },
         ],
     });

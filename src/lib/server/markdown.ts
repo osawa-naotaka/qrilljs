@@ -4,6 +4,7 @@ import { cwd } from "node:process";
 import type { Markdown } from "@/lib/core/markdown";
 import { globExt } from "@/server";
 import matter from "gray-matter";
+import rehypePrism from "rehype-prism-plus";
 import rehypeStringify from "rehype-stringify";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from "remark-gfm";
@@ -21,6 +22,7 @@ export async function markdownToHtml(markdown: string): Promise<string> {
             .use(remarkFrontmatter)
             .use(remarkToc)
             .use(remarkRehype)
+            .use(rehypePrism)
             .use(rehypeStringify)
             .process(markdown)
     ).value.toString();
