@@ -17,10 +17,6 @@ export function cloneAndMergeRecord<T extends Record<PropertyKey, unknown>>(
     return new_record;
 }
 
-export function joinAll<T extends {}, S extends {}>(base: T, items: S[]): T & S {
-    return Object.assign({}, base, ...items);
-}
-
 export function unionRecords<T extends {}>(...items: T[]) {
     return unionArrayOfRecords(items);
 }

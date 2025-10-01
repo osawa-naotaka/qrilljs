@@ -4,20 +4,20 @@ import { tag } from "@site/components/element/tag";
 import { articleHeader } from "@site/components/module/articleHeader";
 import type { PostFm } from "@site/site.config";
 import { TAG_DESIGN } from "@site/styles/design";
-import { F_LARGE, F_XLARGE, S_2XLARGE, S_MEDIUM, TEXT_JUSTIFY, TEXT_UNDERLINE, colorof } from "qrill/core";
-import { A, H2, H3, H4, H5, Li, Ol, P, Ul } from "qrill/core";
-import { as, component, element, registerComponent, style } from "qrill/core";
-import type { HComponentFn, Markdown, Store } from "qrill/core";
+import { F_LARGE, F_XLARGE, S_2XLARGE, S_MEDIUM, TEXT_JUSTIFY, TEXT_UNDERLINE, colorof } from "qrilljs/core";
+import { A, H2, H3, H4, H5, Li, Ol, P, Ul } from "qrilljs/core";
+import { component, element, registerComponent, style } from "qrilljs/core";
+import type { HComponentFn, Markdown, Store } from "qrilljs/core";
 
 export type ArticleArgument = Markdown<PostFm>;
 
 export function article(store: Store): HComponentFn<ArticleArgument> {
-    const Article = element("article", { tag: "article" });
+    const Article = element(store, { tag: "article" }, "article");
     const ArticleHeader = articleHeader(store);
-    const Author = element("author");
-    const ArticleTag = as("article-tag", tag());
-    const DateTime = dateTime();
-    const ArticleText = element("article-text");
+    const Author = element(store, { tag: "div" }, "author");
+    const ArticleTag = tag(store);
+    const DateTime = dateTime(store);
+    const ArticleText = element(store, { tag: "div" }, "article-text");
     const ShareX = shareX(store);
 
     const component_styles = [

@@ -1,6 +1,6 @@
-import { atStyle, colorof, component, element, registerComponent, style } from "qrill/core";
-import type { HComponentFn, HNode, Store } from "qrill/core";
-import { DEFAULT_RESPONSIVE_PAGE_WIDTH, FULL_WIDTH_HEIGHT, S_MEDIUM } from "qrill/core";
+import { atStyle, colorof, component, element, registerComponent, style } from "qrilljs/core";
+import type { HComponentFn, HNode, Store } from "qrilljs/core";
+import { DEFAULT_RESPONSIVE_PAGE_WIDTH, FULL_WIDTH_HEIGHT, S_MEDIUM } from "qrilljs/core";
 
 export type PopoverArgument = {
     open_button: HNode;
@@ -9,11 +9,11 @@ export type PopoverArgument = {
 };
 
 export function popover(store: Store, button_id: string): HComponentFn<PopoverArgument> {
-    const Popover = element("popover");
-    const Button = element("popover-button", { tag: "button" });
-    const CloseArea = element("popover-close-area");
-    const Container = element("popover-container");
-    const Content = element("popover-content");
+    const Popover = element(store, { tag: "div" }, "popover");
+    const Button = element(store, { tag: "button" }, "popover-button");
+    const CloseArea = element(store, { tag: "div" }, "popover-close-area");
+    const Container = element(store, { tag: "div" }, "popover-container");
+    const Content = element(store, { tag: "div" }, "popover-content");
 
     const styles = [
         style(Container)(FULL_WIDTH_HEIGHT, {

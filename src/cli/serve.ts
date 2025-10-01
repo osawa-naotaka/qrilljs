@@ -175,12 +175,14 @@ function normalResponse(content_arg: string | Buffer<ArrayBufferLike>, ext: stri
 }
 
 function errorResponse(status: number, cause: string | Error): Resp {
+    const store = generateStore({ target_prefix: "" });
+
     if (typeof cause === "string") {
-        const content = toArrayBuffer(stringifyToHtml(0, [])(ErrorPage({ name: status.toString(), cause })));
+        const content = toArrayBuffer(stringifyToHtml(0, [])(ErrorPage(store, { name: status.toString(), cause })));
         return { status, content, type: "text/html" };
     }
 
-    const content = toArrayBuffer(stringifyToHtml(0, [])(InternalServerErrorPage(cause)));
+    const content = toArrayBuffer(stringifyToHtml(0, [])(InternalServerErrorPage(store, cause)));
     return { status, content, type: "text/html" };
 }
 

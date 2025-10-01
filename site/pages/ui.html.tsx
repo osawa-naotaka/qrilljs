@@ -1,5 +1,5 @@
-import { element, hIcon, hSvgIconFont, registerRootPage, style, unionRecords } from "qrill/core";
-import type { ColorCategory, HArgument, HRootPageFn, Properties, Store } from "qrill/core";
+import { element, hIcon, hSvgIconFont, registerRootPage, style, unionRecords } from "qrilljs/core";
+import type { ColorCategory, HArgument, HRootPageFn, Properties, Store } from "qrilljs/core";
 import {
     BOLD,
     BOX_ELEVATED,
@@ -23,14 +23,14 @@ import {
     INLINE_FLEX,
     S_MEDIUM,
     S_SMALL,
-} from "qrill/core";
+} from "qrilljs/core";
 
 export default function Root(store: Store): HRootPageFn<HArgument> {
-    const BText = element("b-text");
-    const BOutlined = element("b-outlined");
-    const BTonal = element("b-tonal");
-    const BFilled = element("b-filled");
-    const BElevated = element("b-elevated");
+    const BText = element(store, { tag: "div" }, "b-text");
+    const BOutlined = element(store, { tag: "div" }, "b-outlined");
+    const BTonal = element(store, { tag: "div" }, "b-tonal");
+    const BFilled = element(store, { tag: "div" }, "b-filled");
+    const BElevated = element(store, { tag: "div" }, "b-elevated");
     const Icon = hIcon(store);
     const GithubIcon = hSvgIconFont(store, { type: "brands", name: "github" });
     const XIcon = hSvgIconFont(store, { type: "brands", name: "x-twitter" });

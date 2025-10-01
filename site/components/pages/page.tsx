@@ -1,9 +1,9 @@
 import { pageHead } from "@site/components/pages/pageHead";
 import { pageFooter } from "@site/components/sections/pageFooter";
 import { pageHeader } from "@site/components/sections/pageHeader";
-import { component, registerComponent } from "qrill/core";
-import type { HComponentFn, HSvgBrandsIconName, Store } from "qrill/core";
-import { DEFAULT_STYLES, INIT_CSS } from "qrill/core";
+import { component, registerComponent } from "qrilljs/core";
+import type { HComponentFn, HSvgBrandsIconName, Store } from "qrilljs/core";
+import { DEFAULT_STYLES, INIT_CSS } from "qrilljs/core";
 
 export type PageArgument = {
     title: string;

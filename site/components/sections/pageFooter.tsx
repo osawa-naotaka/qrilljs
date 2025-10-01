@@ -1,15 +1,15 @@
-import { S_MEDIUM, colorof, component, element, registerComponent, style } from "qrill/core";
-import type { HComponentFn, Store } from "qrill/core";
-import { ABSOLUTE_ANCHOR, FIX_BOTTOM } from "qrill/core";
+import { S_MEDIUM, colorof, component, element, registerComponent, style } from "qrilljs/core";
+import type { HComponentFn, Store } from "qrilljs/core";
+import { ABSOLUTE_ANCHOR, FIX_BOTTOM } from "qrilljs/core";
 
 export type PageFooterArgument = {
     site_name: string;
 };
 
 export function pageFooter(store: Store): HComponentFn<PageFooterArgument> {
-    const PageFooter = element("page-footer", { tag: "footer" });
-    const Content = element("page-footer-content");
-    const Copyright = element("page-footer-copyright");
+    const PageFooter = element(store, { tag: "footer" }, "page-footer");
+    const Content = element(store, { tag: "div" }, "page-footer-content");
+    const Copyright = element(store, { tag: "div" }, "page-footer-copyright");
 
     const component_styles = [
         style(PageFooter)(FIX_BOTTOM, {

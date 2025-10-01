@@ -1,8 +1,8 @@
 import { hSvgIconFont } from "@/lib/ui/svgIconFont";
 import { TAG_DESIGN } from "@site/styles/design";
-import { S_SMALL, S_TINY, colorof } from "qrill/core";
-import { as, component, element, registerComponent, style } from "qrill/core";
-import type { HComponentFn, Store } from "qrill/core";
+import { S_SMALL, S_TINY, colorof } from "qrilljs/core";
+import { as, component, element, registerComponent, style } from "qrilljs/core";
+import type { HComponentFn, Store } from "qrilljs/core";
 
 export type ShareXArgument = {
     title: string;
@@ -10,8 +10,8 @@ export type ShareXArgument = {
 };
 
 export function shareX(store: Store): HComponentFn<ShareXArgument> {
-    const ShareX = element("share-x", { tag: "a" });
-    const Text = element("share-x-text");
+    const ShareX = element(store, { tag: "a" }, "share-x");
+    const Text = element(store, { tag: "div" }, "share-x-text");
     const XIcon = as("share-x-icon", hSvgIconFont(store, { type: "brands", name: "x-twitter" }));
 
     const styles = [

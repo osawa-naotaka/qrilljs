@@ -8,7 +8,7 @@
 
     // JSX
     "jsx": "react-jsx",
-    "jsxImportSource": "qrill",
+    "jsxImportSource": "qrilljs",
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -28,10 +28,10 @@
     "paths": {
       "@/*": ["./src/*"],
       "@site/*": ["./site/*"],
-      "qrill/core": ["./src/core.ts"],
-      "qrill/server": ["./src/server.ts"],
-      "qrill/jsx-dev-runtime": ["./src/jsx-dev-runtime.ts"],
-      "qrill/jsx-runtime": ["./src/jsx-runtime.ts"]
+      "qrilljs/core": ["./src/core.ts"],
+      "qrilljs/server": ["./src/server.ts"],
+      "qrilljs/jsx-dev-runtime": ["./src/jsx-dev-runtime.ts"],
+      "qrilljs/jsx-runtime": ["./src/jsx-runtime.ts"]
     },
   },
   "include": ["./src/**/*", "./site/**/*"],

@@ -1,5 +1,5 @@
-import { BOLD, BOX_FILLED, BOX_FILLED_EM_LIGHT, INLINE_FLEX, S_SMALL, S_TINY, style } from "qrill/core";
-import type { ColorCategory, HComponentFn, Selector, Store, StyleRule } from "qrill/core";
+import { BOLD, BOX_FILLED, BOX_FILLED_EM_LIGHT, INLINE_FLEX, S_SMALL, S_TINY, style } from "qrilljs/core";
+import type { ColorCategory, HComponentFn, Selector, Store, StyleRule } from "qrilljs/core";
 
 export function TAG_DESIGN<T>(store: Store, cat: ColorCategory, top: HComponentFn<T>): StyleRule[] {
     return [

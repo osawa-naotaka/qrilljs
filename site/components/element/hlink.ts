@@ -1,8 +1,8 @@
-import type { AttributeOf, HComponentFn, Store } from "qrill/core";
-import { colorof, component, element, registerComponent, style } from "qrill/core";
+import type { AttributeOf, HComponentFn, Store } from "qrilljs/core";
+import { colorof, component, element, registerComponent, style } from "qrilljs/core";
 
 export function hlink(store: Store): HComponentFn<Partial<AttributeOf<"a">>> {
-    const Link = element("link", { tag: "a" });
+    const Link = element(store, { tag: "a" }, "link");
 
     const styles = [
         style(Link)({ transition: ["all", "0.25s", "ease-in-out"] }),

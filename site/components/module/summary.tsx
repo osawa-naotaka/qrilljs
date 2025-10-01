@@ -4,18 +4,18 @@ import { tag } from "@site/components/element/tag";
 import { articleHeader } from "@site/components/module/articleHeader";
 import type { PostFm } from "@site/site.config";
 import { TAG_DESIGN } from "@site/styles/design";
-import { H2, as, component, element, registerComponent, style } from "qrill/core";
-import type { HComponentFn, Markdown, Store, StyleRule } from "qrill/core";
-import { F_XLARGE, S_XLARGE } from "qrill/core";
+import { H2, component, element, registerComponent, style } from "qrilljs/core";
+import type { HComponentFn, Markdown, Store, StyleRule } from "qrilljs/core";
+import { F_XLARGE, S_XLARGE } from "qrilljs/core";
 
 export type SummaryArgument = Markdown<PostFm>;
 
 export function summary(store: Store): HComponentFn<SummaryArgument> {
-    const Summary = element("summary", { tag: "article" });
+    const Summary = element(store, { tag: "article" }, "summary");
     const ArticleHeader = articleHeader(store);
-    const Author = element("author");
-    const SummaryTag = as("summary-tag", tag());
-    const DateTime = dateTime();
+    const Author = element(store, { tag: "div" }, "author");
+    const SummaryTag = tag(store);
+    const DateTime = dateTime(store);
     const HLink = hlink(store);
 
     const component_styles: (StyleRule | StyleRule[])[] = [
