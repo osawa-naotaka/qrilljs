@@ -48,10 +48,10 @@ export type Store = {
     asset: AssetConfig;
 };
 
-export function generateStore(asset: AssetConfig, rule: RecursivePartial<DesignRule> = {}): Store {
+export function generateStore(asset: AssetConfig, rule: RecursivePartial<DesignRule> = {}, element_count = 0): Store {
     return {
         components: new Map<string, HComponent>(),
-        element_count: 0,
+        element_count,
         designrule: cloneAndMergeRecord(default_design_rule, rule),
         asset,
     };
