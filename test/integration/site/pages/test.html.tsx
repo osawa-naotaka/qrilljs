@@ -1,4 +1,4 @@
-import type { HRootPageFn, Store } from "qrill/core";
+import type { HRootPageFn, Store } from "qrilljs/core";
 
 export default function Root(_store: Store): HRootPageFn<void> {
     return async () => (

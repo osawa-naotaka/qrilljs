@@ -1,14 +1,14 @@
 import { page } from "@site/components/pages/page";
 import { summaries } from "@site/components/sections/summaries";
 import { navitem, postFmSchema, posts_dir, site } from "@site/site.config";
-import { element, registerRootPage, style } from "qrill/core";
-import type { HRootPageFn, Store } from "qrill/core";
-import { DEFAULT_RESPONSIVE_PAGE_WIDTH } from "qrill/core";
-import { getAllMarkdowns } from "qrill/server";
+import { element, registerRootPage, style } from "qrilljs/core";
+import type { HRootPageFn, Store } from "qrilljs/core";
+import { DEFAULT_RESPONSIVE_PAGE_WIDTH } from "qrilljs/core";
+import { getAllMarkdowns } from "qrilljs/server";
 
 export default function Root(store: Store): HRootPageFn<void> {
     const Page = page(store);
-    const PageMainArea = element(store, "page-main-area", { tag: "main" });
+    const PageMainArea = element(store, { tag: "main" }, "page-main-area");
     const Summaries = summaries(store);
 
     const styles = [style(PageMainArea)(DEFAULT_RESPONSIVE_PAGE_WIDTH(store))];

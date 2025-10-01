@@ -12,6 +12,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Security: in case of vulnerabilities.
 
 ## [Unreleased]
+## [0.1.0-alpha.11] - 2025-10-01
+### Changed
+- change element() function argument. insert Store as a first argument and change argument order.
+- auto-generated class name for css is now include hash value to distinct between instances from same component. we no longer care about class name collision.
+
+### Removed
+- as() is no longer needed, because of the reason mensioned above. but still implemented. maybe use it for another reason.
+
 ## [0.1.0-alpha.10] - 2025-10-01
 ### Added
 - add rehype-prism-plus functionarity to highlight markdown.

@@ -1,7 +1,7 @@
 import { hlink } from "@site/components/element/hlink";
-import { component, element, hSvgIconStore, registerComponent, style } from "qrill/core";
-import type { HComponentFn, HSvgBrandsIconName, Store } from "qrill/core";
-import { F_XLARGE, S_XLARGE } from "qrill/core";
+import { component, element, hSvgIconStore, registerComponent, style } from "qrilljs/core";
+import type { HComponentFn, HSvgBrandsIconName, Store } from "qrilljs/core";
+import { F_XLARGE, S_XLARGE } from "qrilljs/core";
 
 export type NavigationArgument = {
     navitem: {
@@ -11,7 +11,7 @@ export type NavigationArgument = {
 };
 
 export function navigation(store: Store): HComponentFn<NavigationArgument> {
-    const Navigation = element(store, "navigation", { tag: "nav" });
+    const Navigation = element(store, { tag: "nav" }, "navigation");
     const HLink = hlink(store);
     const icons: HSvgBrandsIconName[] = ["youtube", "x-twitter", "github"];
     const HSvgIconStore = hSvgIconStore(

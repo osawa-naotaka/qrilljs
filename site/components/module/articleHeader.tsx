@@ -1,15 +1,15 @@
-import { component, element, registerComponent, style } from "qrill/core";
-import type { HComponentFn, HNode, Store } from "qrill/core";
-import { F_SMALL, S_SMALL, S_TINY } from "qrill/core";
+import { component, element, registerComponent, style } from "qrilljs/core";
+import type { HComponentFn, HNode, Store } from "qrilljs/core";
+import { F_SMALL, S_SMALL, S_TINY } from "qrilljs/core";
 
 export type ArticleHeaderArgument = {
     title: HNode;
 };
 
 export function articleHeader(store: Store): HComponentFn<ArticleHeaderArgument> {
-    const ArticleHeader = element(store, "article-header", { tag: "header" });
-    const Title = element(store, "article-header-title");
-    const Meta = element(store, "article-header-meta");
+    const ArticleHeader = element(store, { tag: "header" }, "article-header");
+    const Title = element(store, { tag: "div" }, "article-header-title");
+    const Meta = element(store, { tag: "div" }, "article-header-meta");
 
     const component_styles = [
         style(Title)({ border_bottom: "2px solid" }),

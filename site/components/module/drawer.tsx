@@ -1,5 +1,5 @@
-import { component, element, registerComponent, style } from "qrill/core";
-import type { HComponentFn, HNode, Store } from "qrill/core";
+import { component, element, registerComponent, style } from "qrilljs/core";
+import type { HComponentFn, HNode, Store } from "qrilljs/core";
 
 export type DrawerArgument = {
     title: HNode;
@@ -9,12 +9,12 @@ export type DrawerArgument = {
 };
 
 export function drawer(store: Store, button_id: string): HComponentFn<DrawerArgument> {
-    const Drawer = element(store, "drawer");
-    const Title = element(store, "drawer-title");
-    const HeaderSpace = element(store, "drawer-header-space");
-    const Content = element(store, "drawer-content");
-    const OpenState = element(store, "drawer-open-state", { tag: "input" });
-    const OpenButton = element(store, "drawer-open-button", { tag: "label" });
+    const Drawer = element(store, { tag: "div" }, "drawer");
+    const Title = element(store, { tag: "div" }, "drawer-title");
+    const HeaderSpace = element(store, { tag: "div" }, "drawer-header-space");
+    const Content = element(store, { tag: "div" }, "drawer-content");
+    const OpenState = element(store, { tag: "input" }, "drawer-open-state");
+    const OpenButton = element(store, { tag: "label" }, "drawer-open-button");
 
     const styles = [
         style(Drawer)({ overflow: "hidden" }),

@@ -1,4 +1,4 @@
-import type { HSvgBrandsIconName } from "qrill/core";
+import type { HSvgBrandsIconName } from "qrilljs/core";
 import * as v from "valibot";
 
 export const site = {

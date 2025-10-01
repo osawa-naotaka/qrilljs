@@ -28,8 +28,8 @@ export type ElementArg<K> = {
 
 export function element<K extends Tag | qrillTag = "div">(
     store: Store,
-    element_name: string,
     arg: ElementArg<K> = {},
+    element_name = "default",
 ): HElementFn<K> {
     const name_with_hash = name_with_one_time_hash(store, element_name);
     const dot_name = `.${name_with_hash}`;

@@ -1,10 +1,10 @@
-import { DEFAULT_RESPONSIVE_PAGE_WIDTH, S_2XLARGE, colorof } from "@/core";
-import { component, element, registerComponent, style } from "qrill/core";
-import type { HArgument, HComponentFn, Store } from "qrill/core";
+import { DEFAULT_RESPONSIVE_PAGE_WIDTH, S_2XLARGE, colorof } from "qrilljs/core";
+import { component, element, registerComponent, style } from "qrilljs/core";
+import type { HArgument, HComponentFn, Store } from "qrilljs/core";
 
 export function hero(store: Store): HComponentFn<HArgument> {
-    const Hero = element(store, "hero");
-    const HeroText = element(store, "hero-text");
+    const Hero = element(store, { tag: "div" }, "hero");
+    const HeroText = element(store, { tag: "div" }, "hero-text");
 
     const component_styles = [
         style(Hero)({

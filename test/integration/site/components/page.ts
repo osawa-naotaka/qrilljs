@@ -1,5 +1,5 @@
-import { A, Body, H1, Html, Link, Meta, Title, element, registerComponent, style } from "qrill/core";
-import type { HComponentFn, Store } from "qrill/core";
+import { A, Body, H1, Html, Link, Meta, Title, element, registerComponent, style } from "qrilljs/core";
+import type { HComponentFn, Store } from "qrilljs/core";
 
 export type PageAttribute = {
     title: string;
@@ -9,9 +9,9 @@ export type PageAttribute = {
 export default function page(store: Store): HComponentFn<PageAttribute> {
     registerComponent(store, "page", [style(".page-header")({ width: "100%" })]);
 
-    const PageHead = element(store, "page-head", { tag: "head" });
-    const PageHeader = element(store, "page-header", { tag: "header" });
-    const PageFooter = element(store, "page-footer", { tag: "footer" });
+    const PageHead = element(store, { tag: "head" }, "page-head");
+    const PageHeader = element(store, { tag: "header" }, "page-header");
+    const PageFooter = element(store, { tag: "footer" }, "page-footer");
 
     return (attribute, ...child) =>
         Html(

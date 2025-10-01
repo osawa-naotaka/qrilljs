@@ -2,9 +2,9 @@ import { drawer } from "@site/components/module/drawer";
 import { navigation } from "@site/components/module/navigation";
 import { popover } from "@site/components/module/popover";
 import { search } from "@site/components/module/search";
-import { colorof, component, element, hSvgIconFont, registerComponent, style } from "qrill/core";
-import type { HComponentFn, HSvgBrandsIconName, Store } from "qrill/core";
-import { DEFAULT_RESPONSIVE_PAGE_WIDTH, FIX_TOP_STICKY, F_3XLARGE } from "qrill/core";
+import { colorof, component, element, hSvgIconFont, registerComponent, style } from "qrilljs/core";
+import type { HComponentFn, HSvgBrandsIconName, Store } from "qrilljs/core";
+import { DEFAULT_RESPONSIVE_PAGE_WIDTH, FIX_TOP_STICKY, F_3XLARGE } from "qrilljs/core";
 
 export type PageHeaderArgument = {
     title: string;
@@ -15,7 +15,7 @@ export type PageHeaderArgument = {
 };
 
 export function pageHeader(store: Store): HComponentFn<PageHeaderArgument> {
-    const PageHeader = element(store, "page-header", { tag: "header" });
+    const PageHeader = element(store, { tag: "header" }, "page-header");
     const Drawer = drawer(store, "page-header-toggle-button");
     const Popover = popover(store, "search-popover");
     const Navigation = navigation(store);

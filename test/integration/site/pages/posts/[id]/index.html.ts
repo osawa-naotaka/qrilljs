@@ -1,5 +1,5 @@
-import { H2, element, registerComponent, style } from "qrill/core";
-import type { HRootPageFn, Store } from "qrill/core";
+import { H2, element, registerComponent, style } from "qrilljs/core";
+import type { HRootPageFn, Store } from "qrilljs/core";
 import page from "../../../components/page";
 import { site } from "../../../site.config";
 
@@ -18,7 +18,7 @@ export default function Root(store: Store): HRootPageFn<RootParameter> {
         }),
     ]);
     const Page = page(store);
-    const PageMainArea = element(store, "page-main-area", { tag: "main" });
+    const PageMainArea = element(store, { tag: "main" }, "page-main-area");
 
     return async (parameter) => {
         const title = `Post Page ${parameter.id}`;
