@@ -9,11 +9,11 @@ export type PopoverArgument = {
 };
 
 export function popover(store: Store, button_id: string): HComponentFn<PopoverArgument> {
-    const Popover = element("popover");
-    const Button = element("popover-button", { tag: "button" });
-    const CloseArea = element("popover-close-area");
-    const Container = element("popover-container");
-    const Content = element("popover-content");
+    const Popover = element(store, "popover");
+    const Button = element(store, "popover-button", { tag: "button" });
+    const CloseArea = element(store, "popover-close-area");
+    const Container = element(store, "popover-container");
+    const Content = element(store, "popover-content");
 
     const styles = [
         style(Container)(FULL_WIDTH_HEIGHT, {

@@ -1,6 +1,7 @@
 import { element } from "@/lib/core/component";
 import type { HArgument, HComponentFn } from "@/lib/core/component";
 import { A, Body, H1, Head, Html, Link, Meta, Script, Title } from "@/lib/core/elements";
+import type { Store } from "@/lib/core/store";
 
 const site = {
     lang: "en",
@@ -8,10 +9,10 @@ const site = {
     description: "fast, light-weight static site generator",
 };
 
-export function page(): HComponentFn<HArgument> {
-    const PageHeader = element("page-header", { tag: "header" });
-    const PageFooter = element("page-footer", { tag: "footer" });
-    const PageFooterCopyright = element("page-footer-copyright");
+export function page(store: Store): HComponentFn<HArgument> {
+    const PageHeader = element(store, "page-header", { tag: "header" });
+    const PageFooter = element(store, "page-footer", { tag: "footer" });
+    const PageFooterCopyright = element(store, "page-footer-copyright");
 
     return (_attribute, ...child) =>
         Html(

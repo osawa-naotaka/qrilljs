@@ -7,9 +7,9 @@ export type PageFooterArgument = {
 };
 
 export function pageFooter(store: Store): HComponentFn<PageFooterArgument> {
-    const PageFooter = element("page-footer", { tag: "footer" });
-    const Content = element("page-footer-content");
-    const Copyright = element("page-footer-copyright");
+    const PageFooter = element(store, "page-footer", { tag: "footer" });
+    const Content = element(store, "page-footer-content");
+    const Copyright = element(store, "page-footer-copyright");
 
     const component_styles = [
         style(PageFooter)(FIX_BOTTOM, {

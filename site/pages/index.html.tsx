@@ -9,7 +9,7 @@ import { getAllMarkdowns } from "qrill/server";
 export default function Root(store: Store): HRootPageFn<void> {
     const Page = page(store);
     const Hero = hero(store);
-    const PageMainArea = element("page-main-area", { tag: "main" });
+    const PageMainArea = element(store, "page-main-area", { tag: "main" });
     const Summaries = summaries(store);
 
     const styles = [style(PageMainArea)(DEFAULT_RESPONSIVE_PAGE_WIDTH(store))];

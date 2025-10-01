@@ -2,7 +2,7 @@ import { dateTime } from "@site/components/element/dateTime";
 import { tag } from "@site/components/element/tag";
 import { postFmSchema } from "@site/site.config";
 import { TAG_DESIGN } from "@site/styles/design";
-import { as, colorof, component, createDom, element, hSvgIconFont, registerComponent, style } from "qrill/core";
+import { colorof, component, createDom, element, hSvgIconFont, registerComponent, style } from "qrill/core";
 import { DEFAULT_RESPONSIVE_PAGE_WIDTH, F_SMALL, F_TINY, S_2XLARGE, S_LARGE } from "qrill/core";
 import type { HArgument, HClientFn, HComponentFn, HNode, Store } from "qrill/core";
 import type { SearchResult } from "staticseek";
@@ -11,11 +11,11 @@ import * as v from "valibot";
 import { StaticSeekError, createSearchFn } from "staticseek";
 
 export function search(store: Store): HComponentFn<HArgument> {
-    const Search = element("search");
-    const SearchBar = element("search-bar");
-    const Input = element("search-input", { tag: "input" });
+    const Search = element(store, "search");
+    const SearchBar = element(store, "search-bar");
+    const Input = element(store, "search-input", { tag: "input" });
     const InputIcon = hSvgIconFont(store, { type: "solid", name: "magnifying-glass" });
-    const Result = element("search-result", { tag: "ul" });
+    const Result = element(store, "search-result", { tag: "ul" });
     searchResultItem(store);
 
     const component_sytles = [
@@ -54,8 +54,8 @@ export default function clientFunction(store: Store): HClientFn {
 
     return async () => {
         const search_fn = createSearchFn("/search-index.json");
-        const search_result_e = querySelector<HTMLUListElement>(".search-result");
-        const search_input_e = querySelector<HTMLInputElement>(".search-input");
+        const search_result_e = querySelector<HTMLUListElement>(`[class*="search-result-"]`);
+        const search_input_e = querySelector<HTMLInputElement>(`[class*="search-input-"]`);
 
         search_input_e.addEventListener("input", async () => {
             const results = await search_fn(search_input_e.value);
@@ -98,12 +98,12 @@ type SearchResultItemAttribute = {
 };
 
 export function searchResultItem(store: Store): HComponentFn<SearchResultItemAttribute> {
-    const ResultItem = element("search-result-item", { tag: "li" });
-    const Meta = element("search-result-item-meta");
-    const Title = element("search-result-item-title");
-    const Description = element("search-result-item-description");
-    const DateTime = dateTime();
-    const Tag = as("serch-result-item-tag", tag());
+    const ResultItem = element(store, "search-result-item", { tag: "li" });
+    const Meta = element(store, "search-result-item-meta");
+    const Title = element(store, "search-result-item-title");
+    const Description = element(store, "search-result-item-description");
+    const DateTime = dateTime(store);
+    const Tag = tag(store);
 
     const component_styles = [
         style(ResultItem)({ margin_block: [S_2XLARGE(store), "0"] }),

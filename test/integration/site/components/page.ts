@@ -9,9 +9,9 @@ export type PageAttribute = {
 export default function page(store: Store): HComponentFn<PageAttribute> {
     registerComponent(store, "page", [style(".page-header")({ width: "100%" })]);
 
-    const PageHead = element("page-head", { tag: "head" });
-    const PageHeader = element("page-header", { tag: "header" });
-    const PageFooter = element("page-footer", { tag: "footer" });
+    const PageHead = element(store, "page-head", { tag: "head" });
+    const PageHeader = element(store, "page-header", { tag: "header" });
+    const PageFooter = element(store, "page-footer", { tag: "footer" });
 
     return (attribute, ...child) =>
         Html(

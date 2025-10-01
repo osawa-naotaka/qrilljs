@@ -26,11 +26,11 @@ import {
 } from "qrill/core";
 
 export default function Root(store: Store): HRootPageFn<HArgument> {
-    const BText = element("b-text");
-    const BOutlined = element("b-outlined");
-    const BTonal = element("b-tonal");
-    const BFilled = element("b-filled");
-    const BElevated = element("b-elevated");
+    const BText = element(store, "b-text");
+    const BOutlined = element(store, "b-outlined");
+    const BTonal = element(store, "b-tonal");
+    const BFilled = element(store, "b-filled");
+    const BElevated = element(store, "b-elevated");
     const Icon = hIcon(store);
     const GithubIcon = hSvgIconFont(store, { type: "brands", name: "github" });
     const XIcon = hSvgIconFont(store, { type: "brands", name: "x-twitter" });

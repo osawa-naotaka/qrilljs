@@ -10,8 +10,8 @@ export type ShareXArgument = {
 };
 
 export function shareX(store: Store): HComponentFn<ShareXArgument> {
-    const ShareX = element("share-x", { tag: "a" });
-    const Text = element("share-x-text");
+    const ShareX = element(store, "share-x", { tag: "a" });
+    const Text = element(store, "share-x-text");
     const XIcon = as("share-x-icon", hSvgIconFont(store, { type: "brands", name: "x-twitter" }));
 
     const styles = [

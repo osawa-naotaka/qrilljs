@@ -8,7 +8,7 @@ export type SummariesArgument = {
 };
 
 export function summaries(store: Store): HComponentFn<SummariesArgument> {
-    const Summaries = element("summaries", { tag: "section" });
+    const Summaries = element(store, "summaries", { tag: "section" });
     const Summary = summary(store);
 
     return component(Summaries, ({ posts }) => (

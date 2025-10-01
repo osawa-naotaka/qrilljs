@@ -18,7 +18,7 @@ export default function Root(store: Store): HRootPageFn<RootParameter> {
         }),
     ]);
     const Page = page(store);
-    const PageMainArea = element("page-main-area", { tag: "main" });
+    const PageMainArea = element(store, "page-main-area", { tag: "main" });
 
     return async (parameter) => {
         const title = `Post Page ${parameter.id}`;
