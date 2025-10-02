@@ -2,8 +2,8 @@ import { dateTime } from "@site/components/element/dateTime";
 import { tag } from "@site/components/element/tag";
 import { postFmSchema } from "@site/site.config";
 import { TAG_DESIGN } from "@site/styles/design";
-import { colorof, component, createDom, element, registerComponent, style, svgIconFont } from "qrilljs/core";
-import { DEFAULT_RESPONSIVE_PAGE_WIDTH, F_SMALL, F_TINY, S_2XLARGE, S_LARGE } from "qrilljs/core";
+import { colorof, component, createDom, element, registerComponent, style, faSvgIconFont, W_MEDIUM, S_MEDIUM } from "qrilljs/core";
+import { F_SMALL, F_TINY, S_2XLARGE, S_LARGE } from "qrilljs/core";
 import type { HArgument, HClientFn, HComponentFn, HNode, Store } from "qrilljs/core";
 import type { SearchResult } from "staticseek";
 import * as v from "valibot";
@@ -14,12 +14,17 @@ export function search(store: Store): HComponentFn<HArgument> {
     const Search = element(store, "div", { name: "search" });
     const SearchBar = element(store);
     const Input = element(store, "input", { name: "search-input" });
-    const InputIcon = svgIconFont(store, { type: "solid", name: "magnifying-glass" });
+    const InputIcon = faSvgIconFont(store, { type: "solid", name: "magnifying-glass" });
     const Result = element(store, "ul", { name: "search-result" });
     searchResultItem(store);
 
     const component_sytles = [
-        style(Search)(DEFAULT_RESPONSIVE_PAGE_WIDTH(store)),
+        style(Search)({
+            max_width: W_MEDIUM(store),
+            width: "100%",
+            padding_inline: S_MEDIUM(store),
+            margin_inline: "auto"
+        }),
         style(SearchBar)({
             display: "flex",
             flex_direction: "row",

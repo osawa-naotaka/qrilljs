@@ -4,7 +4,7 @@ import { tag } from "@site/components/element/tag";
 import { articleHeader } from "@site/components/module/articleHeader";
 import type { PostFm } from "@site/site.config";
 import { TAG_DESIGN } from "@site/styles/design";
-import { F_LARGE, F_XLARGE, S_2XLARGE, S_MEDIUM, TEXT_JUSTIFY, TEXT_UNDERLINE, colorof } from "qrilljs/core";
+import { F_LARGE, F_XLARGE, S_2XLARGE, S_MEDIUM, colorof } from "qrilljs/core";
 import { A, H2, H3, H4, H5, Li, Ol, P, Ul } from "qrilljs/core";
 import { component, element, registerComponent, style } from "qrilljs/core";
 import type { HComponentFn, Markdown, Store } from "qrilljs/core";
@@ -26,11 +26,13 @@ export function article(store: Store): HComponentFn<ArticleArgument> {
         style(ArticleHeader, H2)({ font_size: F_XLARGE(store) }),
         TAG_DESIGN(store, "text", ArticleTag),
 
-        style(ArticleText)(TEXT_JUSTIFY, {
+        style(ArticleText)({
             display: "flex",
             flex_direction: "column",
             align_items: "normal",
             gap: "0",
+            overflow_wrap: "anywhere",
+            text_align: "justify",
         }),
         style(
             ArticleText,
@@ -71,7 +73,10 @@ export function article(store: Store): HComponentFn<ArticleArgument> {
             list_style_type: "disc",
         }),
         style(ArticleText, Ol)({ list_style_type: "decimal" }),
-        style(ArticleText, A)(TEXT_UNDERLINE),
+        style(ArticleText, A)({
+            text_decoration: ["underline", "2px"],
+            text_underline_offset: "5px",            
+        }),
         style(ArticleText, Li)({ margin_inline: S_2XLARGE(store) }),
     ];
 

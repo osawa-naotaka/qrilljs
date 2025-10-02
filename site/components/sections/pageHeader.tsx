@@ -2,9 +2,9 @@ import { drawer } from "@site/components/module/drawer";
 import { navigation } from "@site/components/module/navigation";
 import { popover } from "@site/components/module/popover";
 import { search } from "@site/components/module/search";
-import { colorof, component, element, registerComponent, style, svgIconFont } from "qrilljs/core";
+import { colorof, component, element, registerComponent, style, faSvgIconFont, S_MEDIUM, W_MEDIUM } from "qrilljs/core";
 import type { HComponentFn, HSvgBrandsIconName, Store } from "qrilljs/core";
-import { DEFAULT_RESPONSIVE_PAGE_WIDTH, FIX_TOP_STICKY, F_3XLARGE } from "qrilljs/core";
+import { F_3XLARGE } from "qrilljs/core";
 
 export type PageHeaderArgument = {
     title: string;
@@ -21,17 +21,26 @@ export function pageHeader(store: Store): HComponentFn<PageHeaderArgument> {
     const Navigation = navigation(store);
     const Search = search(store);
 
-    const PopoverOpenButton = svgIconFont(store, { type: "solid", name: "magnifying-glass" });
-    const PopoverCloseButton = svgIconFont(store, { type: "solid", name: "xmark" });
-    const DrawerOpenButton = svgIconFont(store, { type: "solid", name: "bars" });
+    const PopoverOpenButton = faSvgIconFont(store, { type: "solid", name: "magnifying-glass" });
+    const PopoverCloseButton = faSvgIconFont(store, { type: "solid", name: "xmark" });
+    const DrawerOpenButton = faSvgIconFont(store, { type: "solid", name: "bars" });
 
     const component_styles = [
-        style(PageHeader)(FIX_TOP_STICKY, {
+        style(PageHeader)({
+            position: "sticky",
+            top: "0",
+            left: "0",
+            width: "100%",
             color: colorof(store, "text"),
             background_color: colorof(store, "background"),
             opacity: "0.8",
         }),
-        style(Drawer)(DEFAULT_RESPONSIVE_PAGE_WIDTH(store)),
+        style(Drawer)({
+            max_width: W_MEDIUM(store),
+            width: "100%",
+            padding_inline: S_MEDIUM(store),
+            margin_inline: "auto",
+        }),
         style("h1")({ font_size: F_3XLARGE(store) }),
     ];
 

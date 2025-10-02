@@ -1,6 +1,6 @@
-import { atStyle, colorof, component, element, registerComponent, style } from "qrilljs/core";
+import { atStyle, colorof, component, element, registerComponent, style, W_MEDIUM } from "qrilljs/core";
 import type { HComponentFn, HNode, Store } from "qrilljs/core";
-import { DEFAULT_RESPONSIVE_PAGE_WIDTH, FULL_WIDTH_HEIGHT, S_MEDIUM } from "qrilljs/core";
+import { S_MEDIUM } from "qrilljs/core";
 
 export type PopoverArgument = {
     open_button: HNode;
@@ -16,7 +16,9 @@ export function popover(store: Store): HComponentFn<PopoverArgument> {
     const Content = element(store);
 
     const styles = [
-        style(Container)(FULL_WIDTH_HEIGHT, {
+        style(Container)({
+            width: "100%",
+            height: "100svh",
             padding_block: S_MEDIUM(store),
             background_color: colorof(store, "background"),
             border: "none",
@@ -32,7 +34,12 @@ export function popover(store: Store): HComponentFn<PopoverArgument> {
             opacity: "1",
         }),
         atStyle(["@layer", "high"], ["@starting-style"])([Container, ":popover-open"])({ opacity: "0" }),
-        style(Content)(DEFAULT_RESPONSIVE_PAGE_WIDTH(store)),
+        style(Content)({
+            max_width: W_MEDIUM(store),
+            width: "100%",
+            padding_inline: S_MEDIUM(store),
+            margin_inline: "auto"
+        }),
         style(Button)({
             border: "none",
             cursor: "pointer",

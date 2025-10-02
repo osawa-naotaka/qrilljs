@@ -1,13 +1,13 @@
 import type { Attribute, HComponentFn } from "@/lib/core/component";
 import type { Store } from "@/lib/core/store";
 import { hash_djb2_object } from "@/lib/core/util";
-import { svgIconFont } from "@/lib/ui/svgIconFont";
-import type { HSvgIconArg } from "@/lib/ui/svgIconFont";
+import { faSvgIconFont } from "@/lib/ui/faSvgIconFont";
+import type { HSvgIconArg } from "@/lib/ui/faSvgIconFont";
 
-export function svgIconStore(store: Store, icons: HSvgIconArg[]): HComponentFn<HSvgIconArg> {
+export function faSvgIconStore(store: Store, icons: HSvgIconArg[]): HComponentFn<HSvgIconArg> {
     const icon_map = new Map<number, HComponentFn<Attribute>>();
     for (const icon of icons) {
-        icon_map.set(hash_djb2_object(icon), svgIconFont(store, icon));
+        icon_map.set(hash_djb2_object(icon), faSvgIconFont(store, icon));
     }
 
     return (icon) => {
