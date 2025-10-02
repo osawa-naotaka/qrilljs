@@ -19,15 +19,13 @@ export function pageFooter(store: Store): HComponentFn<PageFooterArgument> {
             color: colorof(store, "text_secondary"),
             background_color: colorof(store, "background_secondary"),
         }),
-        style(Content)(
-            {
-                position: "relative",
-                display: "flex",
-                flex_direction: "column",
-                align_items: "center",
-                gap: S_MEDIUM(store),
-            },
-        ),
+        style(Content)({
+            position: "relative",
+            display: "flex",
+            flex_direction: "column",
+            align_items: "center",
+            gap: S_MEDIUM(store),
+        }),
         style(Copyright)({ text_align: "center" }),
     ];
 

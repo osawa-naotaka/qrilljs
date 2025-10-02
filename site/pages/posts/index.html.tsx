@@ -1,7 +1,7 @@
 import { page } from "@site/components/pages/page";
 import { summaries } from "@site/components/sections/summaries";
 import { navitem, postFmSchema, posts_dir, site } from "@site/site.config";
-import { element, registerRootPage, S_MEDIUM, style, W_MEDIUM } from "qrilljs/core";
+import { S_MEDIUM, W_MEDIUM, element, registerRootPage, style } from "qrilljs/core";
 import type { HRootPageFn, Store } from "qrilljs/core";
 import { getAllMarkdowns } from "qrilljs/server";
 
@@ -10,12 +10,14 @@ export default function Root(store: Store): HRootPageFn<void> {
     const PageMainArea = element(store, "main", { name: "page-main-area" });
     const Summaries = summaries(store);
 
-    const styles = [style(PageMainArea)({
-        max_width: W_MEDIUM(store),
-        width: "100%",
-        padding_inline: S_MEDIUM(store),
-        margin_inline: "auto",
-    })];
+    const styles = [
+        style(PageMainArea)({
+            max_width: W_MEDIUM(store),
+            width: "100%",
+            padding_inline: S_MEDIUM(store),
+            margin_inline: "auto",
+        }),
+    ];
 
     registerRootPage(store, styles);
 

@@ -1,10 +1,10 @@
-import { colorof, S_SMALL, S_TINY, style } from "qrilljs/core";
+import { S_SMALL, S_TINY, colorof, style } from "qrilljs/core";
 import type { ColorCategory, HComponentFn, Selector, Store, StyleRule } from "qrilljs/core";
 
 export function TAG_DESIGN<T>(store: Store, cat: ColorCategory, top: HComponentFn<T>): StyleRule[] {
     return [
         style(top)({
-            color: colorof(store, "background"), 
+            color: colorof(store, "background"),
             background_color: colorof(store, cat),
             border: "none",
             box_shadow: "none",
@@ -20,7 +20,7 @@ export function TAG_DESIGN<T>(store: Store, cat: ColorCategory, top: HComponentF
             padding: [S_TINY(store), S_SMALL(store)],
         }),
         style([top, ":hover"])({
-            background_color: colorof(store, cat, "dark")
+            background_color: colorof(store, cat, "dark"),
         }),
     ];
 }

@@ -73,9 +73,12 @@ export function article(store: Store): HComponentFn<ArticleArgument> {
             list_style_type: "disc",
         }),
         style(ArticleText, Ol)({ list_style_type: "decimal" }),
-        style(ArticleText, A)({
+        style(
+            ArticleText,
+            A,
+        )({
             text_decoration: ["underline", "2px"],
-            text_underline_offset: "5px",            
+            text_underline_offset: "5px",
         }),
         style(ArticleText, Li)({ margin_inline: S_2XLARGE(store) }),
     ];

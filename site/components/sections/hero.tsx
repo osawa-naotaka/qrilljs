@@ -18,7 +18,7 @@ export function hero(store: Store): HComponentFn<HArgument> {
             max_width: W_MEDIUM(store),
             width: "100%",
             padding_inline: S_MEDIUM(store),
-            margin_inline: "auto"
+            margin_inline: "auto",
         }),
         style(
             HeroText,

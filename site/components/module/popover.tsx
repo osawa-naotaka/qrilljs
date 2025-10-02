@@ -1,4 +1,4 @@
-import { atStyle, colorof, component, element, registerComponent, style, W_MEDIUM } from "qrilljs/core";
+import { W_MEDIUM, atStyle, colorof, component, element, registerComponent, style } from "qrilljs/core";
 import type { HComponentFn, HNode, Store } from "qrilljs/core";
 import { S_MEDIUM } from "qrilljs/core";
 
@@ -38,7 +38,7 @@ export function popover(store: Store): HComponentFn<PopoverArgument> {
             max_width: W_MEDIUM(store),
             width: "100%",
             padding_inline: S_MEDIUM(store),
-            margin_inline: "auto"
+            margin_inline: "auto",
         }),
         style(Button)({
             border: "none",

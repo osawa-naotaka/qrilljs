@@ -2,7 +2,7 @@ import { drawer } from "@site/components/module/drawer";
 import { navigation } from "@site/components/module/navigation";
 import { popover } from "@site/components/module/popover";
 import { search } from "@site/components/module/search";
-import { colorof, component, element, registerComponent, style, faSvgIconFont, S_MEDIUM, W_MEDIUM } from "qrilljs/core";
+import { S_MEDIUM, W_MEDIUM, colorof, component, element, faSvgIconFont, registerComponent, style } from "qrilljs/core";
 import type { HComponentFn, HSvgBrandsIconName, Store } from "qrilljs/core";
 import { F_3XLARGE } from "qrilljs/core";
 

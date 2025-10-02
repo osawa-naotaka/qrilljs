@@ -21,7 +21,8 @@ export function page(store: Store): HComponentFn<PageArgument> {
     const PageHeader = pageHeader(store);
     const PageFooter = pageFooter(store);
 
-    const styles = [INIT_CSS, 
+    const styles = [
+        INIT_CSS,
         atStyle(["@layer", "base"])(":root")({
             font_size: store.designrule.font.base_size,
             line_height: store.designrule.font.line_height,

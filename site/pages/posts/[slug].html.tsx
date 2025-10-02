@@ -21,12 +21,12 @@ export default function Root(store: Store): HRootPageFn<RootParameter> {
     const Article = article(store);
 
     const styles = [
-        style(PageMainArea)({ 
+        style(PageMainArea)({
             max_width: W_MEDIUM(store),
             width: "100%",
             padding_inline: S_MEDIUM(store),
             margin_inline: "auto",
-            margin_block: ["0", S_2XLARGE(store)]
+            margin_block: ["0", S_2XLARGE(store)],
         }),
     ];
 

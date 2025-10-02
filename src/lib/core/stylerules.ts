@@ -26,7 +26,7 @@ export const INIT_CSS: StyleRule[] = /* @__PURE__*/ [
             font_family: "inherit",
             line_height: "inherit",
             color: "inherit",
-            background: "inherit"
+            background: "inherit",
         },
     },
     {
@@ -64,7 +64,7 @@ export const INIT_CSS: StyleRule[] = /* @__PURE__*/ [
             ["header"],
             ["nav"],
             ["section"],
-            ["main"]
+            ["main"],
         ],
         properties: {
             all: "unset",

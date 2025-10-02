@@ -1,5 +1,5 @@
 import { link } from "@site/components/element/link";
-import { component, element, registerComponent, style, faSvgIconStore } from "qrilljs/core";
+import { component, element, faSvgIconStore, registerComponent, style } from "qrilljs/core";
 import type { HComponentFn, HSvgBrandsIconName, Store } from "qrilljs/core";
 import { F_XLARGE, S_XLARGE } from "qrilljs/core";
 
