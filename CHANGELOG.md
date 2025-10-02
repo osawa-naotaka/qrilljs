@@ -13,8 +13,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-## [0.1.0-alpha.12]
-### Changed - 2025-10-02
+## [0.1.0-alpha.12] - 2025-10-02
+### Changed
 - change element() function argument. change order and object structure.
 
 ## [0.1.0-alpha.11] - 2025-10-01
