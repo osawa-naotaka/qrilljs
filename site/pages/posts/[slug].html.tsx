@@ -2,9 +2,9 @@ import path from "node:path";
 import { article } from "@site/components/module/article";
 import { page } from "@site/components/pages/page";
 import { navitem, postFmSchema, posts_dir, site } from "@site/site.config";
-import { RawHTML, element, registerRootPage, style } from "qrilljs/core";
+import { RawHTML, S_MEDIUM, W_MEDIUM, element, registerRootPage, style } from "qrilljs/core";
 import type { HRootPageFn, Store } from "qrilljs/core";
-import { DEFAULT_RESPONSIVE_PAGE_WIDTH, S_2XLARGE } from "qrilljs/core";
+import { S_2XLARGE } from "qrilljs/core";
 import { getMarkdown, listFiles, markdownToHtml } from "qrilljs/server";
 
 type RootParameter = {
@@ -21,7 +21,13 @@ export default function Root(store: Store): HRootPageFn<RootParameter> {
     const Article = article(store);
 
     const styles = [
-        style(PageMainArea)({ margin_block: ["0", S_2XLARGE(store)] }, DEFAULT_RESPONSIVE_PAGE_WIDTH(store)),
+        style(PageMainArea)({
+            max_width: W_MEDIUM(store),
+            width: "100%",
+            padding_inline: S_MEDIUM(store),
+            margin_inline: "auto",
+            margin_block: ["0", S_2XLARGE(store)],
+        }),
     ];
 
     registerRootPage(store, styles);

@@ -1,4 +1,4 @@
-import { DEFAULT_RESPONSIVE_PAGE_WIDTH, S_2XLARGE, colorof } from "qrilljs/core";
+import { S_2XLARGE, S_MEDIUM, W_MEDIUM, colorof } from "qrilljs/core";
 import { component, element, registerComponent, style } from "qrilljs/core";
 import type { HArgument, HComponentFn, Store } from "qrilljs/core";
 
@@ -14,7 +14,12 @@ export function hero(store: Store): HComponentFn<HArgument> {
             font_size: "min(17vw, 7rem)",
             line_height: "1.2",
         }),
-        style(HeroText)(DEFAULT_RESPONSIVE_PAGE_WIDTH(store)),
+        style(HeroText)({
+            max_width: W_MEDIUM(store),
+            width: "100%",
+            padding_inline: S_MEDIUM(store),
+            margin_inline: "auto",
+        }),
         style(
             HeroText,
             "em",

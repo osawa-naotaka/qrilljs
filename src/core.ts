@@ -8,9 +8,9 @@ export * from "@/lib/core/store";
 export * from "@/lib/core/style";
 export * from "@/lib/core/stylerules";
 export * from "@/lib/core/markdown";
-export * from "@/lib/ui/fa_icon";
-export * from "@/lib/ui/svgIconFont";
-export * from "@/lib/ui/svgIconStore";
+export * from "@/lib/ui/faIcon";
+export * from "@/lib/ui/faSvgIconFont";
+export * from "@/lib/ui/faSvgIconStore";
 
 import type { QrillConfig } from "@/cli/config";
 import type { DesignRule } from "@/lib/core/design";

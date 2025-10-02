@@ -13,6 +13,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [@.1.0-alpha.13] - 2025-10-02
+### Changed
+- INIT_CSS style is updated to reset almost all styles.
+
+### Removed
+- most of styles defined in stylerules.ts is removed.
+
 ## [0.1.0-alpha.12] - 2025-10-02
 ### Changed
 - change element() function argument. change order and object structure.
@@ -105,7 +112,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.12...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.13...HEAD
+[0.1.0-alpha.13]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.12...v0.1.0-alpha.13
 [0.1.0-alpha.12]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.11...v0.1.0-alpha.12
 [0.1.0-alpha.11]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.10...v0.1.0-alpha.11
 [0.1.0-alpha.10]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.9...v0.1.0-alpha.10

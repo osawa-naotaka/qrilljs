@@ -1,6 +1,5 @@
 import { S_MEDIUM, colorof, component, element, registerComponent, style } from "qrilljs/core";
 import type { HComponentFn, Store } from "qrilljs/core";
-import { ABSOLUTE_ANCHOR, FIX_BOTTOM } from "qrilljs/core";
 
 export type PageFooterArgument = {
     site_name: string;
@@ -12,19 +11,21 @@ export function pageFooter(store: Store): HComponentFn<PageFooterArgument> {
     const Copyright = element(store);
 
     const component_styles = [
-        style(PageFooter)(FIX_BOTTOM, {
+        style(PageFooter)({
+            position: "sticky",
+            bottom: "0",
+            left: "0",
+            width: "100%",
             color: colorof(store, "text_secondary"),
             background_color: colorof(store, "background_secondary"),
         }),
-        style(Content)(
-            {
-                display: "flex",
-                flex_direction: "column",
-                align_items: "center",
-                gap: S_MEDIUM(store),
-            },
-            ABSOLUTE_ANCHOR,
-        ),
+        style(Content)({
+            position: "relative",
+            display: "flex",
+            flex_direction: "column",
+            align_items: "center",
+            gap: S_MEDIUM(store),
+        }),
         style(Copyright)({ text_align: "center" }),
     ];
 

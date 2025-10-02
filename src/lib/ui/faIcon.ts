@@ -18,7 +18,7 @@ export type HSolidIconArg = {
 
 export type HIconArg = HBrandsIconArg | HSolidIconArg;
 
-export function fa_icon(store: Store): HComponentFn<HIconArg> {
+export function faIcon(store: Store): HComponentFn<HIconArg> {
     const Top = element(store, "i", { name: "icon" });
 
     registerComponent(store, Top, [], {
