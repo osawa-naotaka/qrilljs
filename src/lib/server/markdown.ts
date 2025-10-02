@@ -6,26 +6,34 @@ import { globExt } from "@/server";
 import matter from "gray-matter";
 import rehypePrism from "rehype-prism-plus";
 import rehypeStringify from "rehype-stringify";
+import remarkAssignIdAndExtractToc from "remark-assign-id-and-extract-toc";
+import type { ToC } from "remark-assign-id-and-extract-toc";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
-import remarkToc from "remark-toc";
 import { unified } from "unified";
 import * as v from "valibot";
 
-export async function markdownToHtml(markdown: string): Promise<string> {
-    return (
-        await unified()
-            .use(remarkParse)
-            .use(remarkGfm)
-            .use(remarkFrontmatter)
-            .use(remarkToc)
-            .use(remarkRehype)
-            .use(rehypePrism)
-            .use(rehypeStringify)
-            .process(markdown)
-    ).value.toString();
+export type HtmlToc = {
+    html: string;
+    toc: ToC[];
+};
+
+export async function markdownToHtml(markdown: string): Promise<HtmlToc> {
+    const processed = await unified()
+        .use(remarkParse)
+        .use(remarkGfm)
+        .use(remarkFrontmatter)
+        .use(remarkAssignIdAndExtractToc, { prefix: "heading", startLevel: 3 })
+        .use(remarkRehype)
+        .use(rehypePrism)
+        .use(rehypeStringify)
+        .process(markdown);
+    return {
+        html: processed.value.toString(),
+        toc: processed.data.toc as ToC[],
+    };
 }
 
 export async function getAllMarkdowns<T>(

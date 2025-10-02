@@ -1,5 +1,6 @@
 import path from "node:path";
 import { article } from "@site/components/module/article";
+import { toc } from "@site/components/module/toc";
 import { page } from "@site/components/pages/page";
 import { navitem, postFmSchema, posts_dir, site } from "@site/site.config";
 import { RawHTML, S_MEDIUM, W_MEDIUM, element, registerRootPage, style } from "qrilljs/core";
@@ -19,6 +20,7 @@ export default function Root(store: Store): HRootPageFn<RootParameter> {
     const Page = page(store);
     const PageMainArea = element(store, "main", { name: "page-main-area" });
     const Article = article(store);
+    const ToC = toc(store);
 
     const styles = [
         style(PageMainArea)({
@@ -35,7 +37,7 @@ export default function Root(store: Store): HRootPageFn<RootParameter> {
     return async ({ slug }) => {
         const md = await getMarkdown(posts_dir, slug, postFmSchema);
 
-        const raw_html = await markdownToHtml(md.content);
+        const { html, toc } = await markdownToHtml(md.content);
 
         return (
             <Page
@@ -46,8 +48,9 @@ export default function Root(store: Store): HRootPageFn<RootParameter> {
                 navitem={navitem}
             >
                 <PageMainArea>
+                    <ToC toc={toc} />
                     <Article {...md}>
-                        <RawHTML>{raw_html}</RawHTML>
+                        <RawHTML>{html}</RawHTML>
                     </Article>
                 </PageMainArea>
             </Page>
