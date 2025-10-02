@@ -8,7 +8,7 @@ export * from "@/lib/core/store";
 export * from "@/lib/core/style";
 export * from "@/lib/core/stylerules";
 export * from "@/lib/core/markdown";
-export * from "@/lib/ui/icon";
+export * from "@/lib/ui/fa_icon";
 export * from "@/lib/ui/svgIconFont";
 export * from "@/lib/ui/svgIconStore";
 

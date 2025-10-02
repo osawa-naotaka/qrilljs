@@ -81,6 +81,6 @@ export function registerRootPage(
 }
 
 export function name_with_one_time_hash(store: Store, name: string): string {
-    const obj = { name, element_count: store.element_count++ };
-    return `${name}-${hash_djb2(obj).toString(16)}`;
+    const count = store.element_count++;
+    return `${name}-${hash_djb2(`${count.toString(16)}-${name}`).toString(16)}`;
 }

@@ -7,9 +7,9 @@ export type ArticleHeaderArgument = {
 };
 
 export function articleHeader(store: Store): HComponentFn<ArticleHeaderArgument> {
-    const ArticleHeader = element(store, { tag: "header" }, "article-header");
-    const Title = element(store, { tag: "div" }, "article-header-title");
-    const Meta = element(store, { tag: "div" }, "article-header-meta");
+    const ArticleHeader = element(store, "header", { name: "article-header" });
+    const Title = element(store);
+    const Meta = element(store);
 
     const component_styles = [
         style(Title)({ border_bottom: "2px solid" }),

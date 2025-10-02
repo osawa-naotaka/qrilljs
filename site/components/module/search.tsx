@@ -2,7 +2,7 @@ import { dateTime } from "@site/components/element/dateTime";
 import { tag } from "@site/components/element/tag";
 import { postFmSchema } from "@site/site.config";
 import { TAG_DESIGN } from "@site/styles/design";
-import { colorof, component, createDom, element, hSvgIconFont, registerComponent, style } from "qrilljs/core";
+import { colorof, component, createDom, element, registerComponent, style, svgIconFont } from "qrilljs/core";
 import { DEFAULT_RESPONSIVE_PAGE_WIDTH, F_SMALL, F_TINY, S_2XLARGE, S_LARGE } from "qrilljs/core";
 import type { HArgument, HClientFn, HComponentFn, HNode, Store } from "qrilljs/core";
 import type { SearchResult } from "staticseek";
@@ -11,11 +11,11 @@ import * as v from "valibot";
 import { StaticSeekError, createSearchFn } from "staticseek";
 
 export function search(store: Store): HComponentFn<HArgument> {
-    const Search = element(store, { tag: "div" }, "search");
-    const SearchBar = element(store, { tag: "div" }, "search-bar");
-    const Input = element(store, { tag: "input" }, "search-input");
-    const InputIcon = hSvgIconFont(store, { type: "solid", name: "magnifying-glass" });
-    const Result = element(store, { tag: "ul" }, "search-result");
+    const Search = element(store, "div", { name: "search" });
+    const SearchBar = element(store);
+    const Input = element(store, "input", { name: "search-input" });
+    const InputIcon = svgIconFont(store, { type: "solid", name: "magnifying-glass" });
+    const Result = element(store, "ul", { name: "search-result" });
     searchResultItem(store);
 
     const component_sytles = [
@@ -98,10 +98,10 @@ type SearchResultItemAttribute = {
 };
 
 export function searchResultItem(store: Store): HComponentFn<SearchResultItemAttribute> {
-    const ResultItem = element(store, { tag: "li" }, "search-result-item");
-    const Meta = element(store, { tag: "div" }, "search-result-item-meta");
-    const Title = element(store, { tag: "div" }, "search-result-item-title");
-    const Description = element(store, { tag: "div" }, "search-result-item-description");
+    const ResultItem = element(store, "li");
+    const Meta = element(store);
+    const Title = element(store);
+    const Description = element(store);
     const DateTime = dateTime(store);
     const Tag = tag(store);
 

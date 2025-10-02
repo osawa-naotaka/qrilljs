@@ -1,5 +1,5 @@
-import { hlink } from "@site/components/element/hlink";
-import { component, element, hSvgIconStore, registerComponent, style } from "qrilljs/core";
+import { link } from "@site/components/element/link";
+import { component, element, registerComponent, style, svgIconStore } from "qrilljs/core";
 import type { HComponentFn, HSvgBrandsIconName, Store } from "qrilljs/core";
 import { F_XLARGE, S_XLARGE } from "qrilljs/core";
 
@@ -11,10 +11,10 @@ export type NavigationArgument = {
 };
 
 export function navigation(store: Store): HComponentFn<NavigationArgument> {
-    const Navigation = element(store, { tag: "nav" }, "navigation");
-    const HLink = hlink(store);
+    const Navigation = element(store, "nav", { name: "navigation" });
+    const Link = link(store);
     const icons: HSvgBrandsIconName[] = ["youtube", "x-twitter", "github"];
-    const HSvgIconStore = hSvgIconStore(
+    const SvgIconStore = svgIconStore(
         store,
         icons.map((x) => ({ type: "brands", name: x })),
     );
@@ -36,11 +36,11 @@ export function navigation(store: Store): HComponentFn<NavigationArgument> {
 
     return component(Navigation, ({ navitem }) => (
         <Navigation>
-            <HLink href="/posts">blog</HLink>
+            <Link href="/posts">blog</Link>
             {navitem.map((item) => (
-                <HLink href={item.url} target="__blank" key={item.url}>
-                    <HSvgIconStore type="brands" name={item.icon} />
-                </HLink>
+                <Link href={item.url} target="__blank" key={item.url}>
+                    <SvgIconStore type="brands" name={item.icon} />
+                </Link>
             ))}
         </Navigation>
     ));

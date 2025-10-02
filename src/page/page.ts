@@ -10,9 +10,9 @@ const site = {
 };
 
 export function page(store: Store): HComponentFn<HArgument> {
-    const PageHeader = element(store, { tag: "header" }, "page-header");
-    const PageFooter = element(store, { tag: "footer" }, "page-footer");
-    const PageFooterCopyright = element(store, { tag: "div" }, "page-footer-copyright");
+    const PageHeader = element(store, "header", { name: "page-header" });
+    const PageFooter = element(store, "footer", { name: "page-footer" });
+    const PageFooterCopyright = element(store);
 
     return (_attribute, ...child) =>
         Html(

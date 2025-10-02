@@ -16,7 +16,7 @@ export function rootPageFnParameters(): RootParameter[] {
 
 export default function Root(store: Store): HRootPageFn<RootParameter> {
     const Page = page(store);
-    const PageMainArea = element(store, { tag: "main" }, "page-main-area");
+    const PageMainArea = element(store, "main", { name: "page-main-area" });
     const Summaries = summaries(store);
 
     const styles = [style(PageMainArea)(DEFAULT_RESPONSIVE_PAGE_WIDTH(store))];

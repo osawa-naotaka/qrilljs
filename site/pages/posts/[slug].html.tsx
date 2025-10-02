@@ -12,12 +12,12 @@ type RootParameter = {
 };
 
 export async function rootPageFnParameters(): Promise<RootParameter[]> {
-    return (await listFiles(posts_dir, ".md")).map((y) => ({ slug: path.basename(y, ".md") }));
+    return listFiles(posts_dir, ".md").map((y) => ({ slug: path.basename(y, ".md") }));
 }
 
 export default function Root(store: Store): HRootPageFn<RootParameter> {
     const Page = page(store);
-    const PageMainArea = element(store, { tag: "main" }, "page-main-area");
+    const PageMainArea = element(store, "main", { name: "page-main-area" });
     const Article = article(store);
 
     const styles = [

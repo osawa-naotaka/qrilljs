@@ -17,9 +17,12 @@ export type HSvgSolidIconArg = {
 
 export type HSvgIconArg = HSvgBrandsIconArg | HSvgSolidIconArg;
 
-export function hSvgIconFont(store: Store, arg: HSvgIconArg): HComponentFn<Attribute> {
+export function svgIconFont(store: Store, arg: HSvgIconArg): HComponentFn<Attribute> {
     const font_name = `${arg.type}-${arg.name}`;
-    const Top = element(store, { tag: "i", class: ["hf", `hf-${font_name}`] }, `svg-icon-font-${arg.type}-${arg.name}`);
+    const Top = element(store, "i", {
+        name: `svg-icon-font-${arg.type}-${arg.name}`,
+        class: ["hf", `hf-${font_name}`],
+    });
 
     registerComponent(store, Top, [], {
         fonts: [
