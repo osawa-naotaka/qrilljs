@@ -13,11 +13,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-## [@.1.0-alpha.14] - 2025-10-03
+## [0.1.0-alpha.15] - 2025-10-03
+### Changed
+- return value of markdownToHtml() is changed to add ToC information with html string.
+  - headings of this html includes ids for ToC
+
+## [0.1.0-alpha.14] - 2025-10-03
 ### Fixed
 - unintended reset in INIT_CSS is fixed.
 
-## [@.1.0-alpha.13] - 2025-10-02
+## [0.1.0-alpha.13] - 2025-10-02
 ### Changed
 - INIT_CSS style is updated to reset almost all styles.
 
@@ -116,7 +121,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.14...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.15...HEAD
+[0.1.0-alpha.15]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.14...v0.1.0-alpha.15
 [0.1.0-alpha.14]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.13...v0.1.0-alpha.14
 [0.1.0-alpha.13]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.12...v0.1.0-alpha.13
 [0.1.0-alpha.12]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.11...v0.1.0-alpha.12
