@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Security: in case of vulnerabilities.
 
 ## [Unreleased]
+### Changed - 2025-10-02
+- change element() function argument. change order and object structure.
+
 ## [0.1.0-alpha.11] - 2025-10-01
 ### Changed
 - change element() function argument. insert Store as a first argument and change argument order.
@@ -100,7 +103,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.11...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.12...HEAD
+[0.1.0-alpha.12]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.11...v0.1.0-alpha.12
 [0.1.0-alpha.11]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.10...v0.1.0-alpha.11
 [0.1.0-alpha.10]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.9...v0.1.0-alpha.10
 [0.1.0-alpha.9]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.8...v0.1.0-alpha.9

@@ -7,7 +7,7 @@ export type DateTimeArgument = {
 };
 
 export function dateTime(store: Store): HComponentFn<DateTimeArgument> {
-    const DateTime = element(store, { tag: "time" }, "date-time");
+    const DateTime = element(store, "time", { name: "date-time" });
     return component(DateTime, ({ datetime, lang = "en-us" }) => {
         const date = datetime instanceof Date ? datetime : new Date(datetime);
         const date_string = date.toLocaleDateString(lang, {

@@ -12,12 +12,12 @@ import type { HComponentFn, Markdown, Store } from "qrilljs/core";
 export type ArticleArgument = Markdown<PostFm>;
 
 export function article(store: Store): HComponentFn<ArticleArgument> {
-    const Article = element(store, { tag: "article" }, "article");
+    const Article = element(store, "article", { name: "article" });
     const ArticleHeader = articleHeader(store);
-    const Author = element(store, { tag: "div" }, "author");
+    const Author = element(store);
     const ArticleTag = tag(store);
     const DateTime = dateTime(store);
-    const ArticleText = element(store, { tag: "div" }, "article-text");
+    const ArticleText = element(store);
     const ShareX = shareX(store);
 
     const component_styles = [

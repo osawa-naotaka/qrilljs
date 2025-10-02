@@ -1,4 +1,4 @@
-import { element, hIcon, hSvgIconFont, registerRootPage, style, unionRecords } from "qrilljs/core";
+import { element, fa_icon, registerRootPage, style, svgIconFont, unionRecords } from "qrilljs/core";
 import type { ColorCategory, HArgument, HRootPageFn, Properties, Store } from "qrilljs/core";
 import {
     BOLD,
@@ -26,15 +26,15 @@ import {
 } from "qrilljs/core";
 
 export default function Root(store: Store): HRootPageFn<HArgument> {
-    const BText = element(store, { tag: "div" }, "b-text");
-    const BOutlined = element(store, { tag: "div" }, "b-outlined");
-    const BTonal = element(store, { tag: "div" }, "b-tonal");
-    const BFilled = element(store, { tag: "div" }, "b-filled");
-    const BElevated = element(store, { tag: "div" }, "b-elevated");
-    const Icon = hIcon(store);
-    const GithubIcon = hSvgIconFont(store, { type: "brands", name: "github" });
-    const XIcon = hSvgIconFont(store, { type: "brands", name: "x-twitter" });
-    const YoutubeIcon = hSvgIconFont(store, { type: "brands", name: "youtube" });
+    const BText = element(store);
+    const BOutlined = element(store);
+    const BTonal = element(store);
+    const BFilled = element(store);
+    const BElevated = element(store);
+    const Icon = fa_icon(store);
+    const GithubIcon = svgIconFont(store, { type: "brands", name: "github" });
+    const XIcon = svgIconFont(store, { type: "brands", name: "x-twitter" });
+    const YoutubeIcon = svgIconFont(store, { type: "brands", name: "youtube" });
 
     const kind: ColorCategory = "primary";
 

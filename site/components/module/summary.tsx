@@ -1,5 +1,5 @@
 import { dateTime } from "@site/components/element/dateTime";
-import { hlink } from "@site/components/element/hlink";
+import { link } from "@site/components/element/link";
 import { tag } from "@site/components/element/tag";
 import { articleHeader } from "@site/components/module/articleHeader";
 import type { PostFm } from "@site/site.config";
@@ -11,12 +11,12 @@ import { F_XLARGE, S_XLARGE } from "qrilljs/core";
 export type SummaryArgument = Markdown<PostFm>;
 
 export function summary(store: Store): HComponentFn<SummaryArgument> {
-    const Summary = element(store, { tag: "article" }, "summary");
+    const Summary = element(store, "article", { name: "summary" });
     const ArticleHeader = articleHeader(store);
-    const Author = element(store, { tag: "div" }, "author");
+    const Author = element(store);
     const SummaryTag = tag(store);
     const DateTime = dateTime(store);
-    const HLink = hlink(store);
+    const Link = link(store);
 
     const component_styles: (StyleRule | StyleRule[])[] = [
         style(Summary)({ margin_block: S_XLARGE(store) }),
@@ -30,9 +30,9 @@ export function summary(store: Store): HComponentFn<SummaryArgument> {
         <Summary>
             <ArticleHeader
                 title={
-                    <HLink href={`/posts/${slug}`}>
+                    <Link href={`/posts/${slug}`}>
                         <h2>{data.title}</h2>
-                    </HLink>
+                    </Link>
                 }
             >
                 <Author>{data.author}</Author>

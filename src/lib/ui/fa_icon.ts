@@ -4,7 +4,7 @@ import { Link } from "@/lib/core/elements";
 import { registerComponent } from "@/lib/core/store";
 import type { Store } from "@/lib/core/store";
 
-export type HIconType = "brands" | "solid";
+export type IconType = "brands" | "solid";
 
 export type HBrandsIconArg = {
     type: "brands";
@@ -18,8 +18,8 @@ export type HSolidIconArg = {
 
 export type HIconArg = HBrandsIconArg | HSolidIconArg;
 
-export function hIcon(store: Store): HComponentFn<HIconArg> {
-    const Top = element(store, { tag: "i" }, "h-icon");
+export function fa_icon(store: Store): HComponentFn<HIconArg> {
+    const Top = element(store, "i", { name: "icon" });
 
     registerComponent(store, Top, [], {
         inserts: [

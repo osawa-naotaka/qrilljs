@@ -25,10 +25,14 @@ export function unionArrayOfRecords<T extends {}>(items: T[]) {
     return Object.assign({}, ...items);
 }
 
-export function hash_djb2(...jsons: Record<string, unknown>[]) {
-    let hash = 5381;
+export function hash_djb2_object(...jsons: Record<string, unknown>[]): number {
     const chars = jsons.map((x) => JSON.stringify(x)).join("");
-    for (const char of [...chars]) {
+    return hash_djb2(chars);
+}
+
+export function hash_djb2(s: string): number {
+    let hash = 5381;
+    for (const char of [...s]) {
         hash = ((hash << 5) + hash + char.charCodeAt(0)) & 0xffffffff;
     }
     return hash >>> 0;

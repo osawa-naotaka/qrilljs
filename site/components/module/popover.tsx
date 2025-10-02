@@ -8,12 +8,12 @@ export type PopoverArgument = {
     body: HNode;
 };
 
-export function popover(store: Store, button_id: string): HComponentFn<PopoverArgument> {
-    const Popover = element(store, { tag: "div" }, "popover");
-    const Button = element(store, { tag: "button" }, "popover-button");
-    const CloseArea = element(store, { tag: "div" }, "popover-close-area");
-    const Container = element(store, { tag: "div" }, "popover-container");
-    const Content = element(store, { tag: "div" }, "popover-content");
+export function popover(store: Store): HComponentFn<PopoverArgument> {
+    const Popover = element(store, "div", { name: "popover" });
+    const Button = element(store, "button");
+    const CloseArea = element(store);
+    const Container = element(store);
+    const Content = element(store);
 
     const styles = [
         style(Container)(FULL_WIDTH_HEIGHT, {
@@ -48,17 +48,19 @@ export function popover(store: Store, button_id: string): HComponentFn<PopoverAr
         }),
     ];
 
+    const popover_container_id = `container-${Container.name}`;
+
     registerComponent(store, Popover, styles);
 
     return component(Popover, ({ open_button, close_button, body }) => (
         <Popover>
-            <Button type="button" popovertarget={button_id}>
+            <Button type="button" popovertarget={popover_container_id}>
                 {open_button}
             </Button>
-            <Container popover={null} id={button_id}>
+            <Container popover={null} id={popover_container_id}>
                 <Content>
                     <CloseArea>
-                        <Button type="button" popovertarget={button_id}>
+                        <Button type="button" popovertarget={popover_container_id}>
                             {close_button}
                         </Button>
                     </CloseArea>

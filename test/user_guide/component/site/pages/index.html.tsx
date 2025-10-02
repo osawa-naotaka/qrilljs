@@ -1,8 +1,8 @@
-import type { HRootPageFn, Store } from "qrill/core";
+import type { HRootPageFn, Store } from "qrilljs/core";
 import { siteTitle } from "../components/siteTitle";
 
-export default function Root(_store: Store): HRootPageFn<void> {
-    const SiteTitle = siteTitle();
+export default function Root(store: Store): HRootPageFn<void> {
+    const SiteTitle = siteTitle(store);
     return async () => (
         <html lang="en">
             <head>

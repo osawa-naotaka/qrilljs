@@ -2,7 +2,7 @@ import { drawer } from "@site/components/module/drawer";
 import { navigation } from "@site/components/module/navigation";
 import { popover } from "@site/components/module/popover";
 import { search } from "@site/components/module/search";
-import { colorof, component, element, hSvgIconFont, registerComponent, style } from "qrilljs/core";
+import { colorof, component, element, registerComponent, style, svgIconFont } from "qrilljs/core";
 import type { HComponentFn, HSvgBrandsIconName, Store } from "qrilljs/core";
 import { DEFAULT_RESPONSIVE_PAGE_WIDTH, FIX_TOP_STICKY, F_3XLARGE } from "qrilljs/core";
 
@@ -15,15 +15,15 @@ export type PageHeaderArgument = {
 };
 
 export function pageHeader(store: Store): HComponentFn<PageHeaderArgument> {
-    const PageHeader = element(store, { tag: "header" }, "page-header");
+    const PageHeader = element(store, "header", { name: "page-header" });
     const Drawer = drawer(store, "page-header-toggle-button");
-    const Popover = popover(store, "search-popover");
+    const Popover = popover(store);
     const Navigation = navigation(store);
     const Search = search(store);
 
-    const PopoverOpenButton = hSvgIconFont(store, { type: "solid", name: "magnifying-glass" });
-    const PopoverCloseButton = hSvgIconFont(store, { type: "solid", name: "xmark" });
-    const DrawerOpenButton = hSvgIconFont(store, { type: "solid", name: "bars" });
+    const PopoverOpenButton = svgIconFont(store, { type: "solid", name: "magnifying-glass" });
+    const PopoverCloseButton = svgIconFont(store, { type: "solid", name: "xmark" });
+    const DrawerOpenButton = svgIconFont(store, { type: "solid", name: "bars" });
 
     const component_styles = [
         style(PageHeader)(FIX_TOP_STICKY, {

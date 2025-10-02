@@ -21,22 +21,18 @@ export type HElement<K> = {
 // qrill Element (is function), expressing HTML element
 export type HElementFn<K> = (attribute: AttributeOf<K>, ...child: HNode[]) => HNode;
 
-export type ElementArg<K> = {
+export type ElementArg = {
     class?: string | string[];
-    tag?: K;
+    name?: string;
 };
 
-export function element<K extends Tag | qrillTag = "div">(
-    store: Store,
-    arg: ElementArg<K> = {},
-    element_name = "default",
-): HElementFn<K> {
-    const name_with_hash = name_with_one_time_hash(store, element_name);
+export function element<K extends Tag | qrillTag>(store: Store, tag?: K, arg: ElementArg = {}): HElementFn<K> {
+    const name_with_hash = name_with_one_time_hash(store, arg.name || "qrill");
     const dot_name = `.${name_with_hash}`;
     const class_name = arg.class === undefined ? [] : typeof arg.class === "string" ? [arg.class] : arg.class;
     return {
         [dot_name]: (attribute: AttributeOf<K>, ...child: HNode[]) => ({
-            tag: arg.tag || ("div" as const),
+            tag: tag || ("div" as const),
             attribute: addClassInRecord(attribute, [name_with_hash, ...class_name]),
             child,
         }),
