@@ -45,10 +45,11 @@ export function search(store: Store): HComponentFn<HArgument> {
         style(Input)({
             color: colorof(store, "text"),
             background_color: colorof(store, "background"),
+            width: "100%",
             height: S_2XLARGE(store),
         }),
         style([Input, "::placeholder"])({ opacity: "0.5" }),
-        style(Result)({ margin_block: S_LARGE(store) }),
+        style(Result)({ margin_block: S_LARGE(store), list_style_type: "none" }),
     ];
 
     registerComponent(store, Search, component_sytles, { script: import.meta.url });
