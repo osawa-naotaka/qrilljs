@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Security: in case of vulnerabilities.
 
 ## [Unreleased]
+
+## [0.1.0-alpha.12]
 ### Changed - 2025-10-02
 - change element() function argument. change order and object structure.
 
