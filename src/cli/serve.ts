@@ -61,7 +61,7 @@ function createAndStartDenoServer(config: QrillConfig, proc: ReqProcessFn, reloa
             const { socket, response } = Deno.upgradeWebSocket(req);
             socket.addEventListener("open", () => {
                 watcher.removeAllListeners();
-                watcher.on("change", () => {
+                watcher.on("all", () => {
                     reload();
                     socket.send("reload");
                 });
@@ -82,7 +82,7 @@ function createAndStartBunServer(config: QrillConfig, proc: ReqProcessFn, reload
         websocket: {
             open(ws) {
                 watcher.removeAllListeners();
-                watcher.on("change", () => {
+                watcher.on("all", () => {
                     reload();
                     ws.send("reload");
                 });
@@ -132,7 +132,7 @@ function createAndStartNodeServer(config: QrillConfig, proc: ReqProcessFn, reloa
         const { pathname } = new URL(req.url || "", `wss://${config.server.hostname}`);
         if (pathname === "/reload") {
             wss.handleUpgrade(req, socket, head, (ws) => {
-                watcher.on("change", () => {
+                watcher.on("all", () => {
                     watcher.removeAllListeners();
                     reload();
                     ws.send("reload");
@@ -288,7 +288,7 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
             // reload plugin
             if (new URL(req.url).pathname.endsWith("/reload.js")) {
                 const reload =
-                    "const ws = new WebSocket(`ws://${location.host}/reload`); ws.onmessage = (event) => { if (event.data === 'reload') { location.reload(); } }";
+                    "const ws = new WebSocket(`ws://${location.host}/reload`); ws.onmessage = (event) => { if (event.data === 'reload') { location.reload(); } }; window.addEventListener('beforeunload', () => ws.close());";
                 return normalResponse(reload, ".js");
             }
 

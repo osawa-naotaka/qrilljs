@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.1.0-alpha.16] - 2025-10-05
+### Fixed
+- Fixed an issue where WebSocket connections were not closing properly during browser page transitions
+
+
 ## [0.1.0-alpha.15] - 2025-10-03
 ### Changed
 - return value of markdownToHtml() is changed to add ToC information with html string.
@@ -121,7 +126,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.15...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.16...HEAD
+[0.1.0-alpha.16]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.15...v0.1.0-alpha.16
 [0.1.0-alpha.15]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.14...v0.1.0-alpha.15
 [0.1.0-alpha.14]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.13...v0.1.0-alpha.14
 [0.1.0-alpha.13]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.12...v0.1.0-alpha.13

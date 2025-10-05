@@ -1,6 +1,6 @@
 {
   "name": "qrilljs",
-  "version": "0.1.0-alpha.15",
+  "version": "0.1.0-alpha.16",
   "description": "lightweight static site generator for typescript",
   "type": "module",
   "main": "build/client/main.js",
