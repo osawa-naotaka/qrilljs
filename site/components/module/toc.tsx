@@ -1,5 +1,5 @@
 import { type HComponentFn, type Store, component, element } from "@/core";
-import type { ToC } from "remark-assign-id-and-extract-toc";
+import type { ToC } from "remark-export-toc";
 
 export type ToCArgument = {
     toc: ToC[];

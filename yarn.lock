@@ -3286,7 +3286,7 @@ __metadata:
     jsdom: "npm:^26.0.0"
     rehype-prism-plus: "npm:^2.0.1"
     rehype-stringify: "npm:^10.0.1"
-    remark-assign-id-and-extract-toc: "npm:^0.1.0-alpha.1"
+    remark-export-toc: "npm:^0.1.0-alpha.2"
     remark-frontmatter: "npm:^5.0.0"
     remark-gfm: "npm:^4.0.1"
     remark-parse: "npm:^11.0.0"
@@ -3380,14 +3380,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"remark-assign-id-and-extract-toc@npm:^0.1.0-alpha.1":
-  version: 0.1.0-alpha.1
-  resolution: "remark-assign-id-and-extract-toc@npm:0.1.0-alpha.1"
+"remark-export-toc@npm:^0.1.0-alpha.2":
+  version: 0.1.0-alpha.2
+  resolution: "remark-export-toc@npm:0.1.0-alpha.2"
   dependencies:
     mdast-util-to-string: "npm:^4.0.0"
     unist-util-visit: "npm:^5.0.0"
     vfile: "npm:^6.0.3"
-  checksum: 10c0/d3348b81e5755d927c5c9532b9ffe9b2b210a7f61bbebd0ad24761e6bf88bf1210eb19271aa1358a24943dd524d1ee7a7dc57e929c890c90ea11986e64d4210c
+  checksum: 10c0/9fde700bd3866c9f53aaa8f2448408aa318a68dca73c80708b7b4c9de5d6aa251556e51962f7c7e426aaa9eeb8172fe983caf0ac4974e1aff4043c703712ecb0
   languageName: node
   linkType: hard
 
