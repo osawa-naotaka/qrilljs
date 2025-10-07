@@ -6,8 +6,8 @@ import { globExt } from "@/server";
 import matter from "gray-matter";
 import rehypePrism from "rehype-prism-plus";
 import rehypeStringify from "rehype-stringify";
-import remarkAssignIdAndExtractToc from "remark-assign-id-and-extract-toc";
-import type { ToC } from "remark-assign-id-and-extract-toc";
+import remarkExportToc from "remark-export-toc";
+import type { ToC } from "remark-export-toc";
 import remarkFrontmatter from "remark-frontmatter";
 import remarkGfm from "remark-gfm";
 import remarkParse from "remark-parse";
@@ -25,7 +25,7 @@ export async function markdownToHtml(markdown: string): Promise<HtmlToc> {
         .use(remarkParse)
         .use(remarkGfm)
         .use(remarkFrontmatter)
-        .use(remarkAssignIdAndExtractToc, { prefix: "heading", startLevel: 3 })
+        .use(remarkExportToc, { prefix: "heading", startLevel: 2 })
         .use(remarkRehype)
         .use(rehypePrism)
         .use(rehypeStringify)
