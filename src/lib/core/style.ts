@@ -32,10 +32,8 @@ export function style(...context: Selector[]): (...properties: Properties[]) => 
     });
 }
 
-export function atStyle(
-    ...atrules: Atrule[]
-): (...context: SelectorContext[]) => (...properties: Properties[]) => StyleRule {
-    return (context: SelectorContext) =>
+export function atStyle(...atrules: Atrule[]): (...context: Selector[]) => (...properties: Properties[]) => StyleRule {
+    return (...context: Selector[]) =>
         (...properties: Properties[]) => ({
             atrules,
             selector: [context],
