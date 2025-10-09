@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.1.0-alpha.19] - 2025-10-09
+### Added
+- Add ToC type export from remark-export-toc.
+
+
 ## [0.1.0-alpha.18] - 2025-10-08
 ### Fixed
 - Fixed an issue where second-level argument of atStyle()()() requires one more bracket("[]").
@@ -134,7 +139,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.18...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.19...HEAD
+[0.1.0-alpha.19]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.18...v0.1.0-alpha.19
 [0.1.0-alpha.18]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.17...v0.1.0-alpha.18
 [0.1.0-alpha.17]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.16...v0.1.0-alpha.17
 [0.1.0-alpha.16]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.15...v0.1.0-alpha.16
