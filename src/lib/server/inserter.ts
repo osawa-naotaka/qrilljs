@@ -33,10 +33,11 @@ export function insertNodes(root: HNode, selector: Selector[], insert: HNode[], 
     }
 
     if (search_deep) {
+        const child = root.child.filter((c) => c);
         return {
             tag: root.tag,
             attribute: root.attribute,
-            child: root.child.map((c) => insertNodes(c, selector, insert, true)),
+            child: child.map((c) => insertNodes(c, selector, insert, true)),
         };
     }
     return root;
