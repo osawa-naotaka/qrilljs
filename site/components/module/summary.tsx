@@ -4,7 +4,7 @@ import { tag } from "@site/components/element/tag";
 import { articleHeader } from "@site/components/module/articleHeader";
 import type { PostFm } from "@site/site.config";
 import { TAG_DESIGN } from "@site/styles/design";
-import { H2, component, element, registerComponent, style } from "qrilljs/core";
+import { component, element, registerComponent, style } from "qrilljs/core";
 import type { HComponentFn, Markdown, Store, StyleRule } from "qrilljs/core";
 import { F_XLARGE, S_XLARGE } from "qrilljs/core";
 
@@ -20,7 +20,7 @@ export function summary(store: Store): HComponentFn<SummaryArgument> {
 
     const component_styles: (StyleRule | StyleRule[])[] = [
         style(Summary)({ margin_block: S_XLARGE(store) }),
-        style(Summary, ArticleHeader, H2)({ font_size: F_XLARGE(store) }),
+        style(Summary, ArticleHeader, "h2")({ font_size: F_XLARGE(store) }),
         TAG_DESIGN(store, "text", SummaryTag),
     ];
 

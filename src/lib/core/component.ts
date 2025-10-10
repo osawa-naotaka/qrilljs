@@ -1,6 +1,7 @@
 import type { AttributeMap, Tag, qrillTag } from "@/lib/core/elements";
-import { Class } from "@/lib/core/elements";
-import { type Store, name_with_one_time_hash } from "@/lib/core/store";
+import { gt } from "@/lib/core/elements";
+import type { Store } from "@/lib/core/store";
+import { name_with_one_time_hash } from "@/lib/core/store";
 import { addClassInRecord } from "@/lib/core/util";
 
 // Attribute of HTML Element
@@ -58,6 +59,7 @@ export type HAnyComponentFn = HComponentFn<any>;
 export type HArgument = Record<string, unknown>;
 
 export function as<T>(class_name: string, fn: HComponentFn<T>): HComponentFn<T> {
+    const Class = gt("class");
     const dot_name = `.${class_name}`;
     return {
         [dot_name]: (argument: HComponentFnArg<T>, ...child: HNode[]) =>

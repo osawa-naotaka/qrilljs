@@ -3,7 +3,7 @@ import { article } from "@site/components/module/article";
 import { toc } from "@site/components/module/toc";
 import { page } from "@site/components/pages/page";
 import { navitem, postFmSchema, posts_dir, site } from "@site/site.config";
-import { RawHTML, S_MEDIUM, W_MEDIUM, element, registerRootPage, style } from "qrilljs/core";
+import { S_MEDIUM, W_MEDIUM, element, registerRootPage, style } from "qrilljs/core";
 import type { HRootPageFn, Store } from "qrilljs/core";
 import { S_2XLARGE } from "qrilljs/core";
 import { getMarkdown, listFiles, markdownToHtml } from "qrilljs/server";
@@ -50,7 +50,7 @@ export default function Root(store: Store): HRootPageFn<RootParameter> {
                 <PageMainArea>
                     <ToC toc={toc} />
                     <Article {...md}>
-                        <RawHTML>{html}</RawHTML>
+                        <raw>{html}</raw>
                     </Article>
                 </PageMainArea>
             </Page>

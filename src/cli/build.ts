@@ -9,9 +9,9 @@ import { bundleWoff2 } from "@/cli/font";
 import { bundleHtml } from "@/cli/html";
 import { withoutExt } from "@/cli/route";
 import { bundleScriptEsbuild } from "@/cli/script";
-import { default_design_rule } from "@/core";
 import type { Attribute, HRootPageFn } from "@/lib/core/component";
-import { Link, Script } from "@/lib/core/elements";
+import { default_design_rule } from "@/lib/core/design";
+import { gt } from "@/lib/core/elements";
 import { generateStore } from "@/lib/core/store";
 import type { HComponentAsset, Store } from "@/lib/core/store";
 import { replaceExt } from "@/lib/core/util";
@@ -150,9 +150,11 @@ async function processAndWriteHtml(
 ): Promise<void> {
     const html_start = performance.now();
 
+    const script = gt("script");
+    const link = gt("link");
     const insert_nodes = [
-        css_link !== "" ? Link({ href: css_link, rel: "stylesheet" }) : "",
-        js_src !== "" ? Script({ type: "module", src: js_src }) : "",
+        css_link !== "" ? link({ href: css_link, rel: "stylesheet" }) : "",
+        js_src !== "" ? script({ type: "module", src: js_src }) : "",
     ];
 
     const html = await bundleHtml(store, params, root_page_fn, insert_nodes);

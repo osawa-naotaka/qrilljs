@@ -13,6 +13,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.1.0-alpha.22] - 2025-10-11
+
+### Changed
+- Remove unused capitalized tags and use gt() instead.
+- Update error page using tsx.
+
 ## [0.1.0-alpha.21] - 2025-10-10
 
 ### Fixed
@@ -150,7 +156,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.21...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.22...HEAD
+[0.1.0-alpha.22]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.21...v0.1.0-alpha.22
 [0.1.0-alpha.21]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.20...v0.1.0-alpha.21
 [0.1.0-alpha.20]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.19...v0.1.0-alpha.20
 [0.1.0-alpha.19]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.18...v0.1.0-alpha.19

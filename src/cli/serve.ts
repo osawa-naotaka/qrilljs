@@ -15,8 +15,8 @@ import { stringifyToHtml } from "@/cli/html";
 import { createAssetRouter, createPageRouter, createStaticRouter, withoutExt } from "@/cli/route";
 import type { Router } from "@/cli/route";
 import { bundleScriptEsbuild } from "@/cli/script";
-import { default_design_rule } from "@/core";
-import { Link, Script } from "@/lib/core/elements";
+import { default_design_rule } from "@/lib/core/design";
+import { gt } from "@/lib/core/elements";
 import { generateStore } from "@/lib/core/store";
 import type { Store } from "@/lib/core/store";
 import { contentType } from "@/lib/core/util";
@@ -250,12 +250,14 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
                                 asset_router.set(key, router);
                             }
 
+                            const script = gt("script");
+                            const link = gt("link");
                             const css_name = `${withoutExt(withoutExt(match_page.target_file))}.css`;
                             const js_name = `${withoutExt(withoutExt(match_page.target_file))}.js`;
                             const insert_nodes = [
-                                Script({ type: "module", src: "/reload.js" }),
-                                Script({ type: "module", src: js_name }),
-                                Link({ href: css_name, rel: "stylesheet" }),
+                                script({ type: "module", src: "/reload.js" }),
+                                script({ type: "module", src: js_name }),
+                                link({ href: css_name, rel: "stylesheet" }),
                             ];
 
                             const html_text = await bundleHtml(store, match_page.params, root_page_fn, insert_nodes);

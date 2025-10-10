@@ -1,6 +1,5 @@
 import type { HComponentFn } from "@/lib/core/component";
 import { component, element } from "@/lib/core/component";
-import { Link } from "@/lib/core/elements";
 import { registerComponent } from "@/lib/core/store";
 import type { Store } from "@/lib/core/store";
 
@@ -20,15 +19,16 @@ export type HIconArg = HBrandsIconArg | HSolidIconArg;
 
 export function faIcon(store: Store): HComponentFn<HIconArg> {
     const Top = element(store, "i", { name: "icon" });
+    const link = element(store, "link");
 
     registerComponent(store, Top, [], {
         inserts: [
             {
                 selector: ["head"],
                 nodes: [
-                    Link({ href: `${store.asset.target_prefix}/css/fontawesome.min.css`, rel: "stylesheet" }),
-                    Link({ href: `${store.asset.target_prefix}/css/brands.min.css`, rel: "stylesheet" }),
-                    Link({ href: `${store.asset.target_prefix}/css/solid.min.css`, rel: "stylesheet" }),
+                    link({ href: `${store.asset.target_prefix}/css/fontawesome.min.css`, rel: "stylesheet" }),
+                    link({ href: `${store.asset.target_prefix}/css/brands.min.css`, rel: "stylesheet" }),
+                    link({ href: `${store.asset.target_prefix}/css/solid.min.css`, rel: "stylesheet" }),
                 ],
             },
         ],
