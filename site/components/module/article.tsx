@@ -5,7 +5,6 @@ import { articleHeader } from "@site/components/module/articleHeader";
 import type { PostFm } from "@site/site.config";
 import { TAG_DESIGN } from "@site/styles/design";
 import { F_LARGE, F_XLARGE, S_2XLARGE, S_MEDIUM, colorof } from "qrilljs/core";
-import { A, H2, H3, H4, H5, Li, Ol, P, Ul } from "qrilljs/core";
 import { component, element, registerComponent, style } from "qrilljs/core";
 import type { HComponentFn, Markdown, Store } from "qrilljs/core";
 
@@ -23,7 +22,7 @@ export function article(store: Store): HComponentFn<ArticleArgument> {
     const component_styles = [
         style(Article)({ margin_block: S_2XLARGE(store) }),
 
-        style(ArticleHeader, H2)({ font_size: F_XLARGE(store) }),
+        style(ArticleHeader, "h2")({ font_size: F_XLARGE(store) }),
         TAG_DESIGN(store, "text", ArticleTag),
 
         style(ArticleText)({
@@ -36,7 +35,7 @@ export function article(store: Store): HComponentFn<ArticleArgument> {
         }),
         style(
             ArticleText,
-            H3,
+            "h3",
         )({
             font_size: F_LARGE(store),
             border_radius: "4px",
@@ -48,39 +47,39 @@ export function article(store: Store): HComponentFn<ArticleArgument> {
         }),
         style(
             ArticleText,
-            P,
+            "p",
         )({
             margin_block: ["0", S_2XLARGE(store)],
             text_indent: S_MEDIUM(store),
         }),
         style(
             ArticleText,
-            H4,
+            "h4",
         )({
             border_bottom: "1px solid",
             margin_block: S_MEDIUM(store),
         }),
         style(
             ArticleText,
-            H5,
+            "h5",
         )({
             border_left: "4px solid",
         }),
         style(
             ArticleText,
-            Ul,
+            "ul",
         )({
             list_style_type: "disc",
         }),
-        style(ArticleText, Ol)({ list_style_type: "decimal" }),
+        style(ArticleText, "ol")({ list_style_type: "decimal" }),
         style(
             ArticleText,
-            A,
+            "a",
         )({
             text_decoration: ["underline", "2px"],
             text_underline_offset: "5px",
         }),
-        style(ArticleText, Li)({ margin_inline: S_2XLARGE(store) }),
+        style(ArticleText, "li")({ margin_inline: S_2XLARGE(store) }),
     ];
 
     const prism_cdn = "https://cdn.jsdelivr.net/npm/prismjs@1.30.0";
