@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+- remove unused capitalized tags.
+- update error page.
+
 ## [0.1.0-alpha.21] - 2025-10-10
 
 ### Fixed
