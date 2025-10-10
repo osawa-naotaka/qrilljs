@@ -46,7 +46,7 @@ export type HComponentFnArg<T> = T & { class?: string | string[]; id?: string; c
 
 // if name_fn is string, it refers html elemen name like html, body, p..., so we don't use dottend name for that.
 export function component<K, T>(name_fn: HComponentFn<K> | string, component_fn: HComponentFn<T>): HComponentFn<T> {
-    const component_name = typeof name_fn === "string" ? name_fn : name_fn.name;
+    const component_name = typeof name_fn === "string" ? `.${name_fn}` : name_fn.name;
     return {
         [component_name]: (argument: HComponentFnArg<T>, ...child: HNode[]) => component_fn(argument, ...child),
     }[component_name];
@@ -63,6 +63,10 @@ export function as<T>(class_name: string, fn: HComponentFn<T>): HComponentFn<T> 
         [dot_name]: (argument: HComponentFnArg<T>, ...child: HNode[]) =>
             Class({ class: class_name }, fn(argument, ...child)),
     }[dot_name];
+}
+
+export function selectorOf(c: HAnyComponentFn): string {
+    return c.name;
 }
 
 // qrill HTML Top export function
