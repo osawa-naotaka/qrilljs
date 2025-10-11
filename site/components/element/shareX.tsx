@@ -1,7 +1,7 @@
 import { faSvgIconFont } from "@/lib/ui/faSvgIconFont";
 import { TAG_DESIGN } from "@site/styles/design";
 import { S_SMALL, S_TINY, colorof } from "qrilljs/core";
-import { as, component, element, registerComponent, style } from "qrilljs/core";
+import { as, component, element, registerStyle, style } from "qrilljs/core";
 import type { HComponentFn, Store } from "qrilljs/core";
 
 export type ShareXArgument = {
@@ -38,7 +38,7 @@ export function shareX(store: Store): HComponentFn<ShareXArgument> {
         }),
     ];
 
-    registerComponent(store, ShareX, styles);
+    registerStyle(store, ShareX, styles);
 
     return component(ShareX, ({ title, url }) => {
         const href = `https://x.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`;

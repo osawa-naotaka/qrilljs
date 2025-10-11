@@ -1,4 +1,4 @@
-import { W_MEDIUM, atStyle, colorof, component, element, registerComponent, style } from "qrilljs/core";
+import { W_MEDIUM, atStyle, colorof, component, element, registerStyle, style } from "qrilljs/core";
 import type { HComponentFn, HNode, Store } from "qrilljs/core";
 import { S_MEDIUM } from "qrilljs/core";
 
@@ -57,7 +57,7 @@ export function popover(store: Store): HComponentFn<PopoverArgument> {
 
     const popover_container_id = `container-${Container.name}`;
 
-    registerComponent(store, Popover, styles);
+    registerStyle(store, Popover, styles);
 
     return component(Popover, ({ open_button, close_button, body }) => (
         <Popover>

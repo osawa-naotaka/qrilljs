@@ -1,4 +1,4 @@
-import { component, element, registerComponent, style } from "qrilljs/core";
+import { component, element, registerStyle, style } from "qrilljs/core";
 import type { HComponentFn, HNode, Store } from "qrilljs/core";
 
 export type DrawerArgument = {
@@ -45,7 +45,7 @@ export function drawer(store: Store, button_id: string): HComponentFn<DrawerArgu
         }),
     ];
 
-    registerComponent(store, Drawer, styles);
+    registerStyle(store, Drawer, styles);
 
     return component(Drawer, ({ title, header_space, open_button, content }) => (
         <Drawer>

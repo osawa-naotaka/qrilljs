@@ -4,8 +4,8 @@ import { tag } from "@site/components/element/tag";
 import { articleHeader } from "@site/components/module/articleHeader";
 import type { PostFm } from "@site/site.config";
 import { TAG_DESIGN } from "@site/styles/design";
-import { F_LARGE, F_XLARGE, S_2XLARGE, S_MEDIUM, colorof } from "qrilljs/core";
-import { component, element, registerComponent, style } from "qrilljs/core";
+import { F_LARGE, F_XLARGE, S_2XLARGE, S_MEDIUM, colorof, registerInsert } from "qrilljs/core";
+import { component, element, registerStyle, style } from "qrilljs/core";
 import type { HComponentFn, Markdown, Store } from "qrilljs/core";
 
 export type ArticleArgument = Markdown<PostFm>;
@@ -85,14 +85,13 @@ export function article(store: Store): HComponentFn<ArticleArgument> {
     const prism_cdn = "https://cdn.jsdelivr.net/npm/prismjs@1.30.0";
     const prism_theme: string = "tomorrow";
     const css_filename = `prism${prism_theme === "" ? "" : `-${prism_theme}`}.min.css`;
-    registerComponent(store, Article, component_styles, {
-        inserts: [
-            {
-                selector: ["head"],
-                nodes: [<link key={css_filename} href={`${prism_cdn}/themes/${css_filename}`} rel="stylesheet" />],
-            },
-        ],
-    });
+    registerStyle(store, Article, component_styles);
+    registerInsert(store, Article, [
+        {
+            selector: ["head"],
+            nodes: [<link key={css_filename} href={`${prism_cdn}/themes/${css_filename}`} rel="stylesheet" />],
+        },
+    ]);
 
     return component(Article, ({ data, slug }, ...child) => (
         <Article>

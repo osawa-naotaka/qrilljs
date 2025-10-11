@@ -1,6 +1,6 @@
 import type { Attribute, HComponentFn } from "@/lib/core/component";
 import { component, element } from "@/lib/core/component";
-import { registerComponent } from "@/lib/core/store";
+import { registerFont } from "@/lib/core/store";
 import type { Store } from "@/lib/core/store";
 
 export type HSvgIconType = "brands" | "solid";
@@ -24,19 +24,17 @@ export function faSvgIconFont(store: Store, arg: HSvgIconArg): HComponentFn<Attr
         class: ["hf", `hf-${font_name}`],
     });
 
-    registerComponent(store, Top, [], {
-        fonts: [
-            {
-                package_name: "@fortawesome/fontawesome-free",
-                chars: [
-                    {
-                        src: `svgs/${arg.type}/${arg.name}.svg`,
-                        name: font_name,
-                    },
-                ],
-            },
-        ],
-    });
+    registerFont(store, Top, [
+        {
+            package_name: "@fortawesome/fontawesome-free",
+            chars: [
+                {
+                    src: `svgs/${arg.type}/${arg.name}.svg`,
+                    name: font_name,
+                },
+            ],
+        },
+    ]);
 
     return component(Top, Top);
 }

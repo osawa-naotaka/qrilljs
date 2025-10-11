@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+- fixed an issue where multi-calling registerStyle() result in clear previous style.
+- remove registerStyle()
+
+- add registerStyle(), registerScript(), registerAsset(), registerInsert(), registerFont().
+
 ## [0.1.0-alpha.22] - 2025-10-11
 
 ### Changed
