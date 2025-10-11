@@ -1,4 +1,4 @@
-import { component, element, registerComponent, style } from "qrilljs/core";
+import { component, element, registerStyle, style } from "qrilljs/core";
 import type { HComponentFn, HNode, Store } from "qrilljs/core";
 import { F_SMALL, S_SMALL, S_TINY } from "qrilljs/core";
 
@@ -25,7 +25,7 @@ export function articleHeader(store: Store): HComponentFn<ArticleHeaderArgument>
         }),
     ];
 
-    registerComponent(store, ArticleHeader, component_styles);
+    registerStyle(store, ArticleHeader, component_styles);
 
     return component(ArticleHeader, ({ title }, ...child) => (
         <ArticleHeader>

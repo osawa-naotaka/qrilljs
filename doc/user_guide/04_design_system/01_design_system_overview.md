@@ -141,13 +141,13 @@ export default defaultSiteConfig({
 ### style()関数による基本的なスタイリング
 
 ```typescript
-import { style, registerComponent } from "qrill/core";
+import { style, registerStyle } from "qrill/core";
 import type { Store } from "qrill/core";
 
 export function myButton(store: Store): HComponentFn<ButtonAttribute> {
     const Button = element("my-button"); // default tag is div
     
-    registerComponent(store, Button, [
+    registerStyle(store, Button, [
         style(Button)({
             padding: S_MEDIUM(store),
             font_size: F_MEDIUM(store),
@@ -212,7 +212,7 @@ import { atStyle } from "qrill/core";
 export function responsiveCard(store: Store): HComponentFn<{}> {
     const ResponsiveCard = element("responsive-card");
     
-    registerComponent(store, ResponsiveCard, [
+    registerStyle(store, ResponsiveCard, [
         // 基本スタイル
         style(ResponsiveCard)({
             padding: S_MEDIUM(store),
@@ -246,7 +246,7 @@ export function navigationMenu(store: Store): HComponentFn<{}> {
     const NavItem = element("nav-item", { tag: "li" });
     const NavLink = element("nav-link", { tag: "a" });
     
-    registerComponent(store, NavMenu, [
+    registerStyle(store, NavMenu, [
         // 基本スタイル
         style(NavMenu)({
             display: "flex",
@@ -299,7 +299,7 @@ export function navigationMenu(store: Store): HComponentFn<{}> {
 export function button(store: Store): HComponentFn<{}> {
     const Button = element("button", { tag: "button" });
     
-    registerComponent(store, Button, [
+    registerStyle(store, Button, [
         // ❌ ハードコーディング
         // style(Button)({
         //     font_size: "16px",
@@ -327,7 +327,7 @@ export function button(store: Store): HComponentFn<{}> {
 export function semanticComponent(store: Store): HComponentFn<{}> {
     const Component = element("semantic-component");
     
-    registerComponent(store, Component, [
+    registerStyle(store, Component, [
         // ✅ 意味のあるカラー指定
         style(Component)({
             background_color: colorof(store, "background", "main"),
@@ -348,7 +348,7 @@ export function semanticComponent(store: Store): HComponentFn<{}> {
 export function spacingComponent(store: Store): HComponentFn<{}> {
     const Component = element("spacing-component");
     
-    registerComponent(store, Component, [
+    registerStyle(store, Component, [
         // ✅ 定義済みのスペーシングを使用
         style(Component)({
             margin: S_MEDIUM(store),
@@ -369,7 +369,7 @@ export function spacingComponent(store: Store): HComponentFn<{}> {
 export function responsiveComponent(store: Store): HComponentFn<{}> {
     const Component = element("responsive-component");
     
-    registerComponent(store, Component, [
+    registerStyle(store, Component, [
         // 基本スタイル
         style(Component)({
             font_size: F_MEDIUM(store),

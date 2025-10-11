@@ -10,14 +10,14 @@ import { cloneAndMergeRecord, hash_djb2 } from "@/lib/core/util";
 export type HComponent = {
     component_name: string;
     style: StyleRule[];
-    attachment?: HComponentAttachment;
+    attachment: HComponentAttachment;
 };
 
 export type HComponentAttachment = {
     script?: string;
-    assets?: HComponentAsset[];
-    inserts?: HComponentInsert[];
-    fonts?: HIconFontCharacter[];
+    assets: HComponentAsset[];
+    inserts: HComponentInsert[];
+    fonts: HIconFontCharacter[];
 };
 
 export type HComponentAsset = {
@@ -57,16 +57,143 @@ export function generateStore(asset: AssetConfig, rule: RecursivePartial<DesignR
     };
 }
 
-export function registerComponent<K>(
+export function registerStyle<K>(
     store: Store,
     name_fn: HComponentFn<K> | string,
     raw_style: (StyleRule | StyleRule[])[],
-    attachment?: HComponentAttachment,
 ): void {
     const component_name = typeof name_fn === "string" ? name_fn : name_fn.name;
     const style = raw_style.flatMap((x) => (Array.isArray(x) ? x : [x]));
 
-    store.components.set(component_name, { component_name, style, attachment });
+    const component = store.components.get(component_name);
+    if (component === undefined) {
+        store.components.set(component_name, {
+            component_name,
+            style,
+            attachment: { assets: [], inserts: [], fonts: [] },
+        });
+    } else {
+        const new_component: HComponent = {
+            component_name: component_name,
+            style: [...component.style, ...style],
+            attachment: {
+                assets: [],
+                inserts: [],
+                fonts: [],
+            },
+        };
+        store.components.set(component_name, new_component);
+    }
+
+    return;
+}
+
+export function registerScript<K>(store: Store, name_fn: HComponentFn<K> | string, script: string): void {
+    const component_name = typeof name_fn === "string" ? name_fn : name_fn.name;
+
+    const component = store.components.get(component_name);
+    if (component === undefined) {
+        store.components.set(component_name, {
+            component_name,
+            style: [],
+            attachment: { script, assets: [], inserts: [], fonts: [] },
+        });
+    } else {
+        const new_component: HComponent = {
+            component_name: component_name,
+            style: component.style,
+            attachment: {
+                script,
+                assets: component.attachment.assets,
+                inserts: component.attachment.inserts,
+                fonts: component.attachment.fonts,
+            },
+        };
+        store.components.set(component_name, new_component);
+    }
+
+    return;
+}
+
+export function registerAsset<K>(store: Store, name_fn: HComponentFn<K> | string, assets: HComponentAsset[]): void {
+    const component_name = typeof name_fn === "string" ? name_fn : name_fn.name;
+
+    const component = store.components.get(component_name);
+    if (component === undefined) {
+        store.components.set(component_name, {
+            component_name,
+            style: [],
+            attachment: { assets, inserts: [], fonts: [] },
+        });
+    } else {
+        const new_component: HComponent = {
+            component_name: component_name,
+            style: component.style,
+            attachment: {
+                script: component.attachment.script,
+                assets: [...component.attachment.assets, ...assets],
+                inserts: component.attachment.inserts,
+                fonts: component.attachment.fonts,
+            },
+        };
+        store.components.set(component_name, new_component);
+    }
+
+    return;
+}
+
+export function registerInsert<K>(store: Store, name_fn: HComponentFn<K> | string, inserts: HComponentInsert[]): void {
+    const component_name = typeof name_fn === "string" ? name_fn : name_fn.name;
+
+    const component = store.components.get(component_name);
+    if (component === undefined) {
+        store.components.set(component_name, {
+            component_name,
+            style: [],
+            attachment: { assets: [], inserts, fonts: [] },
+        });
+    } else {
+        const new_component: HComponent = {
+            component_name: component_name,
+            style: component.style,
+            attachment: {
+                script: component.attachment.script,
+                assets: component.attachment.assets,
+                inserts: [...component.attachment.inserts, ...inserts],
+                fonts: component.attachment.fonts,
+            },
+        };
+        store.components.set(component_name, new_component);
+    }
+
+    return;
+}
+
+export function registerFont<K>(store: Store, name_fn: HComponentFn<K> | string, fonts: HIconFontCharacter[]): void {
+    const component_name = typeof name_fn === "string" ? name_fn : name_fn.name;
+
+    const component = store.components.get(component_name);
+    if (component === undefined) {
+        store.components.set(component_name, {
+            component_name,
+            style: [],
+            attachment: { assets: [], inserts: [], fonts },
+        });
+    } else {
+        const new_component: HComponent = {
+            component_name: component_name,
+            style: component.style,
+            attachment: {
+                script: component.attachment.script,
+                assets: component.attachment.assets,
+                inserts: component.attachment.inserts,
+                fonts: [...component.attachment.fonts, ...fonts],
+            },
+        };
+        store.components.set(component_name, new_component);
+    }
+
+    return;
 }
 
 export function registerRootPage(
@@ -77,7 +204,11 @@ export function registerRootPage(
     const component_name = "qrill-root-page";
     const style = raw_style.flatMap((x) => (Array.isArray(x) ? x : [x]));
 
-    store.components.set(component_name, { component_name, style, attachment });
+    store.components.set(component_name, {
+        component_name,
+        style,
+        attachment: attachment || { assets: [], inserts: [], fonts: [] },
+    });
 }
 
 export function name_with_one_time_hash(store: Store, name: string): string {

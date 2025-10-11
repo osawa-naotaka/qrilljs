@@ -1,4 +1,4 @@
-import { S_MEDIUM, colorof, component, element, registerComponent, style } from "qrilljs/core";
+import { S_MEDIUM, colorof, component, element, registerStyle, style } from "qrilljs/core";
 import type { HComponentFn, Store } from "qrilljs/core";
 
 export type PageFooterArgument = {
@@ -29,7 +29,7 @@ export function pageFooter(store: Store): HComponentFn<PageFooterArgument> {
         style(Copyright)({ text_align: "center" }),
     ];
 
-    registerComponent(store, PageFooter, component_styles);
+    registerStyle(store, PageFooter, component_styles);
 
     return component(PageFooter, ({ site_name }) => (
         <PageFooter>

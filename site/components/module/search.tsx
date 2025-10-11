@@ -10,7 +10,8 @@ import {
     createDom,
     element,
     faSvgIconFont,
-    registerComponent,
+    registerScript,
+    registerStyle,
     style,
 } from "qrilljs/core";
 import { F_SMALL, F_TINY, S_2XLARGE, S_LARGE } from "qrilljs/core";
@@ -52,7 +53,8 @@ export function search(store: Store): HComponentFn<HArgument> {
         style(Result)({ margin_block: S_LARGE(store), list_style_type: "none" }),
     ];
 
-    registerComponent(store, Search, component_sytles, { script: import.meta.url });
+    registerStyle(store, Search, component_sytles);
+    registerScript(store, Search, import.meta.url);
 
     return component(Search, () => (
         <Search>
@@ -136,7 +138,7 @@ export function searchResultItem(store: Store): HComponentFn<SearchResultItemAtt
         TAG_DESIGN(store, "text", Tag),
     ];
 
-    registerComponent(store, ResultItem, component_styles);
+    registerStyle(store, ResultItem, component_styles);
 
     return component(ResultItem, ({ result }) => {
         const key = v.parse(SearchKeySchema, result.key);

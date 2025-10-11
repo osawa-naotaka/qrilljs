@@ -1,5 +1,5 @@
 import { S_2XLARGE, S_MEDIUM, W_MEDIUM, colorof } from "qrilljs/core";
-import { component, element, registerComponent, style } from "qrilljs/core";
+import { component, element, registerStyle, style } from "qrilljs/core";
 import type { HArgument, HComponentFn, Store } from "qrilljs/core";
 
 export function hero(store: Store): HComponentFn<HArgument> {
@@ -30,7 +30,7 @@ export function hero(store: Store): HComponentFn<HArgument> {
         }),
     ];
 
-    registerComponent(store, Hero, component_styles);
+    registerStyle(store, Hero, component_styles);
 
     return component(Hero, () => (
         <Hero>

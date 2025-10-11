@@ -1,6 +1,6 @@
 import type { HComponentFn } from "@/lib/core/component";
 import { component, element } from "@/lib/core/component";
-import { registerComponent } from "@/lib/core/store";
+import { registerAsset, registerInsert } from "@/lib/core/store";
 import type { Store } from "@/lib/core/store";
 
 export type IconType = "brands" | "solid";
@@ -21,45 +21,43 @@ export function faIcon(store: Store): HComponentFn<HIconArg> {
     const Top = element(store, "i", { name: "icon" });
     const link = element(store, "link");
 
-    registerComponent(store, Top, [], {
-        inserts: [
-            {
-                selector: ["head"],
-                nodes: [
-                    link({ href: `${store.asset.target_prefix}/css/fontawesome.min.css`, rel: "stylesheet" }),
-                    link({ href: `${store.asset.target_prefix}/css/brands.min.css`, rel: "stylesheet" }),
-                    link({ href: `${store.asset.target_prefix}/css/solid.min.css`, rel: "stylesheet" }),
-                ],
-            },
-        ],
-        assets: [
-            {
-                package_name: "@fortawesome/fontawesome-free",
-                copy_files: [
-                    {
-                        src: "webfonts/fa-brands-400.*",
-                        dist: "webfonts/",
-                    },
-                    {
-                        src: "webfonts/fa-solid-900.*",
-                        dist: "webfonts/",
-                    },
-                    {
-                        src: "css/fontawesome.min.css",
-                        dist: "css/",
-                    },
-                    {
-                        src: "css/brands.min.css",
-                        dist: "css/",
-                    },
-                    {
-                        src: "css/solid.min.css",
-                        dist: "css/",
-                    },
-                ],
-            },
-        ],
-    });
+    registerInsert(store, Top, [
+        {
+            selector: ["head"],
+            nodes: [
+                link({ href: `${store.asset.target_prefix}/css/fontawesome.min.css`, rel: "stylesheet" }),
+                link({ href: `${store.asset.target_prefix}/css/brands.min.css`, rel: "stylesheet" }),
+                link({ href: `${store.asset.target_prefix}/css/solid.min.css`, rel: "stylesheet" }),
+            ],
+        },
+    ]);
+    registerAsset(store, Top, [
+        {
+            package_name: "@fortawesome/fontawesome-free",
+            copy_files: [
+                {
+                    src: "webfonts/fa-brands-400.*",
+                    dist: "webfonts/",
+                },
+                {
+                    src: "webfonts/fa-solid-900.*",
+                    dist: "webfonts/",
+                },
+                {
+                    src: "css/fontawesome.min.css",
+                    dist: "css/",
+                },
+                {
+                    src: "css/brands.min.css",
+                    dist: "css/",
+                },
+                {
+                    src: "css/solid.min.css",
+                    dist: "css/",
+                },
+            ],
+        },
+    ]);
 
     return component(Top, ({ type, name }) => {
         return Top({ class: [`fa-${type}`, `fa-${name}`] });

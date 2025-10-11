@@ -2,7 +2,7 @@ import { drawer } from "@site/components/module/drawer";
 import { navigation } from "@site/components/module/navigation";
 import { popover } from "@site/components/module/popover";
 import { search } from "@site/components/module/search";
-import { S_MEDIUM, W_MEDIUM, colorof, component, element, faSvgIconFont, registerComponent, style } from "qrilljs/core";
+import { S_MEDIUM, W_MEDIUM, colorof, component, element, faSvgIconFont, registerStyle, style } from "qrilljs/core";
 import type { HComponentFn, HSvgBrandsIconName, Store } from "qrilljs/core";
 import { F_3XLARGE } from "qrilljs/core";
 
@@ -44,7 +44,7 @@ export function pageHeader(store: Store): HComponentFn<PageHeaderArgument> {
         style("h1")({ font_size: F_3XLARGE(store) }),
     ];
 
-    registerComponent(store, PageHeader, component_styles);
+    registerStyle(store, PageHeader, component_styles);
 
     return component(PageHeader, ({ title, navitem }) => (
         <PageHeader>
