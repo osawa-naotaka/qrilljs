@@ -7,7 +7,7 @@ import { getAllMarkdowns } from "qrilljs/server";
 
 export default function Root(store: Store): HRootPageFn<void> {
     const Page = page(store);
-    const PageMainArea = element(store, "main", { name: "page-main-area" });
+    const PageMainArea = element(store, { tag: "main", name: "page-main-area" });
     const Summaries = summaries(store);
 
     const styles = [

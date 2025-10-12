@@ -11,7 +11,7 @@ export type NavigationArgument = {
 };
 
 export function navigation(store: Store): HComponentFn<NavigationArgument> {
-    const Navigation = element(store, "nav", { name: "navigation" });
+    const Navigation = element(store, { tag: "nav", name: "navigation" });
     const Link = link(store);
     const icons: HSvgBrandsIconName[] = ["youtube", "x-twitter", "github"];
     const SvgIconStore = faSvgIconStore(

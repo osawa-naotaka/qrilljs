@@ -11,7 +11,7 @@ import type { HComponentFn, Markdown, Store } from "qrilljs/core";
 export type ArticleArgument = Markdown<PostFm>;
 
 export function article(store: Store): HComponentFn<ArticleArgument> {
-    const Article = element(store, "article", { name: "article" });
+    const Article = element(store, { tag: "article", name: "article" });
     const ArticleHeader = articleHeader(store);
     const Author = element(store);
     const ArticleTag = tag(store);

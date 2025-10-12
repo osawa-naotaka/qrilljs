@@ -13,9 +13,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+- Change element() argument.
+
+## [0.1.0-alpha.23] - 2025-10-11
+### Fixed
 - fixed an issue where multi-calling registerStyle() result in clear previous style.
+
+### Removed
 - remove registerStyle()
 
+### Added
 - add registerStyle(), registerScript(), registerAsset(), registerInsert(), registerFont().
 
 ## [0.1.0-alpha.22] - 2025-10-11
@@ -161,7 +168,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.22...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.23...HEAD
+[0.1.0-alpha.23]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.22...v0.1.0-alpha.23
 [0.1.0-alpha.22]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.21...v0.1.0-alpha.22
 [0.1.0-alpha.21]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.20...v0.1.0-alpha.21
 [0.1.0-alpha.20]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.19...v0.1.0-alpha.20

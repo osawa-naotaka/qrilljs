@@ -18,7 +18,7 @@ export async function rootPageFnParameters(): Promise<RootParameter[]> {
 
 export default function Root(store: Store): HRootPageFn<RootParameter> {
     const Page = page(store);
-    const PageMainArea = element(store, "main", { name: "page-main-area" });
+    const PageMainArea = element(store, { tag: "main", name: "page-main-area" });
     const Article = article(store);
     const ToC = toc(store);
 

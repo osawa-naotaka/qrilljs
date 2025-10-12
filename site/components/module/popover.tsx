@@ -9,8 +9,8 @@ export type PopoverArgument = {
 };
 
 export function popover(store: Store): HComponentFn<PopoverArgument> {
-    const Popover = element(store, "div", { name: "popover" });
-    const Button = element(store, "button");
+    const Popover = element(store, { name: "popover" });
+    const Button = element(store, { tag: "button" });
     const CloseArea = element(store);
     const Container = element(store);
     const Content = element(store);

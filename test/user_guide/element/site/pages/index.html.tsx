@@ -2,7 +2,7 @@ import type { HRootPageFn, Store } from "qrilljs/core";
 import { element } from "qrilljs/core";
 
 export default function Root(store: Store): HRootPageFn<void> {
-    const SiteTitle = element(store, "h1", { name: "site-title" });
+    const SiteTitle = element(store, { tag: "h1", name: "site-title" });
     return async () => (
         <html lang="en">
             <head>

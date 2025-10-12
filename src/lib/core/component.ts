@@ -25,18 +25,19 @@ export type HElementFn<K> = {
     designator: string;
 };
 
-export type ElementArg = {
+export type ElementArg<K extends Tag | qrillTag> = {
+    tag?: K;
     class?: string | string[];
     name?: string;
 };
 
-export function element<K extends Tag | qrillTag>(store: Store, tag?: K, arg: ElementArg = {}): HElementFn<K> {
+export function element<K extends Tag | qrillTag>(store: Store, arg: ElementArg<K> = {}): HElementFn<K> {
     const name_with_hash = name_with_one_time_hash(store, arg.name || "qrill");
     const dot_name = `.${name_with_hash}`;
     const class_name = arg.class === undefined ? [] : typeof arg.class === "string" ? [arg.class] : arg.class;
     return Object.assign(
         (attribute: AttributeOf<K>, ...children: HNode[]) => ({
-            tag: tag || ("div" as const),
+            tag: arg.tag || ("div" as const),
             attribute: addClassInRecord(attribute, [name_with_hash, ...class_name]),
             children,
         }),

@@ -6,7 +6,7 @@ export type PageFooterArgument = {
 };
 
 export function pageFooter(store: Store): HComponentFn<PageFooterArgument> {
-    const PageFooter = element(store, "footer", { name: "page-footer" });
+    const PageFooter = element(store, { tag: "footer", name: "page-footer" });
     const Content = element(store);
     const Copyright = element(store);
 

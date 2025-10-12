@@ -22,11 +22,11 @@ import * as v from "valibot";
 import { StaticSeekError, createSearchFn } from "staticseek";
 
 export function search(store: Store): HComponentFn<HArgument> {
-    const Search = element(store, "div", { name: "search" });
+    const Search = element(store, { name: "search" });
     const SearchBar = element(store);
-    const Input = element(store, "input", { name: "search-input" });
+    const Input = element(store, { tag: "input", name: "search-input" });
     const InputIcon = faSvgIconFont(store, { type: "solid", name: "magnifying-glass" });
-    const Result = element(store, "ul", { name: "search-result" });
+    const Result = element(store, { tag: "ul", name: "search-result" });
     searchResultItem(store);
 
     const component_sytles = [
@@ -116,7 +116,7 @@ type SearchResultItemAttribute = {
 };
 
 export function searchResultItem(store: Store): HComponentFn<SearchResultItemAttribute> {
-    const ResultItem = element(store, "li");
+    const ResultItem = element(store, { tag: "li" });
     const Meta = element(store);
     const Title = element(store);
     const Description = element(store);
