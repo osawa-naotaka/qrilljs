@@ -3,9 +3,8 @@ import { article } from "@site/components/module/article";
 import { toc } from "@site/components/module/toc";
 import { page } from "@site/components/pages/page";
 import { navitem, postFmSchema, posts_dir, site } from "@site/site.config";
-import { S_MEDIUM, W_MEDIUM, element, registerRootPage, style } from "qrilljs/core";
 import type { HRootPageFn, Store } from "qrilljs/core";
-import { S_2XLARGE } from "qrilljs/core";
+import { element, registerRootPage, S_2XLARGE, S_MEDIUM, style, W_MEDIUM } from "qrilljs/core";
 import { getMarkdown, listFiles, markdownToHtml } from "qrilljs/server";
 
 type RootParameter = {

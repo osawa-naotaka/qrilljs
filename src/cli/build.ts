@@ -2,8 +2,8 @@ import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node
 import { createRequire } from "node:module";
 import path from "node:path";
 import { cwd } from "node:process";
-import { loadConfig } from "@/cli/config";
-import { default_config } from "@/cli/config";
+import { globSync } from "glob";
+import { default_config, loadConfig } from "@/cli/config";
 import { bundleCss } from "@/cli/css";
 import { bundleWoff2 } from "@/cli/font";
 import { bundleHtml } from "@/cli/html";
@@ -12,11 +12,10 @@ import { bundleScriptEsbuild } from "@/cli/script";
 import type { Attribute, HRootPageFn } from "@/lib/core/component";
 import { default_design_rule } from "@/lib/core/design";
 import { gt } from "@/lib/core/elements";
-import { generateStore } from "@/lib/core/store";
 import type { HComponentAsset, Store } from "@/lib/core/store";
+import { generateStore } from "@/lib/core/store";
 import { replaceExt } from "@/lib/core/util";
 import { globExt } from "@/server";
-import { globSync } from "glob";
 
 export async function build(conf_file: string | undefined) {
     const start = performance.now();

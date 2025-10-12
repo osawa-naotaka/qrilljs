@@ -1,10 +1,10 @@
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { cwd } from "node:process";
+import { globSync } from "glob";
 import type { HComponentAsset } from "@/core";
 import type { Attribute } from "@/lib/core/component";
 import { globExt } from "@/lib/server/util";
-import { globSync } from "glob";
 
 type RouteTable = {
     path_regexp: RegExp;
@@ -50,7 +50,7 @@ export function withoutExt(file: string): string {
 }
 
 function escapeForRegExp(exp: string): string {
-    return exp.replace(/[-^$\\\.*+?()[\]{}|/]/g, "\\$&");
+    return exp.replace(/[-^$\\.*+?()[\]{}|/]/g, "\\$&");
 }
 
 function createPageRouteTable(rootdir: string): RouteTable[] {

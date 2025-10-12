@@ -1,5 +1,5 @@
-import { component, element } from "@/lib/core/component";
 import type { HArgument, HComponentFn } from "@/lib/core/component";
+import { component, element } from "@/lib/core/component";
 import type { Store } from "@/lib/core/store";
 
 const site = {

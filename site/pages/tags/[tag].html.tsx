@@ -1,8 +1,8 @@
 import { page } from "@site/components/pages/page";
 import { summaries } from "@site/components/sections/summaries";
 import { navitem, postFmSchema, posts_dir, site, tag_map } from "@site/site.config";
-import { S_MEDIUM, W_MEDIUM, element, registerRootPage, style } from "qrilljs/core";
 import type { HRootPageFn, Store } from "qrilljs/core";
+import { element, registerRootPage, S_MEDIUM, style, W_MEDIUM } from "qrilljs/core";
 import { getAllMarkdowns } from "qrilljs/server";
 
 type RootParameter = {

@@ -1,6 +1,6 @@
 import { tag_map } from "@site/site.config";
-import { component, element } from "qrilljs/core";
 import type { HComponentFn, Store } from "qrilljs/core";
+import { component, element } from "qrilljs/core";
 
 export type TagArgument = {
     slug: string;

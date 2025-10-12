@@ -2,24 +2,26 @@ import { dateTime } from "@site/components/element/dateTime";
 import { tag } from "@site/components/element/tag";
 import { postFmSchema } from "@site/site.config";
 import { TAG_DESIGN } from "@site/styles/design";
+import type { HArgument, HClientFn, HComponentFn, HNode, Store } from "qrilljs/core";
 import {
-    S_MEDIUM,
-    W_MEDIUM,
     colorof,
     component,
     createDom,
     element,
+    F_SMALL,
+    F_TINY,
     faSvgIconFont,
     registerScript,
     registerStyle,
+    S_2XLARGE,
+    S_LARGE,
+    S_MEDIUM,
     style,
+    W_MEDIUM,
 } from "qrilljs/core";
-import { F_SMALL, F_TINY, S_2XLARGE, S_LARGE } from "qrilljs/core";
-import type { HArgument, HClientFn, HComponentFn, HNode, Store } from "qrilljs/core";
 import type { SearchResult } from "staticseek";
+import { createSearchFn, StaticSeekError } from "staticseek";
 import * as v from "valibot";
-
-import { StaticSeekError, createSearchFn } from "staticseek";
 
 export function search(store: Store): HComponentFn<HArgument> {
     const Search = element(store, { name: "search" });

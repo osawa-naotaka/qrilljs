@@ -1,30 +1,28 @@
 import { readFile } from "node:fs/promises";
-import http from "node:http";
 import type { IncomingMessage, ServerResponse } from "node:http";
+import http from "node:http";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { cwd } from "node:process";
 import type { Duplex } from "node:stream";
-import { loadConfig, requireConfig } from "@/cli/config";
+import type { FSWatcher } from "chokidar";
+import chokidar from "chokidar";
+import { WebSocketServer } from "ws";
 import type { QrillConfig } from "@/cli/config";
-import { default_config } from "@/cli/config";
+import { default_config, loadConfig, requireConfig } from "@/cli/config";
 import { bundleCss } from "@/cli/css";
 import { bundleWoff2 } from "@/cli/font";
-import { bundleHtml } from "@/cli/html";
-import { stringifyToHtml } from "@/cli/html";
-import { createAssetRouter, createPageRouter, createStaticRouter, withoutExt } from "@/cli/route";
+import { bundleHtml, stringifyToHtml } from "@/cli/html";
 import type { Router } from "@/cli/route";
+import { createAssetRouter, createPageRouter, createStaticRouter, withoutExt } from "@/cli/route";
 import { bundleScriptEsbuild } from "@/cli/script";
 import { default_design_rule } from "@/lib/core/design";
 import { gt } from "@/lib/core/elements";
-import { generateStore } from "@/lib/core/store";
 import type { Store } from "@/lib/core/store";
+import { generateStore } from "@/lib/core/store";
 import { contentType } from "@/lib/core/util";
 import { ErrorPage, InternalServerErrorPage } from "@/page/error";
 import { qrill_error_css } from "@/page/qrill-error";
-import chokidar from "chokidar";
-import type { FSWatcher } from "chokidar";
-import { WebSocketServer } from "ws";
 
 export async function serve(conf_file: string | undefined): Promise<void> {
     const config = loadConfig(conf_file ?? "qrill.config.ts", default_config);
@@ -33,11 +31,7 @@ export async function serve(conf_file: string | undefined): Promise<void> {
 
     const [proc, reload] = createReqProcessor(config);
 
-    if (
-        typeof process !== "undefined" &&
-        process.versions &&
-        Object.prototype.hasOwnProperty.call(process.versions, "bun")
-    ) {
+    if (typeof process !== "undefined" && process.versions && Object.hasOwn(process.versions, "bun")) {
         createAndStartBunServer(config, proc, reload, watcher);
     } else if (typeof globalThis !== "undefined" && globalThis.Deno) {
         createAndStartDenoServer(config, proc, reload, watcher);
@@ -290,6 +284,7 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
             // reload plugin
             if (new URL(req.url).pathname.endsWith("/reload.js")) {
                 const reload =
+                    // biome-ignore lint/suspicious/noTemplateCurlyInString : this template string placeholder in the "" is intended one.
                     "const ws = new WebSocket(`ws://${location.host}/reload`); ws.onmessage = (event) => { if (event.data === 'reload') { location.reload(); } }; window.addEventListener('beforeunload', () => ws.close());";
                 return normalResponse(reload, ".js");
             }

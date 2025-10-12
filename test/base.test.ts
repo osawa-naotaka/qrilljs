@@ -1,7 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { Body, Footer, H1, Head, Header, Html, Script, Title } from "../src/lib/core/elements";
-import { insertNodes } from "../src/lib/core/style";
-import { rulesToString } from "../src/lib/core/style";
+import { insertNodes, rulesToString } from "../src/lib/core/style";
 
 describe("ruleToString test", () => {
     test("Sigle Selector, string", () => {

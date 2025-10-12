@@ -1,5 +1,4 @@
 import { cwd } from "node:process";
-import type { Store } from "@/core";
 import commonjs from "@rollup/plugin-commonjs";
 import nodeResolve from "@rollup/plugin-node-resolve";
 import terser from "@rollup/plugin-terser";
@@ -7,6 +6,7 @@ import typescript from "@rollup/plugin-typescript";
 import virtual from "@rollup/plugin-virtual";
 import esbuild from "esbuild";
 import { rollup } from "rollup";
+import type { Store } from "@/core";
 
 export async function bundleScriptEsbuild(store: Store): Promise<string | null> {
     const script_files = Array.from(store.components.values())

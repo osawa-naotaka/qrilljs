@@ -2,9 +2,18 @@ import { drawer } from "@site/components/module/drawer";
 import { navigation } from "@site/components/module/navigation";
 import { popover } from "@site/components/module/popover";
 import { search } from "@site/components/module/search";
-import { S_MEDIUM, W_MEDIUM, colorof, component, element, faSvgIconFont, registerStyle, style } from "qrilljs/core";
 import type { HComponentFn, HSvgBrandsIconName, Store } from "qrilljs/core";
-import { F_3XLARGE } from "qrilljs/core";
+import {
+    colorof,
+    component,
+    element,
+    F_3XLARGE,
+    faSvgIconFont,
+    registerStyle,
+    S_MEDIUM,
+    style,
+    W_MEDIUM,
+} from "qrilljs/core";
 
 export type PageHeaderArgument = {
     title: string;
