@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+- nix flakeとnpm packagesのバージョンを最新に上げた。
+
 ## [0.1.0-alpha.24] - 2025-10-12
 
 ### Changed
