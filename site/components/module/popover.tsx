@@ -55,7 +55,7 @@ export function popover(store: Store): HComponentFn<PopoverArgument> {
         }),
     ];
 
-    const popover_container_id = `container-${Container.name}`;
+    const popover_container_id = `container-${Container.designator}`;
 
     registerStyle(store, Popover, styles);
 
