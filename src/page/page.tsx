@@ -1,4 +1,4 @@
-import { element } from "@/lib/core/component";
+import { component, element } from "@/lib/core/component";
 import type { HArgument, HComponentFn } from "@/lib/core/component";
 import type { Store } from "@/lib/core/store";
 
@@ -13,7 +13,7 @@ export function page(store: Store): HComponentFn<HArgument> {
     const PageFooter = element(store, "footer", { class: "page-footer" });
     const PageFooterCopyright = element(store, "div", { class: "page-footer-copyright" });
 
-    return (_attribute, ...children) => (
+    return component("html", (_attribute, ...children) => (
         <html lang={site.lang}>
             <head>
                 <meta charset="utf-8" />
@@ -34,5 +34,5 @@ export function page(store: Store): HComponentFn<HArgument> {
                 </PageFooter>
             </body>
         </html>
-    );
+    ));
 }

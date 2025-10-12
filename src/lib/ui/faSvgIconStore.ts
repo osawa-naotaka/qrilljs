@@ -1,5 +1,5 @@
-import type { Attribute, HComponentFn } from "@/lib/core/component";
-import type { Store } from "@/lib/core/store";
+import { type Attribute, type HComponentFn, component } from "@/lib/core/component";
+import { type Store, name_with_one_time_hash } from "@/lib/core/store";
 import { hash_djb2_object } from "@/lib/core/util";
 import { faSvgIconFont } from "@/lib/ui/faSvgIconFont";
 import type { HSvgIconArg } from "@/lib/ui/faSvgIconFont";
@@ -10,11 +10,11 @@ export function faSvgIconStore(store: Store, icons: HSvgIconArg[]): HComponentFn
         icon_map.set(hash_djb2_object(icon), faSvgIconFont(store, icon));
     }
 
-    return (icon) => {
+    return component(name_with_one_time_hash(store, "fa-svg-icon-store"), (icon) => {
         const icon_fn = icon_map.get(hash_djb2_object(icon));
         if (icon_fn !== undefined) {
             return icon_fn({});
         }
         return "";
-    };
+    });
 }
