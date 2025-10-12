@@ -1,5 +1,6 @@
 import type { Attribute, HElement, HNode } from "@/lib/core/component";
-import { type CompoundSelector, type Selector, isCombinator, normalizeSelector } from "@/lib/core/style";
+import type { CompoundSelector, Selector } from "@/lib/core/style";
+import { isCombinator, normalizeSelector } from "@/lib/core/style";
 
 // Inserter (HNode).
 export function insertNodes(root: HNode, selector: Selector[], insert: HNode[], search_deep: boolean): HNode {

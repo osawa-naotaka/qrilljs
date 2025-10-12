@@ -15,7 +15,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [0.1.0-alpha.24] - 2025-10-12
 
-- Change element() argument.
+### Changed
+- Changed the element() function signature to accept all options as the second argument.
 
 ## [0.1.0-alpha.23] - 2025-10-11
 ### Fixed
