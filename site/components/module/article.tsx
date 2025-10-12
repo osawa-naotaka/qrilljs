@@ -93,7 +93,7 @@ export function article(store: Store): HComponentFn<ArticleArgument> {
         },
     ]);
 
-    return component(Article, ({ data, slug }, ...child) => (
+    return component(Article, ({ data, slug }, ...children) => (
         <Article>
             <ArticleHeader title={<h2>{data.title}</h2>}>
                 <Author>{data.author}</Author>
@@ -103,7 +103,7 @@ export function article(store: Store): HComponentFn<ArticleArgument> {
                 ))}
                 <ShareX title={data.title} url={`http://localhost/posts/${slug}`} />
             </ArticleHeader>
-            <ArticleText>{child}</ArticleText>
+            <ArticleText>{children}</ArticleText>
         </Article>
     ));
 }

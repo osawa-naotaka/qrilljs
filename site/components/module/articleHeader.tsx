@@ -27,10 +27,10 @@ export function articleHeader(store: Store): HComponentFn<ArticleHeaderArgument>
 
     registerStyle(store, ArticleHeader, component_styles);
 
-    return component(ArticleHeader, ({ title }, ...child) => (
+    return component(ArticleHeader, ({ title }, ...children) => (
         <ArticleHeader>
             <Title>{title}</Title>
-            <Meta>{child}</Meta>
+            <Meta>{children}</Meta>
         </ArticleHeader>
     ));
 }

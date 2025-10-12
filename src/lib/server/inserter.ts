@@ -23,21 +23,21 @@ export function insertNodes(root: HNode, selector: Selector[], insert: HNode[], 
     if (matchCompoundSelector(normalizeSelector(selector[0]), root)) {
         const child =
             selector.length === 1
-                ? [...root.child, ...insert]
-                : root.child.map((c) => insertNodes(c, selector.slice(1), insert, true));
+                ? [...root.children, ...insert]
+                : root.children.map((c) => insertNodes(c, selector.slice(1), insert, true));
         return {
             tag: root.tag,
             attribute: root.attribute,
-            child,
+            children: child,
         };
     }
 
     if (search_deep) {
-        const child = root.child.filter((c) => c);
+        const child = root.children.filter((c) => c);
         return {
             tag: root.tag,
             attribute: root.attribute,
-            child: child.map((c) => insertNodes(c, selector, insert, true)),
+            children: child.map((c) => insertNodes(c, selector, insert, true)),
         };
     }
     return root;

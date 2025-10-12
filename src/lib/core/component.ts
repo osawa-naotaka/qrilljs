@@ -16,11 +16,11 @@ export type HNode<T extends Attribute = Attribute> = string | HElement<T>;
 export type HElement<K> = {
     tag: Tag | qrillTag;
     attribute: Partial<K>;
-    child: HNode[];
+    children: HNode[];
 };
 
 // qrill Element (is function), expressing HTML element
-export type HElementFn<K> = (attribute: AttributeOf<K>, ...child: HNode[]) => HNode;
+export type HElementFn<K> = (attribute: AttributeOf<K>, ...children: HNode[]) => HNode;
 
 export type ElementArg = {
     class?: string | string[];
@@ -32,16 +32,16 @@ export function element<K extends Tag | qrillTag>(store: Store, tag?: K, arg: El
     const dot_name = `.${name_with_hash}`;
     const class_name = arg.class === undefined ? [] : typeof arg.class === "string" ? [arg.class] : arg.class;
     return {
-        [dot_name]: (attribute: AttributeOf<K>, ...child: HNode[]) => ({
+        [dot_name]: (attribute: AttributeOf<K>, ...children: HNode[]) => ({
             tag: tag || ("div" as const),
             attribute: addClassInRecord(attribute, [name_with_hash, ...class_name]),
-            child,
+            children,
         }),
     }[dot_name];
 }
 
 // qrill Component (is function)
-export type HComponentFn<T> = (argument: HComponentFnArg<T>, ...child: HNode[]) => HNode;
+export type HComponentFn<T> = (argument: HComponentFnArg<T>, ...children: HNode[]) => HNode;
 // biome-ignore lint: using any.
 export type HComponentFnArg<T> = T & { class?: string | string[]; id?: string; children?: any; key?: any };
 
@@ -49,7 +49,7 @@ export type HComponentFnArg<T> = T & { class?: string | string[]; id?: string; c
 export function component<K, T>(name_fn: HComponentFn<K> | string, component_fn: HComponentFn<T>): HComponentFn<T> {
     const component_name = typeof name_fn === "string" ? `.${name_fn}` : name_fn.name;
     return {
-        [component_name]: (argument: HComponentFnArg<T>, ...child: HNode[]) => component_fn(argument, ...child),
+        [component_name]: (argument: HComponentFnArg<T>, ...children: HNode[]) => component_fn(argument, ...children),
     }[component_name];
 }
 
@@ -62,8 +62,8 @@ export function as<T>(class_name: string, fn: HComponentFn<T>): HComponentFn<T> 
     const Class = gt("class");
     const dot_name = `.${class_name}`;
     return {
-        [dot_name]: (argument: HComponentFnArg<T>, ...child: HNode[]) =>
-            Class({ class: class_name }, fn(argument, ...child)),
+        [dot_name]: (argument: HComponentFnArg<T>, ...children: HNode[]) =>
+            Class({ class: class_name }, fn(argument, ...children)),
     }[dot_name];
 }
 

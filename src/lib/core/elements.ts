@@ -1944,7 +1944,7 @@ export function printDefine() {
 
 export function gt<K extends Tag | qrillTag>(tag: K): HElementFn<K> {
     return {
-        [tag]: (attribute: AttributeOf<K>, ...child: HNode[]) => ({ tag, attribute, child }),
+        [tag]: (attribute: AttributeOf<K>, ...children: HNode[]) => ({ tag, attribute, children }),
     }[tag];
 }
 

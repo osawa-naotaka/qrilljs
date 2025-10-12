@@ -24,7 +24,7 @@ import type { H1Attribute, HComponentFn } from "qrill/core";
 
 export function siteTitle(): HComponentFn<Partial<H1Attribute>> {
     const SiteTitle = element("site-title", { tag: "h1" });
-    return component(SiteTitle, (_attr, ...child) => (
+    return component(SiteTitle, (_attr, ...children) => (
         <SiteTitle>
             <a href="/">{child}</a>
         </SiteTitle>
@@ -50,7 +50,7 @@ const SiteTitle = element("site-title", { tag: "h1" });
 
 #### 3. コンポーネントの実装
 ```typescript
-return component(SiteTitle, (_attr, ...child) => (
+return component(SiteTitle, (_attr, ...children) => (
     <SiteTitle>
         <a href="/">{child}</a>
     </SiteTitle>
@@ -59,7 +59,7 @@ return component(SiteTitle, (_attr, ...child) => (
 - **第一引数**: ルート要素（`SiteTitle`）
 - **第二引数**: コンポーネントの実装関数
   - `_attr`: コンポーネントに渡された属性（この例では未使用）
-  - `...child`: コンポーネントの子要素（テキストや他の要素）
+  - `...children`: コンポーネントの子要素（テキストや他の要素）
 
 ## コンポーネントの使用
 
@@ -255,7 +255,7 @@ component<K, T>(
 - **説明**: コンポーネントの実装ロジック
 - **引数**:
   - `props: T & StandardHTMLAttributes` - コンポーネントに渡された属性
-  - `...children: HNode[]` - 子要素
+  - `...childrenren: HNode[]` - 子要素
 
 ### 使用パターン
 

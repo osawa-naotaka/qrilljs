@@ -162,7 +162,7 @@ export function myButton(store: Store): HComponentFn<ButtonAttribute> {
         }),
     ]);
     
-    return component(Button, (attr, ...children) => (
+    return component(Button, (attr, ...childrenren) => (
         <Button {...attr}>{children}</Button>
     ));
 }
@@ -232,7 +232,7 @@ export function responsiveCard(store: Store): HComponentFn<{}> {
         }),
     ]);
     
-    return component(ResponsiveCard, (attr, ...children) => (
+    return component(ResponsiveCard, (attr, ...childrenren) => (
         <ResponsiveCard {...attr}>{children}</ResponsiveCard>
     ));
 }
@@ -315,7 +315,7 @@ export function button(store: Store): HComponentFn<{}> {
         }),
     ]);
     
-    return component(Button, (attr, ...children) => (
+    return component(Button, (attr, ...childrenren) => (
         <Button {...attr}>{children}</Button>
     ));
 }
@@ -336,7 +336,7 @@ export function semanticComponent(store: Store): HComponentFn<{}> {
         }),
     ]);
     
-    return component(Component, (attr, ...children) => (
+    return component(Component, (attr, ...childrenren) => (
         <Component {...attr}>{children}</Component>
     ));
 }
@@ -357,7 +357,7 @@ export function spacingComponent(store: Store): HComponentFn<{}> {
         }),
     ]);
     
-    return component(Component, (attr, ...children) => (
+    return component(Component, (attr, ...childrenren) => (
         <Component {...attr}>{children}</Component>
     ));
 }
@@ -383,7 +383,7 @@ export function responsiveComponent(store: Store): HComponentFn<{}> {
         }),
     ]);
     
-    return component(Component, (attr, ...children) => (
+    return component(Component, (attr, ...childrenren) => (
         <Component {...attr}>{children}</Component>
     ));
 }

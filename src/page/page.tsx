@@ -13,7 +13,7 @@ export function page(store: Store): HComponentFn<HArgument> {
     const PageFooter = element(store, "footer", { class: "page-footer" });
     const PageFooterCopyright = element(store, "div", { class: "page-footer-copyright" });
 
-    return (_attribute, ...child) => (
+    return (_attribute, ...children) => (
         <html lang={site.lang}>
             <head>
                 <meta charset="utf-8" />
@@ -28,7 +28,7 @@ export function page(store: Store): HComponentFn<HArgument> {
                         <a href="/">{site.name}</a>
                     </h1>
                 </PageHeader>
-                {child}
+                {children}
                 <PageFooter>
                     <PageFooterCopyright>&copy; 2025 {site.name}</PageFooterCopyright>
                 </PageFooter>
