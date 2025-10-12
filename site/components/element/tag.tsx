@@ -7,7 +7,7 @@ export type TagArgument = {
 };
 
 export function tag(store: Store): HComponentFn<TagArgument> {
-    const Tag = element(store, "a", { name: "tag" });
+    const Tag = element(store, { tag: "a", name: "tag" });
 
     return component(Tag, ({ slug }) => <Tag href={`/tags/${slug}`}>{tag_map[slug] || slug}</Tag>);
 }

@@ -17,16 +17,16 @@ export type JSXChildren = HNode | HNode[] | JSXChildren[];
 
 export function jsx<T extends Attribute>(element: Component<T>, props: Partial<T> & { children?: JSXChildren }): HNode {
     const { children, ...attribute } = props;
-    const child = normalizeChildren(children);
+    const normalized_children = normalizeChildren(children);
 
     if (typeof element === "string") {
         return {
             tag: element as Tag,
             attribute,
-            child,
+            children: normalized_children,
         };
     }
-    return element(attribute as T, ...child);
+    return element(attribute as T, ...normalized_children);
 }
 
 export const jsxs = jsx;

@@ -6,8 +6,8 @@ export type ToCArgument = {
 };
 
 export function toc(store: Store): HComponentFn<ToCArgument> {
-    const ToC = element(store, "ul");
-    const Item = element(store, "li");
+    const ToC = element(store, { tag: "ul" });
+    const Item = element(store, { tag: "li" });
 
     return component(ToC, ({ toc }) => (
         <ToC>

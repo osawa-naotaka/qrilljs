@@ -11,7 +11,7 @@ import { F_XLARGE, S_XLARGE } from "qrilljs/core";
 export type SummaryArgument = Markdown<PostFm>;
 
 export function summary(store: Store): HComponentFn<SummaryArgument> {
-    const Summary = element(store, "article", { name: "summary" });
+    const Summary = element(store, { tag: "article", name: "summary" });
     const ArticleHeader = articleHeader(store);
     const Author = element(store);
     const SummaryTag = tag(store);

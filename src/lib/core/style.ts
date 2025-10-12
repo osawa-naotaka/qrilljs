@@ -53,7 +53,7 @@ export function normalizeSelector(context: Selector): CompoundSelector {
             return [context];
         }
         if (isComponentFn(context)) {
-            return [context.name];
+            return [context.designator];
         }
     }
     throw new Error(`createSelector: internal error. type mismatch 1 at ${context}`);

@@ -50,7 +50,7 @@ export function stringifyToHtml(depth: number, additional_class: string | string
         if (node.tag === "raw") {
             const window = new JSDOM("").window;
             const purify = DOMPurify(window);
-            return node.child
+            return node.children
                 .map((x) => {
                     if (typeof x !== "string") {
                         throw new Error(`Raw node must be string at '${node}'.`);
@@ -65,16 +65,16 @@ export function stringifyToHtml(depth: number, additional_class: string | string
         }
 
         if (node.tag === "unwrap") {
-            return node.child.map(stringifyToHtml(depth + 1, additional_class)).join("");
+            return node.children.map(stringifyToHtml(depth + 1, additional_class)).join("");
         }
 
         if (node.tag === "class") {
-            return node.child.map(stringifyToHtml(depth + 1, node.attribute.class || [])).join("");
+            return node.children.map(stringifyToHtml(depth + 1, node.attribute.class || [])).join("");
         }
 
         const attribute =
             additional_class.length === 0 ? node.attribute : addClassInRecord(node.attribute, additional_class);
-        return `<${node.tag}${attributeToString(attribute)}>${node.child.map(stringifyToHtml(depth + 1, [])).join("")}</${node.tag}>`;
+        return `<${node.tag}${attributeToString(attribute)}>${node.children.map(stringifyToHtml(depth + 1, [])).join("")}</${node.tag}>`;
     };
 }
 

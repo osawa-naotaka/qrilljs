@@ -11,7 +11,7 @@ import type { HComponentFn, Markdown, Store } from "qrilljs/core";
 export type ArticleArgument = Markdown<PostFm>;
 
 export function article(store: Store): HComponentFn<ArticleArgument> {
-    const Article = element(store, "article", { name: "article" });
+    const Article = element(store, { tag: "article", name: "article" });
     const ArticleHeader = articleHeader(store);
     const Author = element(store);
     const ArticleTag = tag(store);
@@ -93,7 +93,7 @@ export function article(store: Store): HComponentFn<ArticleArgument> {
         },
     ]);
 
-    return component(Article, ({ data, slug }, ...child) => (
+    return component(Article, ({ data, slug }, ...children) => (
         <Article>
             <ArticleHeader title={<h2>{data.title}</h2>}>
                 <Author>{data.author}</Author>
@@ -103,7 +103,7 @@ export function article(store: Store): HComponentFn<ArticleArgument> {
                 ))}
                 <ShareX title={data.title} url={`http://localhost/posts/${slug}`} />
             </ArticleHeader>
-            <ArticleText>{child}</ArticleText>
+            <ArticleText>{children}</ArticleText>
         </Article>
     ));
 }

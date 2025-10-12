@@ -29,11 +29,11 @@ function createDomInternal(
         }
 
         if (node.tag === "unwrap") {
-            return node.child.flatMap(createDomInternal(depth + 1, additional_class, d));
+            return node.children.flatMap(createDomInternal(depth + 1, additional_class, d));
         }
 
         if (node.tag === "class") {
-            return node.child.flatMap(createDomInternal(depth + 1, node.attribute.class || [], d));
+            return node.children.flatMap(createDomInternal(depth + 1, node.attribute.class || [], d));
         }
 
         const element = d.createElement(node.tag);
@@ -41,7 +41,7 @@ function createDomInternal(
         const classes = typeof additional_class === "string" ? [additional_class] : additional_class;
         element.classList.add(...classes.map(sanitizeAttributeValue("class")));
 
-        for (const child of node.child) {
+        for (const child of node.children) {
             for (const child_element of createDomInternal(depth + 1, [], d)(child)) {
                 element.appendChild(child_element);
             }

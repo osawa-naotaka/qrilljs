@@ -9,12 +9,12 @@ export type DrawerArgument = {
 };
 
 export function drawer(store: Store, button_id: string): HComponentFn<DrawerArgument> {
-    const Drawer = element(store, "div", { name: "drawer" });
+    const Drawer = element(store, { name: "drawer" });
     const Title = element(store);
     const HeaderSpace = element(store);
     const Content = element(store);
-    const OpenState = element(store, "input");
-    const OpenButton = element(store, "label");
+    const OpenState = element(store, { tag: "input" });
+    const OpenButton = element(store, { tag: "label" });
 
     const styles = [
         style(Drawer)({ overflow: "hidden" }),

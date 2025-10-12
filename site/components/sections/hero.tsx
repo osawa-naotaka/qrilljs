@@ -3,7 +3,7 @@ import { component, element, registerStyle, style } from "qrilljs/core";
 import type { HArgument, HComponentFn, Store } from "qrilljs/core";
 
 export function hero(store: Store): HComponentFn<HArgument> {
-    const Hero = element(store, "div", { name: "hero" });
+    const Hero = element(store, { name: "hero" });
     const HeroText = element(store);
 
     const component_styles = [

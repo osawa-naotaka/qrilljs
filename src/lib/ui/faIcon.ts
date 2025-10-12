@@ -18,8 +18,8 @@ export type HSolidIconArg = {
 export type HIconArg = HBrandsIconArg | HSolidIconArg;
 
 export function faIcon(store: Store): HComponentFn<HIconArg> {
-    const Top = element(store, "i", { name: "icon" });
-    const link = element(store, "link");
+    const Top = element(store, { tag: "i", name: "icon" });
+    const link = element(store, { tag: "link" });
 
     registerInsert(store, Top, [
         {

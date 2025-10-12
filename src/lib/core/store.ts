@@ -62,7 +62,7 @@ export function registerStyle<K>(
     name_fn: HComponentFn<K> | string,
     raw_style: (StyleRule | StyleRule[])[],
 ): void {
-    const component_name = typeof name_fn === "string" ? name_fn : name_fn.name;
+    const component_name = typeof name_fn === "string" ? name_fn : name_fn.designator;
     const style = raw_style.flatMap((x) => (Array.isArray(x) ? x : [x]));
 
     const component = store.components.get(component_name);
@@ -89,7 +89,7 @@ export function registerStyle<K>(
 }
 
 export function registerScript<K>(store: Store, name_fn: HComponentFn<K> | string, script: string): void {
-    const component_name = typeof name_fn === "string" ? name_fn : name_fn.name;
+    const component_name = typeof name_fn === "string" ? name_fn : name_fn.designator;
 
     const component = store.components.get(component_name);
     if (component === undefined) {
@@ -116,7 +116,7 @@ export function registerScript<K>(store: Store, name_fn: HComponentFn<K> | strin
 }
 
 export function registerAsset<K>(store: Store, name_fn: HComponentFn<K> | string, assets: HComponentAsset[]): void {
-    const component_name = typeof name_fn === "string" ? name_fn : name_fn.name;
+    const component_name = typeof name_fn === "string" ? name_fn : name_fn.designator;
 
     const component = store.components.get(component_name);
     if (component === undefined) {
@@ -143,7 +143,7 @@ export function registerAsset<K>(store: Store, name_fn: HComponentFn<K> | string
 }
 
 export function registerInsert<K>(store: Store, name_fn: HComponentFn<K> | string, inserts: HComponentInsert[]): void {
-    const component_name = typeof name_fn === "string" ? name_fn : name_fn.name;
+    const component_name = typeof name_fn === "string" ? name_fn : name_fn.designator;
 
     const component = store.components.get(component_name);
     if (component === undefined) {
@@ -170,7 +170,7 @@ export function registerInsert<K>(store: Store, name_fn: HComponentFn<K> | strin
 }
 
 export function registerFont<K>(store: Store, name_fn: HComponentFn<K> | string, fonts: HIconFontCharacter[]): void {
-    const component_name = typeof name_fn === "string" ? name_fn : name_fn.name;
+    const component_name = typeof name_fn === "string" ? name_fn : name_fn.designator;
 
     const component = store.components.get(component_name);
     if (component === undefined) {

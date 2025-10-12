@@ -16,41 +16,53 @@ export type HNode<T extends Attribute = Attribute> = string | HElement<T>;
 export type HElement<K> = {
     tag: Tag | qrillTag;
     attribute: Partial<K>;
-    child: HNode[];
+    children: HNode[];
 };
 
 // qrill Element (is function), expressing HTML element
-export type HElementFn<K> = (attribute: AttributeOf<K>, ...child: HNode[]) => HNode;
+export type HElementFn<K> = {
+    (attribute: AttributeOf<K>, ...children: HNode[]): HNode;
+    designator: string;
+};
 
-export type ElementArg = {
+export type ElementArg<K extends Tag | qrillTag> = {
+    tag?: K;
     class?: string | string[];
     name?: string;
 };
 
-export function element<K extends Tag | qrillTag>(store: Store, tag?: K, arg: ElementArg = {}): HElementFn<K> {
+export function element<K extends Tag | qrillTag>(store: Store, arg: ElementArg<K> = {}): HElementFn<K> {
     const name_with_hash = name_with_one_time_hash(store, arg.name || "qrill");
     const dot_name = `.${name_with_hash}`;
     const class_name = arg.class === undefined ? [] : typeof arg.class === "string" ? [arg.class] : arg.class;
-    return {
-        [dot_name]: (attribute: AttributeOf<K>, ...child: HNode[]) => ({
-            tag: tag || ("div" as const),
+    return Object.assign(
+        (attribute: AttributeOf<K>, ...children: HNode[]) => ({
+            tag: arg.tag || ("div" as const),
             attribute: addClassInRecord(attribute, [name_with_hash, ...class_name]),
-            child,
+            children,
         }),
-    }[dot_name];
+        {
+            designator: dot_name,
+        },
+    );
 }
 
+export type HComponentRawFn<T> = (argument: HComponentFnArg<T>, ...children: HNode[]) => HNode;
+
 // qrill Component (is function)
-export type HComponentFn<T> = (argument: HComponentFnArg<T>, ...child: HNode[]) => HNode;
+export type HComponentFn<T> = {
+    (argument: HComponentFnArg<T>, ...children: HNode[]): HNode;
+    designator: string;
+};
 // biome-ignore lint: using any.
 export type HComponentFnArg<T> = T & { class?: string | string[]; id?: string; children?: any; key?: any };
 
 // if name_fn is string, it refers html elemen name like html, body, p..., so we don't use dottend name for that.
-export function component<K, T>(name_fn: HComponentFn<K> | string, component_fn: HComponentFn<T>): HComponentFn<T> {
-    const component_name = typeof name_fn === "string" ? `.${name_fn}` : name_fn.name;
-    return {
-        [component_name]: (argument: HComponentFnArg<T>, ...child: HNode[]) => component_fn(argument, ...child),
-    }[component_name];
+export function component<K, T>(name_fn: HComponentFn<K> | string, component_fn: HComponentRawFn<T>): HComponentFn<T> {
+    const component_name = typeof name_fn === "string" ? `.${name_fn}` : name_fn.designator;
+    return Object.assign((argument: HComponentFnArg<T>, ...children: HNode[]) => component_fn(argument, ...children), {
+        designator: component_name,
+    });
 }
 
 // biome-ignore lint/suspicious/noExplicitAny: HAnyComponent uses only for function.name
@@ -61,14 +73,12 @@ export type HArgument = Record<string, unknown>;
 export function as<T>(class_name: string, fn: HComponentFn<T>): HComponentFn<T> {
     const Class = gt("class");
     const dot_name = `.${class_name}`;
-    return {
-        [dot_name]: (argument: HComponentFnArg<T>, ...child: HNode[]) =>
-            Class({ class: class_name }, fn(argument, ...child)),
-    }[dot_name];
-}
-
-export function selectorOf(c: HAnyComponentFn): string {
-    return c.name;
+    return Object.assign(
+        (argument: HComponentFnArg<T>, ...children: HNode[]) => Class({ class: class_name }, fn(argument, ...children)),
+        {
+            designator: dot_name,
+        },
+    );
 }
 
 // qrill HTML Top export function
