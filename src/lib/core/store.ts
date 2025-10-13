@@ -1,7 +1,7 @@
 import type { AssetConfig } from "@/cli/config";
 import type { HComponentFn, HNode } from "@/lib/core/component";
-import { default_design_rule } from "@/lib/core/design";
 import type { DesignRule } from "@/lib/core/design";
+import { default_design_rule } from "@/lib/core/design";
 import type { Selector, StyleRule } from "@/lib/core/style";
 import type { RecursivePartial } from "@/lib/core/util";
 import { cloneAndMergeRecord, hash_djb2 } from "@/lib/core/util";

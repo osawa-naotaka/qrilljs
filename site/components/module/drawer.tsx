@@ -1,5 +1,5 @@
-import { component, element, registerStyle, style } from "qrilljs/core";
 import type { HComponentFn, HNode, Store } from "qrilljs/core";
+import { component, element, registerStyle, style } from "qrilljs/core";
 
 export type DrawerArgument = {
     title: HNode;

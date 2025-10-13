@@ -1,7 +1,7 @@
 import type { Attribute, HComponentFn } from "@/lib/core/component";
 import { component, element } from "@/lib/core/component";
-import { registerFont } from "@/lib/core/store";
 import type { Store } from "@/lib/core/store";
+import { registerFont } from "@/lib/core/store";
 
 export type HSvgIconType = "brands" | "solid";
 

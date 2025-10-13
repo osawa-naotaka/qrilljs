@@ -1,6 +1,5 @@
-import { W_MEDIUM, atStyle, colorof, component, element, registerStyle, style } from "qrilljs/core";
 import type { HComponentFn, HNode, Store } from "qrilljs/core";
-import { S_MEDIUM } from "qrilljs/core";
+import { atStyle, colorof, component, element, registerStyle, S_MEDIUM, style, W_MEDIUM } from "qrilljs/core";
 
 export type PopoverArgument = {
     open_button: HNode;

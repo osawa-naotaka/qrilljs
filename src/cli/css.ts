@@ -2,8 +2,8 @@ import { generateFontCss } from "@/cli/font";
 import type { Properties } from "@/lib/core/properties";
 import { validatePropertyName } from "@/lib/core/sanityze";
 import type { HComponent, Store } from "@/lib/core/store";
-import { isCompoundSelector, normalizeSelector } from "@/lib/core/style";
 import type { Selector, SelectorContext } from "@/lib/core/style";
+import { isCompoundSelector, normalizeSelector } from "@/lib/core/style";
 
 export async function bundleCss(
     store: Store,

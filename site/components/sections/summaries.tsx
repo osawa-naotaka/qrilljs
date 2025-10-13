@@ -1,7 +1,7 @@
 import { summary } from "@site/components/module/summary";
 import type { PostFm } from "@site/site.config";
-import { component, element } from "qrilljs/core";
 import type { HComponentFn, Markdown, Store } from "qrilljs/core";
+import { component, element } from "qrilljs/core";
 
 export type SummariesArgument = {
     posts: Markdown<PostFm>[];

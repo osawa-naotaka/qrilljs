@@ -1,11 +1,11 @@
+import DOMPurify from "dompurify";
+import { JSDOM } from "jsdom";
 import type { Attribute, HNode, HRootPageFn } from "@/lib/core/component";
 import { DOCTYPE } from "@/lib/core/elements";
 import { sanitizeAttributeValue, sanitizeBasic, validateAttributeKey, validateElementName } from "@/lib/core/sanityze";
 import type { HComponentInsert, Store } from "@/lib/core/store";
 import { addClassInRecord } from "@/lib/core/util";
 import { insertNodes } from "@/lib/server/inserter";
-import DOMPurify from "dompurify";
-import { JSDOM } from "jsdom";
 
 export async function bundleHtml(
     store: Store,

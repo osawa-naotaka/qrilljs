@@ -12,7 +12,7 @@ function getVersion() {
         const packagePath = path.join(cwd(), "package.json");
         const packageJson = JSON.parse(readFileSync(packagePath, "utf-8"));
         return packageJson.version || "unknown";
-    } catch (error) {
+    } catch (_error) {
         console.error("Warning: Could not read version from package.json");
         return "unknown";
     }

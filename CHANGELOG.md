@@ -13,6 +13,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.1.0-alpha.25] - 2025-10-13
+
+### Changed
+- Updated nix flake and npm packages to latest versions.
+- Enhanced client-side component scripting to enable querySelector() for child elements of defined component root elements.
+  - Modified HClientFn arguments to pass the parent element of the component where the script is defined.
+  - Updated element() second argument to add the specified name string as a class.
+  - These changes enable querying child elements by calling querySelector() on the parent element with the configured name.
+
 ## [0.1.0-alpha.24] - 2025-10-12
 
 ### Changed
@@ -171,7 +180,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.24...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.25...HEAD
+[0.1.0-alpha.25]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.24...v0.1.0-alpha.25
 [0.1.0-alpha.24]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.23...v0.1.0-alpha.24
 [0.1.0-alpha.23]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.22...v0.1.0-alpha.23
 [0.1.0-alpha.22]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.21...v0.1.0-alpha.22

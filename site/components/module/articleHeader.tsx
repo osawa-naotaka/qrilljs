@@ -1,6 +1,5 @@
-import { component, element, registerStyle, style } from "qrilljs/core";
 import type { HComponentFn, HNode, Store } from "qrilljs/core";
-import { F_SMALL, S_SMALL, S_TINY } from "qrilljs/core";
+import { component, element, F_SMALL, registerStyle, S_SMALL, S_TINY, style } from "qrilljs/core";
 
 export type ArticleHeaderArgument = {
     title: HNode;

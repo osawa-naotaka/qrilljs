@@ -1,5 +1,5 @@
-import { component } from "qrilljs/core";
 import type { HComponentFn } from "qrilljs/core";
+import { component } from "qrilljs/core";
 
 export type PageHeadArgument = {
     title: string;

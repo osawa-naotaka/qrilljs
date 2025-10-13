@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { createPageRouteTable, createPageRouter } from "../src/cli/route";
+import { createPageRouter, createPageRouteTable } from "../src/cli/route";
 
 describe("createPageRouteTable", async () => {
     const router = await createPageRouteTable("test/route");

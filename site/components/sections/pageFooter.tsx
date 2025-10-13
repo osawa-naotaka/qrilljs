@@ -1,5 +1,5 @@
-import { S_MEDIUM, colorof, component, element, registerStyle, style } from "qrilljs/core";
 import type { HComponentFn, Store } from "qrilljs/core";
+import { colorof, component, element, registerStyle, S_MEDIUM, style } from "qrilljs/core";
 
 export type PageFooterArgument = {
     site_name: string;

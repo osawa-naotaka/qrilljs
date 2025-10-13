@@ -1,5 +1,5 @@
-import { S_SMALL, S_TINY, colorof, style } from "qrilljs/core";
 import type { ColorCategory, HComponentFn, Selector, Store, StyleRule } from "qrilljs/core";
+import { colorof, S_SMALL, S_TINY, style } from "qrilljs/core";
 
 export function TAG_DESIGN<T>(store: Store, cat: ColorCategory, top: HComponentFn<T>): StyleRule[] {
     return [

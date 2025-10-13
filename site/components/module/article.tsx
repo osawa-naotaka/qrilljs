@@ -4,9 +4,19 @@ import { tag } from "@site/components/element/tag";
 import { articleHeader } from "@site/components/module/articleHeader";
 import type { PostFm } from "@site/site.config";
 import { TAG_DESIGN } from "@site/styles/design";
-import { F_LARGE, F_XLARGE, S_2XLARGE, S_MEDIUM, colorof, registerInsert } from "qrilljs/core";
-import { component, element, registerStyle, style } from "qrilljs/core";
 import type { HComponentFn, Markdown, Store } from "qrilljs/core";
+import {
+    colorof,
+    component,
+    element,
+    F_LARGE,
+    F_XLARGE,
+    registerInsert,
+    registerStyle,
+    S_2XLARGE,
+    S_MEDIUM,
+    style,
+} from "qrilljs/core";
 
 export type ArticleArgument = Markdown<PostFm>;
 
