@@ -72,10 +72,10 @@ export function search(store: Store): HComponentFn<HArgument> {
 export default function clientFunction(store: Store): HClientFn {
     const SearchResultItem = searchResultItem(store);
 
-    return async () => {
+    return async (root: Element) => {
         const search_fn = createSearchFn("/search-index.json");
-        const search_result_e = querySelector<HTMLUListElement>(`[class*="search-result-"]`);
-        const search_input_e = querySelector<HTMLInputElement>(`[class*="search-input-"]`);
+        const search_result_e = querySelector<HTMLUListElement>(".search-result", root);
+        const search_input_e = querySelector<HTMLInputElement>(".search-input", root);
 
         search_input_e.addEventListener("input", async () => {
             const results = await search_fn(search_input_e.value);
@@ -91,7 +91,7 @@ export default function clientFunction(store: Store): HClientFn {
     };
 }
 
-function querySelector<T extends Element>(selector: string, d: Document = document): T {
+function querySelector<T extends Element>(selector: string, d: Document | Element = document): T {
     const e = d.querySelector<T>(selector);
     if (e === null) {
         throw new Error(`element not found: ${selector}`);

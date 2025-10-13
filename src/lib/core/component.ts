@@ -35,6 +35,9 @@ export function element<K extends Tag | qrillTag>(store: Store, arg: ElementArg<
     const name_with_hash = name_with_one_time_hash(store, arg.name || "qrill");
     const dot_name = `.${name_with_hash}`;
     const class_name = arg.class === undefined ? [] : typeof arg.class === "string" ? [arg.class] : arg.class;
+    if (arg.name) {
+        class_name.push(arg.name);
+    }
     return Object.assign(
         (attribute: AttributeOf<K>, ...children: HNode[]) => ({
             tag: arg.tag || ("div" as const),
@@ -85,4 +88,4 @@ export function as<T>(class_name: string, fn: HComponentFn<T>): HComponentFn<T> 
 export type HRootPageFn<T> = (parameter: T) => Promise<HNode>;
 
 // qrill Client FUnction
-export type HClientFn = () => Promise<void>;
+export type HClientFn = (root: Element) => Promise<void>;

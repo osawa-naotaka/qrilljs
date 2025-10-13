@@ -9,15 +9,18 @@ import { rollup } from "rollup";
 import type { Store } from "@/core";
 
 export async function bundleScriptEsbuild(store: Store): Promise<string | null> {
-    const script_files = Array.from(store.components.values())
-        .map((x) => x.attachment?.script)
-        .filter((x) => x !== undefined);
+    const script_component: [string, string][] = [];
+    for (const [k, v] of store.components) {
+        if (v.attachment?.script) {
+            script_component.push([k, v.attachment.script]);
+        }
+    }
 
-    if (script_files.length === 0) {
+    if (script_component.length === 0) {
         return null;
     }
 
-    const entry = `import { generateStore } from "qrilljs/core"; const store = generateStore({ target_prefix: "" }, {}, ${store.element_count}); ${script_files.map((x, idx) => `import scr${idx} from "${decodeURIComponent(new URL(x).pathname)}"; await scr${idx}(store)();`).join("\n")}`;
+    const entry = `import { generateStore } from "qrilljs/core"; const store = generateStore({ target_prefix: "" }, {}, ${store.element_count}); ${script_component.map(([k, v], idx) => `import scr${idx} from "${decodeURIComponent(new URL(v).pathname)}"; await scr${idx}(store)(document.querySelector("${k}"));`).join("\n")}`;
     const bundle = await esbuild.build({
         stdin: {
             contents: entry,
@@ -42,14 +45,18 @@ export async function bundleScriptEsbuild(store: Store): Promise<string | null> 
 }
 
 export async function bundleScriptRollup(store: Store): Promise<string | null> {
-    const script_files = Array.from(store.components.values())
-        .map((x) => x.attachment?.script)
-        .filter(Boolean);
-    if (script_files.length === 0) {
+    const script_component: [string, string][] = [];
+    for (const [k, v] of store.components) {
+        if (v.attachment?.script) {
+            script_component.push([k, v.attachment.script]);
+        }
+    }
+
+    if (script_component.length === 0) {
         return null;
     }
 
-    const entry = `import { generateStore } from "@/core"; const store = generateStore(); ${script_files.map((x, idx) => `import scr${idx} from "${x}"; await scr${idx}(store)();`).join("\n")}`;
+    const entry = `import { generateStore } from "qrilljs/core"; const store = generateStore({ target_prefix: "" }, {}, ${store.element_count}); ${script_component.map(([k, v], idx) => `import scr${idx} from "${decodeURIComponent(new URL(v).pathname)}"; await scr${idx}(store)(document.querySelector("${k}"));`).join("\n")}`;
     const bundle = await rollup({
         input: "entry.ts",
         treeshake: "smallest",
