@@ -1,4 +1,4 @@
-import type { ComponentFn, PropBase, QNode } from "@/lib/core/component";
+import type { Children, ComponentFn, PropBase, QNode } from "@/lib/core/component";
 import type { Tag, TagAttribute } from "@/lib/core/element";
 
 export namespace JSX {
@@ -13,7 +13,7 @@ export namespace JSX {
     export interface IntrinsicElements extends IntrinsicElements_ {}
 }
 
-export function jsx<T extends PropBase>(elem: Component<T>, props: T & { children?: JSXChildren }): QNode {
+export function jsx<T extends PropBase>(elem: Component<T>, props: T & { children?: Children }): QNode {
     console.log("jsx called.");
     console.dir(elem, { depth: null });
     if (typeof elem === "string") {

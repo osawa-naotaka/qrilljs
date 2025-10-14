@@ -11,7 +11,7 @@ export type QElement<T extends PropBase = PropBase> = {
 export type QNode = string | QElement;
 
 export type Child = QNode | null | false | undefined;
-export type Children = Child | Children[];
+export type Children = Child | readonly Child[] | readonly Children[];
 
 export type QElementProps<T extends Tag> = Partial<AttributeOf<T>> & {
     children?: Children;

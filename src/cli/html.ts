@@ -51,8 +51,8 @@ export function stringifyToHtml(depth: number, additional_class: string | string
             return sanitizeBasic(node);
         }
 
-        // console.log("html.ts:");
-        // console.dir(node, { depth: null });
+        console.log("html.ts:");
+        console.dir(node, { depth: null });
 
         const children = Array.isArray(node.props.children) ? node.props.children : [node.props.children];
 

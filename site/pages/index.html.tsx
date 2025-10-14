@@ -26,7 +26,7 @@ function comp1(store: Store): ComponentFn {
     const H2 = element(store, { tag: "h2" });
     return component(H2, ({ children }) => {
         return (
-            <H2>{children}</H2>
+            <H2>hoge{children}</H2>
         );
     })
 }

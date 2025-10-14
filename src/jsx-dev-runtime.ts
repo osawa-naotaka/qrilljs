@@ -1,5 +1,5 @@
-import type { PropBase, QNode } from "@/lib/core/component";
-import type { Component, IntrinsicElements_, JSXChildren } from "./jsx-runtime";
+import type { Children, PropBase, QNode } from "@/lib/core/component";
+import type { Component, IntrinsicElements_ } from "./jsx-runtime";
 import { jsx } from "./jsx-runtime";
 
 export namespace JSX {
@@ -8,7 +8,7 @@ export namespace JSX {
 
 export function jsxDEV<T extends PropBase>(
     element: Component<T>,
-    props: T & { children?: JSXChildren },
+    props: T & { children?: Children },
     // biome-ignore lint: using any.
     _d1: any,
     // biome-ignore lint: using any.
