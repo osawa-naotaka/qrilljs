@@ -320,6 +320,7 @@ export type PropertyName =
     | "scroll_snap_stop"
     | "scroll_snap_type"
     | "scrollbar_color"
+    | "scrollbar_width"
     | "shape_outside"
     | "@starting_style"
     | "@supports"
@@ -691,6 +692,7 @@ export const property_names: PropertyName[] = [
     "scroll_snap_stop",
     "scroll_snap_type",
     "scrollbar_color",
+    "scrollbar_width",
     "shape_outside",
     "@starting_style",
     "@supports",

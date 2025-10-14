@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+- scrollbar_widthがCSSバリデーションエラーになっていた問題を修正
+
 ## [0.1.0-alpha.25] - 2025-10-13
 
 ### Changed
