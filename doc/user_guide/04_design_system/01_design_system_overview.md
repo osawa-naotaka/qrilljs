@@ -144,7 +144,7 @@ export default defaultSiteConfig({
 import { style, registerStyle } from "qrill/core";
 import type { Store } from "qrill/core";
 
-export function myButton(store: Store): HComponentFn<ButtonAttribute> {
+export function myButton(store: Store): ComponentFn<ButtonAttribute> {
     const Button = element("my-button"); // default tag is div
     
     registerStyle(store, Button, [
@@ -209,7 +209,7 @@ max_width: W_MEDIUM(store),   // 720px
 ```typescript
 import { atStyle } from "qrill/core";
 
-export function responsiveCard(store: Store): HComponentFn<{}> {
+export function responsiveCard(store: Store): ComponentFn<{}> {
     const ResponsiveCard = element("responsive-card");
     
     registerStyle(store, ResponsiveCard, [
@@ -241,7 +241,7 @@ export function responsiveCard(store: Store): HComponentFn<{}> {
 ### 複雑なセレクタ
 
 ```typescript
-export function navigationMenu(store: Store): HComponentFn<{}> {
+export function navigationMenu(store: Store): ComponentFn<{}> {
     const NavMenu = element("nav-menu", { tag: "nav" });
     const NavItem = element("nav-item", { tag: "li" });
     const NavLink = element("nav-link", { tag: "a" });
@@ -296,7 +296,7 @@ export function navigationMenu(store: Store): HComponentFn<{}> {
 ### 1. デザイントークンの活用
 
 ```typescript
-export function button(store: Store): HComponentFn<{}> {
+export function button(store: Store): ComponentFn<{}> {
     const Button = element("button", { tag: "button" });
     
     registerStyle(store, Button, [
@@ -324,7 +324,7 @@ export function button(store: Store): HComponentFn<{}> {
 ### 2. セマンティックなカラー指定
 
 ```typescript
-export function semanticComponent(store: Store): HComponentFn<{}> {
+export function semanticComponent(store: Store): ComponentFn<{}> {
     const Component = element("semantic-component");
     
     registerStyle(store, Component, [
@@ -345,7 +345,7 @@ export function semanticComponent(store: Store): HComponentFn<{}> {
 ### 3. 一貫したスペーシング
 
 ```typescript
-export function spacingComponent(store: Store): HComponentFn<{}> {
+export function spacingComponent(store: Store): ComponentFn<{}> {
     const Component = element("spacing-component");
     
     registerStyle(store, Component, [
@@ -366,7 +366,7 @@ export function spacingComponent(store: Store): HComponentFn<{}> {
 ### 4. レスポンシブデザイン
 
 ```typescript
-export function responsiveComponent(store: Store): HComponentFn<{}> {
+export function responsiveComponent(store: Store): ComponentFn<{}> {
     const Component = element("responsive-component");
     
     registerStyle(store, Component, [

@@ -1,5 +1,5 @@
 import type { AssetConfig } from "@/cli/config";
-import type { HComponentFn, HNode } from "@/lib/core/component";
+import type { ComponentFn, QNode } from "@/lib/core/component";
 import type { DesignRule } from "@/lib/core/design";
 import { default_design_rule } from "@/lib/core/design";
 import type { Selector, StyleRule } from "@/lib/core/style";
@@ -38,7 +38,7 @@ export type HIconFontCharacter = {
 
 export type HComponentInsert = {
     selector: Selector[];
-    nodes: HNode[];
+    nodes: QNode[];
 };
 
 export type Store = {
@@ -57,9 +57,9 @@ export function generateStore(asset: AssetConfig, rule: RecursivePartial<DesignR
     };
 }
 
-export function registerStyle<K>(
+export function registerStyle(
     store: Store,
-    name_fn: HComponentFn<K> | string,
+    name_fn: ComponentFn | string,
     raw_style: (StyleRule | StyleRule[])[],
 ): void {
     const component_name = typeof name_fn === "string" ? name_fn : name_fn.designator;
@@ -88,7 +88,7 @@ export function registerStyle<K>(
     return;
 }
 
-export function registerScript<K>(store: Store, name_fn: HComponentFn<K> | string, script: string): void {
+export function registerScript(store: Store, name_fn: ComponentFn | string, script: string): void {
     const component_name = typeof name_fn === "string" ? name_fn : name_fn.designator;
 
     const component = store.components.get(component_name);
@@ -115,7 +115,7 @@ export function registerScript<K>(store: Store, name_fn: HComponentFn<K> | strin
     return;
 }
 
-export function registerAsset<K>(store: Store, name_fn: HComponentFn<K> | string, assets: HComponentAsset[]): void {
+export function registerAsset(store: Store, name_fn: ComponentFn | string, assets: HComponentAsset[]): void {
     const component_name = typeof name_fn === "string" ? name_fn : name_fn.designator;
 
     const component = store.components.get(component_name);
@@ -142,7 +142,7 @@ export function registerAsset<K>(store: Store, name_fn: HComponentFn<K> | string
     return;
 }
 
-export function registerInsert<K>(store: Store, name_fn: HComponentFn<K> | string, inserts: HComponentInsert[]): void {
+export function registerInsert(store: Store, name_fn: ComponentFn | string, inserts: HComponentInsert[]): void {
     const component_name = typeof name_fn === "string" ? name_fn : name_fn.designator;
 
     const component = store.components.get(component_name);
@@ -169,7 +169,7 @@ export function registerInsert<K>(store: Store, name_fn: HComponentFn<K> | strin
     return;
 }
 
-export function registerFont<K>(store: Store, name_fn: HComponentFn<K> | string, fonts: HIconFontCharacter[]): void {
+export function registerFont(store: Store, name_fn: ComponentFn | string, fonts: HIconFontCharacter[]): void {
     const component_name = typeof name_fn === "string" ? name_fn : name_fn.designator;
 
     const component = store.components.get(component_name);

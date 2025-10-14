@@ -1,4 +1,4 @@
-import type { Attribute, HNode } from "@/lib/core/component";
+import type { PropBase, QNode } from "@/lib/core/component";
 import type { Component, IntrinsicElements_, JSXChildren } from "./jsx-runtime";
 import { jsx } from "./jsx-runtime";
 
@@ -6,9 +6,9 @@ export namespace JSX {
     export interface IntrinsicElements extends IntrinsicElements_ {}
 }
 
-export function jsxDEV<T extends Attribute>(
+export function jsxDEV<T extends PropBase>(
     element: Component<T>,
-    props: Partial<T> & { children?: JSXChildren },
+    props: T & { children?: JSXChildren },
     // biome-ignore lint: using any.
     _d1: any,
     // biome-ignore lint: using any.
@@ -17,7 +17,7 @@ export function jsxDEV<T extends Attribute>(
     _d3: any,
     // biome-ignore lint: using any.
     _d4: any,
-): HNode {
+): QNode {
     return jsx(element, props);
 }
 

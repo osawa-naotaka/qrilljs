@@ -1,39 +1,32 @@
-import { page } from "@site/components/pages/page";
-import { hero } from "@site/components/sections/hero";
-import { summaries } from "@site/components/sections/summaries";
-import { navitem, postFmSchema, posts_dir, site } from "@site/site.config";
-import type { HRootPageFn, Store } from "qrilljs/core";
-import { element, registerRootPage, S_MEDIUM, style, W_MEDIUM } from "qrilljs/core";
-import { getAllMarkdowns } from "qrilljs/server";
+import { component, ComponentFn, element, type RootPageFn, type Store } from "qrilljs/core";
 
-export default function Root(store: Store): HRootPageFn<void> {
-    const Page = page(store);
-    const Hero = hero(store);
-    const PageMainArea = element(store, { tag: "main", name: "page-main-area" });
-    const Summaries = summaries(store);
-
-    const styles = [
-        style(PageMainArea)({
-            max_width: W_MEDIUM(store),
-            width: "100%",
-            padding_inline: S_MEDIUM(store),
-            margin_inline: "auto",
-        }),
-    ];
-
-    registerRootPage(store, styles);
+export default function Root(store: Store): RootPageFn<void> {
+    const H1 = element(store, { tag: "h1" });
+    const Comp1 = comp1(store);
 
     return async () => {
-        const posts = await getAllMarkdowns(posts_dir, postFmSchema);
-        const posts_sorted = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
-
         return (
-            <Page title={site.name} description={site.description} lang={site.lang} name={site.name} navitem={navitem}>
-                <Hero />
-                <PageMainArea>
-                    <Summaries posts={posts_sorted} />
-                </PageMainArea>
-            </Page>
+            <html>
+                <head>
+                    <title>homepage</title>
+                </head>
+                <body>
+                    <H1>Hello, Again!</H1>
+                    <Comp1>
+                        <div>hage</div>
+                        <span>hige</span>
+                    </Comp1>
+                </body>
+            </html>
         );
     };
+}
+
+function comp1(store: Store): ComponentFn {
+    const H2 = element(store, { tag: "h2" });
+    return component(H2, ({ children }) => {
+        return (
+            <H2>{children}</H2>
+        );
+    })
 }

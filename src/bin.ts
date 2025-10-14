@@ -105,7 +105,7 @@ async function main() {
         }
     } catch (e) {
         if (e instanceof Error) {
-            console.error(e.message);
+            console.error(e);
         } else {
             console.error(e);
         }

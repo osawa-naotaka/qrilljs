@@ -1,4 +1,4 @@
-import type { HComponentFn } from "@/lib/core/component";
+import type { ComponentFn } from "@/lib/core/component";
 import { component, element } from "@/lib/core/component";
 import type { Store } from "@/lib/core/store";
 import { registerAsset, registerInsert } from "@/lib/core/store";
@@ -17,7 +17,7 @@ export type HSolidIconArg = {
 
 export type HIconArg = HBrandsIconArg | HSolidIconArg;
 
-export function faIcon(store: Store): HComponentFn<HIconArg> {
+export function faIcon(store: Store): ComponentFn<HIconArg> {
     const Top = element(store, { tag: "i", name: "icon" });
     const link = element(store, { tag: "link" });
 

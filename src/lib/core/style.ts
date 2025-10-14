@@ -1,4 +1,4 @@
-import type { HAnyComponentFn } from "@/lib/core/component";
+import type { ComponentFn } from "@/lib/core/component";
 import type { Properties } from "@/lib/core/properties";
 import { unionArrayOfRecords } from "@/lib/core/util";
 
@@ -17,7 +17,7 @@ export type SelectorList = SelectorContext[];
 
 export type CompoundSelector = SimpleSelector[];
 
-export type SimpleSelector = string | HAnyComponentFn;
+export type SimpleSelector = string | ComponentFn;
 
 export type Combinator = " " | ">" | "+" | "~" | "||";
 
@@ -75,6 +75,6 @@ function isString(selector: SimpleSelector): selector is string {
     return typeof selector === "string";
 }
 
-function isComponentFn(selector: SimpleSelector): selector is HAnyComponentFn {
+function isComponentFn(selector: SimpleSelector): selector is ComponentFn {
     return typeof selector === "function";
 }

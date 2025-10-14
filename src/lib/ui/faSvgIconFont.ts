@@ -1,4 +1,4 @@
-import type { Attribute, HComponentFn } from "@/lib/core/component";
+import type { ComponentFn } from "@/lib/core/component";
 import { component, element } from "@/lib/core/component";
 import type { Store } from "@/lib/core/store";
 import { registerFont } from "@/lib/core/store";
@@ -17,7 +17,7 @@ export type HSvgSolidIconArg = {
 
 export type HSvgIconArg = HSvgBrandsIconArg | HSvgSolidIconArg;
 
-export function faSvgIconFont(store: Store, arg: HSvgIconArg): HComponentFn<Attribute> {
+export function faSvgIconFont(store: Store, arg: HSvgIconArg): ComponentFn {
     const font_name = `${arg.type}-${arg.name}`;
     const Top = element(store, {
         tag: "i",

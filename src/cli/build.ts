@@ -9,9 +9,8 @@ import { bundleWoff2 } from "@/cli/font";
 import { bundleHtml } from "@/cli/html";
 import { withoutExt } from "@/cli/route";
 import { bundleScriptEsbuild } from "@/cli/script";
-import type { Attribute, HRootPageFn } from "@/lib/core/component";
+import { element, type PropBase, type RootPageFn } from "@/lib/core/component";
 import { default_design_rule } from "@/lib/core/design";
-import { gt } from "@/lib/core/elements";
 import type { HComponentAsset, Store } from "@/lib/core/store";
 import { generateStore } from "@/lib/core/store";
 import { replaceExt } from "@/lib/core/util";
@@ -100,7 +99,7 @@ function copyDir(root: string, dist_dir: string) {
 }
 
 type HtmlPageFn = {
-    default: (store: Store) => Promise<HRootPageFn<Attribute>>;
+    default: (store: Store) => Promise<RootPageFn<PropBase>>;
     rootPageFnParameters?: () => Promise<Array<Record<string, string>>>;
 };
 
@@ -143,14 +142,14 @@ async function processAndWriteHtml(
     relative_path: string,
     dist_dir: string,
     [css_link, js_src]: [string, string],
-    root_page_fn: HRootPageFn<Attribute>,
+    root_page_fn: RootPageFn<PropBase>,
     params: Record<string, string>,
     store: Store,
 ): Promise<void> {
     const html_start = performance.now();
 
-    const script = gt("script");
-    const link = gt("link");
+    const script = element(store, { tag: "script" });
+    const link = element(store, { tag: "link" });
     const insert_nodes = [
         css_link !== "" ? link({ href: css_link, rel: "stylesheet" }) : "",
         js_src !== "" ? script({ type: "module", src: js_src }) : "",

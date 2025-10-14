@@ -16,8 +16,8 @@ import { bundleHtml, stringifyToHtml } from "@/cli/html";
 import type { Router } from "@/cli/route";
 import { createAssetRouter, createPageRouter, createStaticRouter, withoutExt } from "@/cli/route";
 import { bundleScriptEsbuild } from "@/cli/script";
+import { element } from "@/core";
 import { default_design_rule } from "@/lib/core/design";
-import { gt } from "@/lib/core/elements";
 import type { Store } from "@/lib/core/store";
 import { generateStore } from "@/lib/core/store";
 import { contentType } from "@/lib/core/util";
@@ -244,8 +244,8 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
                                 asset_router.set(key, router);
                             }
 
-                            const script = gt("script");
-                            const link = gt("link");
+                            const script = element(store, { tag: "script" });
+                            const link = element(store, { tag: "link" });
                             const css_name = `${withoutExt(withoutExt(match_page.target_file))}.css`;
                             const js_name = `${withoutExt(withoutExt(match_page.target_file))}.js`;
                             const insert_nodes = [

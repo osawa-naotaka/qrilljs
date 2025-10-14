@@ -1,4 +1,4 @@
-import { attribute_names, qrill_tags, tags } from "@/lib/core/elements";
+import { attribute_names, qrill_tags, tags } from "@/lib/core/element";
 import { property_names } from "@/lib/core/properties";
 
 // HTML Element

@@ -1,8 +1,8 @@
-import type { Attribute, HNode } from "@/lib/core/component";
+import type { Child, PropBase, QNode } from "@/lib/core/component";
 import { sanitizeAttributeValue, sanitizeBasic, validateAttributeKey, validateElementName } from "@/lib/core/sanityze";
 
 // DOM Builder
-export function createDom(node: HNode, d: Document = document): Node[] {
+export function createDom(node: QNode, d: Document = document): Node[] {
     return createDomInternal(0, [], d)(node);
 }
 
@@ -10,39 +10,52 @@ function createDomInternal(
     depth: number,
     additional_class: string | string[],
     d: Document = document,
-): (node: HNode) => Node[] {
-    return (node: HNode) => {
+): (child: Child) => Node[] {
+    return (child: Child) => {
         if (depth > 64) {
             throw new Error("stringifyToHtml: html element nesting depth must be under 64.");
         }
 
-        if (typeof node === "string") {
-            return [d.createTextNode(sanitizeBasic(node))];
+        if (child === null || child === undefined || child === false) {
+            return [];
         }
 
-        if (node.tag === "raw") {
+        if (Array.isArray(child)) {
+            return child.flatMap(createDomInternal(depth, additional_class, d));
+        }
+
+        // child is QNode
+        if (typeof child === "string") {
+            return [d.createTextNode(sanitizeBasic(child))];
+        }
+
+        // child is QElement
+        const props_children = Array.isArray(child.props.children) ? child.props.children : [child.props.children];
+        child.props.children = undefined;
+
+        if (child.tag === "raw") {
             throw new Error("Raw node must not be used in client module.");
         }
 
-        if (!validateElementName(node.tag)) {
-            throw new Error(`stringifyToHtml: invalid element name ${node.tag}.`);
+        if (!validateElementName(child.tag)) {
+            throw new Error(`createDom: invalid element name ${child.tag}.`);
         }
 
-        if (node.tag === "unwrap") {
-            return node.children.flatMap(createDomInternal(depth + 1, additional_class, d));
+        if (child.tag === "unwrap") {
+            return props_children.flatMap(createDomInternal(depth + 1, additional_class, d));
         }
 
-        if (node.tag === "class") {
-            return node.children.flatMap(createDomInternal(depth + 1, node.attribute.class || [], d));
+        if (child.tag === "class") {
+            return props_children.flatMap(createDomInternal(depth + 1, child.props.class || [], d));
         }
 
-        const element = d.createElement(node.tag);
-        setAttribute(element, node.attribute);
+        const element = d.createElement(child.tag);
+        setAttribute(element, child.props);
         const classes = typeof additional_class === "string" ? [additional_class] : additional_class;
         element.classList.add(...classes.map(sanitizeAttributeValue("class")));
 
-        for (const child of node.children) {
-            for (const child_element of createDomInternal(depth + 1, [], d)(child)) {
+        for (const c of props_children) {
+            for (const child_element of createDomInternal(depth + 1, [], d)(c)) {
                 element.appendChild(child_element);
             }
         }
@@ -50,7 +63,7 @@ function createDomInternal(
     };
 }
 
-function setAttribute(element: HTMLElement, attribute: Partial<Attribute>): void {
+function setAttribute(element: HTMLElement, attribute: Partial<PropBase>): void {
     for (const [raw_key, value] of Object.entries(attribute)) {
         const key = raw_key.replaceAll("_", "-");
 

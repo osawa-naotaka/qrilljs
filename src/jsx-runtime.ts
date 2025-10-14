@@ -1,44 +1,31 @@
-import type { Attribute, HComponentFn, HNode } from "@/lib/core/component";
-import type { AttributeMap, Tag } from "@/lib/core/elements";
+import type { ComponentFn, PropBase, QNode } from "@/lib/core/component";
+import type { Tag, TagAttribute } from "@/lib/core/element";
 
 export namespace JSX {
     export interface IntrinsicElements extends IntrinsicElements_ {}
 }
 
-export type Component<T extends Attribute> = string | HComponentFn<T>;
+export type Component<T extends PropBase> = string | ComponentFn<T>;
 
-export type IntrinsicElements_ = { [key in keyof AttributeMap]: Partial<AttributeMap[key]> };
+export type IntrinsicElements_ = { [key in keyof TagAttribute]: Partial<TagAttribute[key]> };
 
 export namespace JSX {
     export interface IntrinsicElements extends IntrinsicElements_ {}
 }
 
-export type JSXChildren = HNode | HNode[] | JSXChildren[];
-
-export function jsx<T extends Attribute>(element: Component<T>, props: Partial<T> & { children?: JSXChildren }): HNode {
-    const { children, ...attribute } = props;
-    const normalized_children = normalizeChildren(children);
-
-    if (typeof element === "string") {
+export function jsx<T extends PropBase>(elem: Component<T>, props: T & { children?: JSXChildren }): QNode {
+    console.log("jsx called.");
+    console.dir(elem, { depth: null });
+    if (typeof elem === "string") {
         return {
-            tag: element as Tag,
-            attribute,
-            children: normalized_children,
+            tag: elem as Tag,
+            props,
         };
     }
-    return element(attribute as T, ...normalized_children);
+    const result = elem(props);
+    console.log("function call result:");
+    console.dir(result, { depth: null });
+    return result;
 }
 
 export const jsxs = jsx;
-
-function normalizeChildren(children: JSXChildren | undefined): HNode[] {
-    if (children === undefined) {
-        return [];
-    }
-
-    if (Array.isArray(children)) {
-        return children.flat().flatMap(normalizeChildren);
-    }
-
-    return [children];
-}
