@@ -43,7 +43,7 @@ export function stringifyToHtml(depth: number, additional_class: string | string
             throw new Error("stringifyToHtml: html element nesting depth must be under 64.");
         }
 
-        if (node === null || node === undefined || node === false) {
+        if (node === null || node === undefined || typeof node === "boolean") {
             return "";
         }
 

@@ -16,7 +16,7 @@ function createDomInternal(
             throw new Error("stringifyToHtml: html element nesting depth must be under 64.");
         }
 
-        if (child === null || child === undefined || child === false) {
+        if (child === null || child === undefined || typeof child === "boolean") {
             return [];
         }
 

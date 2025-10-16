@@ -8,9 +8,9 @@ export type QElement<T extends PropBase = PropBase> = {
     props: Partial<T> & { children?: Children; key?: string | number; class?: string | string[] };
 };
 
-export type QNode = string | QElement;
+export type QNode = string | QElement | boolean | null | undefined;
 
-export type Child = QNode | null | false | undefined;
+export type Child = QNode;
 export type Children = Child | readonly Child[] | readonly Children[];
 
 export type QElementProps<T extends Tag> = Partial<AttributeOf<T>> & {
@@ -20,6 +20,10 @@ export type QElementProps<T extends Tag> = Partial<AttributeOf<T>> & {
 
 export type QElementFn<T extends Tag> = {
     (props: Partial<AttributeOf<T>>): QElement<AttributeOf<T>>;
+    designator: string;
+};
+
+export type Designator = {
     designator: string;
 };
 
@@ -71,6 +75,9 @@ export type ComponentFn<K extends PropBase = PropBase> = {
     (props: ComponentProps<K>): QNode;
     designator: string;
 };
+
+// biome-ignore lint: lint/suspicious/noExplicitAny
+export type AnyComponentFn = ComponentFn<any>;
 
 // if name_fn is string, it refers html elemen name like html, body, p..., so we don't use dottend name for that.
 export function component<T extends PropBase>(

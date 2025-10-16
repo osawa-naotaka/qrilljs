@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+- Disgnator型を導入。この型はコンポーネントの名前だけを参照し、その実装を持たない。主にstyle()のために使う。
+- AnyComponentFnが存在していなかったため、追加。
+- Bool値が要素として入っていた場合、本来無視されるが、型エラーになっていた問題を解決。
+
 
 ## [0.1.0-alpha.26] - 2025-10-16
 
