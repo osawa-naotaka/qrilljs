@@ -11,10 +11,10 @@ qrillでは、標準的なHTML要素（`<div>`、`<h1>`、`<p>`など）に加�
 以下は、サイトのタイトルを表す独自要素`SiteTitle`の例です：
 
 ```typescript
-import type { HRootPageFn, Store } from "qrill/core";
+import type { RootPageFn, Store } from "qrill/core";
 import { element } from "qrill/core";
 
-export default function Root(_store: Store): HRootPageFn<void> {
+export default function Root(_store: Store): RootPageFn<void> {
     const SiteTitle = element("site-title", { tag: "h1" });
     return async () => (
         <html lang="en">
@@ -183,10 +183,10 @@ const PostContent = element("post-content", { tag: "section" });
 以下は、複数の独自要素を組み合わせた実際のページ例です：
 
 ```typescript
-import type { HRootPageFn, Store } from "qrill/core";
+import type { RootPageFn, Store } from "qrill/core";
 import { element } from "qrill/core";
 
-export default function Root(_store: Store): HRootPageFn<void> {
+export default function Root(_store: Store): RootPageFn<void> {
     // 独自要素の定義
     const PageHeader = element("page-header", { tag: "header" });
     const SiteTitle = element("site-title", { tag: "h1" });

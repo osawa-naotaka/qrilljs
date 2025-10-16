@@ -294,7 +294,7 @@ export type HBrandsIconName =
     | "sith"
     | "themeisle"
     | "page4"
-    | "hashnode"
+    | "hasQNode"
     | "react"
     | "cc-paypal"
     | "squarespace"

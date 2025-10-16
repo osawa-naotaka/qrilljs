@@ -66,10 +66,10 @@ return component(SiteTitle, (_attr, ...children) => (
 作成したコンポーネントをページで使用する例です：
 
 ```typescript
-import type { HRootPageFn, Store } from "qrill/core";
+import type { RootPageFn, Store } from "qrill/core";
 import { siteTitle } from "../components/siteTitle";
 
-export default function Root(_store: Store): HRootPageFn<void> {
+export default function Root(_store: Store): RootPageFn<void> {
     const SiteTitle = siteTitle();
     
     return async () => (
@@ -255,7 +255,7 @@ component<K, T>(
 - **説明**: コンポーネントの実装ロジック
 - **引数**:
   - `props: T & StandardHTMLAttributes` - コンポーネントに渡された属性
-  - `...childrenren: HNode[]` - 子要素
+  - `...childrenren: QNode[]` - 子要素
 
 ### 使用パターン
 

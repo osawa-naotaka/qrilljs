@@ -241,7 +241,7 @@ export type HSvgBrandsIconName =
     | "gulp"
     | "hacker-news"
     | "hackerrank"
-    | "hashnode"
+    | "hasQNode"
     | "hips"
     | "hire-a-helper"
     | "hive"

@@ -69,7 +69,7 @@ export function rootPageFnParameters(): RootParameter[] {
 **ブログ記事ページ（posts/[slug].html.tsx）:**
 
 ```typescript
-import type { HRootPageFn, Store } from "qrill/core";
+import type { RootPageFn, Store } from "qrill/core";
 import { listFiles, getMarkdown } from "../../../lib/post";
 import path from "path";
 
@@ -89,7 +89,7 @@ export async function rootPageFnParameters(): Promise<RootParameter[]> {
 }
 
 // ページ生成関数
-export default function Root(_store: Store): HRootPageFn<RootParameter> {
+export default function Root(_store: Store): RootPageFn<RootParameter> {
     return async ({ slug }) => {
         // パラメータを使ってコンテンツを取得
         const post = await getMarkdown("./content/posts", slug);
@@ -115,7 +115,7 @@ export default function Root(_store: Store): HRootPageFn<RootParameter> {
 **タグページ（tags/[tag].html.tsx）:**
 
 ```typescript
-import type { HRootPageFn, Store } from "qrill/core";
+import type { RootPageFn, Store } from "qrill/core";
 
 // パラメータの型定義
 type RootParameter = {
@@ -135,7 +135,7 @@ export function rootPageFnParameters(): RootParameter[] {
 }
 
 // ページ生成関数
-export default function Root(_store: Store): HRootPageFn<RootParameter> {
+export default function Root(_store: Store): RootPageFn<RootParameter> {
     return async ({ tag }) => {
         const posts = tag_map[tag] || [];
         
@@ -189,7 +189,7 @@ export async function rootPageFnParameters(): Promise<RootParameter[]> {
     return results;
 }
 
-export default function Root(_store: Store): HRootPageFn<RootParameter> {
+export default function Root(_store: Store): RootPageFn<RootParameter> {
     return async ({ userId, postId }) => {
         const user = await getUser(userId);
         const post = await getPost(postId);
@@ -219,13 +219,13 @@ export default function Root(_store: Store): HRootPageFn<RootParameter> {
 
 ## 型定義の詳細
 
-### HRootPageFn型
+### RootPageFn型
 
 ```typescript
-// HRootPageFn の型定義
-type HRootPageFn<T> = (parameter: T) => Promise<HNode>;
+// RootPageFn の型定義
+type RootPageFn<T> = (parameter: T) => Promise<QNode>;
 
-// HNode はqrill内部で利用するDOM要素の型
+// QNode はqrill内部で利用するDOM要素の型
 // 通常のjsx要素（React.ReactElement相当）として扱える
 ```
 
@@ -248,7 +248,7 @@ export async function rootPageFnParameters(): Promise<RootParameter[]> { ... }
 ```typescript
 // Store型はアプリケーション全体の状態管理オブジェクト
 // 各ページで共通のデータやユーティリティ関数にアクセス可能
-export default function Root(store: Store): HRootPageFn<RootParameter> {
+export default function Root(store: Store): RootPageFn<RootParameter> {
     // store.config でアプリケーション設定にアクセス
     // store.utils でユーティリティ関数にアクセス
     return async (params) => { ... };

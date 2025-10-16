@@ -14,8 +14,6 @@ export namespace JSX {
 }
 
 export function jsx<T extends PropBase>(elem: Component<T>, props: T & { children?: Children }): QNode {
-    console.log("jsx called.");
-    console.dir(elem, { depth: null });
     if (typeof elem === "string") {
         return {
             tag: elem as Tag,
@@ -23,8 +21,6 @@ export function jsx<T extends PropBase>(elem: Component<T>, props: T & { childre
         };
     }
     const result = elem(props);
-    console.log("function call result:");
-    console.dir(result, { depth: null });
     return result;
 }
 

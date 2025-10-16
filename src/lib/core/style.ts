@@ -17,7 +17,7 @@ export type SelectorList = SelectorContext[];
 
 export type CompoundSelector = SimpleSelector[];
 
-export type SimpleSelector = string | ComponentFn;
+export type SimpleSelector = string | ComponentFn<any>;
 
 export type Combinator = " " | ">" | "+" | "~" | "||";
 
