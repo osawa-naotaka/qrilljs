@@ -86,8 +86,11 @@ function setAttribute(element: HTMLElement, attribute: Partial<PropBase>): void 
             );
         }
 
-        for (const v of Array.isArray(value) ? value : [value]) {
-            element.setAttribute(key, sanitizeAttributeValue(key)(v));
+        if(Array.isArray(value)) {
+            const values = value.map((x) => sanitizeAttributeValue(key)(x));
+            element.setAttribute(key, values.join(" "));
+        } else {
+            element.setAttribute(key, sanitizeAttributeValue(key)(value));
         }
     }
 }
