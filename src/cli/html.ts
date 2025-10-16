@@ -4,7 +4,7 @@ import type { Child, PropBase, QNode, RootPageFn } from "@/lib/core/component";
 import { DOCTYPE } from "@/lib/core/element";
 import { sanitizeAttributeValue, sanitizeBasic, validateAttributeKey, validateElementName } from "@/lib/core/sanityze";
 import type { HComponentInsert, Store } from "@/lib/core/store";
-import { addClassInRecord } from "@/lib/core/util";
+import { addClassInRecord, deepFlatMap } from "@/lib/core/util";
 import { insertNodes } from "@/lib/server/inserter";
 
 export async function bundleHtml(
@@ -55,19 +55,17 @@ export function stringifyToHtml(depth: number, additional_class: string | string
         console.dir(node, { depth: null });
 
         const children = Array.isArray(node.props.children) ? node.props.children : [node.props.children];
-
         node.props.children = null;
 
         if (node.tag === "raw") {
             const window = new JSDOM("").window;
             const purify = DOMPurify(window);
-            return children
-                .map((x) => {
+            return deepFlatMap((x) => {
                     if (typeof x !== "string") {
                         throw new Error(`Raw node must be string at '${node}'.`);
                     }
                     return purify.sanitize(x);
-                })
+                }, children)
                 .join("");
         }
 
@@ -76,15 +74,15 @@ export function stringifyToHtml(depth: number, additional_class: string | string
         }
 
         if (node.tag === "unwrap") {
-            return children.map(stringifyToHtml(depth + 1, additional_class)).join("");
+            return deepFlatMap(stringifyToHtml(depth + 1, additional_class), children).join("");
         }
 
         if (node.tag === "class") {
-            return children.map(stringifyToHtml(depth + 1, node.props.class || [])).join("");
+            return deepFlatMap(stringifyToHtml(depth + 1, node.props.class || []), children).join("");
         }
 
         const attribute = additional_class.length === 0 ? node.props : addClassInRecord(node.props, additional_class);
-        return `<${node.tag}${attributeToString(attribute)}>${children.map(stringifyToHtml(depth + 1, [])).join("")}</${node.tag}>`;
+        return `<${node.tag}${attributeToString(attribute)}>${deepFlatMap(stringifyToHtml(depth + 1, []), children).join("")}</${node.tag}>`;
     };
 }
 

@@ -2,6 +2,20 @@ export function replaceExt(filename: string, ext: string) {
     return filename.replace(/\.[^/.]+$/, ext);
 }
 
+export function deepFlatMap<T, R>(fn: (x: T) => R, xs: T[]): R[] {
+    const rec: R[][] = [];
+
+    for(const x of xs) {
+        if(Array.isArray(x)) {
+            rec.push(deepFlatMap(fn, x));
+        } else {
+            rec.push([fn(x)]);
+        }
+    }
+
+    return rec.flat();
+}
+
 export function cloneAndMergeRecord<T extends Record<PropertyKey, unknown>>(
     record1: T,
     record2: RecursivePartial<T>,
