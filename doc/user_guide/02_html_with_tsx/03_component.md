@@ -20,9 +20,9 @@
 
 ```typescript
 import { component, element } from "qrill/core";
-import type { H1Attribute, HComponentFn } from "qrill/core";
+import type { H1Attribute, ComponentFn } from "qrill/core";
 
-export function siteTitle(): HComponentFn<Partial<H1Attribute>> {
+export function siteTitle(): ComponentFn<Partial<H1Attribute>> {
     const SiteTitle = element("site-title", { tag: "h1" });
     return component(SiteTitle, (_attr, ...children) => (
         <SiteTitle>
@@ -36,10 +36,10 @@ export function siteTitle(): HComponentFn<Partial<H1Attribute>> {
 
 #### 1. コンポーネント生成関数の定義
 ```typescript
-export function siteTitle(): HComponentFn<Partial<H1Attribute>>
+export function siteTitle(): ComponentFn<Partial<H1Attribute>>
 ```
 - **関数名**: キャメルケースで小文字始まり（`siteTitle`）
-- **戻り値の型**: `HComponentFn<Partial<H1Attribute>>` - h1要素の属性を受け取るコンポーネント
+- **戻り値の型**: `ComponentFn<Partial<H1Attribute>>` - h1要素の属性を受け取るコンポーネント
 
 #### 2. ルート要素の作成
 ```typescript
@@ -66,10 +66,10 @@ return component(SiteTitle, (_attr, ...children) => (
 作成したコンポーネントをページで使用する例です：
 
 ```typescript
-import type { HRootPageFn, Store } from "qrill/core";
+import type { RootPageFn, Store } from "qrill/core";
 import { siteTitle } from "../components/siteTitle";
 
-export default function Root(_store: Store): HRootPageFn<void> {
+export default function Root(_store: Store): RootPageFn<void> {
     const SiteTitle = siteTitle();
     
     return async () => (
@@ -116,7 +116,7 @@ export default function Root(_store: Store): HRootPageFn<void> {
 
 ```typescript
 import { component, element } from "qrill/core";
-import type { HComponentFn } from "qrill/core";
+import type { ComponentFn } from "qrill/core";
 
 // コンポーネントの引数の型定義
 export type DateTimeArgument = {
@@ -124,7 +124,7 @@ export type DateTimeArgument = {
     lang?: string;
 };
 
-export function dateTime(): HComponentFn<DateTimeArgument> {
+export function dateTime(): ComponentFn<DateTimeArgument> {
     const DateTime = element("date-time", { tag: "time" });
     
     return component(DateTime, ({ datetime, lang = "ja" }) => {
@@ -150,7 +150,7 @@ export function dateTime(): HComponentFn<DateTimeArgument> {
 
 ```typescript
 import { component, element } from "qrill/core";
-import type { HComponentFn } from "qrill/core";
+import type { ComponentFn } from "qrill/core";
 import { dateTime } from "./dateTime";
 
 export type ArticleCardArgument = {
@@ -161,7 +161,7 @@ export type ArticleCardArgument = {
     tags?: string[];
 };
 
-export function articleCard(): HComponentFn<ArticleCardArgument> {
+export function articleCard(): ComponentFn<ArticleCardArgument> {
     const Card = element("article-card", { tag: "article" });
     const CardHeader = element("card-header", { tag: "header" });
     const CardTitle = element("card-title", { tag: "h3" });
@@ -238,7 +238,7 @@ components/
 component<K, T>(
     rootElement: HElementFn<K> | string, 
     implementation: ComponentImplementation<T>
-): HComponentFn<T>
+): ComponentFn<T>
 ```
 
 ### パラメータ
@@ -255,13 +255,13 @@ component<K, T>(
 - **説明**: コンポーネントの実装ロジック
 - **引数**:
   - `props: T & StandardHTMLAttributes` - コンポーネントに渡された属性
-  - `...childrenren: HNode[]` - 子要素
+  - `...childrenren: QNode[]` - 子要素
 
 ### 使用パターン
 
 #### 1. 文字列ベースのコンポーネント
 ```typescript
-export function simpleAlert(): HComponentFn<{ message: string }> {
+export function simpleAlert(): ComponentFn<{ message: string }> {
     return component("alert", ({ message }) => (
         <div class="alert">
             {message}
@@ -272,7 +272,7 @@ export function simpleAlert(): HComponentFn<{ message: string }> {
 
 #### 2. 要素ベースのコンポーネント
 ```typescript
-export function userCard(): HComponentFn<{ name: string; email: string }> {
+export function userCard(): ComponentFn<{ name: string; email: string }> {
     const Card = element("user-card");
     
     return component(Card, ({ name, email }) => (

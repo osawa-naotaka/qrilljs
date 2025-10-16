@@ -1,7 +1,7 @@
 import { page } from "@site/components/pages/page";
 import { summaries } from "@site/components/sections/summaries";
 import { navitem, postFmSchema, posts_dir, site, tag_map } from "@site/site.config";
-import type { HRootPageFn, Store } from "qrilljs/core";
+import type { RootPageFn, Store } from "qrilljs/core";
 import { element, registerRootPage, S_MEDIUM, style, W_MEDIUM } from "qrilljs/core";
 import { getAllMarkdowns } from "qrilljs/server";
 
@@ -13,7 +13,7 @@ export function rootPageFnParameters(): RootParameter[] {
     return Object.keys(tag_map).map((tag) => ({ tag }));
 }
 
-export default function Root(store: Store): HRootPageFn<RootParameter> {
+export default function Root(store: Store): RootPageFn<RootParameter> {
     const Page = page(store);
     const PageMainArea = element(store, { tag: "main", name: "page-main-area" });
     const Summaries = summaries(store);

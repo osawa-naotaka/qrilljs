@@ -1,8 +1,8 @@
-import type { HNode } from "@/lib/core/component";
+import type { QNode } from "@/lib/core/component";
 import type { Store } from "@/lib/core/store";
 import { page } from "@/page/page";
 
-export function ErrorPage(store: Store, arg: { name: string; cause: string }): HNode {
+export function ErrorPage(store: Store, arg: { name: string; cause: string }): QNode {
     const Page = page(store);
 
     return (
@@ -15,7 +15,7 @@ export function ErrorPage(store: Store, arg: { name: string; cause: string }): H
     );
 }
 
-export function InternalServerErrorPage(store: Store, error: Error): HNode {
+export function InternalServerErrorPage(store: Store, error: Error): QNode {
     const Page = page(store);
 
     if (error.stack === undefined) {

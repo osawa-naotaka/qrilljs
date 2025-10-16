@@ -1,11 +1,11 @@
-import type { HComponentFn, HNode, Store } from "qrilljs/core";
+import type { ComponentFn, QNode, Store } from "qrilljs/core";
 import { component, element, F_SMALL, registerStyle, S_SMALL, S_TINY, style } from "qrilljs/core";
 
 export type ArticleHeaderArgument = {
-    title: HNode;
+    title: QNode;
 };
 
-export function articleHeader(store: Store): HComponentFn<ArticleHeaderArgument> {
+export function articleHeader(store: Store): ComponentFn<ArticleHeaderArgument> {
     const ArticleHeader = element(store, { tag: "header", name: "article-header" });
     const Title = element(store);
     const Meta = element(store);
@@ -26,7 +26,7 @@ export function articleHeader(store: Store): HComponentFn<ArticleHeaderArgument>
 
     registerStyle(store, ArticleHeader, component_styles);
 
-    return component(ArticleHeader, ({ title }, ...children) => (
+    return component(ArticleHeader, ({ title, children }) => (
         <ArticleHeader>
             <Title>{title}</Title>
             <Meta>{children}</Meta>

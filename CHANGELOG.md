@@ -13,6 +13,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+
+## [0.1.0-alpha.26] - 2025-10-16
+
+### Fixed
+- Fixed CSS validation error caused by scrollbar_width.
+- Fixed an issue where jsx() did not show type errors for invalid values inside {} expressions.
+- Fixed dom function to correctly assign multiple field properties.
+- Fixed client function element count bug.
+- Fixed site argument handling for children position.
+- Fixed treatment of deep structure of node.prop.children.
+
+### Changed
+- Renamed HNode to QNode, HElement to QElement, HElementFn to QElementFn, HComponentFn to ComponentFn, HRootPageFn to RootPageFn, and HClientFn to ClientFn.
+- Changed page import scheme to prevent multiple imports.
+- Re-implemented jsx with improved type checking and structure handling.
+
 ## [0.1.0-alpha.25] - 2025-10-13
 
 ### Changed
@@ -180,7 +196,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.25...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.26...HEAD
+[0.1.0-alpha.26]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.25...v0.1.0-alpha.26
 [0.1.0-alpha.25]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.24...v0.1.0-alpha.25
 [0.1.0-alpha.24]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.23...v0.1.0-alpha.24
 [0.1.0-alpha.23]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.22...v0.1.0-alpha.23

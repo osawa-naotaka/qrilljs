@@ -1,7 +1,7 @@
-import type { AttributeOf, HComponentFn, Store } from "qrilljs/core";
+import type { AttributeOf, ComponentFn, Store } from "qrilljs/core";
 import { colorof, component, element, registerStyle, style } from "qrilljs/core";
 
-export function link(store: Store): HComponentFn<Partial<AttributeOf<"a">>> {
+export function link(store: Store): ComponentFn<Partial<AttributeOf<"a">>> {
     const Link = element(store, { tag: "a", name: "link" });
 
     const styles = [

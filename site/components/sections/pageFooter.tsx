@@ -1,11 +1,11 @@
-import type { HComponentFn, Store } from "qrilljs/core";
+import type { ComponentFn, Store } from "qrilljs/core";
 import { colorof, component, element, registerStyle, S_MEDIUM, style } from "qrilljs/core";
 
 export type PageFooterArgument = {
     site_name: string;
 };
 
-export function pageFooter(store: Store): HComponentFn<PageFooterArgument> {
+export function pageFooter(store: Store): ComponentFn<PageFooterArgument> {
     const PageFooter = element(store, { tag: "footer", name: "page-footer" });
     const Content = element(store);
     const Copyright = element(store);

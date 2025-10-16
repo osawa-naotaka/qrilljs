@@ -1,7 +1,7 @@
 import { pageHead } from "@site/components/pages/pageHead";
 import { pageFooter } from "@site/components/sections/pageFooter";
 import { pageHeader } from "@site/components/sections/pageHeader";
-import type { HComponentFn, HSvgBrandsIconName, Store } from "qrilljs/core";
+import type { ComponentFn, HSvgBrandsIconName, Store } from "qrilljs/core";
 import { atStyle, colorof, component, INIT_CSS, registerStyle } from "qrilljs/core";
 
 export type PageArgument = {
@@ -15,7 +15,7 @@ export type PageArgument = {
     }[];
 };
 
-export function page(store: Store): HComponentFn<PageArgument> {
+export function page(store: Store): ComponentFn<PageArgument> {
     const PageHead = pageHead();
     const PageHeader = pageHeader(store);
     const PageFooter = pageFooter(store);
@@ -35,7 +35,7 @@ export function page(store: Store): HComponentFn<PageArgument> {
 
     registerStyle(store, "html", styles);
 
-    return component("html", ({ lang, name, title, description, navitem }, ...children) => (
+    return component("html", ({ lang, name, title, description, navitem, children }) => (
         <html lang={lang}>
             <PageHead title={title} description={description} />
             <body>

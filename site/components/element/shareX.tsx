@@ -1,6 +1,6 @@
 import { TAG_DESIGN } from "@site/styles/design";
-import type { HComponentFn, Store } from "qrilljs/core";
-import { as, colorof, component, element, registerStyle, S_SMALL, S_TINY, style } from "qrilljs/core";
+import type { ComponentFn, Store } from "qrilljs/core";
+import { colorof, component, element, registerStyle, S_SMALL, S_TINY, style } from "qrilljs/core";
 import { faSvgIconFont } from "@/lib/ui/faSvgIconFont";
 
 export type ShareXArgument = {
@@ -8,10 +8,10 @@ export type ShareXArgument = {
     url: string;
 };
 
-export function shareX(store: Store): HComponentFn<ShareXArgument> {
+export function shareX(store: Store): ComponentFn<ShareXArgument> {
     const ShareX = element(store, { tag: "a", name: "share-x" });
     const Text = element(store);
-    const XIcon = as("share-x-icon", faSvgIconFont(store, { type: "brands", name: "x-twitter" }));
+    const XIcon = faSvgIconFont(store, { type: "brands", name: "x-twitter" });
 
     const styles = [
         TAG_DESIGN(store, "background", ShareX),

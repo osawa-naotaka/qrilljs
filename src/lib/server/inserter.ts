@@ -1,11 +1,19 @@
-import type { Attribute, HElement, HNode } from "@/lib/core/component";
+import type { Child, PropBase, QElement, QNode } from "@/lib/core/component";
 import type { CompoundSelector, Selector } from "@/lib/core/style";
 import { isCombinator, normalizeSelector } from "@/lib/core/style";
 
-// Inserter (HNode).
-export function insertNodes(root: HNode, selector: Selector[], insert: HNode[], search_deep: boolean): HNode {
+// Inserter (QNode).
+export function insertNodes(root: QNode, selector: Selector[], insert: QNode[], search_deep: boolean): QNode {
+    return insertNodesInternal(root, selector, insert, search_deep);
+}
+
+export function insertNodesInternal(root: Child, selector: Selector[], insert: QNode[], search_deep: boolean): QNode {
     if (typeof root === "string") {
         return root;
+    }
+
+    if (root === undefined || root === null || root === false) {
+        return "";
     }
 
     if (selector.length === 0) {
@@ -15,46 +23,44 @@ export function insertNodes(root: HNode, selector: Selector[], insert: HNode[], 
     if (isCombinator(selector[0])) {
         switch (selector[0]) {
             case ">":
-                return insertNodes(root, selector.slice(1), insert, false);
+                return insertNodesInternal(root, selector.slice(1), insert, false);
             default:
                 throw new Error("insertElementsCombinator: unsupported combinator.");
         }
     }
 
+    if (root.props === undefined) {
+        root.props = {};
+    }
+    const children = Array.isArray(root.props.children) ? root.props.children : [root.props.children];
+
     if (matchCompoundSelector(normalizeSelector(selector[0]), root)) {
         const child =
             selector.length === 1
-                ? [...root.children, ...insert]
-                : root.children.map((c) => insertNodes(c, selector.slice(1), insert, true));
-        return {
-            tag: root.tag,
-            attribute: root.attribute,
-            children: child,
-        };
+                ? [...children, ...insert]
+                : children.map((c) => insertNodesInternal(c, selector.slice(1), insert, true));
+        root.props.children = child;
+        return root;
     }
 
     if (search_deep) {
-        const child = root.children.filter((c) => c);
-        return {
-            tag: root.tag,
-            attribute: root.attribute,
-            children: child.map((c) => insertNodes(c, selector, insert, true)),
-        };
+        const new_child = children.map((c) => insertNodesInternal(c, selector, insert, true));
+        root.props.children = new_child;
     }
     return root;
 }
 
-function matchCompoundSelector(selector: CompoundSelector, element: HElement<{ id?: string }>): boolean {
+function matchCompoundSelector(selector: CompoundSelector, element: QElement<{ id?: string }>): boolean {
     for (const s of selector) {
         if (typeof s !== "string") {
             throw new Error("matchCompoundSelector: ComponentFn is not supported.");
         }
         if (s.startsWith(".")) {
-            if (!hasClass(s.slice(1), element.attribute)) {
+            if (!hasClass(s.slice(1), element.props)) {
                 return false;
             }
         } else if (s.startsWith("#")) {
-            if (element.attribute.id === undefined || element.attribute.id !== s.slice(1)) {
+            if (element.props.id === undefined || element.props.id !== s.slice(1)) {
                 return false;
             }
         } else if (s !== "*") {
@@ -66,7 +72,7 @@ function matchCompoundSelector(selector: CompoundSelector, element: HElement<{ i
     return true;
 }
 
-function hasClass(className: string, attribute: Attribute): boolean {
+function hasClass(className: string, attribute: PropBase): boolean {
     if (attribute.class === undefined || typeof attribute.class !== "string") {
         return false;
     }

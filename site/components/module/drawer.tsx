@@ -1,14 +1,14 @@
-import type { HComponentFn, HNode, Store } from "qrilljs/core";
+import type { ComponentFn, QNode, Store } from "qrilljs/core";
 import { component, element, registerStyle, style } from "qrilljs/core";
 
 export type DrawerArgument = {
-    title: HNode;
-    header_space: HNode;
-    open_button: HNode;
-    content: HNode;
+    title: QNode;
+    header_space: QNode;
+    open_button: QNode;
+    content: QNode;
 };
 
-export function drawer(store: Store, button_id: string): HComponentFn<DrawerArgument> {
+export function drawer(store: Store, button_id: string): ComponentFn<DrawerArgument> {
     const Drawer = element(store, { name: "drawer" });
     const Title = element(store);
     const HeaderSpace = element(store);

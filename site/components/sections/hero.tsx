@@ -1,7 +1,7 @@
-import type { HArgument, HComponentFn, Store } from "qrilljs/core";
+import type { ComponentFn, PropBase, Store } from "qrilljs/core";
 import { colorof, component, element, registerStyle, S_2XLARGE, S_MEDIUM, style, W_MEDIUM } from "qrilljs/core";
 
-export function hero(store: Store): HComponentFn<HArgument> {
+export function hero(store: Store): ComponentFn<PropBase> {
     const Hero = element(store, { name: "hero" });
     const HeroText = element(store);
 

@@ -4,12 +4,12 @@ import { tag } from "@site/components/element/tag";
 import { articleHeader } from "@site/components/module/articleHeader";
 import type { PostFm } from "@site/site.config";
 import { TAG_DESIGN } from "@site/styles/design";
-import type { HComponentFn, Markdown, Store, StyleRule } from "qrilljs/core";
+import type { ComponentFn, Markdown, Store, StyleRule } from "qrilljs/core";
 import { component, element, F_XLARGE, registerStyle, S_XLARGE, style } from "qrilljs/core";
 
 export type SummaryArgument = Markdown<PostFm>;
 
-export function summary(store: Store): HComponentFn<SummaryArgument> {
+export function summary(store: Store): ComponentFn<SummaryArgument> {
     const Summary = element(store, { tag: "article", name: "summary" });
     const ArticleHeader = articleHeader(store);
     const Author = element(store);

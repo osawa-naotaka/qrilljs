@@ -1,4 +1,4 @@
-import type { HComponentFn } from "qrilljs/core";
+import type { ComponentFn } from "qrilljs/core";
 import { component } from "qrilljs/core";
 
 export type PageHeadArgument = {
@@ -6,7 +6,7 @@ export type PageHeadArgument = {
     description: string;
 };
 
-export function pageHead(): HComponentFn<PageHeadArgument> {
+export function pageHead(): ComponentFn<PageHeadArgument> {
     return component("head", ({ title, description }) => (
         <head class="page-head">
             {/* Global Metadata */}

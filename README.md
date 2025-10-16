@@ -73,9 +73,9 @@ site/
 
 ```tsx
 // site/pages/index.html.tsx
-import type { HRootPageFn } from "qrill/core";
+import type { RootPageFn } from "qrill/core";
 
-const IndexPage: HRootPageFn<{}> = async () => {
+const IndexPage: RootPageFn<{}> = async () => {
   return (
     <div>
       <h1>Welcome to qrill</h1>
@@ -91,13 +91,13 @@ export default IndexPage;
 
 ```tsx
 // site/pages/posts/[slug].html.tsx
-import type { HRootPageFn } from "qrill/core";
+import type { RootPageFn } from "qrill/core";
 
 interface PostPageProps {
   slug: string;
 }
 
-const PostPage: HRootPageFn<PostPageProps> = async ({ slug }) => {
+const PostPage: RootPageFn<PostPageProps> = async ({ slug }) => {
   // Markdownファイルからデータを取得
   const post = await loadMarkdown(`site/contents/posts/${slug}.md`);
   

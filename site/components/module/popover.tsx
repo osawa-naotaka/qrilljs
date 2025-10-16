@@ -1,13 +1,13 @@
-import type { HComponentFn, HNode, Store } from "qrilljs/core";
+import type { ComponentFn, QNode, Store } from "qrilljs/core";
 import { atStyle, colorof, component, element, registerStyle, S_MEDIUM, style, W_MEDIUM } from "qrilljs/core";
 
 export type PopoverArgument = {
-    open_button: HNode;
-    close_button: HNode;
-    body: HNode;
+    open_button: QNode;
+    close_button: QNode;
+    body: QNode;
 };
 
-export function popover(store: Store): HComponentFn<PopoverArgument> {
+export function popover(store: Store): ComponentFn<PopoverArgument> {
     const Popover = element(store, { name: "popover" });
     const Button = element(store, { tag: "button" });
     const CloseArea = element(store);

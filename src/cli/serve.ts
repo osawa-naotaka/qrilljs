@@ -16,13 +16,14 @@ import { bundleHtml, stringifyToHtml } from "@/cli/html";
 import type { Router } from "@/cli/route";
 import { createAssetRouter, createPageRouter, createStaticRouter, withoutExt } from "@/cli/route";
 import { bundleScriptEsbuild } from "@/cli/script";
+import { simpleElement } from "@/core";
 import { default_design_rule } from "@/lib/core/design";
-import { gt } from "@/lib/core/elements";
 import type { Store } from "@/lib/core/store";
 import { generateStore } from "@/lib/core/store";
 import { contentType } from "@/lib/core/util";
 import { ErrorPage, InternalServerErrorPage } from "@/page/error";
 import { qrill_error_css } from "@/page/qrill-error";
+import { importPage } from "./page";
 
 export async function serve(conf_file: string | undefined): Promise<void> {
     const config = loadConfig(conf_file ?? "qrill.config.ts", default_config);
@@ -208,28 +209,29 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
             // Page router
             const match_page = page_router(req);
             if (!(match_page instanceof Error)) {
-                const page_fn = require(path.join(page_dir, match_page.target_file));
-                if (typeof page_fn.default === "function") {
-                    const store = generateStore(config.asset, site_config);
-                    const root_page_fn = await page_fn.default(store);
+                const page = await importPage(path.join(page_dir, match_page.target_file), config, site_config);
 
+                if (page !== null) {
                     // auto generation of .css , .js and .woff2 from .html.ts
                     if (match_page.auto_generate) {
+                        if (page.root_page_fn === undefined) {
+                            throw new Error("server internal error.");
+                        }
                         switch (match_page.req_ext) {
                             case ".css": {
                                 const css_name = withoutExt(withoutExt(match_page.target_file));
-                                const css = await bundleCss(store, css_name, require);
+                                const css = await bundleCss(page.store, css_name);
                                 if (css instanceof Error) {
                                     return errorResponse(500, css);
                                 }
                                 return normalResponse(css || "", match_page.req_ext);
                             }
                             case ".js": {
-                                const js = await bundleScriptEsbuild(store);
+                                const js = await bundleScriptEsbuild(page.store, page.client_element_count_start);
                                 return normalResponse(js || "", match_page.req_ext);
                             }
                             case ".woff2": {
-                                const woff2 = await bundleWoff2(store);
+                                const woff2 = await bundleWoff2(page.store);
                                 return normalResponse(woff2 || "", match_page.req_ext);
                             }
                             default:
@@ -239,13 +241,16 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
 
                     switch (match_page.req_ext) {
                         case ".html": {
-                            const router_set = createAssetRouterSet(store, config.asset.target_prefix, require);
+                            if (page.root_page_fn === undefined) {
+                                throw new Error(`file "${match_page.target_file}" does not includes default export.`);
+                            }
+                            const router_set = createAssetRouterSet(page.store, config.asset.target_prefix, require);
                             for (const [key, router] of router_set) {
                                 asset_router.set(key, router);
                             }
 
-                            const script = gt("script");
-                            const link = gt("link");
+                            const script = simpleElement("script");
+                            const link = simpleElement("link");
                             const css_name = `${withoutExt(withoutExt(match_page.target_file))}.css`;
                             const js_name = `${withoutExt(withoutExt(match_page.target_file))}.js`;
                             const insert_nodes = [
@@ -254,15 +259,28 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
                                 link({ href: css_name, rel: "stylesheet" }),
                             ];
 
-                            const html_text = await bundleHtml(store, match_page.params, root_page_fn, insert_nodes);
+                            const html_text = await bundleHtml(
+                                page.store,
+                                match_page.params,
+                                page.root_page_fn.default,
+                                insert_nodes,
+                            );
 
                             return normalResponse(html_text, ".html");
                         }
                         default:
-                            return normalResponse(root_page_fn, match_page.req_ext);
+                            if (page.any_page_fn_result === undefined) {
+                                throw new Error(
+                                    `processing result of file "${match_page.target_file}" default() is a function. But this file extenstion needs string output.`,
+                                );
+                            }
+                            return normalResponse(page.any_page_fn_result, match_page.req_ext);
                     }
                 }
-                return errorResponse(500, `${match_page.target_file} does not have default export.`);
+                return errorResponse(
+                    500,
+                    `${match_page.target_file} or its client scripts does not have default export.`,
+                );
             }
 
             // Public router

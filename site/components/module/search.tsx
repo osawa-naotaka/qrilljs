@@ -2,7 +2,7 @@ import { dateTime } from "@site/components/element/dateTime";
 import { tag } from "@site/components/element/tag";
 import { postFmSchema } from "@site/site.config";
 import { TAG_DESIGN } from "@site/styles/design";
-import type { HArgument, HClientFn, HComponentFn, HNode, Store } from "qrilljs/core";
+import type { ClientFn, ComponentFn, PropBase, QNode, Store } from "qrilljs/core";
 import {
     colorof,
     component,
@@ -23,13 +23,12 @@ import type { SearchResult } from "staticseek";
 import { createSearchFn, StaticSeekError } from "staticseek";
 import * as v from "valibot";
 
-export function search(store: Store): HComponentFn<HArgument> {
+export function search(store: Store): ComponentFn<PropBase> {
     const Search = element(store, { name: "search" });
     const SearchBar = element(store);
     const Input = element(store, { tag: "input", name: "search-input" });
     const InputIcon = faSvgIconFont(store, { type: "solid", name: "magnifying-glass" });
     const Result = element(store, { tag: "ul", name: "search-result" });
-    searchResultItem(store);
 
     const component_sytles = [
         style(Search)({
@@ -69,7 +68,7 @@ export function search(store: Store): HComponentFn<HArgument> {
     ));
 }
 
-export default function clientFunction(store: Store): HClientFn {
+export default function clientFunction(store: Store): ClientFn {
     const SearchResultItem = searchResultItem(store);
 
     return async (root: Element) => {
@@ -99,7 +98,7 @@ function querySelector<T extends Element>(selector: string, d: Document | Elemen
     return e;
 }
 
-function setChild(element: HTMLElement, nodes: HNode[]): void {
+function setChild(element: HTMLElement, nodes: QNode[]): void {
     element.innerText = "";
     for (const node of nodes) {
         for (const n of createDom(node)) {
@@ -117,8 +116,8 @@ type SearchResultItemAttribute = {
     result: SearchResult;
 };
 
-export function searchResultItem(store: Store): HComponentFn<SearchResultItemAttribute> {
-    const ResultItem = element(store, { tag: "li" });
+export function searchResultItem(store: Store): ComponentFn<SearchResultItemAttribute> {
+    const ResultItem = element(store, { tag: "li", name: "search-result-item" });
     const Meta = element(store);
     const Title = element(store);
     const Description = element(store);

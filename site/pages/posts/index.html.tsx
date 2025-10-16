@@ -1,11 +1,11 @@
 import { page } from "@site/components/pages/page";
 import { summaries } from "@site/components/sections/summaries";
 import { navitem, postFmSchema, posts_dir, site } from "@site/site.config";
-import type { HRootPageFn, Store } from "qrilljs/core";
+import type { RootPageFn, Store } from "qrilljs/core";
 import { element, registerRootPage, S_MEDIUM, style, W_MEDIUM } from "qrilljs/core";
 import { getAllMarkdowns } from "qrilljs/server";
 
-export default function Root(store: Store): HRootPageFn<void> {
+export default function Root(store: Store): RootPageFn<void> {
     const Page = page(store);
     const PageMainArea = element(store, { tag: "main", name: "page-main-area" });
     const Summaries = summaries(store);

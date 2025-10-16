@@ -3,7 +3,7 @@ import path from "node:path";
 import { cwd } from "node:process";
 import { globSync } from "glob";
 import type { HComponentAsset } from "@/core";
-import type { Attribute } from "@/lib/core/component";
+import type { PropBase } from "@/lib/core/component";
 import { globExt } from "@/lib/server/util";
 
 type RouteTable = {
@@ -17,7 +17,7 @@ export type Route = {
     target_file: string;
     req_ext: string;
     auto_generate: boolean;
-    params: Attribute;
+    params: PropBase;
 };
 
 export type Router = (req: Request) => Route | Error;

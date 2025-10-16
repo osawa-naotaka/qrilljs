@@ -4,7 +4,7 @@ import { tag } from "@site/components/element/tag";
 import { articleHeader } from "@site/components/module/articleHeader";
 import type { PostFm } from "@site/site.config";
 import { TAG_DESIGN } from "@site/styles/design";
-import type { HComponentFn, Markdown, Store } from "qrilljs/core";
+import type { ComponentFn, Markdown, Store } from "qrilljs/core";
 import {
     colorof,
     component,
@@ -20,7 +20,7 @@ import {
 
 export type ArticleArgument = Markdown<PostFm>;
 
-export function article(store: Store): HComponentFn<ArticleArgument> {
+export function article(store: Store): ComponentFn<ArticleArgument> {
     const Article = element(store, { tag: "article", name: "article" });
     const ArticleHeader = articleHeader(store);
     const Author = element(store);
@@ -103,7 +103,7 @@ export function article(store: Store): HComponentFn<ArticleArgument> {
         },
     ]);
 
-    return component(Article, ({ data, slug }, ...children) => (
+    return component(Article, ({ data, slug, children }) => (
         <Article>
             <ArticleHeader title={<h2>{data.title}</h2>}>
                 <Author>{data.author}</Author>

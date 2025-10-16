@@ -2,7 +2,7 @@ import { drawer } from "@site/components/module/drawer";
 import { navigation } from "@site/components/module/navigation";
 import { popover } from "@site/components/module/popover";
 import { search } from "@site/components/module/search";
-import type { HComponentFn, HSvgBrandsIconName, Store } from "qrilljs/core";
+import type { ComponentFn, HSvgBrandsIconName, Store } from "qrilljs/core";
 import {
     colorof,
     component,
@@ -23,7 +23,7 @@ export type PageHeaderArgument = {
     }[];
 };
 
-export function pageHeader(store: Store): HComponentFn<PageHeaderArgument> {
+export function pageHeader(store: Store): ComponentFn<PageHeaderArgument> {
     const PageHeader = element(store, { tag: "header", name: "page-header" });
     const Drawer = drawer(store, "page-header-toggle-button");
     const Popover = popover(store);

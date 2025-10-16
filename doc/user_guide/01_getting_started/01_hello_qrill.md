@@ -81,9 +81,9 @@ hello_qrill/
 ### 4. 最初のページ（site/pages/index.html.tsx）
 
 ```tsx
-import type { HRootPageFn, Store } from "qrill/core";
+import type { RootPageFn, Store } from "qrill/core";
 
-export default function Root(_store: Store): HRootPageFn<void> {
+export default function Root(_store: Store): RootPageFn<void> {
     return async () => (
         <html lang="en">
             <head>

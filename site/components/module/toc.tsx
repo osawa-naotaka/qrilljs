@@ -1,11 +1,11 @@
 import type { ToC } from "remark-export-toc";
-import { component, element, type HComponentFn, type Store } from "@/core";
+import { type ComponentFn, component, element, type Store } from "@/core";
 
 export type ToCArgument = {
     toc: ToC[];
 };
 
-export function toc(store: Store): HComponentFn<ToCArgument> {
+export function toc(store: Store): ComponentFn<ToCArgument> {
     const ToC = element(store, { tag: "ul" });
     const Item = element(store, { tag: "li" });
 

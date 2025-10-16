@@ -1,5 +1,5 @@
 import { link } from "@site/components/element/link";
-import type { HComponentFn, HSvgBrandsIconName, Store } from "qrilljs/core";
+import type { ComponentFn, HSvgBrandsIconName, Store } from "qrilljs/core";
 import { component, element, F_XLARGE, faSvgIconStore, registerStyle, S_XLARGE, style } from "qrilljs/core";
 
 export type NavigationArgument = {
@@ -9,7 +9,7 @@ export type NavigationArgument = {
     }[];
 };
 
-export function navigation(store: Store): HComponentFn<NavigationArgument> {
+export function navigation(store: Store): ComponentFn<NavigationArgument> {
     const Navigation = element(store, { tag: "nav", name: "navigation" });
     const Link = link(store);
     const icons: HSvgBrandsIconName[] = ["youtube", "x-twitter", "github"];

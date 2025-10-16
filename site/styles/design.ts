@@ -1,7 +1,7 @@
-import type { ColorCategory, HComponentFn, Selector, Store, StyleRule } from "qrilljs/core";
+import type { ColorCategory, ComponentFn, PropBase, Selector, Store, StyleRule } from "qrilljs/core";
 import { colorof, S_SMALL, S_TINY, style } from "qrilljs/core";
 
-export function TAG_DESIGN<T>(store: Store, cat: ColorCategory, top: HComponentFn<T>): StyleRule[] {
+export function TAG_DESIGN<T extends PropBase>(store: Store, cat: ColorCategory, top: ComponentFn<T>): StyleRule[] {
     return [
         style(top)({
             color: colorof(store, "background"),

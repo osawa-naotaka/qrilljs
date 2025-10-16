@@ -1,37 +1,35 @@
-import type { AttributeMap, qrillTag, Tag } from "@/lib/core/elements";
-import { gt } from "@/lib/core/elements";
 import type { Store } from "@/lib/core/store";
 import { name_with_one_time_hash } from "@/lib/core/store";
 import { addClassInRecord } from "@/lib/core/util";
+import type { AttributeOf, QrillTag, Tag } from "./element";
 
-// Attribute of HTML Element
-export type AttributeValue = string | string[] | null | undefined;
-export type Attribute = Record<string, AttributeValue>;
-export type AttributeOf<K> = Partial<AttributeMap[K & keyof AttributeMap]>;
-
-// HTML DOM Node = string or HTML Element
-export type HNode<T extends Attribute = Attribute> = string | HElement<T>;
-
-// HTML Element, with custom element name
-export type HElement<K> = {
-    tag: Tag | qrillTag;
-    attribute: Partial<K>;
-    children: HNode[];
+export type QElement<T extends PropBase = PropBase> = {
+    tag: Tag;
+    props: Partial<T> & { children?: Children; key?: string | number; class?: string | string[] };
 };
 
-// qrill Element (is function), expressing HTML element
-export type HElementFn<K> = {
-    (attribute: AttributeOf<K>, ...children: HNode[]): HNode;
+export type QNode = string | QElement;
+
+export type Child = QNode | null | false | undefined;
+export type Children = Child | readonly Child[] | readonly Children[];
+
+export type QElementProps<T extends Tag> = Partial<AttributeOf<T>> & {
+    children?: Children;
+    key?: string | number;
+};
+
+export type QElementFn<T extends Tag> = {
+    (props: Partial<AttributeOf<T>>): QElement<AttributeOf<T>>;
     designator: string;
 };
 
-export type ElementArg<K extends Tag | qrillTag> = {
-    tag?: K;
+export type QElementArgument<T extends Tag> = {
+    tag?: T;
     class?: string | string[];
     name?: string;
 };
 
-export function element<K extends Tag | qrillTag>(store: Store, arg: ElementArg<K> = {}): HElementFn<K> {
+export function element<T extends Tag | QrillTag>(store: Store, arg: QElementArgument<T> = {}): QElementFn<T> {
     const name_with_hash = name_with_one_time_hash(store, arg.name || "qrill");
     const dot_name = `.${name_with_hash}`;
     const class_name = arg.class === undefined ? [] : typeof arg.class === "string" ? [arg.class] : arg.class;
@@ -39,10 +37,9 @@ export function element<K extends Tag | qrillTag>(store: Store, arg: ElementArg<
         class_name.push(arg.name);
     }
     return Object.assign(
-        (attribute: AttributeOf<K>, ...children: HNode[]) => ({
+        (props: QElementProps<T>) => ({
             tag: arg.tag || ("div" as const),
-            attribute: addClassInRecord(attribute, [name_with_hash, ...class_name]),
-            children,
+            props: addClassInRecord(props, [name_with_hash, ...class_name]),
         }),
         {
             designator: dot_name,
@@ -50,42 +47,44 @@ export function element<K extends Tag | qrillTag>(store: Store, arg: ElementArg<
     );
 }
 
-export type HComponentRawFn<T> = (argument: HComponentFnArg<T>, ...children: HNode[]) => HNode;
-
-// qrill Component (is function)
-export type HComponentFn<T> = {
-    (argument: HComponentFnArg<T>, ...children: HNode[]): HNode;
-    designator: string;
-};
-// biome-ignore lint: using any.
-export type HComponentFnArg<T> = T & { class?: string | string[]; id?: string; children?: any; key?: any };
-
-// if name_fn is string, it refers html elemen name like html, body, p..., so we don't use dottend name for that.
-export function component<K, T>(name_fn: HComponentFn<K> | string, component_fn: HComponentRawFn<T>): HComponentFn<T> {
-    const component_name = typeof name_fn === "string" ? `.${name_fn}` : name_fn.designator;
-    return Object.assign((argument: HComponentFnArg<T>, ...children: HNode[]) => component_fn(argument, ...children), {
-        designator: component_name,
-    });
-}
-
-// biome-ignore lint/suspicious/noExplicitAny: HAnyComponent uses only for function.name
-export type HAnyComponentFn = HComponentFn<any>;
-
-export type HArgument = Record<string, unknown>;
-
-export function as<T>(class_name: string, fn: HComponentFn<T>): HComponentFn<T> {
-    const Class = gt("class");
-    const dot_name = `.${class_name}`;
+export function simpleElement<T extends Tag>(tag: T): QElementFn<T> {
     return Object.assign(
-        (argument: HComponentFnArg<T>, ...children: HNode[]) => Class({ class: class_name }, fn(argument, ...children)),
+        (props: QElementProps<T>) => ({
+            tag: tag || ("div" as const),
+            props,
+        }),
         {
-            designator: dot_name,
+            designator: tag,
         },
     );
 }
 
+export type PropBase = Record<string, unknown>;
+
+export type ComponentProps<K extends PropBase> = K & {
+    children?: Children;
+    key?: string | number;
+};
+
+export type ComponentRawFn<K extends PropBase> = (props: ComponentProps<K>) => QNode;
+export type ComponentFn<K extends PropBase = PropBase> = {
+    (props: ComponentProps<K>): QNode;
+    designator: string;
+};
+
+// if name_fn is string, it refers html elemen name like html, body, p..., so we don't use dottend name for that.
+export function component<T extends PropBase>(
+    name_fn: ComponentFn | string,
+    component_fn: ComponentRawFn<T>,
+): ComponentFn<T> {
+    const component_name = typeof name_fn === "string" ? `.${name_fn}` : name_fn.designator;
+    return Object.assign((props: ComponentProps<T>) => component_fn(props), {
+        designator: component_name,
+    });
+}
+
 // qrill HTML Top export function
-export type HRootPageFn<T> = (parameter: T) => Promise<HNode>;
+export type RootPageFn<T> = (parameter: T) => Promise<QNode>;
 
 // qrill Client FUnction
-export type HClientFn = (root: Element) => Promise<void>;
+export type ClientFn = (root: Element) => Promise<void>;
