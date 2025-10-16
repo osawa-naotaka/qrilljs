@@ -1,5 +1,5 @@
 import type { ToC } from "remark-export-toc";
-import { component, element, type ComponentFn, type Store } from "@/core";
+import { type ComponentFn, component, element, type Store } from "@/core";
 
 export type ToCArgument = {
     toc: ToC[];

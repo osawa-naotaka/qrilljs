@@ -65,6 +65,10 @@ function createDomInternal(
 
 function setAttribute(element: HTMLElement, attribute: Partial<PropBase>): void {
     for (const [raw_key, value] of Object.entries(attribute)) {
+        if (raw_key === "children") {
+            continue;
+        }
+
         const key = raw_key.replaceAll("_", "-");
 
         if (!validateAttributeKey(key)) {

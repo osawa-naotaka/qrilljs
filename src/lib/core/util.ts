@@ -5,8 +5,8 @@ export function replaceExt(filename: string, ext: string) {
 export function deepFlatMap<T, R>(fn: (x: T) => R, xs: T[]): R[] {
     const rec: R[][] = [];
 
-    for(const x of xs) {
-        if(Array.isArray(x)) {
+    for (const x of xs) {
+        if (Array.isArray(x)) {
             rec.push(deepFlatMap(fn, x));
         } else {
             rec.push([fn(x)]);

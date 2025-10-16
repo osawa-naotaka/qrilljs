@@ -9,7 +9,7 @@ import { bundleWoff2 } from "@/cli/font";
 import { bundleHtml } from "@/cli/html";
 import { withoutExt } from "@/cli/route";
 import { bundleScriptEsbuild } from "@/cli/script";
-import { element, type PropBase, type RootPageFn } from "@/lib/core/component";
+import { simpleElement, type PropBase, type RootPageFn } from "@/lib/core/component";
 import { default_design_rule } from "@/lib/core/design";
 import type { HComponentAsset, Store } from "@/lib/core/store";
 import { generateStore } from "@/lib/core/store";
@@ -148,8 +148,8 @@ async function processAndWriteHtml(
 ): Promise<void> {
     const html_start = performance.now();
 
-    const script = element(store, { tag: "script" });
-    const link = element(store, { tag: "link" });
+    const script = simpleElement("script");
+    const link = simpleElement("link");
     const insert_nodes = [
         css_link !== "" ? link({ href: css_link, rel: "stylesheet" }) : "",
         js_src !== "" ? script({ type: "module", src: js_src }) : "",

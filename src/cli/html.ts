@@ -52,18 +52,17 @@ export function stringifyToHtml(depth: number, additional_class: string | string
         }
 
         const children = Array.isArray(node.props.children) ? node.props.children : [node.props.children];
-        node.props.children = null;
+        node.props.children = undefined;
 
         if (node.tag === "raw") {
             const window = new JSDOM("").window;
             const purify = DOMPurify(window);
             return deepFlatMap((x) => {
-                    if (typeof x !== "string") {
-                        throw new Error(`Raw node must be string at '${node}'.`);
-                    }
-                    return purify.sanitize(x);
-                }, children)
-                .join("");
+                if (typeof x !== "string") {
+                    throw new Error(`Raw node must be string at '${node}'.`);
+                }
+                return purify.sanitize(x);
+            }, children).join("");
         }
 
         if (!validateElementName(node.tag)) {
@@ -86,7 +85,7 @@ export function stringifyToHtml(depth: number, additional_class: string | string
 function attributeToString(attribute: Partial<PropBase>): string {
     return Object.entries(attribute)
         .map(([raw_key, value]) => {
-            if(raw_key === "children") {
+            if (raw_key === "children") {
                 return "";
             }
 

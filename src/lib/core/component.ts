@@ -47,6 +47,18 @@ export function element<T extends Tag | QrillTag>(store: Store, arg: QElementArg
     );
 }
 
+export function simpleElement<T extends Tag>(tag: T): QElementFn<T> {
+    return Object.assign(
+        (props: QElementProps<T>) => ({
+            tag: tag || ("div" as const),
+            props,
+        }),
+        {
+            designator: tag,
+        },
+    );
+}
+
 export type PropBase = Record<string, unknown>;
 
 export type ComponentProps<K extends PropBase> = K & {

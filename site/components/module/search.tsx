@@ -2,7 +2,7 @@ import { dateTime } from "@site/components/element/dateTime";
 import { tag } from "@site/components/element/tag";
 import { postFmSchema } from "@site/site.config";
 import { TAG_DESIGN } from "@site/styles/design";
-import type { PropBase, ClientFn, ComponentFn, QNode, Store } from "qrilljs/core";
+import type { ClientFn, ComponentFn, PropBase, QNode, Store } from "qrilljs/core";
 import {
     colorof,
     component,
