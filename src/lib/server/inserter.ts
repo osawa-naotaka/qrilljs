@@ -12,7 +12,7 @@ export function insertNodesInternal(root: Child, selector: Selector[], insert: Q
         return root;
     }
 
-    if (root === undefined || root === null || root === false) {
+    if (root === undefined || root === null || typeof root === "boolean") {
         return "";
     }
 

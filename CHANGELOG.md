@@ -14,6 +14,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 
+## [0.1.0-alpha.27] - 2025-10-16
+
+### Added
+- Introduced Designator type for referencing component names without implementations, primarily for use with style() function.
+- Added AnyComponentFn type which was previously missing.
+
+### Fixed
+- Fixed type error when boolean values were used as elements (they are now properly ignored and not rendered).
+
 ## [0.1.0-alpha.26] - 2025-10-16
 
 ### Fixed
@@ -196,7 +205,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.26...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.27...HEAD
+[0.1.0-alpha.27]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.26...v0.1.0-alpha.27
 [0.1.0-alpha.26]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.25...v0.1.0-alpha.26
 [0.1.0-alpha.25]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.24...v0.1.0-alpha.25
 [0.1.0-alpha.24]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.23...v0.1.0-alpha.24

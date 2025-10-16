@@ -1,4 +1,4 @@
-import type { ComponentFn } from "@/lib/core/component";
+import type { Designator } from "@/lib/core/component";
 import type { Properties } from "@/lib/core/properties";
 import { unionArrayOfRecords } from "@/lib/core/util";
 
@@ -17,8 +17,7 @@ export type SelectorList = SelectorContext[];
 
 export type CompoundSelector = SimpleSelector[];
 
-// biome-ignore lint:lint/suspicious/noExplicitAny
-export type SimpleSelector = string | ComponentFn<any>;
+export type SimpleSelector = string | Designator;
 
 export type Combinator = " " | ">" | "+" | "~" | "||";
 
@@ -76,6 +75,6 @@ function isString(selector: SimpleSelector): selector is string {
     return typeof selector === "string";
 }
 
-function isComponentFn(selector: SimpleSelector): selector is ComponentFn {
+function isComponentFn(selector: SimpleSelector): selector is Designator {
     return typeof selector === "function";
 }
