@@ -35,7 +35,7 @@ export function page(store: Store): ComponentFn<PageArgument> {
 
     registerStyle(store, "html", styles);
 
-    return component("html", ({ lang, name, title, description, navitem }, ...children) => (
+    return component("html", ({ lang, name, title, description, navitem, children }) => (
         <html lang={lang}>
             <PageHead title={title} description={description} />
             <body>

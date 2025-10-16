@@ -26,7 +26,7 @@ export function articleHeader(store: Store): ComponentFn<ArticleHeaderArgument> 
 
     registerStyle(store, ArticleHeader, component_styles);
 
-    return component(ArticleHeader, ({ title }, ...children) => (
+    return component(ArticleHeader, ({ title, children }) => (
         <ArticleHeader>
             <Title>{title}</Title>
             <Meta>{children}</Meta>

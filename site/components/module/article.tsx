@@ -103,7 +103,7 @@ export function article(store: Store): ComponentFn<ArticleArgument> {
         },
     ]);
 
-    return component(Article, ({ data, slug }, ...children) => (
+    return component(Article, ({ data, slug, children }) => (
         <Article>
             <ArticleHeader title={<h2>{data.title}</h2>}>
                 <Author>{data.author}</Author>
