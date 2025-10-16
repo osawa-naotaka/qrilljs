@@ -29,7 +29,6 @@ export function search(store: Store): ComponentFn<PropBase> {
     const Input = element(store, { tag: "input", name: "search-input" });
     const InputIcon = faSvgIconFont(store, { type: "solid", name: "magnifying-glass" });
     const Result = element(store, { tag: "ul", name: "search-result" });
-    searchResultItem(store);
 
     const component_sytles = [
         style(Search)({
@@ -118,7 +117,7 @@ type SearchResultItemAttribute = {
 };
 
 export function searchResultItem(store: Store): ComponentFn<SearchResultItemAttribute> {
-    const ResultItem = element(store, { tag: "li" });
+    const ResultItem = element(store, { tag: "li", name: "search-result-item" });
     const Meta = element(store);
     const Title = element(store);
     const Description = element(store);

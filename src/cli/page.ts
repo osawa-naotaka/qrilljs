@@ -10,6 +10,7 @@ export type ImportedRootPageFn = {
 export type ImportPageReturnValue = {
     root_page_fn?: ImportedRootPageFn;
     store: Store;
+    client_element_count_start: number;
     any_page_fn_result?: string;
 };
 
@@ -26,8 +27,10 @@ export async function importPage(
     if (typeof page_fn.default === "function") {
         const page_fn_result = await page_fn.default(store);
         if (typeof page_fn_result === "string") {
-            return { store, any_page_fn_result: page_fn_result };
+            return { store, client_element_count_start: 0, any_page_fn_result: page_fn_result };
         }
+
+        const client_element_count_start = store.element_count;
 
         const js_files = Array.from(store.components.values())
             .map((x) => x.attachment?.script)
@@ -43,7 +46,11 @@ export async function importPage(
             }
         }
 
-        return { store, root_page_fn: { default: page_fn_result, rootPageFnParameters: page_fn.rootPageFnParameters } };
+        return {
+            store,
+            client_element_count_start,
+            root_page_fn: { default: page_fn_result, rootPageFnParameters: page_fn.rootPageFnParameters },
+        };
     }
 
     console.warn(`importPage: import file "${path}" does not have default export.`);

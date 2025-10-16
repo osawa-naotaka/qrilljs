@@ -45,7 +45,13 @@ export async function build(conf_file: string | undefined) {
 
         if (page !== null) {
             if (path.extname(relative_path) === ".html" && page.root_page_fn !== undefined) {
-                await processHtmlDotTs(page.store, relative_path, dist_dir, page.root_page_fn);
+                await processHtmlDotTs(
+                    page.store,
+                    relative_path,
+                    dist_dir,
+                    page.root_page_fn,
+                    page.client_element_count_start,
+                );
 
                 for (const [key, value] of page.store.components.entries()) {
                     if (value.attachment?.assets !== undefined) {
@@ -57,7 +63,6 @@ export async function build(conf_file: string | undefined) {
             } else {
                 console.warn("build has internal error. skip processing.");
             }
-
         } else {
             console.warn(`${filename_in_dir} has no default export. skip processing.`);
         }
@@ -101,8 +106,14 @@ function copyDir(root: string, dist_dir: string) {
     }
 }
 
-async function processHtmlDotTs(store: Store, relative_path: string, dist_dir: string, page_fn: ImportedRootPageFn) {
-    const css_js = await bundleAndWriteCssJs(relative_path, dist_dir, store);
+async function processHtmlDotTs(
+    store: Store,
+    relative_path: string,
+    dist_dir: string,
+    page_fn: ImportedRootPageFn,
+    start_num: number,
+) {
+    const css_js = await bundleAndWriteCssJs(relative_path, dist_dir, store, start_num);
     await bundleAndWriteWoff2(relative_path, dist_dir, store);
 
     if (page_fn.rootPageFnParameters !== undefined) {
@@ -155,11 +166,16 @@ async function bundleAndWriteWoff2(relative_path: string, dist_dir: string, stor
     }
 }
 
-async function bundleAndWriteCssJs(relative_path: string, dist_dir: string, store: Store): Promise<[string, string]> {
+async function bundleAndWriteCssJs(
+    relative_path: string,
+    dist_dir: string,
+    store: Store,
+    start_num: number,
+): Promise<[string, string]> {
     // process js
     const js_start = performance.now();
     let js_src = "";
-    const script_content = await bundleScriptEsbuild(store);
+    const script_content = await bundleScriptEsbuild(store, start_num);
     if (script_content !== null) {
         js_src = writeToFile(script_content, relative_path, dist_dir, ".js", js_start);
     }

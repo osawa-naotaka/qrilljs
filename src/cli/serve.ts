@@ -214,7 +214,7 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
                 if (page !== null) {
                     // auto generation of .css , .js and .woff2 from .html.ts
                     if (match_page.auto_generate) {
-                        if(page.root_page_fn === undefined) {
+                        if (page.root_page_fn === undefined) {
                             throw new Error("server internal error.");
                         }
                         switch (match_page.req_ext) {
@@ -227,7 +227,7 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
                                 return normalResponse(css || "", match_page.req_ext);
                             }
                             case ".js": {
-                                const js = await bundleScriptEsbuild(page.store);
+                                const js = await bundleScriptEsbuild(page.store, page.client_element_count_start);
                                 return normalResponse(js || "", match_page.req_ext);
                             }
                             case ".woff2": {
@@ -241,7 +241,7 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
 
                     switch (match_page.req_ext) {
                         case ".html": {
-                            if(page.root_page_fn === undefined) {
+                            if (page.root_page_fn === undefined) {
                                 throw new Error(`file "${match_page.target_file}" does not includes default export.`);
                             }
                             const router_set = createAssetRouterSet(page.store, config.asset.target_prefix, require);
@@ -269,8 +269,10 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
                             return normalResponse(html_text, ".html");
                         }
                         default:
-                            if(page.any_page_fn_result === undefined) {
-                                throw new Error(`processing result of file "${match_page.target_file}" default() is a function. But this file extenstion needs string output.`);
+                            if (page.any_page_fn_result === undefined) {
+                                throw new Error(
+                                    `processing result of file "${match_page.target_file}" default() is a function. But this file extenstion needs string output.`,
+                                );
                             }
                             return normalResponse(page.any_page_fn_result, match_page.req_ext);
                     }
