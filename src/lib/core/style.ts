@@ -17,6 +17,7 @@ export type SelectorList = SelectorContext[];
 
 export type CompoundSelector = SimpleSelector[];
 
+// biome-ignore lint:lint/suspicious/noExplicitAny
 export type SimpleSelector = string | ComponentFn<any>;
 
 export type Combinator = " " | ">" | "+" | "~" | "||";

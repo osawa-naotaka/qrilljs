@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 - scrollbar_widthがCSSバリデーションエラーになっていた問題を修正
+- jsxで、{}内の値に無効な値が指定されていても型エラーにならなかった問題を解決
+- HNodeをQNodeに、HElementをQElementに、HElemenetFnをQElementFnに、HComponentFnをComponentFnに、HRootPageFnをRootPageFnに、HClientFnをClientFnにリネーム
+
 
 ## [0.1.0-alpha.25] - 2025-10-13
 

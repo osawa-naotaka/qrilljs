@@ -1,3 +1,5 @@
+import type { Children } from "./component";
+
 export type Tag = keyof TagAttribute;
 export type AttributeOf<K extends Tag> = TagAttribute[K];
 
@@ -269,10 +271,8 @@ type GlobalAttributes = {
     tabindex: string;
     title: string;
     translate: "yes" | "no";
-    // biome-ignore lint: using any.
-    children: any;
-    // biome-ignore lint: using any.
-    key: any;
+    children: Children;
+    key: string | number;
 };
 
 // HTML要素ごとの属性型定義
