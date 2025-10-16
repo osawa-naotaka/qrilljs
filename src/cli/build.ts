@@ -9,12 +9,12 @@ import { bundleWoff2 } from "@/cli/font";
 import { bundleHtml } from "@/cli/html";
 import { withoutExt } from "@/cli/route";
 import { bundleScriptEsbuild } from "@/cli/script";
-import { simpleElement, type PropBase, type RootPageFn } from "@/lib/core/component";
+import { simpleElement } from "@/lib/core/component";
 import { default_design_rule } from "@/lib/core/design";
 import type { HComponentAsset, Store } from "@/lib/core/store";
-import { generateStore } from "@/lib/core/store";
 import { replaceExt } from "@/lib/core/util";
 import { globExt } from "@/server";
+import { type ImportedRootPageFn, importPage } from "./page";
 
 export async function build(conf_file: string | undefined) {
     const start = performance.now();
@@ -37,24 +37,27 @@ export async function build(conf_file: string | undefined) {
         throw new Error(`qrill: no page directory found at ${page_dir}.`);
     }
     for (const filename_in_dir of globExt(page_dir, ".{ts,tsx}")) {
+        const relative_path = replaceExt(path.join("/", filename_in_dir), "");
+
         const import_start = performance.now();
-        const page_fn = await import(path.join(page_dir, filename_in_dir));
+        const page = await importPage(path.join(page_dir, filename_in_dir), config, site_config);
         console.log(`import ${filename_in_dir} in ${(performance.now() - import_start).toFixed(2)}ms`);
 
-        const relative_path = replaceExt(path.join("/", filename_in_dir), "");
-        if (typeof page_fn.default === "function") {
-            const store = generateStore(config.asset, site_config);
-            if (path.extname(relative_path) === ".html") {
-                await processHtmlDotTs(store, relative_path, dist_dir, page_fn);
+        if (page !== null) {
+            if (path.extname(relative_path) === ".html" && page.root_page_fn !== undefined) {
+                await processHtmlDotTs(page.store, relative_path, dist_dir, page.root_page_fn);
 
-                for (const [key, value] of store.components.entries()) {
+                for (const [key, value] of page.store.components.entries()) {
                     if (value.attachment?.assets !== undefined) {
                         asset_store.set(key, value.attachment.assets);
                     }
                 }
+            } else if (page.any_page_fn_result !== undefined) {
+                await processAnyDotTs(relative_path, dist_dir, page.any_page_fn_result);
             } else {
-                await processAnyDotTs(store, relative_path, dist_dir, page_fn);
+                console.warn("build has internal error. skip processing.");
             }
+
         } else {
             console.warn(`${filename_in_dir} has no default export. skip processing.`);
         }
@@ -98,13 +101,7 @@ function copyDir(root: string, dist_dir: string) {
     }
 }
 
-type HtmlPageFn = {
-    default: (store: Store) => Promise<RootPageFn<PropBase>>;
-    rootPageFnParameters?: () => Promise<Array<Record<string, string>>>;
-};
-
-async function processHtmlDotTs(store: Store, relative_path: string, dist_dir: string, page_fn: HtmlPageFn) {
-    const root_page_fn = await page_fn.default(store);
+async function processHtmlDotTs(store: Store, relative_path: string, dist_dir: string, page_fn: ImportedRootPageFn) {
     const css_js = await bundleAndWriteCssJs(relative_path, dist_dir, store);
     await bundleAndWriteWoff2(relative_path, dist_dir, store);
 
@@ -114,25 +111,15 @@ async function processHtmlDotTs(store: Store, relative_path: string, dist_dir: s
 
         for (const param of param_list) {
             const file_replaced = param_names.reduce((p, c) => p.replaceAll(`[${c}]`, param[c]), relative_path);
-            await processAndWriteHtml(file_replaced, dist_dir, css_js, root_page_fn, param, store);
+            await processAndWriteHtml(file_replaced, dist_dir, css_js, page_fn, param, store);
         }
     } else {
-        await processAndWriteHtml(relative_path, dist_dir, css_js, root_page_fn, {}, store);
+        await processAndWriteHtml(relative_path, dist_dir, css_js, page_fn, {}, store);
     }
 }
 
-type AnyPageFn = {
-    default: (store: Store) => Promise<string>;
-};
-
-async function processAnyDotTs(
-    repository: Store,
-    relative_path: string,
-    dist_dir: string,
-    page_fn: AnyPageFn,
-): Promise<void> {
+async function processAnyDotTs(relative_path: string, dist_dir: string, output_string: string): Promise<void> {
     const start = performance.now();
-    const output_string = await page_fn.default(repository);
     const absolute_path = path.join(dist_dir, relative_path);
     ensureDirWrite(absolute_path, output_string);
     console.log(`process ${relative_path} in ${(performance.now() - start).toFixed(2)}ms`);
@@ -142,7 +129,7 @@ async function processAndWriteHtml(
     relative_path: string,
     dist_dir: string,
     [css_link, js_src]: [string, string],
-    root_page_fn: RootPageFn<PropBase>,
+    root_page_fn: ImportedRootPageFn,
     params: Record<string, string>,
     store: Store,
 ): Promise<void> {
@@ -155,7 +142,7 @@ async function processAndWriteHtml(
         js_src !== "" ? script({ type: "module", src: js_src }) : "",
     ];
 
-    const html = await bundleHtml(store, params, root_page_fn, insert_nodes);
+    const html = await bundleHtml(store, params, root_page_fn.default, insert_nodes);
 
     writeToFile(html, relative_path, dist_dir, ".html", html_start);
 }
@@ -180,8 +167,7 @@ async function bundleAndWriteCssJs(relative_path: string, dist_dir: string, stor
     // process css
     const css_start = performance.now();
 
-    const require = createRequire(import.meta.url);
-    const css = await bundleCss(store, withoutExt(relative_path), require);
+    const css = await bundleCss(store, withoutExt(relative_path));
     if (css instanceof Error) {
         console.warn(css);
         return ["", js_src];
