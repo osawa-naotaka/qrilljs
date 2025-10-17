@@ -19,6 +19,8 @@ import { type ImportedRootPageFn, importPage } from "./page";
 export async function build(conf_file: string | undefined) {
     const start = performance.now();
 
+    const require = createRequire(import.meta.url);
+
     const config = loadConfig(conf_file ?? "qrill.config.ts", default_config);
     const site_config = loadConfig(config.input.site_conf, default_design_rule);
 
@@ -40,7 +42,7 @@ export async function build(conf_file: string | undefined) {
         const relative_path = replaceExt(path.join("/", filename_in_dir), "");
 
         const import_start = performance.now();
-        const page = await importPage(path.join(page_dir, filename_in_dir), config, site_config);
+        const page = await importPage(require, path.join(page_dir, filename_in_dir), config, site_config);
         console.log(`import ${filename_in_dir} in ${(performance.now() - import_start).toFixed(2)}ms`);
 
         if (page !== null) {
@@ -69,7 +71,6 @@ export async function build(conf_file: string | undefined) {
     }
 
     // copy assets
-    const require = createRequire(import.meta.url);
     for (const statics of asset_store.values()) {
         for (const entry of statics) {
             const root_dir =

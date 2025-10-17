@@ -209,7 +209,12 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
             // Page router
             const match_page = page_router(req);
             if (!(match_page instanceof Error)) {
-                const page = await importPage(path.join(page_dir, match_page.target_file), config, site_config);
+                const page = await importPage(
+                    require,
+                    path.join(page_dir, match_page.target_file),
+                    config,
+                    site_config,
+                );
 
                 if (page !== null) {
                     // auto generation of .css , .js and .woff2 from .html.ts
