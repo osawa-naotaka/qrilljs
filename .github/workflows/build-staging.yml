@@ -1,6 +1,5 @@
-name: Build on Staging
+name: Build with Bun (using yarn.lock)
 
-# トリガー条件
 on:
   push:
     branches:
@@ -14,21 +13,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          node-version: '24'
-          cache: 'yarn'
-      
-      - name: Enable Corepack
-        run: corepack enable
+          bun-version: latest
       
       - name: Install dependencies
-        run: yarn install --immutable
+        run: bun install --frozen-lockfile
       
       - name: Build project
-        run: yarn build
-      
+        run: bun run build
+                
       - name: Build Success
         if: success()
         run: echo "✅ Build completed successfully!"
