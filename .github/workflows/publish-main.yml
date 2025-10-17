@@ -33,7 +33,7 @@ jobs:
         run: bun run build
 
       - name: npm publish
-        run: npm publish --access public
+        run: npm publish --access public --tag latest
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
