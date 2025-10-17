@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+- ページリロードキャッシュが正しく初期化されていなかった問題を解決
 
 ## [0.1.0-alpha.27] - 2025-10-16
 

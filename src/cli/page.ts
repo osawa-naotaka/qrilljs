@@ -1,4 +1,3 @@
-import { createRequire } from "node:module";
 import { type DesignRule, generateStore, type PropBase, type RootPageFn, type Store } from "@/core";
 import type { QrillConfig } from "./config";
 
@@ -15,13 +14,12 @@ export type ImportPageReturnValue = {
 };
 
 export async function importPage(
+    require: NodeJS.Require,
     path: string,
     config: QrillConfig,
     site_config: DesignRule,
 ): Promise<ImportPageReturnValue | null> {
-    const require = createRequire(import.meta.url);
-
-    const page_fn = await import(path);
+    const page_fn = require(path);
     const store = generateStore(config.asset, site_config);
 
     if (typeof page_fn.default === "function") {

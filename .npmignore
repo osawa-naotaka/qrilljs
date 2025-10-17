@@ -2,6 +2,7 @@
 /.vscode
 /.yarn
 /.yarnrc.yml
+/.github
 /build/bin.d.ts
 /dist
 /doc
@@ -17,8 +18,9 @@ bun.lock
 deno.json
 flake.lock
 flake.nix
-qrill-*.tgz
+qrilljs-*.tgz
 package.tgz
 tsconfig.json
 tsup.config.ts
+tsup.debug.config.ts
 yarn.lock
