@@ -4,7 +4,8 @@ on:
     workflow_dispatch: # 手動実行
     push:
         branches:
-            - main # mainブランチ更新時にも実行したい場合
+            - main
+            - tagging
 
 jobs:
     create_tag:
