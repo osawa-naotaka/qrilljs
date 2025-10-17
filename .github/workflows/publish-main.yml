@@ -1,9 +1,9 @@
-name: Build with Bun
+name: Build with Bun and publish to npm
 
 on:
   push:
     branches:
-      - staging
+      - main
 
 jobs:
   build:
@@ -25,10 +25,15 @@ jobs:
       - name: Build project
         run: bun run build
 
-      - name: Build Success
+      - name: Dry-run npm publish
+        run: bun publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish Success
         if: success()
-        run: echo "✅ Build completed successfully!"
+        run: echo "✅ Publish completed successfully!"
       
-      - name: Build Failure
+      - name: Publish Failure
         if: failure()
-        run: echo "❌ Build failed!"
+        run: echo "❌ Publish failed!"

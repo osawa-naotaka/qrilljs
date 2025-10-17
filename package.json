@@ -91,6 +91,5 @@
     "unified": "^11.0.5",
     "valibot": "^1.1.0",
     "ws": "^8.18.3"
-  },
-  "packageManager": "yarn@4.9.1"
+  }
 }

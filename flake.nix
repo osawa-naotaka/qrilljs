@@ -12,7 +12,6 @@
   in {
     devShells.${system}.default = pkgs.mkShell {
       buildInputs = with pkgs; [
-        yarn-berry
         nodejs_24
         bun
         deno
