@@ -13,7 +13,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-- ページリロードキャッシュが正しく初期化されていなかった問題を解決
+## [0.1.0-alpha.28] - 2025-10-17
+
+### Fixed
+- Fixed page reload cache initialization issue that was preventing proper cache clearing.
+
+### Changed
+- Migrated from Yarn to Bun as the package manager, removing yarn.lock and adding bun.lock.
 
 ## [0.1.0-alpha.27] - 2025-10-16
 
@@ -206,7 +212,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.27...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.28...HEAD
+[0.1.0-alpha.28]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.27...v0.1.0-alpha.28
 [0.1.0-alpha.27]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.26...v0.1.0-alpha.27
 [0.1.0-alpha.26]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.25...v0.1.0-alpha.26
 [0.1.0-alpha.25]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.24...v0.1.0-alpha.25
