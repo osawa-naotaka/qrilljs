@@ -13,7 +13,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-- ライブラリ類のセキュリティアップデート
+## [0.1.0-alpha.29] - 2025-10-19
+
+### Changed
+- Updated dependency packages for security improvements.
 
 ## [0.1.0-alpha.28] - 2025-10-17
 
@@ -214,7 +217,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.28...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.29...HEAD
+[0.1.0-alpha.29]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.28...v0.1.0-alpha.29
 [0.1.0-alpha.28]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.27...v0.1.0-alpha.28
 [0.1.0-alpha.27]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.26...v0.1.0-alpha.27
 [0.1.0-alpha.26]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.25...v0.1.0-alpha.26
