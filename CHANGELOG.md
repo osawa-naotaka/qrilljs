@@ -13,6 +13,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.1.0-alpha.30] - 2025-10-20
+
+### Changed
+- Updated svg2woff2 package to v0.3.4 to fix a regression bug.
+
+### Fixed
+- Fixed woff2 font generation by adding required timestamp property.
+
 ## [0.1.0-alpha.29] - 2025-10-19
 
 ### Changed
@@ -217,7 +225,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.29...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.30...HEAD
+[0.1.0-alpha.30]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.29...v0.1.0-alpha.30
 [0.1.0-alpha.29]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.28...v0.1.0-alpha.29
 [0.1.0-alpha.28]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.27...v0.1.0-alpha.28
 [0.1.0-alpha.27]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.26...v0.1.0-alpha.27
