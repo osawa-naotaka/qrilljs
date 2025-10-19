@@ -1,15 +1,19 @@
 name: Build with Bun and publish to npm
 
 on:
+  workflow_dispatch: # 手動実行
   push:
     branches:
       - main
+      - publish
 
 jobs:
   build:
     runs-on: ubuntu-latest
     environment: npm
-    
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -18,7 +22,13 @@ jobs:
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
-      
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+
       - name: Install dependencies
         run: bun install --frozen-lockfile
       
@@ -26,7 +36,7 @@ jobs:
         run: bun run build
 
       - name: npm publish
-        run: npm publish --access public
+        run: npm publish --provenance --access public --tag latest
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
