@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+- svg2woff2がエンバグしていた問題を修正するため、当該パッケージを最新にアップデートした。
+
 ## [0.1.0-alpha.29] - 2025-10-19
 
 ### Changed

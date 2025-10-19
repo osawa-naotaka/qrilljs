@@ -85,7 +85,7 @@
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.2",
     "rollup": "^4.52.5",
-    "svg2woff2": "^0.3.3",
+    "svg2woff2": "^0.3.4",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",
     "unified": "^11.0.5",
