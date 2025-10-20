@@ -1,7 +1,7 @@
+import type { AttributeOf, QrillTag, Tag } from "./element.ts";
 import type { Store } from "./store.ts";
 import { name_with_one_time_hash } from "./store.ts";
 import { addClassInRecord } from "./util.ts";
-import type { AttributeOf, QrillTag, Tag } from "./element.ts";
 
 export type QElement<T extends PropBase = PropBase> = {
     tag: Tag;

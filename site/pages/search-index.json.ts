@@ -1,6 +1,6 @@
-import { postFmSchema, posts_dir } from "..//site.config.ts";
 import { getAllMarkdowns } from "qrilljs/server";
 import { createIndex, indexToObject, LinearIndex, StaticSeekError } from "staticseek";
+import { postFmSchema, posts_dir } from "../site.config.ts";
 
 export default async function createSearchIndex(): Promise<string> {
     const posts = await getAllMarkdowns(posts_dir, postFmSchema);

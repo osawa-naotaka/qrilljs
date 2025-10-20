@@ -3,18 +3,18 @@ import { createRequire } from "node:module";
 import path from "node:path";
 import { cwd } from "node:process";
 import { globSync } from "glob";
-import { default_config, loadConfig } from "./config.ts";
-import { bundleCss } from "./css.ts";
-import { bundleWoff2 } from "./font.ts";
-import { bundleHtml } from "./html.ts";
-import { withoutExt } from "./route.ts";
-import { bundleScriptEsbuild } from "./script.ts";
 import { simpleElement } from "../lib/core/component.ts";
 import { default_design_rule } from "../lib/core/design.ts";
 import type { HComponentAsset, Store } from "../lib/core/store.ts";
 import { replaceExt } from "../lib/core/util.ts";
 import { globExt } from "../server.ts";
+import { default_config, loadConfig } from "./config.ts";
+import { bundleCss } from "./css.ts";
+import { bundleWoff2 } from "./font.ts";
+import { bundleHtml } from "./html.ts";
 import { type ImportedRootPageFn, importPage } from "./page.ts";
+import { withoutExt } from "./route.ts";
+import { bundleScriptEsbuild } from "./script.ts";
 
 export async function build(conf_file: string | undefined) {
     const start = performance.now();

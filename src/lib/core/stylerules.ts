@@ -1,7 +1,7 @@
+import type { ColorVariant } from "./design.ts";
 import type { Store } from "./store.ts";
 import type { StyleRule } from "./style.ts";
 import { atStyle } from "./style.ts";
-import type { ColorVariant } from "./design.ts";
 
 export const INIT_CSS: StyleRule[] = /* @__PURE__*/ [
     {

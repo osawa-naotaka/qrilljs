@@ -21,7 +21,7 @@ import { default_design_rule } from "../lib/core/design.ts";
 import type { Store } from "../lib/core/store.ts";
 import { generateStore } from "../lib/core/store.ts";
 import { contentType } from "../lib/core/util.ts";
-import { ErrorPage, InternalServerErrorPage } from "../page/error.ts";
+import { ErrorPage, InternalServerErrorPage } from "../page/error.tsx";
 import { qrill_error_css } from "../page/qrill-error.ts";
 import { importPage } from "./page.ts";
 
