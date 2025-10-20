@@ -15,18 +15,4 @@ export default defineConfig([{
     dts: true,
     format: ["esm"],
     outDir: "build",
-}, {
-    entry: {
-        "qrill-deno": "src/bin-deno.ts",
-        "qrill-node": "src/bin-node.ts",
-        "qrill-bun": "src/bin-bun.ts"
-    },
-    sourcemap: false,
-    minify: true,
-    splitting: false,
-    clean: true,
-    dts: false,
-    format: ["esm"],
-    outDir: "build",
-
 }]);

@@ -1,6 +1,6 @@
 {
   "name": "qrilljs",
-  "version": "0.1.0-alpha.31",
+  "version": "0.1.0-alpha.32",
   "description": "lightweight static site generator for typescript",
   "type": "module",
   "main": "build/client/main.js",
@@ -32,10 +32,7 @@
     }
   },
   "bin": {
-    "qrill": "build/bin.sh",
-    "qrill-deno": "build/qrill-deno.js",
-    "qrill-node": "build/qrill-node.js",
-    "qrill-bun": "build/qrill-bun.js"
+    "qrill": "build/bin.sh"
   },
   "scripts": {
     "clean": "rm -rf build dist package.tgz qrilljs-*.tgz",

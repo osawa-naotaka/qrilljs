@@ -13,6 +13,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.1.0-alpha.32] - 2025-10-20
+
+### Removed
+- Removed qrill-node, qrill-deno, and qrill-bun commands in favor of unified qrill command with runtime flags (--node, --deno, --bun) for explicit runtime specification while maintaining automatic environment detection as default.
+- Removed unintended debug output.
+
+### Fixed
+- Fixed --version flag functionality by converting it from an option to a dedicated command alongside build and dev.
 
 ## [0.1.0-alpha.31] - 2025-10-20
 
@@ -232,7 +240,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.31...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.32...HEAD
+[0.1.0-alpha.32]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.31...v0.1.0-alpha.32
 [0.1.0-alpha.31]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.30...v0.1.0-alpha.31
 [0.1.0-alpha.30]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.29...v0.1.0-alpha.30
 [0.1.0-alpha.29]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.28...v0.1.0-alpha.29
