@@ -1,7 +1,7 @@
-import { drawer } from "@site/components/module/drawer";
-import { navigation } from "@site/components/module/navigation";
-import { popover } from "@site/components/module/popover";
-import { search } from "@site/components/module/search";
+import { drawer } from "../module/drawer.tsx";
+import { navigation } from "../module/navigation.tsx";
+import { popover } from "../module/popover.tsx";
+import { search } from "../module/search.tsx";
 import type { ComponentFn, HSvgBrandsIconName, Store } from "qrilljs/core";
 import {
     colorof,

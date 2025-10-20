@@ -1,6 +1,6 @@
-import { pageHead } from "@site/components/pages/pageHead";
-import { pageFooter } from "@site/components/sections/pageFooter";
-import { pageHeader } from "@site/components/sections/pageHeader";
+import { pageHead } from "./pageHead.tsx";
+import { pageFooter } from "../sections/pageFooter.tsx";
+import { pageHeader } from "../sections/pageHeader.tsx";
 import type { ComponentFn, HSvgBrandsIconName, Store } from "qrilljs/core";
 import { atStyle, colorof, component, INIT_CSS, registerStyle } from "qrilljs/core";
 

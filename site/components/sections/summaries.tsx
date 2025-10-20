@@ -1,5 +1,5 @@
-import { summary } from "@site/components/module/summary";
-import type { PostFm } from "@site/site.config";
+import { summary } from "../module/summary.tsx";
+import type { PostFm } from "../../site.config.ts";
 import type { ComponentFn, Markdown, Store } from "qrilljs/core";
 import { component, element } from "qrilljs/core";
 

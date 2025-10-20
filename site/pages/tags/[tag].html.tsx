@@ -1,6 +1,6 @@
-import { page } from "@site/components/pages/page";
-import { summaries } from "@site/components/sections/summaries";
-import { navitem, postFmSchema, posts_dir, site, tag_map } from "@site/site.config";
+import { page } from "../../components/pages/page.tsx";
+import { summaries } from "../../components/sections/summaries.tsx";
+import { navitem, postFmSchema, posts_dir, site, tag_map } from "../../site.config.ts";
 import type { RootPageFn, Store } from "qrilljs/core";
 import { element, registerRootPage, S_MEDIUM, style, W_MEDIUM } from "qrilljs/core";
 import { getAllMarkdowns } from "qrilljs/server";
