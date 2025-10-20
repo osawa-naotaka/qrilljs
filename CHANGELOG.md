@@ -14,6 +14,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 
 - 意図しないデバッグ出力を削除
+- qrill-node, qrill-deno, qrill-bunを削除。代わりに、qrillのオプションとして--node, --deno, --bunを渡すことで、明示的にランタイムを指定することが可能になった。指定しない場合はこれまで通り、自動で環境を検出して実行する。
+- --versionが正しく動作していなかった問題を修正。現在はオプションではなくversionとしてbuild, devと並んだコマンドとして用意した。
 
 ## [0.1.0-alpha.31] - 2025-10-20
 

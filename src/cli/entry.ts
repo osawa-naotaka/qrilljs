@@ -1,13 +1,14 @@
 import { readFileSync } from "node:fs";
-import path from "node:path";
-import { cwd, exit } from "node:process";
+import { createRequire } from "node:module";
+import { exit } from "node:process";
 import { parseArgs } from "node:util";
 import { build } from "./build.ts";
 import { serve } from "./serve.ts";
 
 function getVersion() {
     try {
-        const packagePath = path.join(cwd(), "package.json");
+        const require = createRequire(import.meta.url);
+        const packagePath = require.resolve("qrilljs/package.json");
         const packageJson = JSON.parse(readFileSync(packagePath, "utf-8"));
         return packageJson.version || "unknown";
     } catch (_error) {
@@ -29,11 +30,11 @@ Usage:
 Commands:
   build       Build the static site
   dev         Start a preview server
+  version     Show version information
 
 Options:
   -c, --config <path>   Specify a custom config file path
   -h, --help            Show this help message
-  -v, --version         Show version information
 
 Examples:
   ${PROGRAM_NAME} build                        Build site with default config
@@ -82,7 +83,7 @@ export async function main(sliced_argv: string[]) {
 
         if (args.positionals.length === 0) {
             showHelp();
-            exit(1);
+            exit(0);
         }
 
         const command = args.positionals[0];
@@ -95,6 +96,11 @@ export async function main(sliced_argv: string[]) {
 
             case "dev":
                 await serve(args.values.config);
+                break;
+
+            case "version":
+                showVersion();
+                exit(0);
                 break;
 
             default:
