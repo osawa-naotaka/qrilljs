@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+- 意図しないデバッグ出力を削除
 
 ## [0.1.0-alpha.31] - 2025-10-20
 
