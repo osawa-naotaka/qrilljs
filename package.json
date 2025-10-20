@@ -43,8 +43,8 @@
     "node-build": "tsc && node --import=tsx --eval 'import { main } from \"qrilljs/bin\"; await main(process.argv.slice(1));' build",
     "bun-dev": "concurrently \"tsc --watch\" \"bun -e='import { main } from \\\"qrilljs/bin\\\"; await main(process.argv.slice(1));' dev\"",
     "bun-build": "tsc && bun -e='import { main } from \"qrilljs/bin\"; await main(process.argv.slice(1));' build",
-    "deno-dev": "deno check ./site/**/*.{ts,tsx} && deno run -A src/bin.ts dev",
-    "deno-build": "deno check ./site/**/*.{ts,tsx} && deno run -A src/bin.ts build",
+    "deno-dev": "deno check ./site/**/*.{ts,tsx} && deno eval \"import { main } from \\\"qrilljs/bin\\\"; await main(process.argv.slice(2));\" dev",
+    "deno-build": "deno check ./site/**/*.{ts,tsx} && deno eval \"import { main } from \\\"qrilljs/bin\\\"; await main(process.argv.slice(2));\" build",
     "check": "biome check --write ./src ./site ./test",
     "pack": "npm pack"
   },
