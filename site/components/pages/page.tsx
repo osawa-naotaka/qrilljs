@@ -1,8 +1,8 @@
-import { pageHead } from "./pageHead.tsx";
-import { pageFooter } from "../sections/pageFooter.tsx";
-import { pageHeader } from "../sections/pageHeader.tsx";
 import type { ComponentFn, HSvgBrandsIconName, Store } from "qrilljs/core";
 import { atStyle, colorof, component, INIT_CSS, registerStyle } from "qrilljs/core";
+import { pageFooter } from "../sections/pageFooter.tsx";
+import { pageHeader } from "../sections/pageHeader.tsx";
+import { pageHead } from "./pageHead.tsx";
 
 export type PageArgument = {
     title: string;

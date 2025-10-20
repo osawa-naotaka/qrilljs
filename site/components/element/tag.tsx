@@ -1,6 +1,6 @@
-import { tag_map } from "../../site.config.ts";
 import type { ComponentFn, Store } from "qrilljs/core";
 import { component, element } from "qrilljs/core";
+import { tag_map } from "../../site.config.ts";
 
 export type TagArgument = {
     slug: string;

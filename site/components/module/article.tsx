@@ -1,9 +1,3 @@
-import { dateTime } from "../element/dateTime.tsx";
-import { shareX } from "../element/shareX.tsx";
-import { tag } from "../element/tag.tsx";
-import { articleHeader } from "./articleHeader.tsx";
-import type { PostFm } from "../../site.config.ts";
-import { TAG_DESIGN } from "../../styles/design.ts";
 import type { ComponentFn, Markdown, Store } from "qrilljs/core";
 import {
     colorof,
@@ -17,6 +11,12 @@ import {
     S_MEDIUM,
     style,
 } from "qrilljs/core";
+import type { PostFm } from "../../site.config.ts";
+import { TAG_DESIGN } from "../../styles/design.ts";
+import { dateTime } from "../element/dateTime.tsx";
+import { shareX } from "../element/shareX.tsx";
+import { tag } from "../element/tag.tsx";
+import { articleHeader } from "./articleHeader.tsx";
 
 export type ArticleArgument = Markdown<PostFm>;
 

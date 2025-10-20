@@ -1,7 +1,7 @@
-import { summary } from "../module/summary.tsx";
-import type { PostFm } from "../../site.config.ts";
 import type { ComponentFn, Markdown, Store } from "qrilljs/core";
 import { component, element } from "qrilljs/core";
+import type { PostFm } from "../../site.config.ts";
+import { summary } from "../module/summary.tsx";
 
 export type SummariesArgument = {
     posts: Markdown<PostFm>[];

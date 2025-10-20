@@ -1,6 +1,6 @@
-import { page } from "./page.tsx";
 import type { QNode } from "../lib/core/component.ts";
 import type { Store } from "../lib/core/store.ts";
+import { page } from "./page.tsx";
 
 export function ErrorPage(store: Store, arg: { name: string; cause: string }): QNode {
     const Page = page(store);

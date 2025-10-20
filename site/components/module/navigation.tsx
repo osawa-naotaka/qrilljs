@@ -1,6 +1,6 @@
-import { link } from "../element/link.ts";
 import type { ComponentFn, HSvgBrandsIconName, Store } from "qrilljs/core";
 import { component, element, F_XLARGE, faSvgIconStore, registerStyle, S_XLARGE, style } from "qrilljs/core";
+import { link } from "../element/link.ts";
 
 export type NavigationArgument = {
     navitem: {

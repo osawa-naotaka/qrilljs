@@ -1,7 +1,3 @@
-import { drawer } from "../module/drawer.tsx";
-import { navigation } from "../module/navigation.tsx";
-import { popover } from "../module/popover.tsx";
-import { search } from "../module/search.tsx";
 import type { ComponentFn, HSvgBrandsIconName, Store } from "qrilljs/core";
 import {
     colorof,
@@ -14,6 +10,10 @@ import {
     style,
     W_MEDIUM,
 } from "qrilljs/core";
+import { drawer } from "../module/drawer.tsx";
+import { navigation } from "../module/navigation.tsx";
+import { popover } from "../module/popover.tsx";
+import { search } from "../module/search.tsx";
 
 export type PageHeaderArgument = {
     title: string;
