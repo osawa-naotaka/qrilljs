@@ -68,7 +68,7 @@
     },
     "compilerOptions": {
       "jsx": "react-jsx",
-      "jsxImportSource": "qrill",
+      "jsxImportSource": "qrilljs",
       "lib": ["deno.window", "dom", "dom.iterable", "dom.asynciterable"]
     }
   }
