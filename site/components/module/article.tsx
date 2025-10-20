@@ -1,9 +1,9 @@
-import { dateTime } from "@site/components/element/dateTime";
-import { shareX } from "@site/components/element/shareX";
-import { tag } from "@site/components/element/tag";
-import { articleHeader } from "@site/components/module/articleHeader";
-import type { PostFm } from "@site/site.config";
-import { TAG_DESIGN } from "@site/styles/design";
+import { dateTime } from "../element/dateTime.tsx";
+import { shareX } from "../element/shareX.tsx";
+import { tag } from "../element/tag.tsx";
+import { articleHeader } from "./articleHeader.tsx";
+import type { PostFm } from "../../site.config.ts";
+import { TAG_DESIGN } from "../../styles/design.ts";
 import type { ComponentFn, Markdown, Store } from "qrilljs/core";
 import {
     colorof,

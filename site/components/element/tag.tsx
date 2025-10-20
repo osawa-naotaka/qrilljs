@@ -1,4 +1,4 @@
-import { tag_map } from "@site/site.config";
+import { tag_map } from "../../site.config.ts";
 import type { ComponentFn, Store } from "qrilljs/core";
 import { component, element } from "qrilljs/core";
 

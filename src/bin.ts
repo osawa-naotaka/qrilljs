@@ -1,1 +1,1 @@
-export { main } from "./cli/entry";
+export { main } from "./cli/entry.ts";

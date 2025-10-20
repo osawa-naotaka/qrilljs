@@ -1,4 +1,4 @@
-import { page } from "@/page/page";
+import { page } from "./page.tsx";
 import type { QNode } from "../lib/core/component.ts";
 import type { Store } from "../lib/core/store.ts";
 
