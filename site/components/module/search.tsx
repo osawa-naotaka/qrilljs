@@ -1,7 +1,3 @@
-import { dateTime } from "@site/components/element/dateTime";
-import { tag } from "@site/components/element/tag";
-import { postFmSchema } from "@site/site.config";
-import { TAG_DESIGN } from "@site/styles/design";
 import type { ClientFn, ComponentFn, PropBase, QNode, Store } from "qrilljs/core";
 import {
     colorof,
@@ -22,6 +18,10 @@ import {
 import type { SearchResult } from "staticseek";
 import { createSearchFn, StaticSeekError } from "staticseek";
 import * as v from "valibot";
+import { postFmSchema } from "../../site.config.ts";
+import { TAG_DESIGN } from "../../styles/design.ts";
+import { dateTime } from "../element/dateTime.tsx";
+import { tag } from "../element/tag.tsx";
 
 export function search(store: Store): ComponentFn<PropBase> {
     const Search = element(store, { name: "search" });

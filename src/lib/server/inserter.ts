@@ -1,6 +1,6 @@
-import type { Child, PropBase, QElement, QNode } from "@/lib/core/component";
-import type { CompoundSelector, Selector } from "@/lib/core/style";
-import { isCombinator, normalizeSelector } from "@/lib/core/style";
+import type { Child, PropBase, QElement, QNode } from "../core/component";
+import type { CompoundSelector, Selector } from "../core/style.ts";
+import { isCombinator, normalizeSelector } from "../core/style.ts";
 
 // Inserter (QNode).
 export function insertNodes(root: QNode, selector: Selector[], insert: QNode[], search_deep: boolean): QNode {

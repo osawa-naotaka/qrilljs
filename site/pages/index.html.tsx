@@ -1,10 +1,10 @@
-import { page } from "@site/components/pages/page";
-import { hero } from "@site/components/sections/hero";
-import { summaries } from "@site/components/sections/summaries";
-import { navitem, postFmSchema, posts_dir, site } from "@site/site.config";
 import type { RootPageFn, Store } from "qrilljs/core";
 import { element, registerRootPage, S_MEDIUM, style, W_MEDIUM } from "qrilljs/core";
 import { getAllMarkdowns } from "qrilljs/server";
+import { page } from "../components/pages/page.tsx";
+import { hero } from "../components/sections/hero.tsx";
+import { summaries } from "../components/sections/summaries.tsx";
+import { navitem, postFmSchema, posts_dir, site } from "../site.config.ts";
 
 export default function Root(store: Store): RootPageFn<void> {
     const Page = page(store);

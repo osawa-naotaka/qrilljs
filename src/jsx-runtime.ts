@@ -1,5 +1,5 @@
-import type { Children, ComponentFn, PropBase, QNode } from "@/lib/core/component";
-import type { Tag, TagAttribute } from "@/lib/core/element";
+import type { Children, ComponentFn, PropBase, QNode } from "./lib/core/component.ts";
+import type { Tag, TagAttribute } from "./lib/core/element.ts";
 
 export namespace JSX {
     export interface IntrinsicElements extends IntrinsicElements_ {}

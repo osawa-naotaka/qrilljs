@@ -1,4 +1,4 @@
-import type { Children } from "./component";
+import type { Children } from "./component.ts";
 
 export type Tag = keyof TagAttribute;
 export type AttributeOf<K extends Tag> = TagAttribute[K];

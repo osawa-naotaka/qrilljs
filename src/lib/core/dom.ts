@@ -1,5 +1,5 @@
-import type { Child, PropBase, QNode } from "@/lib/core/component";
-import { sanitizeAttributeValue, sanitizeBasic, validateAttributeKey, validateElementName } from "@/lib/core/sanityze";
+import type { Child, PropBase, QNode } from "./component.ts";
+import { sanitizeAttributeValue, sanitizeBasic, validateAttributeKey, validateElementName } from "./sanityze.ts";
 
 // DOM Builder
 export function createDom(node: QNode, d: Document = document): Node[] {

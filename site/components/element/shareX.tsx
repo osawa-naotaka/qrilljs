@@ -1,7 +1,6 @@
-import { TAG_DESIGN } from "@site/styles/design";
 import type { ComponentFn, Store } from "qrilljs/core";
-import { colorof, component, element, registerStyle, S_SMALL, S_TINY, style } from "qrilljs/core";
-import { faSvgIconFont } from "@/lib/ui/faSvgIconFont";
+import { colorof, component, element, faSvgIconFont, registerStyle, S_SMALL, S_TINY, style } from "qrilljs/core";
+import { TAG_DESIGN } from "../../styles/design.ts";
 
 export type ShareXArgument = {
     title: string;

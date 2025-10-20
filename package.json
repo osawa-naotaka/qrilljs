@@ -1,10 +1,15 @@
 {
   "name": "qrilljs",
-  "version": "0.1.0-alpha.30",
+  "version": "0.1.0-alpha.31",
   "description": "lightweight static site generator for typescript",
   "type": "module",
   "main": "build/client/main.js",
   "exports": {
+    "./bin": {
+      "types": "./build/bin/main.d.ts",
+      "import": "./build/bin/main.js",
+      "require": "./build/bin/main.js"
+    },
     "./core": {
       "types": "./build/core/main.d.ts",
       "import": "./build/core/main.js",
@@ -27,19 +32,22 @@
     }
   },
   "bin": {
-    "qrill": "build/bin.js"
+    "qrill": "build/bin.sh",
+    "qrill-deno": "build/qrill-deno.js",
+    "qrill-node": "build/qrill-node.js",
+    "qrill-bun": "build/qrill-bun.js"
   },
   "scripts": {
     "clean": "rm -rf build dist package.tgz qrilljs-*.tgz",
-    "build-release": "biome check --write ./src ./site ./test && tsc && tsup --config tsup.config.ts",
-    "build": "biome check --write ./src ./site ./test && tsc && tsup --config tsup.debug.config.ts",
-    "dev": "concurrently \"tsc --watch\" \"tsup --watch --config tsup.debug.config.ts\" \"bun --hot src/bin.ts dev\"",
-    "node-dev": "concurrently \"tsc --watch\" \"tsup --watch --config tsup.debug.config.ts\" \"tsx watch --exclude './site/**/*' --clear-screen=false src/bin.ts dev\"",
-    "node-build": "tsc && tsx src/bin.ts build",
-    "bun-dev": "concurrently \"tsc --watch\" \"tsup --watch --config tsup.debug.config.ts\" \"bun --hot src/bin.ts dev\"",
-    "bun-build": "tsc && bun src/bin.ts build",
-    "deno-dev": "deno check ./site/**/*.{ts,tsx} && deno run -A src/bin.ts dev",
-    "deno-build": "deno check ./site/**/*.{ts,tsx} && deno run -A src/bin.ts build",
+    "build-release": "biome check --write ./src ./site ./test && tsc && tsup --config tsup.config.ts --publicDir",
+    "build": "biome check --write ./src ./site ./test && tsc && tsup --config tsup.debug.config.ts --publicDir",
+    "dev": "npm run bun-dev",
+    "node-dev": "concurrently \"tsc --watch\" \"node --import=tsx --eval 'import { main } from \\\"qrilljs/bin\\\"; await main(process.argv.slice(1));' dev\"",
+    "node-build": "tsc && node --import=tsx --eval 'import { main } from \"qrilljs/bin\"; await main(process.argv.slice(1));' build",
+    "bun-dev": "concurrently \"tsc --watch\" \"bun -e='import { main } from \\\"qrilljs/bin\\\"; await main(process.argv.slice(1));' dev\"",
+    "bun-build": "tsc && bun -e='import { main } from \"qrilljs/bin\"; await main(process.argv.slice(1));' build",
+    "deno-dev": "deno check ./site/**/*.{ts,tsx} && deno eval \"import { main } from \\\"qrilljs/bin\\\"; await main(process.argv.slice(2));\" dev",
+    "deno-build": "deno check ./site/**/*.{ts,tsx} && deno eval \"import { main } from \\\"qrilljs/bin\\\"; await main(process.argv.slice(2));\" build",
     "check": "biome check --write ./src ./site ./test",
     "pack": "npm pack"
   },

@@ -1,9 +1,9 @@
-import { generateFontCss } from "@/cli/font";
-import type { Properties } from "@/lib/core/properties";
-import { validatePropertyName } from "@/lib/core/sanityze";
-import type { HComponent, Store } from "@/lib/core/store";
-import type { Selector, SelectorContext } from "@/lib/core/style";
-import { isCompoundSelector, normalizeSelector } from "@/lib/core/style";
+import type { Properties } from "../lib/core/properties.ts";
+import { validatePropertyName } from "../lib/core/sanityze.ts";
+import type { HComponent, Store } from "../lib/core/store.ts";
+import type { Selector, SelectorContext } from "../lib/core/style.ts";
+import { isCompoundSelector, normalizeSelector } from "../lib/core/style.ts";
+import { generateFontCss } from "./font.ts";
 
 export async function bundleCss(store: Store, base_name: string): Promise<string | null | Error> {
     const font_css = generateFontCss(store, base_name);

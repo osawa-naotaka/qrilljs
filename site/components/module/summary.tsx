@@ -1,11 +1,11 @@
-import { dateTime } from "@site/components/element/dateTime";
-import { link } from "@site/components/element/link";
-import { tag } from "@site/components/element/tag";
-import { articleHeader } from "@site/components/module/articleHeader";
-import type { PostFm } from "@site/site.config";
-import { TAG_DESIGN } from "@site/styles/design";
 import type { ComponentFn, Markdown, Store, StyleRule } from "qrilljs/core";
 import { component, element, F_XLARGE, registerStyle, S_XLARGE, style } from "qrilljs/core";
+import type { PostFm } from "../../site.config.ts";
+import { TAG_DESIGN } from "../../styles/design.ts";
+import { dateTime } from "../element/dateTime.tsx";
+import { link } from "../element/link.ts";
+import { tag } from "../element/tag.tsx";
+import { articleHeader } from "./articleHeader.tsx";
 
 export type SummaryArgument = Markdown<PostFm>;
 

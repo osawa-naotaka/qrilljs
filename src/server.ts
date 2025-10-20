@@ -1,3 +1,3 @@
 export type { ToC } from "remark-export-toc";
-export * from "@/lib/server/markdown";
-export * from "@/lib/server/util";
+export * from "./lib/server/markdown.ts";
+export * from "./lib/server/util.ts";

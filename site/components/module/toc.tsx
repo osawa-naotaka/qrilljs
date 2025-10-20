@@ -1,5 +1,5 @@
+import { type ComponentFn, component, element, type Store } from "qrilljs/core";
 import type { ToC } from "remark-export-toc";
-import { type ComponentFn, component, element, type Store } from "@/core";
 
 export type ToCArgument = {
     toc: ToC[];
