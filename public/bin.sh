@@ -7,6 +7,6 @@ elif command -v tsx >/dev/null 2>&1; then
 elif command -v bun >/dev/null 2>&1; then
     exec bun -e='import { main } from "qrilljs/bin"; await main(process.argv.slice(1));' "$@"
 else
-    echo "Error: Neither bun, tsx, is installed" >&2
+    echo "Error: Neither bun, tsx(Node.js), deno, is installed" >&2
     exit 1
 fi

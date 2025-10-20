@@ -32,7 +32,10 @@
     }
   },
   "bin": {
-    "qrill": "build/bin.sh"
+    "qrill": "build/bin.sh",
+    "qrill-deno": "build/qrill-deno.js",
+    "qrill-node": "build/qrill-node.js",
+    "qrill-bun": "build/qrill-bun.js"
   },
   "scripts": {
     "clean": "rm -rf build dist package.tgz qrilljs-*.tgz",
