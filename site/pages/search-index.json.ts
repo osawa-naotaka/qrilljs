@@ -1,4 +1,4 @@
-import { postFmSchema, posts_dir } from "@site/site.config";
+import { postFmSchema, posts_dir } from "..//site.config.ts";
 import { getAllMarkdowns } from "qrilljs/server";
 import { createIndex, indexToObject, LinearIndex, StaticSeekError } from "staticseek";
 

@@ -6,7 +6,7 @@ import typescript from "@rollup/plugin-typescript";
 import virtual from "@rollup/plugin-virtual";
 import esbuild from "esbuild";
 import { rollup } from "rollup";
-import type { Store } from "@/core";
+import type { Store } from "../core.ts";
 
 export async function bundleScriptEsbuild(store: Store, start_num: number): Promise<string | null> {
     const script_component: [string, string][] = [];

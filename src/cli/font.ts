@@ -4,7 +4,7 @@ import path from "node:path";
 import { cwd } from "node:process";
 import type { Svg } from "svg2woff2";
 import { generateCss, svg2woff2 } from "svg2woff2";
-import type { Store } from "@/lib/core/store";
+import type { Store } from "../lib/core/store.ts";
 
 type SvgName = {
     name: string;

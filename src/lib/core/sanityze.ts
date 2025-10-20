@@ -1,5 +1,5 @@
-import { attribute_names, qrill_tags, tags } from "@/lib/core/element";
-import { property_names } from "@/lib/core/properties";
+import { attribute_names, qrill_tags, tags } from "./element.ts";
+import { property_names } from "./properties.ts";
 
 // HTML Element
 const allowed_elements = /* @__PURE__*/ new Set<string>([...tags, ...qrill_tags]);

@@ -1,6 +1,6 @@
-import type { ComponentFn } from "@/lib/core/component";
-import { component, element } from "@/lib/core/component";
-import type { Store } from "@/lib/core/store";
+import type { ComponentFn } from "../lib/core/component.ts";
+import { component, element } from "../lib/core/component.ts";
+import type { Store } from "../lib/core/store.ts";
 
 const site = {
     lang: "en",

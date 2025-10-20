@@ -2,7 +2,7 @@ import { existsSync } from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { cwd } from "node:process";
-import { cloneAndMergeRecord } from "@/lib/core/util";
+import { cloneAndMergeRecord } from "../lib/core/util.ts";
 
 export type AssetConfig = {
     target_prefix: string;

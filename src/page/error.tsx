@@ -1,5 +1,5 @@
-import type { QNode } from "@/lib/core/component";
-import type { Store } from "@/lib/core/store";
+import type { QNode } from "../lib/core/component.ts";
+import type { Store } from "../lib/core/store.ts";
 import { page } from "@/page/page";
 
 export function ErrorPage(store: Store, arg: { name: string; cause: string }): QNode {

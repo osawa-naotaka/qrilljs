@@ -1,6 +1,6 @@
-import type { Designator } from "@/lib/core/component";
-import type { Properties } from "@/lib/core/properties";
-import { unionArrayOfRecords } from "@/lib/core/util";
+import type { Designator } from "./component.ts";
+import type { Properties } from "./properties.ts";
+import { unionArrayOfRecords } from "./util.ts";
 
 export type PropertyOf<T extends keyof Properties> = Properties[T];
 

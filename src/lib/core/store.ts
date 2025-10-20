@@ -1,10 +1,10 @@
-import type { AssetConfig } from "@/cli/config";
-import type { ComponentFn, QNode } from "@/lib/core/component";
-import type { DesignRule } from "@/lib/core/design";
-import { default_design_rule } from "@/lib/core/design";
-import type { Selector, StyleRule } from "@/lib/core/style";
-import type { RecursivePartial } from "@/lib/core/util";
-import { cloneAndMergeRecord, hash_djb2 } from "@/lib/core/util";
+import type { AssetConfig } from "../../cli/config.ts";
+import type { ComponentFn, QNode } from "./component.ts";
+import type { DesignRule } from "./design.ts";
+import { default_design_rule } from "./design.ts";
+import type { Selector, StyleRule } from "./style.ts";
+import type { RecursivePartial } from "./util.ts";
+import { cloneAndMergeRecord, hash_djb2 } from "./util.ts";
 
 // qrill element data structure for register element to repository, internal use only.
 export type HComponent = {

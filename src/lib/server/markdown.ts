@@ -12,8 +12,8 @@ import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
 import * as v from "valibot";
-import type { Markdown } from "@/lib/core/markdown";
-import { globExt } from "@/server";
+import type { Markdown } from "../../lib/core/markdown.ts";
+import { globExt } from "../../server.ts";
 
 export type HtmlToc = {
     html: string;

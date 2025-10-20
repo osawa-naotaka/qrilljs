@@ -2,9 +2,9 @@ import { existsSync } from "node:fs";
 import path from "node:path";
 import { cwd } from "node:process";
 import { globSync } from "glob";
-import type { HComponentAsset } from "@/core";
-import type { PropBase } from "@/lib/core/component";
-import { globExt } from "@/lib/server/util";
+import type { HComponentAsset } from "../core.ts";
+import type { PropBase } from "../lib/core/component.ts";
+import { globExt } from "../lib/server/util.ts";
 
 type RouteTable = {
     path_regexp: RegExp;

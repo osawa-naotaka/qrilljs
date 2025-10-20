@@ -1,5 +1,5 @@
-import { type DesignRule, generateStore, type PropBase, type RootPageFn, type Store } from "@/core";
-import type { QrillConfig } from "./config";
+import { type DesignRule, generateStore, type PropBase, type RootPageFn, type Store } from "../core.ts";
+import type { QrillConfig } from "./config.ts";
 
 export type ImportedRootPageFn = {
     default: RootPageFn<PropBase>;

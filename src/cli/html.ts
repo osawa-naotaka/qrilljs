@@ -1,11 +1,11 @@
 import DOMPurify from "dompurify";
 import { JSDOM } from "jsdom";
-import type { Child, PropBase, QNode, RootPageFn } from "@/lib/core/component";
-import { DOCTYPE } from "@/lib/core/element";
-import { sanitizeAttributeValue, sanitizeBasic, validateAttributeKey, validateElementName } from "@/lib/core/sanityze";
-import type { HComponentInsert, Store } from "@/lib/core/store";
-import { addClassInRecord, deepFlatMap } from "@/lib/core/util";
-import { insertNodes } from "@/lib/server/inserter";
+import type { Child, PropBase, QNode, RootPageFn } from "../lib/core/component.ts";
+import { DOCTYPE } from "../lib/core/element.ts";
+import { sanitizeAttributeValue, sanitizeBasic, validateAttributeKey, validateElementName } from "../lib/core/sanityze.ts";
+import type { HComponentInsert, Store } from "../lib/core/store.ts";
+import { addClassInRecord, deepFlatMap } from "../lib/core/util.ts";
+import { insertNodes } from "../lib/server/inserter.ts";
 
 export async function bundleHtml(
     store: Store,
