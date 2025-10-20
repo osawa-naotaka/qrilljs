@@ -13,7 +13,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-- bunサポートを追加
+- bun, denoサポートを追加
+- qrillコマンドは、現在は実行環境によらず使うことができる。しかし、例えばNode.jsのプロジェクトだがパッケージマネージャはbunを使う、というような選択肢はありえる。実行環境を明確に示すため、qrill-node、qrill-deno、qrill-bunという3種類のコマンドを提供する。コマンドの使い方は従来と変わらない。
+
 
 ## [0.1.0-alpha.30] - 2025-10-20
 
