@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+- bunサポートを追加
+
 ## [0.1.0-alpha.30] - 2025-10-20
 
 ### Changed
