@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+- qrillの実行スクリプトの実行環境を明示的にbash指定するように修正した。bashでない環境だとエラーが発生する。
+
 ## [0.1.0-alpha.32] - 2025-10-20
 
 ### Removed
