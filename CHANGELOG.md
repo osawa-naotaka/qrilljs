@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.1.0-alpha.33] - 2025-10-21
+
+### Fixed
+- Fixed qrill startup script to explicitly specify bash environment instead of generic sh, preventing errors in non-bash environments.
+
 ## [0.1.0-alpha.32] - 2025-10-20
 
 ### Removed
@@ -240,7 +245,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.32...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.33...HEAD
+[0.1.0-alpha.33]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.32...v0.1.0-alpha.33
 [0.1.0-alpha.32]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.31...v0.1.0-alpha.32
 [0.1.0-alpha.31]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.30...v0.1.0-alpha.31
 [0.1.0-alpha.30]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.29...v0.1.0-alpha.30
