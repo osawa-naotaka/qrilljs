@@ -13,6 +13,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.1.0-alpha.34] - 2025-10-22
+
+### Fixed
+- Fixed an issue where error pages were not displaying properly in the development server.
+- Enhanced markdown parsing error reporting to display the slug of the failed markdown file on the error page.
+
 ## [0.1.0-alpha.33] - 2025-10-21
 
 ### Fixed
@@ -245,7 +251,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.33...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.34...HEAD
+[0.1.0-alpha.34]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.33...v0.1.0-alpha.34
 [0.1.0-alpha.33]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.32...v0.1.0-alpha.33
 [0.1.0-alpha.32]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.31...v0.1.0-alpha.32
 [0.1.0-alpha.31]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.30...v0.1.0-alpha.31

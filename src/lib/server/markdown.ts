@@ -42,9 +42,21 @@ export async function getAllMarkdowns<T>(
 ): Promise<Markdown<T>[]> {
     return Promise.all(
         listFiles(dir, ".md").map(async (slug) => {
-            const { data, content } = matter(await readFile(path.join(dir, slug), "utf-8"));
-            const data_parsed = v.parse(schema, data);
-            return { slug: path.basename(slug, ".md"), data: data_parsed, content };
+            try {
+                const { data, content } = matter(await readFile(path.join(dir, slug), "utf-8"));
+                const data_parsed = v.parse(schema, data);
+                return { slug: path.basename(slug, ".md"), data: data_parsed, content };
+            } catch (e) {
+                if (e instanceof v.ValiError) {
+                    const error = new Error(e.message, { cause: e.cause });
+                    error.name = `Validation error on ${slug}`;
+                    error.stack = e.stack;
+
+                    throw error;
+                }
+
+                throw e;
+            }
         }),
     );
 }
@@ -54,10 +66,22 @@ export async function getMarkdown<T>(
     slug: string,
     schema: v.BaseSchema<unknown, T, v.BaseIssue<unknown>>,
 ): Promise<Markdown<T>> {
-    const markdown = await readFile(path.join(cwd(), dir, `${slug}.md`), "utf-8");
-    const { data, content } = matter(markdown);
-    const parsed_data = v.parse(schema, data);
-    return { slug, data: parsed_data, content };
+    try {
+        const markdown = await readFile(path.join(cwd(), dir, `${slug}.md`), "utf-8");
+        const { data, content } = matter(markdown);
+        const parsed_data = v.parse(schema, data);
+        return { slug, data: parsed_data, content };
+    } catch (e) {
+        if (e instanceof v.ValiError) {
+            const error = new Error(e.message, { cause: e.cause });
+            error.name = `Validation error on ${slug}`;
+            error.stack = e.stack;
+
+            throw error;
+        }
+
+        throw e;
+    }
 }
 
 export function listFiles(dir: string, ext: string): string[] {

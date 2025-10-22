@@ -15,16 +15,19 @@ export const navitem: { name: string; url: string; icon: HSvgBrandsIconName }[] 
 
 export const posts_dir = "site/contents/posts/";
 
-export const tag_map: Record<string, string> = {
+export const tag_map = {
     techarticle: "Technology",
     staticseek: "staticseek",
-};
+} as const;
+
+export type TagSlugType = keyof typeof tag_map;
+export const tagSlugSchema = v.picklist(Object.keys(tag_map) as [TagSlugType, ...TagSlugType[]]);
 
 export const postFmSchema = v.object({
     title: v.string(),
     author: v.string(),
     date: v.union([v.string(), v.date()]),
-    tag: v.optional(v.array(v.string())),
+    tag: v.optional(v.array(tagSlugSchema)),
 });
 
 export type PostFm = v.InferInput<typeof postFmSchema>;
