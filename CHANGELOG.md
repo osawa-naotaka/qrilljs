@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+- 開発サーバーにおいて、エラーページが適切に表示されていなかった問題を修正
+- markdownファイルのparseにおいて、どのmarkdownファイルのparseに失敗したかをエラーページで知らせるように修正
+
 ## [0.1.0-alpha.33] - 2025-10-21
 
 ### Fixed

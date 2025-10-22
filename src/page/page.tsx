@@ -13,7 +13,7 @@ export function page(store: Store): ComponentFn {
     const PageFooter = element(store, { tag: "footer", class: "page-footer" });
     const PageFooterCopyright = element(store, { class: "page-footer-copyright" });
 
-    return component("html", (_attribute, ...children) => (
+    return component("html", ({ children }) => (
         <html lang={site.lang}>
             <head>
                 <meta charset="utf-8" />

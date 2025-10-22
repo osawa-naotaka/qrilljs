@@ -18,23 +18,13 @@ export function ErrorPage(store: Store, arg: { name: string; cause: string }): Q
 export function InternalServerErrorPage(store: Store, error: Error): QNode {
     const Page = page(store);
 
-    if (error.stack === undefined) {
-        return (
-            <Page>
-                <main class="container">
-                    <h2>Error on Dev Server</h2>
-                    <p>{error.name}</p>
-                    <p>{error.message}</p>
-                    <p>{error.cause?.toString() || "no cause"}</p>
-                </main>
-            </Page>
-        );
-    }
-
     return (
         <Page>
             <main class="container">
                 <h2>Error on Dev Server</h2>
+                <p>{error.name}</p>
+                <p>{error.message}</p>
+                <p>{error.cause?.toString() || "no cause"}</p>
                 <pre>{error.stack || "no stack trace"}</pre>
             </main>
         </Page>
