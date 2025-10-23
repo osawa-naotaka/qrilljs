@@ -90,6 +90,14 @@ export function component<T extends PropBase>(
     });
 }
 
+// Fragment
+export const Fragment = (props: PropBase): QNode => {
+    return {
+        tag: "fragment",
+        props,
+    };
+}
+
 // qrill HTML Top export function
 export type RootPageFn<T> = (parameter: T) => Promise<QNode>;
 

@@ -41,7 +41,7 @@ function createDomInternal(
             throw new Error(`createDom: invalid element name ${child.tag}.`);
         }
 
-        if (child.tag === "unwrap") {
+        if (child.tag === "fragment") {
             return props_children.flatMap(createDomInternal(depth + 1, additional_class, d));
         }
 

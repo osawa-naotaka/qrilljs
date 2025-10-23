@@ -3,8 +3,8 @@ import type { Children } from "./component.ts";
 export type Tag = keyof TagAttribute;
 export type AttributeOf<K extends Tag> = TagAttribute[K];
 
-export type QrillTag = "raw" | "unwrap" | "class";
-export const qrill_tags: QrillTag[] = ["raw", "unwrap", "class"] as const;
+export const qrill_tags = ["raw", "fragment", "class"] as const;
+export type QrillTag = typeof qrill_tags[number];
 
 export function DOCTYPE(): string {
     return "<!DOCTYPE html>";
@@ -237,7 +237,7 @@ export type TagAttribute = {
     video: VideoAttribute;
     wbr: WbrAttribute;
 
-    unwrap: DivAttribute;
+    fragment: DivAttribute;
     raw: DivAttribute;
     class: DivAttribute;
 };
