@@ -13,9 +13,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-- Fragment, <></>を実装した。
-- <unwrap>を<fragment>に変更した
-- menu要素、param要素が欠けていたので追加
+## [0.1.0-alpha.35] - 2025-10-24
+
+### Added
+- Implemented Fragment syntax with `<></>` shorthand.
+- Added missing `menu` and `param` HTML elements.
+
+### Changed
+- Renamed `<unwrap>` element to `<fragment>`.
 
 ## [0.1.0-alpha.34] - 2025-10-22
 
@@ -255,7 +260,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.34...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.35...HEAD
+[0.1.0-alpha.35]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.34...v0.1.0-alpha.35
 [0.1.0-alpha.34]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.33...v0.1.0-alpha.34
 [0.1.0-alpha.33]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.32...v0.1.0-alpha.33
 [0.1.0-alpha.32]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.31...v0.1.0-alpha.32
