@@ -1,6 +1,7 @@
 import type { ComponentFn, PropBase, QNode } from "./lib/core/component.ts";
 import type { Tag, TagAttribute } from "./lib/core/element.ts";
-export { Fragment } from "./lib/core/component.ts"
+
+export { Fragment } from "./lib/core/component.ts";
 
 export namespace JSX {
     export interface IntrinsicElements extends IntrinsicElements_ {}

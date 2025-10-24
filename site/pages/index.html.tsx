@@ -28,20 +28,12 @@ export default function Root(store: Store): RootPageFn<void> {
         const posts_sorted = posts.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
 
         return (
-            <>
-                <Page
-                    title={site.name}
-                    description={site.description}
-                    lang={site.lang}
-                    name={site.name}
-                    navitem={navitem}
-                >
-                    <Hero />
-                    <PageMainArea>
-                        <Summaries posts={posts_sorted} />
-                    </PageMainArea>
-                </Page>
-            </>
+            <Page title={site.name} description={site.description} lang={site.lang} name={site.name} navitem={navitem}>
+                <Hero />
+                <PageMainArea>
+                    <Summaries posts={posts_sorted} />
+                </PageMainArea>
+            </Page>
         );
     };
 }

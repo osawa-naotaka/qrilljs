@@ -4,7 +4,7 @@ export type Tag = keyof TagAttribute;
 export type AttributeOf<K extends Tag> = TagAttribute[K];
 
 export const qrill_tags = ["raw", "fragment", "class"] as const;
-export type QrillTag = typeof qrill_tags[number];
+export type QrillTag = (typeof qrill_tags)[number];
 
 export function DOCTYPE(): string {
     return "<!DOCTYPE html>";
@@ -73,6 +73,7 @@ export const tags: Tag[] = [
     "main",
     "map",
     "mark",
+    "menu",
     "meta",
     "meter",
     "nav",
@@ -83,6 +84,7 @@ export const tags: Tag[] = [
     "option",
     "output",
     "p",
+    "param",
     "picture",
     "pre",
     "progress",
@@ -196,6 +198,7 @@ export type TagAttribute = {
     option: OptionAttribute;
     output: OutputAttribute;
     p: PAttribute;
+    param: ParamAttribute;
     picture: PictureAttribute;
     pre: PreAttribute;
     progress: ProgressAttribute;
@@ -706,6 +709,13 @@ type OutputAttribute = {
 } & GlobalAttributes;
 
 type PAttribute = GlobalAttributes;
+
+type ParamAttribute = {
+    name: string;
+    value: string;
+    type: string;
+    value_type: "data" | "object" | "string";
+} & GlobalAttributes;
 
 type PictureAttribute = GlobalAttributes;
 
