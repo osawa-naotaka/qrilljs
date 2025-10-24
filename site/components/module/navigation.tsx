@@ -10,7 +10,7 @@ export type NavigationArgument = {
 };
 
 export function navigation(store: Store): ComponentFn<NavigationArgument> {
-    const Navigation = element(store, { tag: "nav", name: "navigation" });
+    const Navigation = element(store, { tag: "menu", name: "navigation" });
     const Link = link(store);
     const icons: HSvgBrandsIconName[] = ["youtube", "x-twitter", "github"];
     const SvgIconStore = faSvgIconStore(

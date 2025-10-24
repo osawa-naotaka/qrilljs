@@ -74,7 +74,7 @@ export function stringifyToHtml(depth: number, additional_class: string | string
             throw new Error(`stringifyToHtml: invalid element name ${node.tag}.`);
         }
 
-        if (node.tag === "unwrap") {
+        if (node.tag === "fragment") {
             return deepFlatMap(stringifyToHtml(depth + 1, additional_class), children).join("");
         }
 

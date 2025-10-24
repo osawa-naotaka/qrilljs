@@ -2,6 +2,8 @@ import type { Children, PropBase, QNode } from "@/lib/core/component";
 import type { Component, IntrinsicElements_ } from "./jsx-runtime";
 import { jsx } from "./jsx-runtime";
 
+export { Fragment } from "./lib/core/component.ts";
+
 export namespace JSX {
     export interface IntrinsicElements extends IntrinsicElements_ {}
     export interface ElementChildrenAttribute {
