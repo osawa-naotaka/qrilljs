@@ -1,10 +1,10 @@
 import { type ComponentFn, component } from "../core/component.ts";
 import { name_with_one_time_hash, type Store } from "../core/store.ts";
 import { hash_djb2_object } from "../core/util.ts";
-import type { HSvgIconArg } from "./faSvgIconFont.ts";
+import type { FAIcon } from "./faIcon.ts";
 import { faSvgIconFont } from "./faSvgIconFont.ts";
 
-export function faSvgIconStore(store: Store, icons: HSvgIconArg[]): ComponentFn<HSvgIconArg> {
+export function faSvgIconStore(store: Store, icons: FAIcon[]): ComponentFn<FAIcon> {
     const icon_map = new Map<number, ComponentFn>();
     for (const icon of icons) {
         icon_map.set(hash_djb2_object(icon), faSvgIconFont(store, icon));

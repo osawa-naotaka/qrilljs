@@ -2,22 +2,9 @@ import type { ComponentFn } from "../core/component.ts";
 import { component, element } from "../core/component.ts";
 import type { Store } from "../core/store.ts";
 import { registerFont } from "../core/store.ts";
+import type { FAIcon } from "./faIcon.ts";
 
-export type HSvgIconType = "brands" | "solid";
-
-export type HSvgBrandsIconArg = {
-    type: "brands";
-    name: HSvgBrandsIconName;
-};
-
-export type HSvgSolidIconArg = {
-    type: "solid";
-    name: HSvgSolidIconName;
-};
-
-export type HSvgIconArg = HSvgBrandsIconArg | HSvgSolidIconArg;
-
-export function faSvgIconFont(store: Store, arg: HSvgIconArg): ComponentFn {
+export function faSvgIconFont(store: Store, arg: FAIcon): ComponentFn {
     const font_name = `${arg.type}-${arg.name}`;
     const Top = element(store, {
         tag: "i",
