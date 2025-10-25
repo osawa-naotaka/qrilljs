@@ -13,8 +13,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-- font awesomeのアイコンを示す型をFAIconに変更
-- font awesome用のコンポーネント名を一部変更
+## [0.1.0-alpha.36] - 2025-10-25
+
+### Changed
+- Renamed FontAwesome icon type to FAIcon.
+- Updated some FontAwesome component names and export types.
 
 ## [0.1.0-alpha.35] - 2025-10-24
 
@@ -263,7 +266,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.35...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.36...HEAD
+[0.1.0-alpha.36]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.35...v0.1.0-alpha.36
 [0.1.0-alpha.35]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.34...v0.1.0-alpha.35
 [0.1.0-alpha.34]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.33...v0.1.0-alpha.34
 [0.1.0-alpha.33]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.32...v0.1.0-alpha.33
