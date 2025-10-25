@@ -894,149 +894,36 @@ type VideoAttribute = {
 
 type WbrAttribute = GlobalAttributes;
 
-// グローバル属性の名前のユニオン型
-export type GlobalAttributeNames =
-    | "accesskey"
-    | "autocapitalize"
-    | "autofocus"
-    | "class"
-    | "contenteditable"
-    | "dir"
-    | "draggable"
-    | "enterkeyhint"
-    | "hidden"
-    | "id"
-    | "inert"
-    | "inputmode"
-    | "is"
-    | "itemid"
-    | "itemprop"
-    | "itemref"
-    | "itemscope"
-    | "itemtype"
-    | "lang"
-    | "nonce"
-    | "part"
-    | "popover"
-    | "slot"
-    | "spellcheck"
-    | "tabindex"
-    | "title"
-    | "translate";
+export type AttributeNames = (typeof attribute_names)[number] | `data-${string}`;
 
-// 全ての属性名のユニオン型
-export type AttributeNames =
-    | GlobalAttributeNames
-    | "abbr"
-    | "accept"
-    | "acceptcharset"
-    | "action"
-    | "allow"
-    | "allowfullscreen"
-    | "alt"
-    | "as"
-    | "async"
-    | "attributionsrc"
-    | "autocomplete"
-    | "autoplay"
-    | "capture"
-    | "charset"
-    | "checked"
-    | "cite"
-    | "cols"
-    | "colspan"
-    | "content"
-    | "controls"
-    | "coords"
-    | "crossorigin"
-    | "data"
-    | "datetime"
-    | "decoding"
-    | "default"
-    | "defer"
-    | "dirname"
-    | "disabled"
-    | "disablepictureinpicture"
-    | "disableremoteplayback"
-    | "download"
-    | "enctype"
-    | "fetchpriority"
-    | "for"
-    | "form"
-    | "formaction"
-    | "formenctype"
-    | "formmethod"
-    | "formnovalidate"
-    | "formtarget"
-    | "headers"
-    | "height"
-    | "high"
-    | "href"
-    | "hreflang"
-    | "http-equiv"
-    | "http_equiv"
-    | "imagesizes"
-    | "imagesrcset"
-    | "integrity"
-    | "ismap"
-    | "kind"
-    | "label"
-    | "list"
-    | "loading"
-    | "loop"
-    | "low"
-    | "max"
-    | "maxlength"
-    | "media"
-    | "method"
-    | "min"
-    | "minlength"
-    | "multiple"
-    | "muted"
-    | "name"
-    | "nomodule"
-    | "novalidate"
-    | "open"
-    | "optimum"
-    | "pattern"
-    | "ping"
-    | "placeholder"
-    | "playsinline"
-    | "popovertarget"
-    | "popovertargetaction"
-    | "poster"
-    | "preload"
-    | "readonly"
-    | "referrerpolicy"
-    | "rel"
-    | "required"
-    | "reversed"
-    | "rows"
-    | "rowspan"
-    | "sandbox"
-    | "scope"
-    | "selected"
-    | "shadowrootmode"
-    | "shape"
-    | "size"
-    | "sizes"
-    | "span"
-    | "src"
-    | "srcdoc"
-    | "srclang"
-    | "srcset"
-    | "start"
-    | "step"
-    | "target"
-    | "type"
-    | "usemap"
-    | "value"
-    | "width"
-    | "wrap"
-    | "xmlns"
-    | `data-${string}`;
-
-export const attribute_names: AttributeNames[] = [
+export const attribute_names = [
+    "accesskey",
+    "autocapitalize",
+    "autofocus",
+    "class",
+    "contenteditable",
+    "dir",
+    "draggable",
+    "enterkeyhint",
+    "hidden",
+    "id",
+    "inert",
+    "inputmode",
+    "is",
+    "itemid",
+    "itemprop",
+    "itemref",
+    "itemscope",
+    "itemtype",
+    "lang",
+    "nonce",
+    "part",
+    "popover",
+    "slot",
+    "spellcheck",
+    "tabindex",
+    "title",
+    "translate",
     "accesskey",
     "autocapitalize",
     "autofocus",

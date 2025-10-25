@@ -1,19 +1,19 @@
-import type { ComponentFn, HSvgBrandsIconName, Store } from "qrilljs/core";
-import { component, element, F_XLARGE, faSvgIconStore, registerStyle, S_XLARGE, style } from "qrilljs/core";
+import type { BrandsIconName, ComponentFn, Store } from "qrilljs/core";
+import { component, element, F_XLARGE, faSvgIconFontStore, registerStyle, S_XLARGE, style } from "qrilljs/core";
 import { link } from "../element/link.ts";
 
 export type NavigationArgument = {
     navitem: {
         url: string;
-        icon: HSvgBrandsIconName;
+        icon: BrandsIconName;
     }[];
 };
 
 export function navigation(store: Store): ComponentFn<NavigationArgument> {
     const Navigation = element(store, { tag: "menu", name: "navigation" });
     const Link = link(store);
-    const icons: HSvgBrandsIconName[] = ["youtube", "x-twitter", "github"];
-    const SvgIconStore = faSvgIconStore(
+    const icons: BrandsIconName[] = ["youtube", "x-twitter", "github"];
+    const SvgIconStore = faSvgIconFontStore(
         store,
         icons.map((x) => ({ type: "brands", name: x })),
     );

@@ -10,7 +10,7 @@ export * from "./lib/core/stylerules.ts";
 export * from "./lib/core/util.ts";
 export * from "./lib/ui/faIcon.ts";
 export * from "./lib/ui/faSvgIconFont.ts";
-export * from "./lib/ui/faSvgIconStore.ts";
+export * from "./lib/ui/faSvgIconFontStore.ts";
 
 import type { QrillConfig } from "./cli/config.ts";
 import type { DesignRule } from "./lib/core/design.ts";
