@@ -4,7 +4,7 @@ import { hash_djb2_object } from "../core/util.ts";
 import type { FAIcon } from "./faIcon.ts";
 import { faSvgIconFont } from "./faSvgIconFont.ts";
 
-export function faSvgIconStore(store: Store, icons: FAIcon[]): ComponentFn<FAIcon> {
+export function faSvgIconFontStore(store: Store, icons: FAIcon[]): ComponentFn<FAIcon> {
     const icon_map = new Map<number, ComponentFn>();
     for (const icon of icons) {
         icon_map.set(hash_djb2_object(icon), faSvgIconFont(store, icon));

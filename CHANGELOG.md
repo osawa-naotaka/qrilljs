@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+- font awesomeのアイコンを示す型をFAIconに変更
+- font awesome用のコンポーネント名を一部変更
+
 ## [0.1.0-alpha.35] - 2025-10-24
 
 ### Added

@@ -1,4 +1,4 @@
-import type { ComponentFn, HSvgBrandsIconName, Store } from "qrilljs/core";
+import type { BrandsIconName, ComponentFn, Store } from "qrilljs/core";
 import {
     colorof,
     component,
@@ -19,7 +19,7 @@ export type PageHeaderArgument = {
     title: string;
     navitem: {
         url: string;
-        icon: HSvgBrandsIconName;
+        icon: BrandsIconName;
     }[];
 };
 
