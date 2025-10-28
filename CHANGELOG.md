@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+- ライブラリバージョンのアップデート
+- meta要素にproperty属性を許容するように修正。OGPのため。living standardには存在しない。
+- 空要素から閉じタグを削除してhtml living standardに準拠させた。
+
 ## [0.1.0-alpha.36] - 2025-10-25
 
 ### Changed

@@ -123,6 +123,23 @@ export const tags: Tag[] = [
     "wbr",
 ] as const;
 
+export const void_tags = [
+    "area",
+    "base",
+    "br",
+    "col",
+    "embed",
+    "hr",
+    "img",
+    "input",
+    "link",
+    "meta",
+    "param",
+    "source",
+    "track",
+    "wbr",
+] as const;
+
 // 各HTML要素に対応する属性型を表すマップ型
 export type TagAttribute = {
     a: AAttribute;
@@ -658,6 +675,7 @@ type MetaAttribute = {
     http_equiv: "content-security-policy" | "content-type" | "default-style" | "x-ua-compatible" | "refresh";
     media: string;
     name: string;
+    property: string;
 } & GlobalAttributes;
 
 type MeterAttribute = {
