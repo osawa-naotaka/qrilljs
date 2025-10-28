@@ -1,7 +1,7 @@
 import DOMPurify from "dompurify";
 import { JSDOM } from "jsdom";
 import type { Child, PropBase, QNode, RootPageFn } from "../lib/core/component.ts";
-import { DOCTYPE } from "../lib/core/element.ts";
+import { DOCTYPE, void_tags } from "../lib/core/element.ts";
 import {
     sanitizeAttributeValue,
     sanitizeBasic,
@@ -83,7 +83,14 @@ export function stringifyToHtml(depth: number, additional_class: string | string
         }
 
         const attribute = additional_class.length === 0 ? node.props : addClassInRecord(node.props, additional_class);
-        return `<${node.tag}${attributeToString(attribute)}>${deepFlatMap(stringifyToHtml(depth + 1, []), children).join("")}</${node.tag}>`;
+        const c = deepFlatMap(stringifyToHtml(depth + 1, []), children).join("");
+        if (void_tags.filter((x) => x === node.tag).length !== 0) {
+            if (c.length !== 0) {
+                throw new Error(`stringifyToHtml: element ${node.tag} must be a void element, but has "${c}".`);
+            }
+            return `<${node.tag}${attributeToString(attribute)}>`;
+        }
+        return `<${node.tag}${attributeToString(attribute)}>${c}</${node.tag}>`;
     };
 }
 

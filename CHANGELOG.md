@@ -13,6 +13,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.1.0-alpha.37] - 2025-10-28
+
+### Changed
+- Updated dependency packages to latest versions.
+- Modified meta element to allow property attribute for Open Graph Protocol support (non-standard extension to HTML Living Standard).
+- Removed closing tags from void elements to comply with HTML Living Standard specification.
+
 ## [0.1.0-alpha.36] - 2025-10-25
 
 ### Changed
@@ -266,7 +273,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.36...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.37...HEAD
+[0.1.0-alpha.37]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.36...v0.1.0-alpha.37
 [0.1.0-alpha.36]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.35...v0.1.0-alpha.36
 [0.1.0-alpha.35]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.34...v0.1.0-alpha.35
 [0.1.0-alpha.34]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.33...v0.1.0-alpha.34
