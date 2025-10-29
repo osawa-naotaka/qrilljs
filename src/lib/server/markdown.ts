@@ -41,15 +41,16 @@ export async function getAllMarkdowns<T>(
     schema: v.BaseSchema<unknown, T, v.BaseIssue<unknown>>,
 ): Promise<Markdown<T>[]> {
     return Promise.all(
-        listFiles(dir, ".md").map(async (slug) => {
+        listFiles(dir, ".md").map(async (filename) => {
             try {
-                const { data, content } = matter(await readFile(path.join(dir, slug), "utf-8"));
+                const { data, content } = matter(await readFile(path.join(dir, filename), "utf-8"));
                 const data_parsed = v.parse(schema, data);
-                return { slug: path.basename(slug, ".md"), data: data_parsed, content };
+                const slug = encodeURIComponent(path.basename(filename, ".md"));
+                return { slug, data: data_parsed, content };
             } catch (e) {
                 if (e instanceof v.ValiError) {
                     const error = new Error(e.message, { cause: e.cause });
-                    error.name = `Validation error on ${slug}`;
+                    error.name = `Validation error on ${filename}`;
                     error.stack = e.stack;
 
                     throw error;
@@ -63,18 +64,19 @@ export async function getAllMarkdowns<T>(
 
 export async function getMarkdown<T>(
     dir: string,
-    slug: string,
+    filename: string,
     schema: v.BaseSchema<unknown, T, v.BaseIssue<unknown>>,
 ): Promise<Markdown<T>> {
     try {
-        const markdown = await readFile(path.join(cwd(), dir, `${slug}.md`), "utf-8");
+        const markdown = await readFile(path.join(cwd(), dir, `${filename}.md`), "utf-8");
         const { data, content } = matter(markdown);
         const parsed_data = v.parse(schema, data);
+        const slug = encodeURIComponent(filename);
         return { slug, data: parsed_data, content };
     } catch (e) {
         if (e instanceof v.ValiError) {
             const error = new Error(e.message, { cause: e.cause });
-            error.name = `Validation error on ${slug}`;
+            error.name = `Validation error on ${filename}`;
             error.stack = e.stack;
 
             throw error;
