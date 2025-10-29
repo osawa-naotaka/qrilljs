@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+- getMarkdown(), getAllMarkdowns()で、slugをurlencodeするように修正。
+
 ## [0.1.0-alpha.39] - 2025-10-30
 
 ### Fixed
