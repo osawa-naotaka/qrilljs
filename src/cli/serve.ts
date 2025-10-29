@@ -256,8 +256,8 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
 
                             const script = simpleElement("script");
                             const link = simpleElement("link");
-                            const css_name = `${withoutExt(withoutExt(match_page.target_file))}.css`;
-                            const js_name = `${withoutExt(withoutExt(match_page.target_file))}.js`;
+                            const css_name = encodeURI(`${withoutExt(withoutExt(match_page.target_file))}.css`);
+                            const js_name = encodeURI(`${withoutExt(withoutExt(match_page.target_file))}.js`);
                             const insert_nodes = [
                                 script({ type: "module", src: "/reload.js" }),
                                 script({ type: "module", src: js_name }),

@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+- 生成されたcss/js/woff2へのリンクURLに「[]」が含まれていた問題を解決。URI Encodeをするように修正して解決。
+
 ## [0.1.0-alpha.38] - 2025-10-29
 
 ### Fixed

@@ -26,7 +26,7 @@ export function createPageRouter(rootdir: string): Router {
     if (existsSync(rootdir)) {
         const page_route_table = createPageRouteTable(rootdir);
 
-        return (req) => pageRouter(page_route_table, new URL(req.url).pathname);
+        return (req) => pageRouter(page_route_table, getPath(req));
     }
 
     throw new Error(`createPageRouter: directory "${rootdir}" not found.`);
@@ -35,13 +35,17 @@ export function createPageRouter(rootdir: string): Router {
 export function createStaticRouter(rootdir: string): Router {
     const static_route_table = createStaticRouteTable(rootdir);
 
-    return (req) => staticRouter(static_route_table, new URL(req.url).pathname);
+    return (req) => staticRouter(static_route_table, getPath(req));
 }
 
 export function createAssetRouter(asset_prefix: string, assets: HComponentAsset[], require: NodeJS.Require): Router {
     const asset_route_table = createAssetRouteTable(asset_prefix, assets, require);
 
-    return (req) => pageRouter(asset_route_table, new URL(req.url).pathname);
+    return (req) => pageRouter(asset_route_table, getPath(req));
+}
+
+function getPath(req: Request): string {
+    return decodeURIComponent(new URL(req.url).pathname);
 }
 
 export function withoutExt(file: string): string {
@@ -53,7 +57,7 @@ function escapeForRegExp(exp: string): string {
     return exp.replace(/[-^$\\.*+?()[\]{}|/]/g, "\\$&");
 }
 
-function createPageRouteTable(rootdir: string): RouteTable[] {
+export function createPageRouteTable(rootdir: string): RouteTable[] {
     const exact_route_table: RouteTable[] = [];
     const regexp_route_table: RouteTable[] = [];
 
