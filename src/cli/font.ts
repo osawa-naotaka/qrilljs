@@ -47,7 +47,7 @@ export function generateFontCss(store: Store, base_name: string): string {
 
     return generateCss(svg_names, {
         font_family,
-        font_url: `${base_name}.woff2`,
+        font_url: encodeURI(`${base_name}.woff2`),
         vertical_align: "-0.125em",
     });
 }

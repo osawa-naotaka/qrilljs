@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.1.0-alpha.39] - 2025-10-30
+
+### Fixed
+- Fixed an issue where generated CSS/JS/woff2 link URLs contained unencoded special characters like brackets. Applied proper URI encoding to resolve the problem.
+
 ## [0.1.0-alpha.38] - 2025-10-29
 
 ### Fixed
@@ -278,7 +283,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.38...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.39...HEAD
+[0.1.0-alpha.39]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.38...v0.1.0-alpha.39
 [0.1.0-alpha.38]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.37...v0.1.0-alpha.38
 [0.1.0-alpha.37]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.36...v0.1.0-alpha.37
 [0.1.0-alpha.36]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.35...v0.1.0-alpha.36

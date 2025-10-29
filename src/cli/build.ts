@@ -150,8 +150,8 @@ async function processAndWriteHtml(
     const script = simpleElement("script");
     const link = simpleElement("link");
     const insert_nodes = [
-        css_link !== "" ? link({ href: css_link, rel: "stylesheet" }) : "",
-        js_src !== "" ? script({ type: "module", src: js_src }) : "",
+        css_link !== "" ? link({ href: encodeURI(css_link), rel: "stylesheet" }) : "",
+        js_src !== "" ? script({ type: "module", src: encodeURI(js_src) }) : "",
     ];
 
     const html = await bundleHtml(store, params, root_page_fn.default, insert_nodes);
