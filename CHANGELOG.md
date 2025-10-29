@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+- property属性があるとbuildに失敗する問題を修正。
+
 ## [0.1.0-alpha.37] - 2025-10-28
 
 ### Changed
