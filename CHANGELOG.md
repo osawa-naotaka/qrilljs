@@ -13,7 +13,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-- getMarkdown(), getAllMarkdowns()で、slugをurlencodeするように修正。
+## [0.1.0-alpha.40] - 2025-10-30
+
+### Fixed
+- Fixed an issue where slug parameters in getMarkdown() and getAllMarkdowns() were not properly URL-encoded.
 
 ## [0.1.0-alpha.39] - 2025-10-30
 
@@ -285,7 +288,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.39...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.40...HEAD
+[0.1.0-alpha.40]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.39...v0.1.0-alpha.40
 [0.1.0-alpha.39]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.38...v0.1.0-alpha.39
 [0.1.0-alpha.38]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.37...v0.1.0-alpha.38
 [0.1.0-alpha.37]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.36...v0.1.0-alpha.37
