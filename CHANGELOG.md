@@ -13,7 +13,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-- property属性があるとbuildに失敗する問題を修正。
+## [0.1.0-alpha.38] - 2025-10-29
+
+### Fixed
+- Fixed an issue where build fails when property attribute is used in elements.
 
 ## [0.1.0-alpha.37] - 2025-10-28
 
@@ -275,7 +278,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.37...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.38...HEAD
+[0.1.0-alpha.38]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.37...v0.1.0-alpha.38
 [0.1.0-alpha.37]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.36...v0.1.0-alpha.37
 [0.1.0-alpha.36]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.35...v0.1.0-alpha.36
 [0.1.0-alpha.35]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.34...v0.1.0-alpha.35
