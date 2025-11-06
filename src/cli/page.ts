@@ -1,5 +1,7 @@
-import { type DesignRule, generateStore, type PropBase, type RootPageFn, type Store } from "../core.ts";
+import type { DesignRule, PropBase, RootPageFn, Store } from "../core.ts";
+import { generateStore } from "../core.ts";
 import type { QrillConfig } from "./config.ts";
+import { fileURLToPath } from "node:url";
 
 export type ImportedRootPageFn = {
     default: RootPageFn<PropBase>;
@@ -35,7 +37,7 @@ export async function importPage(
             .filter((x) => x !== undefined);
 
         for (const client of js_files) {
-            const client_fn = require(client.replace("file://", ""));
+            const client_fn = require(fileURLToPath(client));
             if (typeof client_fn.default === "function") {
                 await client_fn.default(store);
             } else {
