@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+- siteのbuild時にcss/jsファイルへのリンクが正しく設定されていないバグを修正
+
 ## [0.1.0-alpha.41] - 2026-06-01
 
 ### Added

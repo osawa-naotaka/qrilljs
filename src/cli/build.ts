@@ -47,7 +47,7 @@ export async function build(conf_file: string | undefined) {
                         await processAndWriteHtml(
                             key,
                             dist_dir,
-                            [r.shared_path ?? r.path, r.shared_path ?? r.path],
+                            [`${r.shared_path ?? r.path}.css`, `${r.shared_path ?? r.path}.js`],
                             page,
                             store,
                         );
