@@ -99,7 +99,9 @@ export const Fragment = (props: PropBase): QNode => {
 };
 
 // qrill HTML Top export function
-export type RootPageFn<T> = (parameter: T) => Promise<QNode>;
+export type RootPageFn<T> = (parameter: T) => Promise<QNode | string>;
+
+export type PageFn<T> = (store: Store) => RootPageFn<T>;
 
 // qrill Client FUnction
 export type ClientFn = (root: Element) => Promise<void>;

@@ -1,6 +1,6 @@
 import DOMPurify from "dompurify";
 import { JSDOM } from "jsdom";
-import type { Child, PropBase, QNode, RootPageFn } from "../lib/core/component.ts";
+import type { Child, PropBase, QNode } from "../lib/core/component.ts";
 import { DOCTYPE, void_tags } from "../lib/core/element.ts";
 import {
     sanitizeAttributeValue,
@@ -12,14 +12,7 @@ import type { HComponentInsert, Store } from "../lib/core/store.ts";
 import { addClassInRecord, deepFlatMap } from "../lib/core/util.ts";
 import { insertNodes } from "../lib/server/inserter.ts";
 
-export async function bundleHtml(
-    store: Store,
-    params: PropBase,
-    root_page_fn: RootPageFn<PropBase>,
-    insert_nodes: QNode[],
-): Promise<string> {
-    const top_node = await root_page_fn(params);
-
+export function bundleHtml(store: Store, top_node: QNode, insert_nodes: QNode[]): string {
     const attached = insertAttachmentNode(store, top_node);
 
     const all_processed = insertNodes(attached, ["head"], insert_nodes, true);

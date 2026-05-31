@@ -5,7 +5,7 @@ import { page } from "../../components/pages/page.tsx";
 import { summaries } from "../../components/sections/summaries.tsx";
 import { navitem, postFmSchema, posts_dir, site } from "../../site.config.ts";
 
-export default function Root(store: Store): RootPageFn<void> {
+export default function Posts(store: Store): RootPageFn<void> {
     const Page = page(store);
     const PageMainArea = element(store, { tag: "main", name: "page-main-area" });
     const Summaries = summaries(store);
