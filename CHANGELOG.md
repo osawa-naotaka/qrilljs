@@ -13,8 +13,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.1.0-alpha.42] - 2026-06-01
+
 ### Fixed
-- siteのbuild時にcss/jsファイルへのリンクが正しく設定されていないバグを修正
+- Fixed a bug where generated links to CSS/JS files were incorrect during site build.
 
 ## [0.1.0-alpha.41] - 2026-06-01
 
@@ -300,7 +302,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.41...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.42...HEAD
+[0.1.0-alpha.42]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.41...v0.1.0-alpha.42
 [0.1.0-alpha.41]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.40...v0.1.0-alpha.41
 [0.1.0-alpha.40]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.39...v0.1.0-alpha.40
 [0.1.0-alpha.39]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.38...v0.1.0-alpha.39
