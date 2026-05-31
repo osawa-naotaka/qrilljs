@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.1.0-alpha.43] - 2026-06-01
+
+### Fixed
+- Fixed an issue where the CSS link filename for woff2 fonts was incorrect during site build.
+
 ## [0.1.0-alpha.42] - 2026-06-01
 
 ### Fixed
@@ -302,7 +307,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.42...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.43...HEAD
+[0.1.0-alpha.43]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.42...v0.1.0-alpha.43
 [0.1.0-alpha.42]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.41...v0.1.0-alpha.42
 [0.1.0-alpha.41]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.40...v0.1.0-alpha.41
 [0.1.0-alpha.40]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.39...v0.1.0-alpha.40
