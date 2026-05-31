@@ -57,7 +57,7 @@ export async function build(conf_file: string | undefined) {
                     case ".css": {
                         const css_start = performance.now();
 
-                        const css = await bundleCss(store, key);
+                        const css = await bundleCss(store, r.path);
                         if (css instanceof Error) {
                             console.warn(css);
                             break;

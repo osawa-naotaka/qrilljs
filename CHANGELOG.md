@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+- woff2へのCSSリンクファイル名が間違っていたのを修正。
+
 ## [0.1.0-alpha.42] - 2026-06-01
 
 ### Fixed
