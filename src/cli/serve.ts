@@ -1,6 +1,8 @@
+import { readFile } from "node:fs/promises";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import http from "node:http";
 import { createRequire } from "node:module";
+import { join } from "node:path";
 import { cwd } from "node:process";
 import type { Duplex } from "node:stream";
 import type { FSWatcher } from "chokidar";
@@ -16,13 +18,10 @@ import { simpleElement } from "../lib/core/component.ts";
 import { default_design_rule } from "../lib/core/design.ts";
 import { generateStore } from "../lib/core/store.ts";
 import { contentType } from "../lib/core/util.ts";
+import type { PageRoute } from "../lib/server/route";
 import { ErrorPage, InternalServerErrorPage } from "../page/error.tsx";
 import { qrill_error_css } from "../page/qrill-error.ts";
-import { PageRoute } from "../lib/server/route";
-import { createStaticRouter, Router } from "./route.ts";
-import { join } from "node:path";
-import { readFile } from "node:fs/promises";
-
+import { createStaticRouter, type Router } from "./route.ts";
 
 export async function serve(conf_file: string | undefined): Promise<void> {
     const config = loadConfig(conf_file ?? "qrill.config.ts", default_config);
@@ -193,12 +192,12 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
     let site_config = requireConfig(require, config.input.site_conf, default_design_rule);
     let public_router = createStaticRouter(public_dir);
     let asset_router = new Map<string, Router>();
-    
+
     const reload_fn: ReloadFn = () => {
         for (const key of Object.keys(require.cache)) {
             delete require.cache[key];
         }
-        route = require(join(root, config.input.route));
+        route = require(join(root, config.input.route)).default;
         site_config = requireConfig(require, config.input.site_conf, default_design_rule);
         public_router = createStaticRouter(public_dir);
         asset_router = new Map<string, Router>();
@@ -213,13 +212,13 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
                 const reload =
                     // biome-ignore lint/suspicious/noTemplateCurlyInString : this template string placeholder in the "" is intended one.
                     "const ws = new WebSocket(`ws://${location.host}/reload`); ws.onmessage = (event) => { if (event.data === 'reload') { location.reload(); } }; window.addEventListener('beforeunload', () => ws.close());";
-                return normalResponse(reload, ".js");                
-            };
+                return normalResponse(reload, ".js");
+            }
 
             // qrill-error.css
             if (path === "/qrill-error.css") {
                 return normalResponse(qrill_error_css, ".css");
-            };
+            }
 
             // Public router
             const match_public = public_router(req);
@@ -257,7 +256,7 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
                     ];
                     const all_processed = bundleHtml(store, page_node, insert_nodes);
 
-                    return normalResponse(all_processed, ".html");                    
+                    return normalResponse(all_processed, ".html");
                 }
                 case ".css": {
                     const css_name = match_page.path;

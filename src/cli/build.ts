@@ -3,11 +3,11 @@ import { createRequire } from "node:module";
 import path from "node:path";
 import { cwd } from "node:process";
 import { globSync } from "glob";
-import { QNode, simpleElement } from "../lib/core/component.ts";
+import { type QNode, simpleElement } from "../lib/core/component.ts";
 import { default_design_rule } from "../lib/core/design.ts";
 import { generateStore, type HComponentAsset, type Store } from "../lib/core/store.ts";
 import { replaceExt } from "../lib/core/util.ts";
-import { PageRoute } from "../server.ts";
+import type { PageRoute } from "../server.ts";
 import { default_config, loadConfig } from "./config.ts";
 import { bundleCss } from "./css.ts";
 import { bundleWoff2 } from "./font.ts";
@@ -33,49 +33,60 @@ export async function build(conf_file: string | undefined) {
     }
 
     const import_start = performance.now();
-    let route: Record<string, PageRoute<unknown>>[] = require(path.join(root, config.input.route)).default;
+    const route: Record<string, PageRoute<unknown>>[] = require(path.join(root, config.input.route)).default;
     console.log(`import ${config.input.route} in ${(performance.now() - import_start).toFixed(2)}ms`);
-    
+
     for (const record of route) {
         for (const [key, r] of Object.entries(record)) {
             if (r.isGen) {
-              const store = generateStore(config.asset, site_config);
-              const pageFn = r.pageFn(store);
-              switch (r.ext) {
-                  case ".html":
-                      const page = await pageFn(r.param);
-                      await processAndWriteHtml(key, dist_dir, [r.shared_path ?? r.path, r.shared_path ?? r.path], page, store);
-                      break;
-                  
-                  case ".css":
-                      const css_start = performance.now();
-                  
-                      const css = await bundleCss(store, key);
-                      if (css instanceof Error) {
-                          console.warn(css);
-                          break;
-                      }
+                const store = generateStore(config.asset, site_config);
+                const pageFn = r.pageFn(store);
+                switch (r.ext) {
+                    case ".html": {
+                        const page = await pageFn(r.param);
+                        await processAndWriteHtml(
+                            key,
+                            dist_dir,
+                            [r.shared_path ?? r.path, r.shared_path ?? r.path],
+                            page,
+                            store,
+                        );
+                        break;
+                    }
 
-                      writeToFile(css ?? "", key, dist_dir, ".css", css_start);                         
-                      break;
+                    case ".css": {
+                        const css_start = performance.now();
 
-                  case ".js":
-                      const js_start = performance.now();
-                      const js = await bundleScriptEsbuild(store, store.element_count);
-                      writeToFile(js ?? "", key, dist_dir, ".js", js_start);
-                      break;
+                        const css = await bundleCss(store, key);
+                        if (css instanceof Error) {
+                            console.warn(css);
+                            break;
+                        }
 
-                  case ".woff2":
-                      const woff2_start = performance.now();
-                      const woff2 = await bundleWoff2(store);
-                      writeToFile(woff2 ?? "", key, dist_dir, ".woff2", woff2_start);
-                      break;
+                        writeToFile(css ?? "", key, dist_dir, ".css", css_start);
+                        break;
+                    }
 
-                  case ".json":
-                      const json = await pageFn(r.param);
-                      await processAnyDotTs(key, dist_dir, json as string);
-                      break;
-              }
+                    case ".js": {
+                        const js_start = performance.now();
+                        const js = await bundleScriptEsbuild(store, store.element_count);
+                        writeToFile(js ?? "", key, dist_dir, ".js", js_start);
+                        break;
+                    }
+
+                    case ".woff2": {
+                        const woff2_start = performance.now();
+                        const woff2 = await bundleWoff2(store);
+                        writeToFile(woff2 ?? "", key, dist_dir, ".woff2", woff2_start);
+                        break;
+                    }
+
+                    case ".json": {
+                        const json = await pageFn(r.param);
+                        await processAnyDotTs(key, dist_dir, json as string);
+                        break;
+                    }
+                }
             }
         }
     }

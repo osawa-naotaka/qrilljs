@@ -1,4 +1,4 @@
-import { PageFn } from "../../lib/core/component";
+import type { PageFn } from "../../lib/core/component";
 
 export type Ext = ".html" | ".css" | ".js" | ".woff2" | ".json";
 
@@ -11,7 +11,12 @@ export type PageRoute<T> = {
     isGen: boolean;
 };
 
-export function sharedPage<T>(shared_path: string, pathFn: (param: T) => string, page: PageFn<T>, params: T[]): Record<string, PageRoute<T>> {
+export function sharedPage<T>(
+    shared_path: string,
+    pathFn: (param: T) => string,
+    page: PageFn<T>,
+    params: T[],
+): Record<string, PageRoute<T>> {
     const pageRecord: Record<string, PageRoute<T>> = {
         [`${shared_path}.css`]: {
             path: shared_path,
@@ -50,7 +55,8 @@ export function sharedPage<T>(shared_path: string, pathFn: (param: T) => string,
             pageFn: page,
             param,
             isGen: false,
-        };    }
+        };
+    }
 
     return pageRecord;
 }
@@ -63,14 +69,14 @@ export function file<T>(path: string, ext: Ext, page: PageFn<T>): Record<string,
             pageFn: page,
             isGen: true,
         },
-    }
+    };
 }
 
 export function indexPage<T>(path: string, page: PageFn<T>): Record<string, PageRoute<T>> {
     const base = path.endsWith("/") ? path : `${path}/`;
     const baseWoSlash = base.substring(0, base.length - 1);
     const indexPath = `${base}index`;
- 
+
     return {
         [base]: {
             path: indexPath,
@@ -111,7 +117,42 @@ export function indexPage<T>(path: string, page: PageFn<T>): Record<string, Page
     };
 }
 
+export function singlePage<T>(path: string, page: PageFn<T>): Record<string, PageRoute<T>> {
+    return {
+        [`${path}`]: {
+            path,
+            ext: ".html",
+            pageFn: page,
+            isGen: false,
+        },
+        [`${path}.html`]: {
+            path,
+            ext: ".html",
+            pageFn: page,
+            isGen: true,
+        },
+        [`${path}.css`]: {
+            path,
+            ext: ".css",
+            pageFn: page,
+            isGen: true,
+        },
+        [`${path}.js`]: {
+            path,
+            ext: ".js",
+            pageFn: page,
+            isGen: true,
+        },
+        [`${path}.woff2`]: {
+            path,
+            ext: ".woff2",
+            pageFn: page,
+            isGen: true,
+        },
+    };
+}
 
+// biome-ignore lint:/suspicious/noExplicitAny
 export function defineRoute(routes: Record<string, PageRoute<any>>[]): Record<string, PageRoute<any>>[] {
     return routes;
 }

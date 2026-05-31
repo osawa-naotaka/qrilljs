@@ -15,7 +15,6 @@ export type QrillConfig = {
         watch_dir: string;
     };
     input: {
-        page_dir: string;
         public_dir: string;
         site_conf: string;
         route: string;
@@ -34,7 +33,6 @@ export const default_config: QrillConfig = {
         watch_dir: "site",
     },
     input: {
-        page_dir: "site/pages",
         public_dir: "site/public",
         site_conf: "site/site.config.ts",
         route: "site/Route.tsx",

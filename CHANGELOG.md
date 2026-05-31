@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+- ファイルベースルーティングを廃止し、コードベースルーティングを採用
+
 ## [0.1.0-alpha.40] - 2025-10-30
 
 ### Fixed

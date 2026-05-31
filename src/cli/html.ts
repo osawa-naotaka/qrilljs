@@ -12,11 +12,7 @@ import type { HComponentInsert, Store } from "../lib/core/store.ts";
 import { addClassInRecord, deepFlatMap } from "../lib/core/util.ts";
 import { insertNodes } from "../lib/server/inserter.ts";
 
-export　function bundleHtml(
-    store: Store,
-    top_node: QNode,
-    insert_nodes: QNode[],
-): string {
+export function bundleHtml(store: Store, top_node: QNode, insert_nodes: QNode[]): string {
     const attached = insertAttachmentNode(store, top_node);
 
     const all_processed = insertNodes(attached, ["head"], insert_nodes, true);

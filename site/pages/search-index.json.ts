@@ -1,7 +1,7 @@
 import { getAllMarkdowns } from "qrilljs/server";
 import { createIndex, indexToObject, LinearIndex, StaticSeekError } from "staticseek";
+import type { RootPageFn } from "@/core.ts";
 import { postFmSchema, posts_dir } from "../site.config.ts";
-import { RootPageFn } from "@/core.ts";
 
 export default function createSearchIndex(): RootPageFn<void> {
     return async () => {
@@ -11,6 +11,6 @@ export default function createSearchIndex(): RootPageFn<void> {
             search_targets: ["data.title", "content"],
         });
         if (index instanceof StaticSeekError) throw index;
-        return JSON.stringify(indexToObject(index));        
-    }
+        return JSON.stringify(indexToObject(index));
+    };
 }
