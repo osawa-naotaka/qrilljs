@@ -6,7 +6,7 @@ import { hero } from "../components/sections/hero.tsx";
 import { summaries } from "../components/sections/summaries.tsx";
 import { navitem, postFmSchema, posts_dir, site } from "../site.config.ts";
 
-export default function Root(store: Store): RootPageFn<void> {
+export default function Home(store: Store): RootPageFn<void> {
     const Page = page(store);
     const Hero = hero(store);
     const PageMainArea = element(store, { tag: "main", name: "page-main-area" });

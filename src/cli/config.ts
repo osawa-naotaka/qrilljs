@@ -18,6 +18,7 @@ export type QrillConfig = {
         page_dir: string;
         public_dir: string;
         site_conf: string;
+        route: string;
     };
     output: {
         clean_befor_build: boolean;
@@ -36,6 +37,7 @@ export const default_config: QrillConfig = {
         page_dir: "site/pages",
         public_dir: "site/public",
         site_conf: "site/site.config.ts",
+        route: "site/Route.tsx",
     },
     output: {
         clean_befor_build: true,

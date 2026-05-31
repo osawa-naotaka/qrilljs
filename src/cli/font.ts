@@ -1,6 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { createRequire } from "node:module";
-import path from "node:path";
+import { join, dirname } from "node:path";
 import { cwd } from "node:process";
 import type { Svg } from "svg2woff2";
 import { generateCss, svg2woff2 } from "svg2woff2";
@@ -62,9 +62,9 @@ function listSvgNames(store: Store): SvgName[] {
             const require = createRequire(import.meta.url);
             const base_dir =
                 chars.package_name !== undefined
-                    ? path.dirname(require.resolve(`${chars.package_name}/package.json`))
+                    ? dirname(require.resolve(`${chars.package_name}/package.json`))
                     : cwd();
-            return chars.chars.map((c) => ({ name: c.name, src: path.join(base_dir, c.src) }));
+            return chars.chars.map((c) => ({ name: c.name, src: join(base_dir, c.src) }));
         }),
     );
 }
