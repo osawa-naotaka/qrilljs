@@ -37,8 +37,6 @@ jobs:
 
       - name: npm publish
         run: npm publish --access public --tag latest
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish Success
         if: success()
