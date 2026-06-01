@@ -3,7 +3,7 @@ import { createIndex, indexToObject, LinearIndex, StaticSeekError } from "static
 import type { RootNodeFn } from "@/core.ts";
 import { postFmSchema, posts_dir } from "../site.config.ts";
 
-export default function createSearchIndex(): RootNodeFn<void> {
+export function createSearchIndex(): RootNodeFn<void> {
     return async () => {
         const posts = await getAllMarkdowns(posts_dir, postFmSchema);
         const index = createIndex(LinearIndex, posts, {
