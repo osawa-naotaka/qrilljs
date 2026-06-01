@@ -33,6 +33,8 @@
       "qrilljs/jsx-dev-runtime": ["./src/jsx-dev-runtime.ts"],
       "qrilljs/jsx-runtime": ["./src/jsx-runtime.ts"]
     },
+
+    "types": ["bun", "deno"],
   },
   "include": ["./src/**/*", "./site/**/*"],
   "typeRoots": ["src", "node_modules/@types"]
