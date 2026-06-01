@@ -21,6 +21,7 @@ import { contentType } from "../lib/core/util.ts";
 import type { PageRoute } from "../lib/server/route";
 import { ErrorPage, InternalServerErrorPage } from "../page/error.tsx";
 import { qrill_error_css } from "../page/qrill-error.ts";
+import { importPage } from "./page.ts";
 import { createStaticRouter, type Router } from "./route.ts";
 
 export async function serve(conf_file: string | undefined): Promise<void> {
@@ -240,11 +241,11 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
             const match_page = findMatchPage(route, req);
             if (!match_page) return errorResponse(404, `route for url "${req.url}" not found.`);
             const store = generateStore(config.asset, site_config);
-            const page = match_page.pageFn(store);
+            const { pageFn, element_count } = await importPage(store, match_page.pageFn);
 
             switch (match_page.ext) {
                 case ".html": {
-                    const page_node = await page(match_page.param);
+                    const page_node = await pageFn(match_page.param);
                     const script = simpleElement("script");
                     const link = simpleElement("link");
                     const css_name = encodeURI(`${match_page.shared_path ?? match_page.path}.css`);
@@ -259,19 +260,6 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
                     return normalResponse(all_processed, ".html");
                 }
                 case ".css": {
-                    const js_files = Array.from(store.components.values())
-                        .map((x) => x.attachment?.script)
-                        .filter((x) => x !== undefined);
-
-                    for (const client of js_files) {
-                        const client_fn = require(client.replace("file://", ""));
-                        if (typeof client_fn.default === "function") {
-                            await client_fn.default(store);
-                        } else {
-                            console.warn(`importPage: import file "${client}" does not have default export.`);
-                        }
-                    }
-
                     const css_name = match_page.path;
                     const css = await bundleCss(store, css_name);
                     if (css instanceof Error) {
@@ -280,7 +268,7 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
                     return normalResponse(css || "", match_page.ext);
                 }
                 case ".js": {
-                    const js = await bundleScriptEsbuild(store, store.element_count);
+                    const js = await bundleScriptEsbuild(store, element_count);
                     return normalResponse(js || "", match_page.ext);
                 }
                 case ".woff2": {
@@ -288,7 +276,7 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
                     return normalResponse(woff2 || "", match_page.ext);
                 }
                 case ".json": {
-                    const page_node = await page(match_page.param);
+                    const page_node = await pageFn(match_page.param);
                     if (typeof page_node !== "string") {
                         return errorResponse(500, `auto generation of ${match_page.ext} is not supported.`);
                     }

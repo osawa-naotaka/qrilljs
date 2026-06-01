@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+- クライアントスクリプト用のCSSがビルドモード時には生成されていなかった問題を解決。
+
+
 ## [0.1.0-alpha.44] - 2026-06-01
 
 ### Fixed
