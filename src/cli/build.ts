@@ -12,6 +12,7 @@ import { default_config, loadConfig } from "./config.ts";
 import { bundleCss } from "./css.ts";
 import { bundleWoff2 } from "./font.ts";
 import { bundleHtml } from "./html.ts";
+import { importPage } from "./page.ts";
 import { bundleScriptEsbuild } from "./script.ts";
 
 export async function build(conf_file: string | undefined) {
@@ -40,7 +41,7 @@ export async function build(conf_file: string | undefined) {
         for (const [key, r] of Object.entries(record)) {
             if (r.isGen) {
                 const store = generateStore(config.asset, site_config);
-                const pageFn = r.pageFn(store);
+                const { pageFn, element_count } = await importPage(store, r.pageFn);
                 switch (r.ext) {
                     case ".html": {
                         const page = await pageFn(r.param);
@@ -69,7 +70,7 @@ export async function build(conf_file: string | undefined) {
 
                     case ".js": {
                         const js_start = performance.now();
-                        const js = await bundleScriptEsbuild(store, store.element_count);
+                        const js = await bundleScriptEsbuild(store, element_count);
                         writeToFile(js ?? "", key, dist_dir, ".js", js_start);
                         break;
                     }

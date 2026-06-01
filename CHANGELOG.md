@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.1.0-alpha.45] - 2026-06-01
+
+### Fixed
+- Fixed an issue where CSS for client scripts was not generated in build mode.
+
 ## [0.1.0-alpha.44] - 2026-06-01
 
 ### Fixed
@@ -315,7 +320,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.44...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.45...HEAD
+[0.1.0-alpha.45]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.44...v0.1.0-alpha.45
 [0.1.0-alpha.44]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.43...v0.1.0-alpha.44
 [0.1.0-alpha.43]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.42...v0.1.0-alpha.43
 [0.1.0-alpha.42]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.41...v0.1.0-alpha.42
