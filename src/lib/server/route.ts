@@ -78,24 +78,6 @@ export function indexPage<T>(path: string, page: PageFn<T>): Record<string, Page
     const indexPath = `${base}index`;
 
     return {
-        [base]: {
-            path: indexPath,
-            ext: ".html",
-            pageFn: page,
-            isGen: false,
-        },
-        [baseWoSlash]: {
-            path: indexPath,
-            ext: ".html",
-            pageFn: page,
-            isGen: false,
-        },
-        [`${base}index.html`]: {
-            path: indexPath,
-            ext: ".html",
-            pageFn: page,
-            isGen: true,
-        },
         [`${base}index.css`]: {
             path: indexPath,
             ext: ".css",
@@ -114,23 +96,29 @@ export function indexPage<T>(path: string, page: PageFn<T>): Record<string, Page
             pageFn: page,
             isGen: true,
         },
+        [base]: {
+            path: indexPath,
+            ext: ".html",
+            pageFn: page,
+            isGen: false,
+        },
+        [baseWoSlash]: {
+            path: indexPath,
+            ext: ".html",
+            pageFn: page,
+            isGen: false,
+        },
+        [`${base}index.html`]: {
+            path: indexPath,
+            ext: ".html",
+            pageFn: page,
+            isGen: true,
+        },
     };
 }
 
 export function singlePage<T>(path: string, page: PageFn<T>): Record<string, PageRoute<T>> {
     return {
-        [`${path}`]: {
-            path,
-            ext: ".html",
-            pageFn: page,
-            isGen: false,
-        },
-        [`${path}.html`]: {
-            path,
-            ext: ".html",
-            pageFn: page,
-            isGen: true,
-        },
         [`${path}.css`]: {
             path,
             ext: ".css",
@@ -146,6 +134,18 @@ export function singlePage<T>(path: string, page: PageFn<T>): Record<string, Pag
         [`${path}.woff2`]: {
             path,
             ext: ".woff2",
+            pageFn: page,
+            isGen: true,
+        },
+        [`${path}`]: {
+            path,
+            ext: ".html",
+            pageFn: page,
+            isGen: false,
+        },
+        [`${path}.html`]: {
+            path,
+            ext: ".html",
             pageFn: page,
             isGen: true,
         },

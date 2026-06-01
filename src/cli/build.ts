@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
-import path from "node:path";
+import { join, dirname, parse } from "node:path";
 import { cwd } from "node:process";
 import { globSync } from "glob";
 import { type QNode, simpleElement } from "../lib/core/component.ts";
@@ -24,8 +24,8 @@ export async function build(conf_file: string | undefined) {
     const site_config = loadConfig(config.input.site_conf, default_design_rule);
 
     const root = cwd();
-    const dist_dir = path.join(root, config.output.dist_dir);
-    const public_dir = path.join(root, config.input.public_dir);
+    const dist_dir = join(root, config.output.dist_dir);
+    const public_dir = join(root, config.input.public_dir);
 
     const asset_store = new Map<string, HComponentAsset[]>();
 
@@ -34,11 +34,13 @@ export async function build(conf_file: string | undefined) {
     }
 
     const import_start = performance.now();
-    const route: Record<string, PageRoute<unknown>>[] = require(path.join(root, config.input.route)).default;
+    const route: Record<string, PageRoute<unknown>>[] = require(join(root, config.input.route)).default;
     console.log(`import ${config.input.route} in ${(performance.now() - import_start).toFixed(2)}ms`);
 
-    for (const record of route) {
-        for (const [key, r] of Object.entries(record)) {
+    for (const pageRouteSet of route) {
+        let has_css = false;
+        let has_js = false;
+        for (const [key, r] of Object.entries(pageRouteSet)) {
             if (r.isGen) {
                 const store = generateStore(config.asset, site_config);
                 const { rootNodeFn, element_count } = await importPage(store, r.pageFn);
@@ -51,7 +53,7 @@ export async function build(conf_file: string | undefined) {
                         await processAndWriteHtml(
                             key,
                             dist_dir,
-                            [`${r.shared_path ?? r.path}.css`, `${r.shared_path ?? r.path}.js`],
+                            [has_css ? `${r.shared_path ?? r.path}.css` : "", has_js ? `${r.shared_path ?? r.path}.js` : ""],
                             rootNode,
                             store,
                         );
@@ -67,21 +69,32 @@ export async function build(conf_file: string | undefined) {
                             break;
                         }
 
-                        writeToFile(css ?? "", key, dist_dir, ".css", css_start);
+                        if (css) {
+                            has_css = true;
+                            writeToFile(css, key, dist_dir, ".css", css_start);
+                        }
+
                         break;
                     }
 
                     case ".js": {
                         const js_start = performance.now();
                         const js = await bundleScriptEsbuild(store, element_count);
-                        writeToFile(js ?? "", key, dist_dir, ".js", js_start);
+
+                        if (js) {
+                            has_js = true;
+                            writeToFile(js, key, dist_dir, ".js", js_start);
+                        }
                         break;
                     }
 
                     case ".woff2": {
                         const woff2_start = performance.now();
                         const woff2 = await bundleWoff2(store);
-                        writeToFile(woff2 ?? "", key, dist_dir, ".woff2", woff2_start);
+                        if (woff2) {
+                            has_css = true;
+                            writeToFile(woff2, key, dist_dir, ".woff2", woff2_start);
+                        }
                         break;
                     }
 
@@ -104,9 +117,9 @@ export async function build(conf_file: string | undefined) {
             const root_dir =
                 entry.package_name === undefined
                     ? cwd()
-                    : path.dirname(require.resolve(`${entry.package_name}/package.json`));
+                    : dirname(require.resolve(`${entry.package_name}/package.json`));
             for (const file of entry.copy_files) {
-                copyFiles(root_dir, file.src, path.join(dist_dir, config.asset.target_prefix, file.dist));
+                copyFiles(root_dir, file.src, join(dist_dir, config.asset.target_prefix, file.dist));
             }
         }
     }
@@ -123,21 +136,21 @@ export async function build(conf_file: string | undefined) {
 
 function copyFiles(root: string, pattern: string, dist_dir: string) {
     for (const src of globSync(pattern, { cwd: root, nodir: true })) {
-        const content = readFileSync(path.join(root, src));
-        ensureDirWrite(path.join(dist_dir, path.parse(src).base), content);
+        const content = readFileSync(join(root, src));
+        ensureDirWrite(join(dist_dir, parse(src).base), content);
     }
 }
 
 function copyDir(root: string, dist_dir: string) {
     for (const src of globSync("**/*", { cwd: root, nodir: true })) {
-        const content = readFileSync(path.join(root, src));
-        ensureDirWrite(path.join(dist_dir, src), content);
+        const content = readFileSync(join(root, src));
+        ensureDirWrite(join(dist_dir, src), content);
     }
 }
 
 async function processAnyDotTs(relative_path: string, dist_dir: string, output_string: string): Promise<void> {
     const start = performance.now();
-    const absolute_path = path.join(dist_dir, relative_path);
+    const absolute_path = join(dist_dir, relative_path);
     ensureDirWrite(absolute_path, output_string);
     console.log(`process ${relative_path} in ${(performance.now() - start).toFixed(2)}ms`);
 }
@@ -171,7 +184,7 @@ function writeToFile(
     start: number,
 ): string {
     const file_ext = replaceExt(file_name, ext);
-    const absolute_path = path.join(dist_dir, file_ext);
+    const absolute_path = join(dist_dir, file_ext);
     ensureDirWrite(absolute_path, content);
     console.log(`process ${file_ext} in ${(performance.now() - start).toFixed(2)}ms`);
 
@@ -179,7 +192,7 @@ function writeToFile(
 }
 
 function ensureDirWrite(absolute_path: string, content: string | Buffer<ArrayBufferLike>) {
-    const base = path.dirname(absolute_path);
+    const base = dirname(absolute_path);
     ensureDir(base);
     writeFileSync(absolute_path, content);
 }
@@ -187,7 +200,7 @@ function ensureDirWrite(absolute_path: string, content: string | Buffer<ArrayBuf
 function ensureDir(base: string) {
     if (!existsSync(base)) {
         const pdir = base.endsWith("/") ? base.slice(0, -1) : base;
-        ensureDir(path.dirname(pdir));
+        ensureDir(dirname(pdir));
         mkdirSync(base);
     }
 }
