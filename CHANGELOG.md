@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+- クライアントスクリプト用のcssが生成されていなかった問題を修正
+
 ## [0.1.0-alpha.43] - 2026-06-01
 
 ### Fixed
