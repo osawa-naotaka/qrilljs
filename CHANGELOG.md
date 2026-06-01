@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Fixed
+- 必要ない場合はjs/cssの生成およびリンクを作らないように修正
+
 ## [0.1.0-alpha.45] - 2026-06-01
 
 ### Fixed
