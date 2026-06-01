@@ -91,7 +91,7 @@
     "rollup": "^4.60.4",
     "svg2woff2": "^0.3.5",
     "tsx": "^4.22.4",
-    "typescript": "^6.0.3",
+    "typescript": "^5.9.3",
     "unified": "^11.0.5",
     "valibot": "^1.4.1",
     "ws": "^8.21.0"
