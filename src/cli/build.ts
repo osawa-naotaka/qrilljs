@@ -34,26 +34,26 @@ export async function build(conf_file: string | undefined) {
     }
 
     const import_start = performance.now();
-    const route: Record<string, PageRoute<unknown>>[] = require(join(root, config.input.route)).default;
+    const route: [string, PageRoute<unknown>][][] = require(join(root, config.input.route)).default;
     console.log(`import ${config.input.route} in ${(performance.now() - import_start).toFixed(2)}ms`);
 
     for (const pageRouteSet of route) {
         let has_css = false;
         let has_js = false;
-        for (const [key, r] of Object.entries(pageRouteSet)) {
-            if (r.isGen) {
+        for (const [key, pageRoute] of pageRouteSet) {
+            if (pageRoute.isGen) {
                 const store = generateStore(config.asset, site_config);
-                const { rootNodeFn, element_count } = await importPage(store, r.pageFn);
-                switch (r.ext) {
+                const { rootNodeFn, element_count } = await importPage(store, pageRoute.pageFn);
+                switch (pageRoute.ext) {
                     case ".html": {
-                        const rootNode = await rootNodeFn(r.param);
+                        const rootNode = await rootNodeFn(pageRoute.param);
                         if (typeof rootNode === "string") {
-                            throw new Error(`${r.path} must return a QNode, got string instead.`);
+                            throw new Error(`${pageRoute.path} must return a QNode, got string instead.`);
                         }
                         await processAndWriteHtml(
                             key,
                             dist_dir,
-                            [has_css ? `${r.shared_path ?? r.path}.css` : "", has_js ? `${r.shared_path ?? r.path}.js` : ""],
+                            [has_css ? `${pageRoute.shared_path ?? pageRoute.path}.css` : "", has_js ? `${pageRoute.shared_path ?? pageRoute.path}.js` : ""],
                             rootNode,
                             store,
                         );
@@ -63,7 +63,7 @@ export async function build(conf_file: string | undefined) {
                     case ".css": {
                         const css_start = performance.now();
 
-                        const css = await bundleCss(store, r.path);
+                        const css = await bundleCss(store, pageRoute.path);
                         if (css instanceof Error) {
                             console.warn(css);
                             break;
@@ -99,9 +99,9 @@ export async function build(conf_file: string | undefined) {
                     }
 
                     case ".json": {
-                        const json = await rootNodeFn(r.param);
+                        const json = await rootNodeFn(pageRoute.param);
                         if (typeof json !== "string") {
-                            throw new Error(`${r.path} must return a string, got QNode instead.`);
+                            throw new Error(`${pageRoute.path} must return a string, got QNode instead.`);
                         }
                         await processAnyDotTs(key, dist_dir, json);
                         break;

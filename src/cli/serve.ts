@@ -172,12 +172,12 @@ function errorResponse(status: number, cause: string | Error): Resp {
     return { status, content, type: "text/html" };
 }
 
-function findMatchPage(route: Record<string, PageRoute<unknown>>[], req: Request): { pageRoute: PageRoute<unknown>, pageRouteSet: Record<string, PageRoute<unknown>> } | undefined {
+function findMatchPage(route: [string, PageRoute<unknown>][][], req: Request): { pageRoute: PageRoute<unknown>, pageRouteSet: [string, PageRoute<unknown>][] } | undefined {
     const path = decodeURIComponent(new URL(req.url).pathname);
     for (const pageRouteSet of route) {
-        const pageRoute = pageRouteSet[path];
-        if (pageRoute) {
-            return { pageRoute, pageRouteSet };
+        const pageRoutePair = pageRouteSet.find(([s]) => s === path);
+        if (pageRoutePair) {
+            return { pageRoute: pageRoutePair[1], pageRouteSet };
         }
     }
     return undefined;
@@ -189,7 +189,7 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
     const root = cwd();
     const public_dir = join(root, config.input.public_dir);
 
-    let route: Record<string, PageRoute<unknown>>[] = require(join(root, config.input.route)).default;
+    let route: [string, PageRoute<unknown>][][] = require(join(root, config.input.route)).default;
     let site_config = requireConfig(require, config.input.site_conf, default_design_rule);
     let public_router = createStaticRouter(public_dir);
     let asset_router = new Map<string, Router>();
