@@ -41,15 +41,18 @@ export async function build(conf_file: string | undefined) {
         for (const [key, r] of Object.entries(record)) {
             if (r.isGen) {
                 const store = generateStore(config.asset, site_config);
-                const { pageFn, element_count } = await importPage(store, r.pageFn);
+                const { rootNodeFn, element_count } = await importPage(store, r.pageFn);
                 switch (r.ext) {
                     case ".html": {
-                        const page = await pageFn(r.param);
+                        const rootNode = await rootNodeFn(r.param);
+                        if (typeof rootNode === "string") {
+                            throw new Error(`${r.path} must return a QNode, got string instead.`);
+                        }
                         await processAndWriteHtml(
                             key,
                             dist_dir,
                             [`${r.shared_path ?? r.path}.css`, `${r.shared_path ?? r.path}.js`],
-                            page,
+                            rootNode,
                             store,
                         );
                         break;
@@ -83,8 +86,11 @@ export async function build(conf_file: string | undefined) {
                     }
 
                     case ".json": {
-                        const json = await pageFn(r.param);
-                        await processAnyDotTs(key, dist_dir, json as string);
+                        const json = await rootNodeFn(r.param);
+                        if (typeof json !== "string") {
+                            throw new Error(`${r.path} must return a string, got QNode instead.`);
+                        }
+                        await processAnyDotTs(key, dist_dir, json);
                         break;
                     }
                 }

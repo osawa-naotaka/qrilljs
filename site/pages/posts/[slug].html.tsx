@@ -1,5 +1,5 @@
 import path from "node:path";
-import type { RootPageFn, Store } from "qrilljs/core";
+import type { RootNodeFn, Store } from "qrilljs/core";
 import { element, registerRootPage, S_2XLARGE, S_MEDIUM, style, W_MEDIUM } from "qrilljs/core";
 import { getMarkdown, listFiles, markdownToHtml } from "qrilljs/server";
 import { article } from "../../components/module/article.tsx";
@@ -15,7 +15,7 @@ export async function rootPageFnParameters(): Promise<RootParameter[]> {
     return listFiles(posts_dir, ".md").map((y) => ({ slug: path.basename(y, ".md") }));
 }
 
-export default function Root(store: Store): RootPageFn<RootParameter> {
+export default function Root(store: Store): RootNodeFn<RootParameter> {
     const Page = page(store);
     const PageMainArea = element(store, { tag: "main", name: "page-main-area" });
     const Article = article(store);

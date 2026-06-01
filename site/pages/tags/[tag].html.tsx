@@ -1,4 +1,4 @@
-import type { RootPageFn, Store } from "qrilljs/core";
+import type { RootNodeFn, Store } from "qrilljs/core";
 import { element, registerRootPage, S_MEDIUM, style, W_MEDIUM } from "qrilljs/core";
 import { getAllMarkdowns } from "qrilljs/server";
 import * as v from "valibot";
@@ -14,7 +14,7 @@ export function rootPageFnParameters(): RootParameter[] {
     return Object.keys(tag_map).map((tag) => ({ tag }));
 }
 
-export default function Root(store: Store): RootPageFn<RootParameter> {
+export default function Root(store: Store): RootNodeFn<RootParameter> {
     const Page = page(store);
     const PageMainArea = element(store, { tag: "main", name: "page-main-area" });
     const Summaries = summaries(store);

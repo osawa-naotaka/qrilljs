@@ -1,4 +1,4 @@
-import type { RootPageFn, Store } from "qrilljs/core";
+import type { RootNodeFn, Store } from "qrilljs/core";
 import { element, registerRootPage, S_MEDIUM, style, W_MEDIUM } from "qrilljs/core";
 import { getAllMarkdowns } from "qrilljs/server";
 import { page } from "../components/pages/page.tsx";
@@ -6,7 +6,7 @@ import { hero } from "../components/sections/hero.tsx";
 import { summaries } from "../components/sections/summaries.tsx";
 import { navitem, postFmSchema, posts_dir, site } from "../site.config.ts";
 
-export default function Home(store: Store): RootPageFn<void> {
+export default function Home(store: Store): RootNodeFn<void> {
     const Page = page(store);
     const Hero = hero(store);
     const PageMainArea = element(store, { tag: "main", name: "page-main-area" });

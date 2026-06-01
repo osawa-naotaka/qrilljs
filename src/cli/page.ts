@@ -1,11 +1,11 @@
-import type { RootPageFn } from "@/core";
+import type { PageFn, RootNodeFn } from "../lib/core/component";
 import type { Store } from "../lib/core/store";
 
 export async function importPage<T>(
     store: Store,
-    page: (store: Store) => RootPageFn<T>,
-): Promise<{ pageFn: RootPageFn<T>; element_count: number }> {
-    const pageFn = page(store);
+    pageFn: PageFn<T>,
+): Promise<{ rootNodeFn: RootNodeFn<T>; element_count: number }> {
+    const rootNodeFn = pageFn(store);
     const element_count = store.element_count;
 
     const js_files = Array.from(store.components.values())
@@ -21,5 +21,5 @@ export async function importPage<T>(
         }
     }
 
-    return { pageFn, element_count };
+    return { rootNodeFn, element_count };
 }

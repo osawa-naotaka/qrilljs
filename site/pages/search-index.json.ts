@@ -1,9 +1,9 @@
 import { getAllMarkdowns } from "qrilljs/server";
 import { createIndex, indexToObject, LinearIndex, StaticSeekError } from "staticseek";
-import type { RootPageFn } from "@/core.ts";
+import type { RootNodeFn } from "@/core.ts";
 import { postFmSchema, posts_dir } from "../site.config.ts";
 
-export default function createSearchIndex(): RootPageFn<void> {
+export default function createSearchIndex(): RootNodeFn<void> {
     return async () => {
         const posts = await getAllMarkdowns(posts_dir, postFmSchema);
         const index = createIndex(LinearIndex, posts, {

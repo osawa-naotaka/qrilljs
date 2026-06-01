@@ -241,11 +241,14 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
             const match_page = findMatchPage(route, req);
             if (!match_page) return errorResponse(404, `route for url "${req.url}" not found.`);
             const store = generateStore(config.asset, site_config);
-            const { pageFn, element_count } = await importPage(store, match_page.pageFn);
+            const { rootNodeFn, element_count } = await importPage(store, match_page.pageFn);
 
             switch (match_page.ext) {
                 case ".html": {
-                    const page_node = await pageFn(match_page.param);
+                    const root_node = await rootNodeFn(match_page.param);
+                    if (typeof root_node === "string") {
+                        return errorResponse(500, `${match_page.path} must return a QNode, got string instead.`);
+                    }
                     const script = simpleElement("script");
                     const link = simpleElement("link");
                     const css_name = encodeURI(`${match_page.shared_path ?? match_page.path}.css`);
@@ -255,7 +258,7 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
                         script({ type: "module", src: js_name }),
                         link({ href: css_name, rel: "stylesheet" }),
                     ];
-                    const all_processed = bundleHtml(store, page_node, insert_nodes);
+                    const all_processed = bundleHtml(store, root_node, insert_nodes);
 
                     return normalResponse(all_processed, ".html");
                 }
@@ -276,9 +279,9 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
                     return normalResponse(woff2 || "", match_page.ext);
                 }
                 case ".json": {
-                    const page_node = await pageFn(match_page.param);
+                    const page_node = await rootNodeFn(match_page.param);
                     if (typeof page_node !== "string") {
-                        return errorResponse(500, `auto generation of ${match_page.ext} is not supported.`);
+                        return errorResponse(500, `${match_page.path} must return a string, got QNode instead.`);
                     }
                     return normalResponse(page_node || "", match_page.ext);
                 }
