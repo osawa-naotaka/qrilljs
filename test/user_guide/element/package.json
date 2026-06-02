@@ -6,7 +6,6 @@
         "tsx": "^4.19.3",
         "typescript": "^5.8.2"
     },
-    "packageManager": "yarn@4.7.0",
     "scripts": {
         "build": "tsc && qrill build",
         "dev": "tsc --watch & qrill dev",

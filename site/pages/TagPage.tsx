@@ -1,20 +1,16 @@
-import type { RootPageFn, Store } from "qrilljs/core";
+import type { RootNodeFn, Store } from "qrilljs/core";
 import { element, registerRootPage, S_MEDIUM, style, W_MEDIUM } from "qrilljs/core";
 import { getAllMarkdowns } from "qrilljs/server";
 import * as v from "valibot";
-import { page } from "../../components/pages/page.tsx";
-import { summaries } from "../../components/sections/summaries.tsx";
-import { navitem, postFmSchema, posts_dir, site, tag_map, tagSlugSchema } from "../../site.config.ts";
+import { page } from "../components/pages/page.tsx";
+import { summaries } from "../components/sections/summaries.tsx";
+import { navitem, postFmSchema, posts_dir, site, tagSlugSchema } from "../site.config.ts";
 
-type RootParameter = {
+type TagPageParameter = {
     tag: string;
 };
 
-export function rootPageFnParameters(): RootParameter[] {
-    return Object.keys(tag_map).map((tag) => ({ tag }));
-}
-
-export default function Root(store: Store): RootPageFn<RootParameter> {
+export function TagPage(store: Store): RootNodeFn<TagPageParameter> {
     const Page = page(store);
     const PageMainArea = element(store, { tag: "main", name: "page-main-area" });
     const Summaries = summaries(store);

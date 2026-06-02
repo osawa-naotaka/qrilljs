@@ -1,7 +1,7 @@
-import type { RootPageFn, Store } from "qrilljs/core";
+import type { RootNodeFn, Store } from "qrilljs/core";
 import { element } from "qrilljs/core";
 
-export default function Root(store: Store): RootPageFn<void> {
+export function HomePage(store: Store): RootNodeFn<void> {
     const SiteTitle = element(store, { tag: "h1", name: "site-title" });
     return async () => (
         <html lang="en">

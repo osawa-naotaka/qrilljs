@@ -43,7 +43,10 @@ export async function bundleWoff2(store: Store): Promise<Buffer | null> {
 }
 
 export function generateFontCss(store: Store, base_name: string): string {
-    const svg_names: Svg[] = listSvgNames(store).map((n) => ({ name: n.name, content: "" }));
+    const svg_names: Svg[] = listSvgNames(store).map(({ name }) => ({ name, content: "" }));
+    if (svg_names.length === 0) {
+        return "";
+    }
 
     return generateCss(svg_names, {
         font_family,

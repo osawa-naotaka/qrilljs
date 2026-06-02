@@ -172,12 +172,15 @@ function errorResponse(status: number, cause: string | Error): Resp {
     return { status, content, type: "text/html" };
 }
 
-function findMatchPage(route: Record<string, PageRoute<unknown>>[], req: Request): PageRoute<unknown> | undefined {
+function findMatchPage(
+    route: [string, PageRoute<unknown>][][],
+    req: Request,
+): { pageRoute: PageRoute<unknown>; pageRouteSet: [string, PageRoute<unknown>][] } | undefined {
     const path = decodeURIComponent(new URL(req.url).pathname);
-    for (const entry of route) {
-        const page = entry[path];
-        if (page) {
-            return page;
+    for (const pageRouteSet of route) {
+        const pageRoutePair = pageRouteSet.find(([s]) => s === path);
+        if (pageRoutePair) {
+            return { pageRoute: pageRoutePair[1], pageRouteSet };
         }
     }
     return undefined;
@@ -189,7 +192,7 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
     const root = cwd();
     const public_dir = join(root, config.input.public_dir);
 
-    let route: Record<string, PageRoute<unknown>>[] = require(join(root, config.input.route)).default;
+    let route: [string, PageRoute<unknown>][][] = require(join(root, config.input.route)).default;
     let site_config = requireConfig(require, config.input.site_conf, default_design_rule);
     let public_router = createStaticRouter(public_dir);
     let asset_router = new Map<string, Router>();
@@ -238,52 +241,52 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
             }
 
             // Page router
-            const match_page = findMatchPage(route, req);
-            if (!match_page) return errorResponse(404, `route for url "${req.url}" not found.`);
+            const ret = findMatchPage(route, req);
+            if (!ret) return errorResponse(404, `route for url "${req.url}" not found.`);
+            const pageRoute = ret.pageRoute;
             const store = generateStore(config.asset, site_config);
-            const { pageFn, element_count } = await importPage(store, match_page.pageFn);
+            const { rootNodeFn, element_count } = await importPage(store, pageRoute.pageFn);
 
-            switch (match_page.ext) {
+            switch (pageRoute.ext) {
                 case ".html": {
-                    const page_node = await pageFn(match_page.param);
+                    const root_node = await rootNodeFn(pageRoute.param);
+                    if (typeof root_node === "string") {
+                        return errorResponse(500, `${pageRoute.path} must return a QNode, got string instead.`);
+                    }
                     const script = simpleElement("script");
                     const link = simpleElement("link");
-                    const css_name = encodeURI(`${match_page.shared_path ?? match_page.path}.css`);
-                    const js_name = encodeURI(`${match_page.shared_path ?? match_page.path}.js`);
+                    const css_name = encodeURI(`${pageRoute.shared_path ?? pageRoute.path}.css`);
+                    const js_name = encodeURI(`${pageRoute.shared_path ?? pageRoute.path}.js`);
                     const insert_nodes = [
                         script({ type: "module", src: "/reload.js" }),
                         script({ type: "module", src: js_name }),
                         link({ href: css_name, rel: "stylesheet" }),
                     ];
-                    const all_processed = bundleHtml(store, page_node, insert_nodes);
+                    const all_processed = bundleHtml(store, root_node, insert_nodes);
 
                     return normalResponse(all_processed, ".html");
                 }
                 case ".css": {
-                    const css_name = match_page.path;
-                    const css = await bundleCss(store, css_name);
-                    if (css instanceof Error) {
-                        return errorResponse(500, css);
-                    }
-                    return normalResponse(css || "", match_page.ext);
+                    const css = await bundleCss(store, pageRoute.path);
+                    return normalResponse(css, pageRoute.ext);
                 }
                 case ".js": {
                     const js = await bundleScriptEsbuild(store, element_count);
-                    return normalResponse(js || "", match_page.ext);
+                    return normalResponse(js, pageRoute.ext);
                 }
                 case ".woff2": {
                     const woff2 = await bundleWoff2(store);
-                    return normalResponse(woff2 || "", match_page.ext);
+                    return normalResponse(woff2 || "", pageRoute.ext);
                 }
                 case ".json": {
-                    const page_node = await pageFn(match_page.param);
+                    const page_node = await rootNodeFn(pageRoute.param);
                     if (typeof page_node !== "string") {
-                        return errorResponse(500, `auto generation of ${match_page.ext} is not supported.`);
+                        return errorResponse(500, `${pageRoute.path} must return a string, got QNode instead.`);
                     }
-                    return normalResponse(page_node || "", match_page.ext);
+                    return normalResponse(page_node || "", pageRoute.ext);
                 }
                 default:
-                    return errorResponse(500, `auto generation of ${match_page.ext} is not supported.`);
+                    return errorResponse(500, `auto generation of ${pageRoute.ext} is not supported.`);
             }
         } catch (e) {
             if (e instanceof Error) {

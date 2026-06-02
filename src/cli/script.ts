@@ -8,7 +8,7 @@ import esbuild from "esbuild";
 import { rollup } from "rollup";
 import type { Store } from "../core.ts";
 
-export async function bundleScriptEsbuild(store: Store, start_num: number): Promise<string | null> {
+export async function bundleScriptEsbuild(store: Store, start_num: number): Promise<string> {
     const script_component: [string, string][] = [];
     for (const [k, v] of store.components) {
         if (v.attachment?.script) {
@@ -17,7 +17,7 @@ export async function bundleScriptEsbuild(store: Store, start_num: number): Prom
     }
 
     if (script_component.length === 0) {
-        return null;
+        return "";
     }
 
     const entry = `import { generateStore } from "qrilljs/core"; const store = generateStore({ target_prefix: "" }, {}, ${start_num}); ${script_component.map(([k, v], idx) => `import scr${idx} from "${decodeURIComponent(new URL(v).pathname)}"; await scr${idx}(store)(document.querySelector("${k}"));`).join("\n")}`;
