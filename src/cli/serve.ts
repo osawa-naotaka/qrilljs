@@ -172,7 +172,10 @@ function errorResponse(status: number, cause: string | Error): Resp {
     return { status, content, type: "text/html" };
 }
 
-function findMatchPage(route: [string, PageRoute<unknown>][][], req: Request): { pageRoute: PageRoute<unknown>, pageRouteSet: [string, PageRoute<unknown>][] } | undefined {
+function findMatchPage(
+    route: [string, PageRoute<unknown>][][],
+    req: Request,
+): { pageRoute: PageRoute<unknown>; pageRouteSet: [string, PageRoute<unknown>][] } | undefined {
     const path = decodeURIComponent(new URL(req.url).pathname);
     for (const pageRouteSet of route) {
         const pageRoutePair = pageRouteSet.find(([s]) => s === path);
@@ -264,16 +267,12 @@ function createReqProcessor(config: QrillConfig): [ReqProcessFn, ReloadFn] {
                     return normalResponse(all_processed, ".html");
                 }
                 case ".css": {
-                    const css_name = pageRoute.path;
-                    const css = await bundleCss(store, css_name);
-                    if (css instanceof Error) {
-                        return errorResponse(500, css);
-                    }
-                    return normalResponse(css || "", pageRoute.ext);
+                    const css = await bundleCss(store, pageRoute.path);
+                    return normalResponse(css, pageRoute.ext);
                 }
                 case ".js": {
                     const js = await bundleScriptEsbuild(store, element_count);
-                    return normalResponse(js || "", pageRoute.ext);
+                    return normalResponse(js, pageRoute.ext);
                 }
                 case ".woff2": {
                     const woff2 = await bundleWoff2(store);

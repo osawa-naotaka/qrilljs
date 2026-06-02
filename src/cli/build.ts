@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
-import { join, dirname, parse } from "node:path";
+import { dirname, join, parse } from "node:path";
 import { cwd } from "node:process";
 import { globSync } from "glob";
 import { type QNode, simpleElement } from "../lib/core/component.ts";
@@ -53,7 +53,10 @@ export async function build(conf_file: string | undefined) {
                         await processAndWriteHtml(
                             key,
                             dist_dir,
-                            [has_css ? `${pageRoute.shared_path ?? pageRoute.path}.css` : "", has_js ? `${pageRoute.shared_path ?? pageRoute.path}.js` : ""],
+                            [
+                                has_css ? `${pageRoute.shared_path ?? pageRoute.path}.css` : "",
+                                has_js ? `${pageRoute.shared_path ?? pageRoute.path}.js` : "",
+                            ],
                             rootNode,
                             store,
                         );
@@ -64,12 +67,7 @@ export async function build(conf_file: string | undefined) {
                         const css_start = performance.now();
 
                         const css = await bundleCss(store, pageRoute.path);
-                        if (css instanceof Error) {
-                            console.warn(css);
-                            break;
-                        }
-
-                        if (css) {
+                        if (css !== "") {
                             has_css = true;
                             writeToFile(css, key, dist_dir, ".css", css_start);
                         }
@@ -81,7 +79,7 @@ export async function build(conf_file: string | undefined) {
                         const js_start = performance.now();
                         const js = await bundleScriptEsbuild(store, element_count);
 
-                        if (js) {
+                        if (js !== "") {
                             has_js = true;
                             writeToFile(js, key, dist_dir, ".js", js_start);
                         }
@@ -92,7 +90,6 @@ export async function build(conf_file: string | undefined) {
                         const woff2_start = performance.now();
                         const woff2 = await bundleWoff2(store);
                         if (woff2) {
-                            has_css = true;
                             writeToFile(woff2, key, dist_dir, ".woff2", woff2_start);
                         }
                         break;

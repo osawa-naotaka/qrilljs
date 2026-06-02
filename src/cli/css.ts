@@ -5,7 +5,7 @@ import type { Selector, SelectorContext } from "../lib/core/style.ts";
 import { isCompoundSelector, normalizeSelector } from "../lib/core/style.ts";
 import { generateFontCss } from "./font.ts";
 
-export async function bundleCss(store: Store, base_name: string): Promise<string | null | Error> {
+export async function bundleCss(store: Store, base_name: string): Promise<string> {
     const font_css = generateFontCss(store, base_name);
     const css = stringifyToCss(Array.from(store.components.values()));
     return `${css}${font_css}`;
@@ -13,6 +13,9 @@ export async function bundleCss(store: Store, base_name: string): Promise<string
 
 // Rule To CSS
 function stringifyToCss(components: HComponent[]): string {
+    if (components.length === 0) {
+        return "";
+    }
     return `@charset "utf-8";\n@layer base, font, low, main, high;\n${components.map(rulesToString).join("")}`;
 }
 
