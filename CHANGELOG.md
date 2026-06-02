@@ -13,11 +13,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
-### Fixed
-- 必要ない場合はjs/cssの生成およびリンクを作らないように修正
+## [0.1.0-alpha.46] - 2026-06-02
 
 ### Changed
-- デフォルトのルーティングファイル名をsite/Route.tsに変更
+- Changed the default routing file name from `site/Route.tsx` to `site/Route.ts`.
+- Changed the return type of `file()`, `singlePage()`, and `indexPage()`, and the argument and return types of `defineRoute()`, from `Record<string, PageRoute>` to arrays of `[string, PageRoute]` tuples.
+
+### Fixed
+- Suppressed the generation of and links to JS/CSS files when they are not required.
 
 ## [0.1.0-alpha.45] - 2026-06-01
 
@@ -326,7 +329,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Component-level asset management with tree shaking
 - Unified development experience for server-side and client-side
 
-[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.45...HEAD
+[Unreleased]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.46...HEAD
+[0.1.0-alpha.46]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.45...v0.1.0-alpha.46
 [0.1.0-alpha.45]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.44...v0.1.0-alpha.45
 [0.1.0-alpha.44]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.43...v0.1.0-alpha.44
 [0.1.0-alpha.43]: https://github.com/osawa-naotaka/qrill/compare/v0.1.0-alpha.42...v0.1.0-alpha.43
