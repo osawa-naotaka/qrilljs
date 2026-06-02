@@ -1,6 +1,6 @@
-import type { RootPageFn, Store } from "qrilljs/core";
+import type { RootNodeFn, Store } from "qrilljs/core";
 
-export default function Root(_store: Store): RootPageFn<void> {
+export function HomePage(_store: Store): RootNodeFn<void> {
     return async () => (
         <html lang="en">
             <head>

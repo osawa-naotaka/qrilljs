@@ -35,7 +35,7 @@ export const default_config: QrillConfig = {
     input: {
         public_dir: "site/public",
         site_conf: "site/site.config.ts",
-        route: "site/Route.tsx",
+        route: "site/Route.ts",
     },
     output: {
         clean_befor_build: true,
