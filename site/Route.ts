@@ -12,13 +12,13 @@ export default defineRoute([
     indexPage("/posts", PostsPage),
     sharedPage(
         "/posts/id",
-        (p: { slug: string }) => `/posts/${p.slug}`,
+        ({ slug }) => `/posts/${slug}`,
         PostPage,
         listFiles(`/site/contents/posts`, ".md").map((x) => ({ slug: basename(x, ".md") })),
     ),
     sharedPage(
         "/tags/id",
-        (p: { tag: string }) => `/tags/${p.tag}`,
+        ({ tag }) => `/tags/${tag}`,
         TagPage,
         Object.keys(tag_map).map((tag) => ({ tag })),
     ),
